@@ -1,13 +1,13 @@
 # -*- coding: utf-8 -*-
-"""Criptografía de HAAP: claves Ed25519 (primitivas).
+"""HAAP cryptography: Ed25519 key primitives.
 
-Cada agente posee un par de claves Ed25519 (32 bytes) generado con la
-biblioteca ``cryptography``. La identidad de alto nivel (dataclass
-``Identity`` + persistencia) vive en ``identity.py``; aquí solo hay
-primitivas de firma/verificación y codificación.
+Each agent owns an Ed25519 key pair (32-byte raw keys) generated with the
+``cryptography`` library. The high-level identity (the ``Identity``
+dataclass and its persistence) lives in ``identity.py``; this module only
+holds signing/verification primitives and encoding helpers.
 
-La clave privada NUNCA abandona esta máquina ni se incluye en ningún
-mensaje o manifest público.
+The private key NEVER leaves this machine and is never included in any
+message or public manifest.
 """
 
 from __future__ import annotations
@@ -24,7 +24,7 @@ from cryptography.hazmat.primitives.asymmetric.ed25519 import (
 
 
 def b64e(data: bytes) -> str:
-    """Base64 (estándar, sin padding issues) de bytes -> str ASCII."""
+    """Base64 (standard) encoding: bytes -> ASCII str."""
     return base64.b64encode(data).decode("ascii")
 
 
@@ -57,7 +57,7 @@ def private_key_from_bytes(raw: bytes) -> Ed25519PrivateKey:
 
 @dataclass
 class KeyPair:
-    """Par de claves Ed25519 con helpers de firma/verificación."""
+    """Ed25519 key pair with signing/verification helpers."""
 
     public_key: bytes = field(repr=False)  # raw 32 B
     private_key: bytes = field(repr=False)  # raw 32 B
@@ -85,7 +85,7 @@ class KeyPair:
         return b64e(self.private_key)
 
     def sign(self, data: bytes) -> bytes:
-        """Firma Ed25519 (64 B) de ``data`` con la clave privada local."""
+        """Ed25519 signature (64 B) of ``data`` with the local private key."""
         return private_key_from_bytes(self.private_key).sign(data)
 
     def verify(self, data: bytes, signature: bytes) -> bool:
@@ -93,7 +93,7 @@ class KeyPair:
 
     @staticmethod
     def verify_with(raw_pub: bytes, data: bytes, signature: bytes) -> bool:
-        """Verifica una firma con una clave pública arbitraria (otros agentes)."""
+        """Verify a signature with an arbitrary public key (other agents)."""
         try:
             public_key_from_bytes(raw_pub).verify(signature, data)
             return True

@@ -1,22 +1,22 @@
 # -*- coding: utf-8 -*-
-"""Jerarquía de errores de HAAP.
+"""HAAP error hierarchy.
 
-Los errores llevan un ``code`` corto y estable (ASCII, sin datos
-sensibles) que viaja en mensajes de tipo ``error`` a través de la red,
-más un mensaje humano ``detail`` que NUNCA debe exponer secretos ni
-trazas internas (ver threat model en ARQUITECTURA.md).
+Errors carry a short, stable ASCII ``code`` (no sensitive data) that
+travels in ``error``-type messages over the wire, plus a human-readable
+``detail`` string that must NEVER expose secrets or internal tracebacks
+(see the threat model in ARQUITECTURA.md).
 """
 
 
 class HAAPError(Exception):
-    """Error base de HAAP."""
+    """Base HAAP error."""
 
     code = "HAAP_ERROR"
 
     def __init__(self, detail="", code=None, transient=False):
         self.detail = detail
         self.code = code or self.code
-        # transient=True -> el emisor puede reintentar (5xx de red, rate limit)
+        # transient=True -> the sender may retry (network 5xx, rate limit)
         self.transient = transient
         super().__init__(detail)
 
@@ -25,7 +25,7 @@ class HAAPError(Exception):
 
 
 # --------------------------------------------------------------------------
-# Envelope / criptografía
+# Envelope / cryptography
 # --------------------------------------------------------------------------
 class ProtocolVersionError(HAAPError):
     code = "PROTOCOL_VERSION_UNSUPPORTED"
@@ -52,13 +52,13 @@ class MalformedEnvelopeError(HAAPError):
 
 
 class ChallengeError(HAAPError):
-    """Fallo en challenge-response (desconocido, caducado, reutilizado)."""
+    """Challenge-response failure (unknown, expired, reused)."""
 
     code = "CHALLENGE_REQUIRED"
 
 
 # --------------------------------------------------------------------------
-# Estado / autorización
+# State / authorization
 # --------------------------------------------------------------------------
 class NotInitializedError(HAAPError):
     code = "NOT_INITIALIZED"
@@ -93,7 +93,7 @@ class RateLimitedError(HAAPError):
 
 
 # --------------------------------------------------------------------------
-# Transporte
+# Transport
 # --------------------------------------------------------------------------
 class TransportError(HAAPError):
     code = "TRANSPORT_ERROR"
@@ -104,13 +104,13 @@ class TransportError(HAAPError):
 
 
 class DiscoveryError(HAAPError):
-    """No se pudo resolver una URL de mensajería para un fingerprint."""
+    """Could not resolve a messaging URL for a fingerprint."""
 
     code = "DISCOVERY_FAILED"
 
 
 class TaskError(HAAPError):
-    """Errores del ciclo de vida de tareas."""
+    """Task lifecycle errors."""
 
     code = "TASK_ERROR"
 
@@ -124,7 +124,7 @@ class TaskStateError(HAAPError):
 
 
 class TaskOverloadError(HAAPError):
-    """El ejecutor local está saturado (tareas concurrentes máximas)."""
+    """The local executor is saturated (max concurrent tasks)."""
 
     code = "TASK_LIMIT_REACHED"
 
@@ -134,19 +134,19 @@ class TaskOverloadError(HAAPError):
 
 
 class UnexpectedMessageError(HAAPError):
-    """Mensaje recibido fuera de contexto (estado de amistad/flow)."""
+    """Message received out of context (friendship/task state)."""
 
     code = "UNEXPECTED_MESSAGE"
 
 
 class FriendRequestDeniedError(HAAPError):
-    """El dueño remoto rechazó la solicitud de amistad."""
+    """The remote owner rejected the friend request."""
 
     code = "FRIEND_REQUEST_DENIED"
 
 
-# Mapa code -> clase, usado por el cliente para traducir envelopes de tipo
-# ``error`` recibidos como respuesta en excepciones locales.
+# Map of error code -> exception class, used by clients to translate
+# received ``error`` envelopes back into local exceptions.
 ERROR_MAP = {
     cls.code: cls for cls in (
         ProtocolVersionError, SignatureError, UnknownSenderError,
@@ -161,7 +161,7 @@ ERROR_MAP = {
 
 
 def error_from_code(code: str, detail: str = "") -> HAAPError:
-    """Instancia la excepción correcta a partir de un code de error."""
+    """Instantiate the proper exception from an error code."""
     cls = ERROR_MAP.get(code)
     if cls is None:
         return HAAPError(detail, code=code)
