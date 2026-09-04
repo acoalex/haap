@@ -1,28 +1,28 @@
 # -*- coding: utf-8 -*-
-"""Matriz de permisos por amigo: deny-by-default con scopes.
+"""Per-friend permission matrix: deny-by-default with scopes.
 
-Catálogo de acciones (cada agente guarda en su Directory, POR AMIGO,
-qué puede hacer ese amigo CONTRA este agente; las acciones en sentido
-``me -> amigo`` se gobiernan con las mismas claves en el lado local
-como guardas de salida — ver ARQUITECTURA.md, tabla de permisos):
+Action catalog (each agent stores in its Directory, PER FRIEND, what
+that friend may do AGAINST this agent; ``me -> friend`` actions are
+governed by the same keys on the local side as outbound guards — see
+ARQUITECTURA.md, permission table):
 
-  chat:converse     el amigo puede abrir intercambios conversacionales/ping
-  read:schedule     el amigo puede consultar la agenda del agente
-  read:calendar     el amigo puede consultar el calendario del agente
-  file:read         el amigo puede LEER archivos (scopes: globs de rutas)
-  file:write        el amigo puede ESCRIBIR archivos (scopes: rutas destino)
-  exec:terminal     el amigo puede pedir ejecución de comandos (scopes:
-                    prefijos de comando permitidos, p. ej. "haap ")
-  task:delegate     (entrante) el amigo puede DELEGARME tareas -> yo ejecuto
-  task:submit       (saliente) guarda local: YO puedo delegar tareas a este
-                    amigo (el servidor del amigo exigirá a su vez que yo
-                    tenga task:delegate en SU matriz)
+  chat:converse     friend may open conversational exchanges/pings
+  read:schedule     friend may query the agent's schedule
+  read:calendar     friend may query the agent's calendar
+  file:read         friend may READ files (scopes: path globs)
+  file:write        friend may WRITE files (scopes: destination paths)
+  exec:terminal     friend may request command execution (scopes:
+                    allowed command prefixes, e.g. "haap ")
+  task:delegate     (inbound) friend may DELEGATE tasks to me -> I execute
+  task:submit       (outbound) local guard: I may delegate tasks to this
+                    friend (the friend's server will in turn require me
+                    to hold task:delegate in THEIR matrix)
 
-Semántica de ``scopes``: lista de cadenas. El matcher aplica globs
-(fnmatch) sobre el ``resource`` de la petición; una lista vacía o con el
-elemento ``"*"`` permite cualquier recurso de la acción. Cualquier
-acción NO listada en ``permissions`` del amigo = denegada (deny by
-default). Las decisiones se auditan.
+``scopes`` semantics: list of strings. The matcher applies globs
+(fnmatch) over the request ``resource``; an empty list or a list
+containing ``"*"`` allows any resource for that action. Any action NOT
+listed in the friend's ``permissions`` = denied (deny by default).
+All decisions are audited.
 """
 
 from __future__ import annotations
@@ -30,32 +30,31 @@ from __future__ import annotations
 import fnmatch
 import threading
 
-# Acciones entrantes que el servidor verifica contra la matriz del amigo.
+# Inbound actions the server checks against the friend's matrix.
 INBOUND_ACTIONS = (
     "chat:converse", "read:schedule", "read:calendar",
     "file:read", "file:write", "exec:terminal", "task:delegate",
 )
-# Acciones salientes que el cliente verifica como guarda local.
+# Outbound actions the client checks as a local guard.
 OUTBOUND_ACTIONS = ("task:submit", "chat:converse")
 
 
 class PermissionMatrix:
-    """Evaluador deny-by-default sobre el registro del amigo.
+    """Deny-by-default evaluator over the friend record.
 
-    El estado vive en ``FriendRecord.permissions`` (serializable); esta
-    clase aporta la lógica de evaluación y las operaciones de edición
-    con auditoría.
+    State lives in ``FriendRecord.permissions`` (serializable); this
+    class provides the evaluation logic and audited edit operations.
     """
 
     def __init__(self, audit=None):
         self._lock = threading.RLock()
-        self._audit = audit  # AuditLog opcional
+        self._audit = audit  # optional AuditLog
 
-    # -- evaluación --------------------------------------------------------
+    # -- evaluation --------------------------------------------------------
     def check(self, friend_permissions: dict, action: str,
               resource: str = "") -> bool:
-        """¿Permite la matriz ``friend_permissions`` la acción sobre el
-        resource? deny-by-default: acciones ausentes o allow=False -> False."""
+        """Does ``friend_permissions`` allow ``action`` on ``resource``?
+        Deny-by-default: missing actions or allow=False -> False."""
         if not isinstance(friend_permissions, dict):
             return False
         entry = friend_permissions.get(action)
@@ -63,27 +62,28 @@ class PermissionMatrix:
             return False
         if not entry.get("allow"):
             return False
-        return self.scope_allows(action, list(entry.get("scopes") or []), resource)
+        return self.scope_allows(action, list(entry.get("scopes") or []),
+                                 resource)
 
     def scope_allows(self, action: str, scopes: list[str],
                      resource: str = "") -> bool:
-        """Glob-match del recurso contra los scopes concedidos. Sin scopes
-        o con ``"*"`` -> cualquier recurso. Un recurso vacío (''), usado
-        por acciones sin recurso (p. ej. chat:converse), siempre pasa si
-        la acción está concedida."""
+        """Glob-match the resource against granted scopes. No scopes or
+        a ``"*"`` scope -> any resource. An empty resource (''), used by
+        actions without a resource (e.g. chat:converse), always passes if
+        the action is granted."""
         if not resource:
             return True
         if not scopes or "*" in scopes:
             return True
         return any(fnmatch.fnmatch(resource, pat) for pat in scopes)
 
-    # -- edición con auditoría ---------------------------------------------
+    # -- audited edits -----------------------------------------------------
     def grant(self, friend_permissions: dict, action: str,
               scopes: list[str] | None = None, audit=None) -> dict:
         with self._lock:
             friend_permissions[action] = {
                 "allow": True, "scopes": [str(s) for s in (scopes or [])]}
-        self._log(audit, "permiso.grant", action=action, result="allow",
+        self._log(audit, "permission.grant", action=action, result="allow",
                   scopes=scopes)
         return friend_permissions
 
@@ -92,7 +92,7 @@ class PermissionMatrix:
         with self._lock:
             if action in friend_permissions:
                 del friend_permissions[action]
-        self._log(audit, "permiso.revoke", action=action, result="deny")
+        self._log(audit, "permission.revoke", action=action, result="deny")
         return friend_permissions
 
     def _log(self, audit, event, **kw):
@@ -100,12 +100,10 @@ class PermissionMatrix:
             audit.event(event, **kw)
 
 
-# Conveniencia: scopes de ejemplo para archivos/comandos
+# Convenience: example scopes for files/commands
 def path_scopes(*globs: str) -> list[str]:
-    """Scopes file:read/file:write como globs de rutas."""
-    return list(globs)
+    return [str(g) for g in globs]
 
 
 def command_scopes(*prefixes: str) -> list[str]:
-    """Scopes exec:terminal como prefijos de comando permitidos."""
-    return list(prefixes)
+    return [str(p) for p in prefixes]

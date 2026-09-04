@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
-"""Auditoría HAAP: registro JSON-lines persistente.
+"""HAAP audit trail: persistent JSON-lines log.
 
-Fichero: ``<HAAP_DIR>/audit.log`` (una entrada JSON por línea), con
-rotación simple por tamaño. En pruebas se usa el modo memoria. Cada
-decisión de seguridad (handshake, permisos, rate limits, tareas) deja
-una traza: quién, qué acción, resultado y detalle NO sensible.
+File: ``<HAAP_DIR>/audit.log`` (one JSON entry per line) with simple
+size-based rotation. Tests use in-memory mode. Every security decision
+(handshake, permissions, rate limits, tasks) leaves a trace: who, what
+action, result and NON-sensitive detail.
 """
 
 from __future__ import annotations
@@ -17,11 +17,11 @@ import time
 from .identity import haap_dir
 
 AUDIT_FILENAME = "audit.log"
-MAX_FILE_BYTES = 5 * 1024 * 1024  # 5 MB -> rota a audit.log.1
+MAX_FILE_BYTES = 5 * 1024 * 1024  # 5 MB -> rotates to audit.log.1
 KEEP_ROTATED = 2
 
-# Acciones de auditoría que NUNCA deben incluirse en logs: contienen
-# secretos o payloads de tareas (ver threat model T7 en ARQUITECTURA.md).
+# Audit actions that must NEVER appear in logs: they contain secrets or
+# task payloads (see threat model T7 in ARQUITECTURA.md).
 _SENSITIVE_KEYS = {"challenge_token", "private_key", "signature", "task_payload"}
 
 
@@ -29,12 +29,12 @@ def _safe(detail: dict | None) -> dict:
     detail = dict(detail or {})
     for key in _SENSITIVE_KEYS:
         if key in detail:
-            detail[key] = "<redactado>"
+            detail[key] = "<redacted>"
     return detail
 
 
 class AuditLog:
-    """Log JSON-lines thread-safe, con modo memoria (tests) y fichero."""
+    """Thread-safe JSON-lines log with in-memory mode (tests) and file mode."""
 
     def __init__(self, directory: str | None = None, memory: bool = False,
                  max_file_bytes: int = MAX_FILE_BYTES):
@@ -75,12 +75,12 @@ class AuditLog:
                     dst = f"{self.path}.{i}"
                     if os.path.exists(src):
                         os.replace(src, dst)
-                # elimina el más antiguo si excede el número a conservar
+                # remove the oldest if it exceeds the retention count
                 old = f"{self.path}.{KEEP_ROTATED + 1}"
                 if os.path.exists(old):
                     os.remove(old)
         except OSError:
-            pass  # si no se puede rotar, seguimos escribiendo
+            pass  # if rotation fails, keep writing
 
     def recent(self, last: int = 50, since: float | None = None,
                friend: str = "", event_prefix: str = "") -> list[dict]:
