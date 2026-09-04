@@ -1,27 +1,27 @@
 # -*- coding: utf-8 -*-
-"""Registro de tareas HAAP con ciclo de vida alineado con A2A.
+"""HAAP task registry with A2A-aligned lifecycle.
 
-Estados (nombres A2A / Linux Foundation):
+States (A2A / Linux Foundation names):
 
     submitted -> accepted -> working -> completed
                      |           |
                      +-> rejected +-> failed
-                              (cualquier estado -> rejected por el agente
-                               receptor; failed si el ejecutor falla)
+                              (any state -> rejected by the receiving
+                               agent; failed if the executor fails)
 
-Transiciones válidas:
+Valid transitions:
 
-    submitted:  creada por el delegador (cliente) o recibida (servidor)
-    accepted:   el ejecutor aceptó la tarea
-    rejected:   el ejecutor la rechazó (permisos no, eso es error de red;
-                rechazo = decisión del ejecutor/agente)
-    working:    el ejecutor informa progreso
-    completed:  el ejecutor envió task_result con payload final
-    failed:     el ejecutor envió task_result con error
+    submitted:  created by the delegator (client) or received (server)
+    accepted:   the executor accepted the task
+    rejected:   the executor rejected it (permissions are transport-level
+                errors; rejection = executor/agent decision)
+    working:    the executor reports progress
+    completed:  the executor sent task_result with the final payload
+    failed:     the executor sent task_result with an error
 
-El registro es local por agente: guarda las tareas QUE ENVIAMOS
-(delegadas a amigos) y las QUE RECIBIMOS (ejecutadas por nosotros), con
-``role`` = delegate/submit.
+The registry is local per agent: it stores tasks WE SENT (delegated to
+friends) and tasks WE RECEIVED (executed by us), with ``role`` =
+delegate/submit.
 """
 
 from __future__ import annotations
@@ -37,7 +37,7 @@ from .identity import haap_dir
 
 TASKS_FILENAME = "tasks.json"
 
-# Estados permitidos (A2A) y transiciones.
+# Allowed states (A2A) and transitions.
 STATES = ("submitted", "accepted", "working", "completed", "failed", "rejected")
 _TRANSITIONS = {
     "submitted": {"accepted", "rejected", "failed"},
@@ -50,7 +50,7 @@ _TRANSITIONS = {
 
 
 def new_task_id() -> str:
-    """Identificador de tarea: 'T' + uuid4 hex corto."""
+    """Task identifier: 'T' + short uuid4 hex."""
     return "T" + uuid.uuid4().hex[:16]
 
 
@@ -60,25 +60,25 @@ class TaskRecord:
                  state: str = "submitted", detail: dict | None = None,
                  created_at: float | None = None):
         if state not in STATES:
-            raise TaskStateError(f"estado inicial inválido: {state}")
+            raise TaskStateError(f"invalid initial state: {state}")
         self.task_id = task_id
-        self.role = role          # "delegate" (yo envío) | "submit" (yo ejecuto)
+        self.role = role          # "delegate" (I sent) | "submit" (I execute)
         self.friend_fingerprint = friend_fingerprint
         self.prompt = prompt
-        self.action = action      # p. ej. "file:read" (para scopes)
-        self.resource = resource  # p. ej. ruta/URI (para scopes)
+        self.action = action      # e.g. "file:read" (for scopes)
+        self.resource = resource  # e.g. path/URI (for scopes)
         self.state = state
-        self.detail = dict(detail or {})   # progreso/resultado/resumen
+        self.detail = dict(detail or {})   # progress/result/summary
         self.created_at = created_at or time.time()
         self.updated_at = self.created_at
         self.progress_log: list[dict] = []
 
     def transition(self, new_state: str, detail: dict | None = None) -> None:
         if new_state not in STATES:
-            raise TaskStateError(f"estado destino inválido: {new_state}")
+            raise TaskStateError(f"invalid target state: {new_state}")
         if new_state not in _TRANSITIONS.get(self.state, set()):
             raise TaskStateError(
-                f"transición inválida {self.state} -> {new_state}")
+                f"invalid transition {self.state} -> {new_state}")
         self.state = new_state
         if detail:
             self.detail.update(detail)
@@ -106,13 +106,13 @@ class TaskRecord:
 
 
 class TaskRegistry:
-    """Registro persistente de tareas local."""
+    """Local, persistent task registry."""
 
     def __init__(self, directory: str | None = None, memory: bool = False):
         self.directory = directory or haap_dir()
         self.path = os.path.join(self.directory, TASKS_FILENAME)
         self.memory = memory
-        self._lock = threading.RLock()  # reentrante: update()->require() anida
+        self._lock = threading.RLock()  # reentrant: update()->require() nests
         self._tasks: dict[str, TaskRecord] = {}
         if not memory:
             self._load()
@@ -162,7 +162,7 @@ class TaskRegistry:
     def require(self, task_id: str) -> TaskRecord:
         rec = self.get(task_id)
         if rec is None:
-            raise TaskNotFoundError(f"tarea desconocida: {task_id}")
+            raise TaskNotFoundError(f"unknown task: {task_id}")
         return rec
 
     def update(self, task_id: str, new_state: str,
