@@ -44,7 +44,7 @@ class RegistryStore:
 
     def __init__(self, entry_ttl: int = ENTRY_TTL_S):
         self._agents: dict[str, dict] = {}
-        self._challenges: dict[str, tuple[str, float]] = {}  # fp -> (nonce, issued)
+        self._challenges: dict[str, tuple[str, float, str]] = {}  # fp -> (nonce, issued, pubkey_b64)
         self._lock = threading.RLock()
         self.entry_ttl = entry_ttl
 
@@ -83,19 +83,29 @@ class RegistryStore:
         with self._lock:
             if len(self._agents) >= MAX_AGENTS and fp not in self._agents:
                 return False, "directory full"
-            self._challenges[fp] = (nonce, self._now())
+            # remember the verified key: the manifest itself never carries keys
+            self._challenges[fp] = (nonce, self._now(), public_key_b64)
         return True, nonce
 
     def complete_registration(self, fingerprint: str, manifest: dict,
-                              endpoint_proof_b64: str) -> tuple[bool, str]:
-        """With the signed endpoint proof, list the agent."""
+                              endpoint_proof_b64: str,
+                              public_key_b64: str = "") -> tuple[bool, str]:
+        """With the signed endpoint proof, list the agent. The proof MUST
+        verify against the public key validated at submit time (kept in
+        the pending challenge); anything else is rejected and the agent
+        is NOT listed."""
         with self._lock:
             pending = self._challenges.pop(fingerprint, None)
             if not pending:
                 return False, "no pending challenge"
-            nonce, issued = pending
+            nonce, issued, verified_key_b64 = pending
             if self._now() - issued > CHALLENGE_TTL_S:
                 return False, "challenge expired"
+            if public_key_b64 and public_key_b64 != verified_key_b64:
+                return False, "public key does not match the registered challenge"
+            if not self.verify_endpoint_proof(
+                    fingerprint, nonce, verified_key_b64, endpoint_proof_b64):
+                return False, "invalid endpoint proof (signed by a different key)"
             rec = {
                 "manifest": manifest,
                 "registered_at": self._now(),
