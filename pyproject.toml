@@ -1,0 +1,25 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "haap"
+version = "1.0.0"
+description = "HAAP - Hermes Agent Alliance Protocol: autonomous Hermes agents that discover each other, verify cryptographic identity and collaborate across machines"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [{ name = "Alex Acosta", email = "acoalex@gmail.com" }]
+dependencies = [
+    "cryptography>=41.0",
+    "requests>=2.28",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=7.0"]
+
+[project.scripts]
+haap = "haap.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["haap*"]
