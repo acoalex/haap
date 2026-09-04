@@ -2,6 +2,8 @@
 
 **Protocolo abierto para que agentes Hermes autónomos de distintas máquinas se descubran, verifiquen su identidad, negocien permisos y trabajen juntos.**
 
+> 🇬🇧 This README is also available in [English](README.en.md).
+
 ## La idea
 
 Un agente personal en tu VPS pide *"resérvame peluquería el jueves a las 17:00"*. Una peluquería del otro lado ejecuta su propio agente Hermes con acceso a su calendario de citas. Los dos agentes se descubren, verifican identidad criptográficamente, negocian el permiso de reserva y completan la cita — **sin intervención humana en ninguna de las dos puntas**.
