@@ -52,6 +52,8 @@ class HAAPServer:
                  rate_limiter: RateLimiter | None = None,
                  tasks: TaskRegistry | None = None,
                  speciality: str = "",
+                 marketplace_catalog: dict | None = None,
+                 marketplace_policy: dict | None = None,
                  on_friend_request=None,   # cb(fp, manifest) -> None (notify owner)
                  on_task=None,             # cb(task_id, payload) -> None | dict (result)
                  skills_dirs: list[str] | None = None,
@@ -63,6 +65,8 @@ class HAAPServer:
         self.rate_limiter = rate_limiter or RateLimiter()
         self.tasks = tasks or TaskRegistry(memory=True)
         self.speciality = speciality
+        self.marketplace_catalog = marketplace_catalog  # service -> info/price
+        self.marketplace_policy = marketplace_policy    # e.g. {"auto_accept": True}
         self.on_friend_request = on_friend_request
         self.on_task = on_task
         self.skills_dirs = skills_dirs
@@ -91,8 +95,11 @@ class HAAPServer:
 
     # ------------------------------------------------------------- routing
     # Bootstrap messages carry the sender's public key in the payload:
-    # they arrive precisely when the receiver does not know the sender yet.
-    BOOTSTRAP_TYPES = frozenset({"hello", "challenge", "friend_request"})
+    # they arrive precisely when the receiver does not know the sender yet
+    # (friendship bootstrap AND marketplace open-services).
+    BOOTSTRAP_TYPES = frozenset({"hello", "challenge", "friend_request",
+                                 "service_search", "service_book",
+                                 "service_cancel", "service_quote"})
 
     def _resolve_sender_pubkey(self, envelope: dict) -> bytes | None:
         """Sender's public key: from the directory if known; for bootstrap
@@ -272,6 +279,97 @@ class HAAPServer:
     def _on_ping(self, env: dict) -> dict:
         return env_mod.sign_body(self.identity, "ping", env["sender_fingerprint"],
                                  {"pong": True, "ts": int(time.time())})
+
+    # ------------------------------------------------------------ marketplace
+    # Open-services handlers: no friendship required, but the sender MUST
+    # pass self-contained verification (signed envelope + fingerprint/key
+    # binding, already enforced by the router for bootstrap types) and the
+    # business policy (rate limit + service rules) decides acceptance.
+
+    def _check_marketplace_sender(self, env: dict) -> str:
+        """Shared checks for open-service messages: fingerprint validity,
+        not blocked, and marketplace rate limit. Returns the sender fp."""
+        sender = env["sender_fingerprint"]
+        rec = self.directory.get(sender)
+        if rec is not None and rec.status == "blocked":
+            raise PermissionDeniedError(f"{sender} is blocked")
+        # dedicated marketplace rate limit (stricter than friend limits)
+        self.rate_limiter.check(sender, "marketplace",
+                                {"marketplace": {"capacity": 10,
+                                                 "refill_per_sec": 0.05},
+                                 "*": {"capacity": 20,
+                                       "refill_per_sec": 0.1}})
+        return sender
+
+    def _on_service_search(self, env: dict) -> dict:
+        sender = self._check_marketplace_sender(env)
+        p = env["payload"]
+        services = str(p.get("services", "")).lower()
+        service_date = str(p.get("date", ""))
+        # the business answers with its availability from its own policy;
+        # the default implementation reports the catalog it publishes
+        catalog = self.marketplace_catalog or {}
+        matched = {k: v for k, v in catalog.items()
+                   if not services or services in k.lower()
+                   or k.lower() in services}
+        self._audit("marketplace.search", sender)
+        return env_mod.sign_body(self.identity, "service_quote", sender,
+                                 {"query": {"services": services,
+                                            "date": service_date},
+                                  "available": bool(matched),
+                                  "services": matched,
+                                  "policy": self.marketplace_policy})
+
+    def _on_service_book(self, env: dict) -> dict:
+        sender = self._check_marketplace_sender(env)
+        p = env["payload"]
+        service = str(p.get("service", ""))
+        when = str(p.get("when", ""))
+        policy = self.marketplace_policy or {}
+        if not policy.get("auto_accept", False):
+            raise PermissionDeniedError(
+                "this business does not accept automated bookings "
+                "(auto_accept disabled)")
+        booking = {"service": service, "when": when,
+                   "client_fingerprint": sender, "status": "reserved"}
+        if self.on_task:
+            # reuse the task pipeline so the booking hits the business
+            # backend (e.g. CalDAV calendar write)
+            task = self.tasks.create(role="server",
+                                     friend_fingerprint=sender,
+                                     prompt=f"marketplace booking {service} {when}",
+                                     action="booking:reserve",
+                                     resource=service)
+            try:
+                result = self.on_task(task.task_id, p)
+            except Exception as exc:
+                self.tasks.update(task.task_id, "failed",
+                                  detail={"error": str(exc)[:200]})
+                return env_mod.sign_body(self.identity, "error", sender,
+                                         {"error_code": "TASK_ERROR",
+                                          "detail": str(exc)[:200],
+                                          "in_reply_to_nonce": env["nonce"]})
+            booking.update(result if isinstance(result, dict) else {})
+            self.tasks.update(task.task_id, "accepted")
+            self.tasks.update(task.task_id, "completed", detail=booking)
+        self._audit("marketplace.book", sender, detail={"service": service})
+        return env_mod.sign_body(self.identity, "task_result", sender,
+                                 {"task_id": f"MKT-{int(time.time())}",
+                                  "state": "completed", "detail": booking})
+
+    def _on_service_cancel(self, env: dict) -> dict:
+        sender = self._check_marketplace_sender(env)
+        p = env["payload"]
+        self._audit("marketplace.cancel", sender,
+                    detail={"booking_id": str(p.get("booking_id", ""))[:40]})
+        return env_mod.sign_body(self.identity, "task_result", sender,
+                                 {"task_id": str(p.get("booking_id", "")),
+                                  "state": "completed",
+                                  "detail": {"cancelled": True}})
+
+    def _on_service_quote(self, env: dict) -> dict:
+        # a quote arriving at a business is unexpected; acknowledge politely
+        return self._error_reply(env, HAAPError("service_quote not expected here"))
 
     # -------------------------------------------------------------- HTTP layer
     def _make_handler(self):

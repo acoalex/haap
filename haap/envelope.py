@@ -46,6 +46,10 @@ MESSAGE_TYPES = frozenset({
     "hello", "hello_ack", "challenge", "verify", "friend_request", "friend_accept",
     "capabilities", "task_request", "task_accept", "task_result",
     "task_progress", "error", "ping",
+    # Marketplace (open-services) message types: signed requests, no prior
+    # friendship required. The business agent's policy decides acceptance;
+    # everything else remains deny-by-default.
+    "service_search", "service_quote", "service_book", "service_cancel",
 })
 SIGNED_FIELDS = (
     "protocol_version", "message_type", "sender_fingerprint",
