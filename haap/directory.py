@@ -1,15 +1,15 @@
 # -*- coding: utf-8 -*-
-"""Directorio de amigos local y persistente.
+"""Local, persistent friends directory.
 
-Fichero: ``<HAAP_DIR>/friends.json``. Cada entrada guarda el fingerprint,
-la CLAVE PÚBLICA del amigo (necesaria para verificar sus firmas), sus
-endpoints de mensajería, capacidades declaradas, permisos concedidos,
-rate limits y el estado de la relación:
+File: ``<HAAP_DIR>/friends.json``. Each entry stores the friend's
+fingerprint, the friend's PUBLIC KEY (needed to verify signatures),
+messaging endpoints, declared capabilities, granted permissions, rate
+limits and the relationship status:
 
-    pending_out    -> yo envié friend_request; espero friend_accept
-    pending_in     -> me enviaron friend_request; esperando aprobación HUMANA
-    accepted       -> amistad establecida (ambas partes)
-    blocked        -> bloqueado (deny-by-default absoluto)
+    pending_out    -> I sent friend_request; awaiting friend_accept
+    pending_in     -> I received friend_request; awaiting HUMAN approval
+    accepted       -> friendship established (both sides)
+    blocked        -> blocked (absolute deny-by-default)
 """
 
 from __future__ import annotations
@@ -32,18 +32,18 @@ FRIENDS_FILENAME = "friends.json"
 STATUSES = ("pending_out", "pending_in", "accepted", "blocked")
 
 DEFAULT_PERMISSIONS = {
-    # Acciones que el AMIGO puede realizar CONTRA este agente.
-    # deny-by-default: la matriz local solo lista lo concedido.
+    # Actions the FRIEND may perform AGAINST this agent.
+    # deny-by-default: the local matrix only lists what is granted.
 }
-# Concesiones típicas al aprobar (plantilla conservadora: sin file/exec).
+# Typical grants on approval (conservative template: no file/exec).
 DEFAULT_GRANT_TEMPLATE = {
     "chat:converse": {"allow": True, "scopes": []},
     "task:delegate": {"allow": True, "scopes": []},
     "task:submit": {"allow": True, "scopes": []},
 }
 DEFAULT_RATE_LIMITS = {
-    # por (amigo, acción): capacidad de ráfaga y recarga tokens/segundo.
-    "*": {"capacity": 60, "refill_per_sec": 0.5},   # global por amigo
+    # per (friend, action): burst capacity and token refill per second.
+    "*": {"capacity": 60, "refill_per_sec": 0.5},   # per-friend global
     "task_request": {"capacity": 5, "refill_per_sec": 0.05},
     "task_result": {"capacity": 10, "refill_per_sec": 0.1},
     "chat:converse": {"capacity": 20, "refill_per_sec": 0.2},
@@ -60,17 +60,17 @@ class FriendRecord:
     fingerprint: str
     name: str
     status: str = "pending_in"
-    public_key_b64: str = ""      # clave pública del amigo (verificar firmas)
+    public_key_b64: str = ""      # friend's public key (verify signatures)
     endpoints: list = field(default_factory=list)   # ["https://host:8443"]
     declared_capabilities: dict = field(default_factory=dict)
-    permissions: dict = field(default_factory=dict)  # acción -> {allow,scopes}
-    rate_limits: dict = field(default_factory=dict)  # acción -> {capacity,refill}
+    permissions: dict = field(default_factory=dict)  # action -> {allow,scopes}
+    rate_limits: dict = field(default_factory=dict)  # action -> {capacity,refill}
     created_at: str = field(default_factory=utc_now_iso)
     updated_at: str = field(default_factory=utc_now_iso)
     last_seen: str = ""
     notes: str = ""
 
-    # -- API cómoda --------------------------------------------------------
+    # -- convenience API ---------------------------------------------------
     def has_permission(self, action: str) -> bool:
         perm = self.permissions.get(action)
         return bool(perm and perm.get("allow"))
@@ -111,12 +111,12 @@ class FriendRecord:
         clean = {k: v for k, v in data.items() if k in known}
         rec = cls(**clean)
         if rec.status not in STATUSES:
-            raise HAAPError(f"estado de amistad inválido: {rec.status}")
+            raise HAAPError(f"invalid friendship status: {rec.status}")
         return rec
 
 
 class Directory:
-    """Registro local de amigos, persistido en JSON con lock."""
+    """Local friends registry, persisted as JSON with locking."""
 
     def __init__(self, directory: str | None = None):
         self.directory = directory or haap_dir()
@@ -125,7 +125,7 @@ class Directory:
         self._friends: dict[str, FriendRecord] = {}
         self._load()
 
-    # -- persistencia ------------------------------------------------------
+    # -- persistence -------------------------------------------------------
     def _load(self) -> None:
         if os.path.exists(self.path):
             with open(self.path, "r", encoding="utf-8") as fh:
@@ -143,7 +143,7 @@ class Directory:
             fh.write("\n")
         os.replace(tmp, self.path)
 
-    # -- consultas ---------------------------------------------------------
+    # -- queries -----------------------------------------------------------
     def get(self, fingerprint: str) -> FriendRecord | None:
         with self._lock:
             return self._friends.get(fingerprint)
@@ -151,11 +151,11 @@ class Directory:
     def require(self, fingerprint: str, statuses=None) -> FriendRecord:
         rec = self.get(fingerprint)
         if rec is None:
-            raise FriendNotFoundError(f"sin relación con {fingerprint}")
+            raise FriendNotFoundError(f"no relationship with {fingerprint}")
         if statuses and rec.status not in statuses:
             raise FriendNotFoundError(
-                f"relación con {fingerprint} en estado {rec.status} "
-                f"(se esperaba {'/'.join(statuses)})")
+                f"relationship with {fingerprint} in status {rec.status} "
+                f"(expected {'/'.join(statuses)})")
         return rec
 
     def all(self) -> list[FriendRecord]:
@@ -166,16 +166,16 @@ class Directory:
         return [r for r in self.all() if r.status == status]
 
     def public_keys(self) -> dict[str, bytes]:
-        """Mapa fingerprint -> clave pública RAW para verificación de firmas.
-        Incluye pendientes y bloqueados: así un remitente conocido siempre
-        puede ser verificado (y rechazado con el error adecuado)."""
+        """Map fingerprint -> RAW public key for signature verification.
+        Includes pending and blocked entries: a known sender can always
+        be verified (and rejected with the proper error)."""
         from .crypto import b64d
         return {
             fp: b64d(rec.public_key_b64)
             for fp, rec in self._friends.items() if rec.public_key_b64
         }
 
-    # -- mutaciones --------------------------------------------------------
+    # -- mutations ---------------------------------------------------------
     def upsert(self, rec: FriendRecord) -> FriendRecord:
         with self._lock:
             rec.touch()
@@ -186,18 +186,18 @@ class Directory:
     def remove(self, fingerprint: str) -> None:
         with self._lock:
             if fingerprint not in self._friends:
-                raise FriendNotFoundError(f"sin relación con {fingerprint}")
+                raise FriendNotFoundError(f"no relationship with {fingerprint}")
             del self._friends[fingerprint]
             self.save()
 
-    # -- máquina de estados de amistad -------------------------------------
+    # -- friendship state machine ------------------------------------------
     def register_known(self, fingerprint: str, public_key_b64: str,
                        name: str = "", endpoints=None,
                        notes: str = "") -> FriendRecord:
-        """Registra/actualiza a un remitente verificado (clave pública ya
-        validada contra la firma). No cambia el estado de una relación
-        existente; crea ``pending_in`` implícito si no existía (el
-        friend_request formal lo consolidará)."""
+        """Register/update a verified sender (public key already validated
+        against the signature). Does not change an existing relationship's
+        status; creates an implicit ``pending_in`` if none existed (the
+        formal friend_request will consolidate it)."""
         with self._lock:
             existing = self._friends.get(fingerprint)
             if existing:
@@ -223,78 +223,79 @@ class Directory:
                         name: str, endpoints=None,
                         permissions: dict | None = None,
                         rate_limits: dict | None = None) -> FriendRecord:
-        """Inicio manual de amistad desde este lado (``haap friends add``)."""
+        """Manual friendship start from this side (``haap friends add``)."""
         with self._lock:
             existing = self._friends.get(fingerprint)
             if existing and existing.status == "blocked":
-                raise FriendBlockedError(f"{fingerprint} está bloqueado")
+                raise FriendBlockedError(f"{fingerprint} is blocked")
             if existing and existing.status == "accepted":
                 raise DuplicateRequestError(
-                    f"ya eres amigo de {fingerprint}")
+                    f"already friends with {fingerprint}")
             rec = FriendRecord(
                 fingerprint=fingerprint, name=name or fingerprint,
                 status="pending_out", public_key_b64=public_key_b64,
                 endpoints=list(endpoints or []),
                 permissions=dict(permissions or DEFAULT_GRANT_TEMPLATE),
                 rate_limits=dict(rate_limits or {}),
-                notes="solicitud enviada por este agente")
+                notes="request sent by this agent")
             self._friends[fingerprint] = rec
             self.save()
             return rec
 
     def mark_outbound_accepted(self, fingerprint: str,
                                their_endpoints=None) -> FriendRecord:
-        """Recibimos friend_accept: pending_out -> accepted. Si la relación
-        local estaba en pending_in (ambos iniciaron a la vez) o ya existía
-        como conocida, también consolida a accepted (idempotente)."""
+        """Received friend_accept: pending_out -> accepted. If the local
+        relationship was pending_in (both sides initiated at once) or
+        already known, also consolidates to accepted (idempotent)."""
         with self._lock:
             rec = self.get(fingerprint)
             if rec is None:
-                raise FriendNotFoundError(f"sin relación con {fingerprint}")
+                raise FriendNotFoundError(f"no relationship with {fingerprint}")
             if rec.status == "blocked":
-                raise FriendBlockedError(f"{fingerprint} está bloqueado")
+                raise FriendBlockedError(f"{fingerprint} is blocked")
             if rec.status not in ("pending_out", "pending_in", "accepted"):
                 raise FriendNotFoundError(
-                    f"relación con {fingerprint} en estado {rec.status} inesperado")
+                    f"unexpected relationship status with {fingerprint}: "
+                    f"{rec.status}")
             rec.status = "accepted"
             if their_endpoints:
                 rec.endpoints = list(
                     dict.fromkeys(rec.endpoints + their_endpoints))
-            rec.notes = "amistad confirmada por el otro agente"
+            rec.notes = "friendship confirmed by the other agent"
             rec.touch()
             self.save()
             return rec
 
     def approve(self, fingerprint: str, grant: dict | None = None,
                 rate_limits: dict | None = None) -> FriendRecord:
-        """Aprobación HUMANA de una solicitud entrante: pending_in ->
-        accepted, con la matriz de permisos que el dueño concede."""
+        """HUMAN approval of an inbound request: pending_in -> accepted,
+        with the permission matrix the owner grants."""
         with self._lock:
             rec = self.require(fingerprint, statuses=("pending_in",))
             rec.status = "accepted"
             rec.permissions = dict(grant or DEFAULT_GRANT_TEMPLATE)
             if rate_limits:
                 rec.rate_limits = dict(rate_limits)
-            rec.notes = "aprobado por el dueño humano"
+            rec.notes = "approved by the human owner"
             rec.touch()
             self.save()
             return rec
 
     def deny(self, fingerprint: str) -> None:
-        """Rechazo humano de una solicitud entrante: elimina la entrada."""
+        """Human rejection of an inbound request: removes the entry."""
         with self._lock:
             rec = self.require(fingerprint, statuses=("pending_in",))
             del self._friends[fingerprint]
             self.save()
 
     def block(self, fingerprint: str) -> FriendRecord:
-        """Bloqueo: rechaza todo mensaje futuro de ese fingerprint."""
+        """Block: rejects every future message from that fingerprint."""
         with self._lock:
             existing = self._friends.get(fingerprint)
             if existing:
                 existing.status = "blocked"
                 existing.permissions = {}
-                existing.notes = "bloqueado por el dueño"
+                existing.notes = "blocked by the owner"
                 existing.touch()
                 rec = existing
             else:
