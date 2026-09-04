@@ -244,9 +244,18 @@ class Directory:
 
     def mark_outbound_accepted(self, fingerprint: str,
                                their_endpoints=None) -> FriendRecord:
-        """Recibimos friend_accept: pending_out -> accepted."""
+        """Recibimos friend_accept: pending_out -> accepted. Si la relación
+        local estaba en pending_in (ambos iniciaron a la vez) o ya existía
+        como conocida, también consolida a accepted (idempotente)."""
         with self._lock:
-            rec = self.require(fingerprint, statuses=("pending_out",))
+            rec = self.get(fingerprint)
+            if rec is None:
+                raise FriendNotFoundError(f"sin relación con {fingerprint}")
+            if rec.status == "blocked":
+                raise FriendBlockedError(f"{fingerprint} está bloqueado")
+            if rec.status not in ("pending_out", "pending_in", "accepted"):
+                raise FriendNotFoundError(
+                    f"relación con {fingerprint} en estado {rec.status} inesperado")
             rec.status = "accepted"
             if their_endpoints:
                 rec.endpoints = list(

@@ -112,7 +112,7 @@ class TaskRegistry:
         self.directory = directory or haap_dir()
         self.path = os.path.join(self.directory, TASKS_FILENAME)
         self.memory = memory
-        self._lock = threading.Lock()
+        self._lock = threading.RLock()  # reentrante: update()->require() anida
         self._tasks: dict[str, TaskRecord] = {}
         if not memory:
             self._load()

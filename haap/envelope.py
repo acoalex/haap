@@ -43,7 +43,7 @@ from .identity import fingerprint_of_public_key
 MAX_CLOCK_SKEW = 300
 # Tipos de mensaje versionados soportados por el protocolo 1.0.
 MESSAGE_TYPES = frozenset({
-    "hello", "challenge", "verify", "friend_request", "friend_accept",
+    "hello", "hello_ack", "challenge", "verify", "friend_request", "friend_accept",
     "capabilities", "task_request", "task_accept", "task_result",
     "task_progress", "error", "ping",
 })
