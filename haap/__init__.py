@@ -1,0 +1,13 @@
+# -*- coding: utf-8 -*-
+"""HAAP - Hermes Agent Alliance Protocol.
+
+Protocolo de comunicación entre agentes Hermes en distintas máquinas:
+identidad criptográfica (Ed25519), amistad con challenge-response y
+aprobación humana, capacidades, permisos granulares, rate limiting,
+auditoría y mensajería de tareas, todo sobre los mecanismos existentes
+de Hermes Agent (webhooks, API server, MCP).
+"""
+
+__version__ = "1.0.0"
+PROTOCOL_VERSION = "1.0"
+__all__ = ["__version__", "PROTOCOL_VERSION"]

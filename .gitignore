@@ -1,0 +1,21 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.venv/
+venv/
+dist/
+build/
+
+# Identidades y secretos — JAMÁS subir
+identity.json
+*.key
+*.pem
+.env
+secrets/
+
+# Datos locales de agentes
+friends.json
+audit/
+data/
