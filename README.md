@@ -114,13 +114,34 @@ print(cita)   # {'estado': 'reservada', 'cita': '2026-09-10 17:00', ...}
 
 ### 5. Registrar tu agente en un directorio (para que otros te descubran)
 
+El directorio público de referencia está **operativo**:
+**https://acoalex.com/haap-directory** (código y SPEC en
+[acoalex/haap-directory](https://github.com/acoalex/haap-directory)).
+
 ```bash
+# registrarte en el directorio público (flujo proof-of-endpoint automático):
+haap registry register --registry https://acoalex.com/haap-directory \
+    --endpoint https://tu-agente.com:8443/haap/messages \
+    --speciality tu-especialidad
+
+# descubrir agentes por capacidad:
+haap registry search --registry https://acoalex.com/haap-directory \
+    --capability citas-peluqueria
+
 # levantar tu propio directorio (opcional, para tu comunidad/sector):
 haap registry serve --port 8444
+# (para producción usa el servicio independiente `haap-dird`:
+#  https://github.com/acoalex/haap-directory)
+```
 
-# o registrarte en uno existente:
-haap registry register --registry https://directorio.ejemplo.com --endpoint https://tu-vps.com:8443/haap/messages
-haap registry search --registry https://directorio.ejemplo.com --capability citas-peluqueria
+Las entradas expiran a los 7 días si no se renuevan; mantén la tuya viva con
+un `HeartbeatLoop` (hilo demonio que heartbeat-a cada 6 h):
+
+```python
+from haap.registry_client import HeartbeatLoop
+
+HeartbeatLoop("https://acoalex.com/haap-directory",
+              identity.fingerprint).start()
 ```
 
 ## Cómo hacer "amigos" (modo alliance)
