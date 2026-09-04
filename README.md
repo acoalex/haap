@@ -136,16 +136,116 @@ haap registry search --registry https://directorio.ejemplo.com --capability cita
 
    y desde Python: `client.start_friendship(...)` — el otro lado recibe el `friend_request`.
 
-2. **El otro dueño aprueba** (nunca se hace solo):
+2. **El otro dueño aprueba con un rol** (nunca se hace solo):
 
    ```bash
-   haap friends list                # ve la solicitud pending_in
-   haap friends approve HF-xxxx... --grant '{"task:submit": {"allow": true, "scopes": ["informes:*"]}}'
+   haap friends requests            # ve la cola de solicitudes pendientes
+   haap friends approve HF-xxxx... --role partner
    ```
 
-3. **A partir de ahí**: tareas delegadas con permisos acotados, rate limits y auditoría en ambos lados.
+3. **A partir de ahí**: tareas delegadas con permisos acotados por el rol, rate limits y auditoría en ambos lados.
 
-Si el otro agente te envía a ti la solicitud, el flujo es el mismo pero en sentido inverso: tú ves `pending_in` y decides con `approve`/`deny`. El callback `on_friend_request` del servidor permite además notificar esa solicitud a tu chat de Hermes (Matrix/Telegram) para aprobarla desde el móvil.
+Si el otro agente te envía a ti la solicitud, el flujo es el mismo pero en sentido inverso: tú ves `pending_in` y decides con `approve`/`deny`.
+
+## Gestión de solicitudes de amistad: roles, política y notificaciones
+
+Cuando un agente desconocido envía una solicitud de amistad, HAAP la evalúa automáticamente contra tu **política** (`~/.haap/policy.json`) con tres resultados posibles, en este orden:
+
+```
+                friend_request entrante (firmado)
+                              │
+        ┌─────────────────────┼─────────────────────┐
+        ▼                     ▼                     ▼
+      DENY                AUTO-APPROVE             QUEUE
+   (blocklist o        (regla por fingerprint   (default: se guarda
+   default=deny)       o especialidad, capado    pending_in y se
+        │              por max_role)             NOTIFICA al dueño)
+        ▼                     ▼                     ▼
+   rechazo                 friend_accept       tarjeta accionable en tu
+   inmediato               con matriz granted   chat / cola de pendientes
+```
+
+### Roles de permisos
+
+En lugar de componer matrices JSON a mano, apruebas con una plantilla con nombre:
+
+```bash
+haap friends roles          # lista los roles disponibles y sus permisos
+haap friends requests       # solicitudes pendientes + comando de decisión sugerido
+haap friends approve HF-xxxx... --role client
+haap friends approve HF-xxxx... --role partner
+```
+
+| Rol | Qué puede hacer el otro agente |
+|---|---|
+| `guest` | Solo conversación/ping. Sin tareas. |
+| `client` | Scopes de reserva (`booking:*`, `service:*`). Ideal para clientes de marketplace. |
+| `partner` | Delegación de tareas amplia + lecturas de agenda/calendario. |
+| `family` | Como partner, con rate limits altos (agentes personales de confianza). |
+| `admin` | Todo, incluido `file:write` y `exec:terminal`. **Solo para agentes que controlas al 100%.** |
+
+Puedes definir tus propios roles (y heredar de los integrados) en `~/.haap/roles.json`:
+
+```json
+{
+  "vip": {
+    "extends": "partner",
+    "description": "Clientes VIP",
+    "rate_limits": {"*": {"capacity": 500, "refill_per_sec": 5.0}}
+  }
+}
+```
+
+### Política de solicitudes (`~/.haap/policy.json`)
+
+```json
+{
+  "default": "queue",
+  "auto_approve": [
+    {"fingerprint": "HF-3f7a9c1b2d4e5f60", "role": "partner"},
+    {"speciality": "citas-peluqueria", "role": "client"}
+  ],
+  "max_role": "partner"
+}
+```
+
+- `"default": "queue"` (recomendado) — todo lo que no encaje en reglas queda pendiente de tu aprobación
+- `"default": "deny"` — modo cerrado: solo entran los que coincidan con una regla de `auto_approve`
+- **`max_role` acota el auto-approve**: aunque una regla pida `admin`, nunca se auto-concederá más que tu rol tope (un rol desconocido se auto-capar a `client`)
+
+### Notificaciones accionables
+
+La solicitud en cola genera una **tarjeta** con todo lo que necesitas para decidir:
+
+```
+=== HAAP FRIEND REQUEST (pending your approval) ===
+  from:    HF-3f7a9c1b2d4e5f60
+  name:    Agente de Ana
+  message: Hola, soy el asistente de Ana
+  wants:   role 'admin' → would grant 'client'
+  decide:  haap friends approve HF-3f7a9c1b2d4e5f60 --role client
+======================================================
+```
+
+Mecanismos de notificación (combinables):
+
+- **ConsoleNotifier** (default) — imprime la tarjeta en los logs del servicio
+- **WebhookNotifier** — POST firmado con HMAC-SHA256 hacia tu Hermes (webhook → tu chat de Matrix/Telegram): apruebas desde el móvil copiando el comando
+- **CompositeNotifier** — varios a la vez
+
+```python
+from haap.policy import WebhookNotifier, ConsoleNotifier, CompositeNotifier
+from haap.server import HAAPServer
+
+server = HAAPServer(ident, directory,
+    notifier=CompositeNotifier(
+        ConsoleNotifier(),
+        WebhookNotifier("https://tu-hermes.com/webhooks/haap-friends",
+                        secret="secreto-compartido-con-hermes"),
+    ))
+```
+
+El `friend_accept` que recibe el otro agente incluye la **matriz concedida real** (`granted` + `granted_role`): si pidió `admin` y concediste `client`, su agente sabe exactamente qué puede hacer — la contraoferta es transparente, no un silencio ambiguo.
 
 ## Cómo publicar servicios (modo marketplace, para negocios)
 
@@ -200,8 +300,10 @@ Levanta dos agentes reales sobre HTTP (peluquería + agente personal), reserva u
 | `haap/client.py` | ✅ | Cliente: amistad, delegación de tareas, marketplace |
 | `haap/registry.py` | ✅ | Directorio público federado (proof-of-endpoint + heartbeats) |
 | `haap/registry_client.py` | ✅ | Cliente de directorio (register/search/heartbeat) |
+| `haap/roles.py` | ✅ | Plantillas de permisos: guest/client/partner/family/admin |
+| `haap/policy.py` | ✅ | Motor de solicitudes (deny/auto-approve/queue) + notificadores |
 | `haap/cli.py` | ✅ | Comando `haap` (init/whoami/friends/task/serve/registry) |
-| Tests (29) | ✅ | Handshake completo, autorización, abuso, marketplace, directorio |
+| Tests (41) | ✅ | Handshake completo, autorización, abuso, marketplace, directorio |
 
 ## Principios de seguridad
 
@@ -221,7 +323,7 @@ Levanta dos agentes reales sobre HTTP (peluquería + agente personal), reserva u
 
 ## Estado y roadmap
 
-Core + marketplace **funcionales y probados** (29 tests). Pendiente en el roadmap: puente nativo con los webhooks de Hermes (notificaciones al chat del dueño), verificación de negocio por dominio web y reputación federada. Ver [ARQUITECTURA.md](docs/ARQUITECTURA.md) para el diseño completo: threat model (10 amenazas), diagramas de secuencia, gobernanza de directorios federados y compatibilidad con el estándar A2A.
+Core + marketplace + **política de amistades con roles** funcionales y probados (41 tests). Pendiente en el roadmap: puente nativo con los webhooks de Hermes (las notificaciones de solicitudes ya emiten la tarjeta; falta el cableado de la aprobación desde el chat), verificación de negocio por dominio web y reputación federada. Ver [ARQUITECTURA.md](docs/ARQUITECTURA.md) para el diseño completo: threat model (10 amenazas), diagramas de secuencia, gobernanza de directorios federados y compatibilidad con el estándar A2A.
 
 ## Licencia
 

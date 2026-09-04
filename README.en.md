@@ -133,16 +133,69 @@ haap registry search --registry https://directory.example.com --capability appoi
 
    then from Python: `client.start_friendship(...)` — the other side receives the `friend_request`.
 
-2. **The other owner approves** (never automatic):
+2. **The other owner approves with a role** (never automatic):
 
    ```bash
-   haap friends list                # they see the pending_in request
-   haap friends approve HF-xxxx... --grant '{"task:submit": {"allow": true, "scopes": ["reports:*"]}}'
+   haap friends requests            # pending request queue
+   haap friends approve HF-xxxx... --role partner
    ```
 
 3. **From then on**: delegated tasks with bounded permissions, rate limits and audit on both sides.
 
 If the other agent sends the request to you instead, the flow is the same in reverse: you see `pending_in` and decide with `approve`/`deny`. The server's `on_friend_request` callback can also push that request to your Hermes chat (Matrix/Telegram) so you can approve it from your phone.
+
+## Friend-request management: roles, policy and notifications
+
+When an unknown agent sends a friend request, HAAP evaluates it against your **policy** (`~/.haap/policy.json`) with three possible outcomes, in order:
+
+1. **deny** — blocklisted or `default: deny` policy → immediate rejection, the owner is never bothered.
+2. **auto-approve** — a rule matches (by fingerprint or speciality), capped by `max_role` → accepted automatically with that role's permission template. The `friend_accept` carries the exact `granted` matrix (transparent counteroffer).
+3. **queue** (default) — stored as `pending_in` and the owner receives an **actionable card**:
+
+```
+=== HAAP FRIEND REQUEST (pending your approval) ===
+  from:    HF-3f7a9c1b2d4e5f60
+  name:    Ana's Agent
+  wants:   role 'admin' → would grant 'client'
+  decide:  haap friends approve HF-3f7a9c1b2d4e5f60 --role client
+======================================================
+```
+
+### Permission roles
+
+| Role | What the other agent may do |
+|---|---|
+| `guest` | Conversation/ping only. No tasks. |
+| `client` | Booking scopes (`booking:*`, `service:*`). Ideal for marketplace clients. |
+| `partner` | Broad task delegation + schedule/calendar reads. |
+| `family` | Like partner, with high rate limits. |
+| `admin` | Everything, including `file:write` and `exec:terminal`. **Only for agents you fully control.** |
+
+Custom roles (with inheritance) live in `~/.haap/roles.json`:
+
+```json
+{
+  "vip": {
+    "extends": "partner",
+    "rate_limits": {"*": {"capacity": 500, "refill_per_sec": 5.0}}
+  }
+}
+```
+
+Policy example (`~/.haap/policy.json`):
+
+```json
+{
+  "default": "queue",
+  "auto_approve": [
+    {"fingerprint": "HF-3f7a9c1b2d4e5f60", "role": "partner"},
+    {"speciality": "appointments", "role": "client"}
+  ],
+  "max_role": "partner"
+}
+```
+
+Notifiers: **ConsoleNotifier** (service logs), **WebhookNotifier** (HMAC-signed POST — point it at a Hermes webhook so the approval card lands in your Matrix/Telegram chat), **CompositeNotifier** (both).
 
 ## Publishing services (marketplace mode, for businesses)
 
@@ -197,8 +250,10 @@ Spins up two real agents over HTTP (salon + personal agent), books an appointmen
 | `haap/client.py` | ✅ | Client: friendship, task delegation, marketplace |
 | `haap/registry.py` | ✅ | Federated public directory (proof-of-endpoint + heartbeats) |
 | `haap/registry_client.py` | ✅ | Directory client (register/search/heartbeat) |
+| `haap/roles.py` | ✅ | Permission templates: guest/client/partner/family/admin |
+| `haap/policy.py` | ✅ | Request engine (deny/auto-approve/queue) + notifiers |
 | `haap/cli.py` | ✅ | `haap` command (init/whoami/friends/task/serve/registry) |
-| Tests (29) | ✅ | Full handshake, authorization, abuse, marketplace, directory |
+| Tests (41) | ✅ | Full handshake, authorization, abuse, marketplace, directory, policy |
 
 ## Security principles
 
@@ -218,7 +273,7 @@ Spins up two real agents over HTTP (salon + personal agent), books an appointmen
 
 ## Status & roadmap
 
-Core + marketplace **functional and tested** (29 tests). Roadmap items: native Hermes webhook bridge (owner chat notifications), business verification via domain web, federated reputation. See [ARQUITECTURA.md](docs/ARQUITECTURA.md) (Spanish) for the full design: threat model (10 threats), sequence diagrams, federated directory governance and compatibility with the A2A standard.
+Core + marketplace + **friend-request policy with roles** functional and tested (41 tests). Roadmap items: native Hermes webhook bridge (owner chat notifications), business verification via domain web, federated reputation. See [ARQUITECTURA.md](docs/ARQUITECTURA.md) (Spanish) for the full design: threat model (10 threats), sequence diagrams, federated directory governance and compatibility with the A2A standard.
 
 ## License
 
