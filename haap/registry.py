@@ -1,21 +1,21 @@
 # -*- coding: utf-8 -*-
-"""Directorio público federado de agentes HAAP.
+"""HAAP federated public directory of agents.
 
-El registro es "guía telefónica", no notario: la identidad vive en las
-claves. El directorio solo indexa manifests firmados y verifica que el
-agente controla el endpoint que declara (proof-of-endpoint).
+The registry is a "phone book", not a notary: identity lives in the
+keys. The directory only indexes signed manifests and verifies that the
+agent controls the endpoint it declares (proof-of-endpoint).
 
-API (stdlib http.server, cero dependencias):
+API (stdlib http.server, zero dependencies):
 
   POST /register            {manifest, public_key_b64, manifest_signature}
-  POST /register/challenge  {fingerprint, endpoint}   -> nonce firmado por el registro
+  POST /register/complete   {fingerprint, manifest, endpoint_proof}
   POST /heartbeat           {fingerprint, timestamp, signature}
   GET  /search?capability=X&q=Y
   GET  /agents/{fingerprint}
   GET  /health
 
-Entradas expiran sin heartbeat en ENTRY_TTL_S (poda perezosa en cada
-lectura). Doble registro del mismo fingerprint = actualización.
+Entries expire without a heartbeat after ENTRY_TTL_S (lazy pruning on
+every read). Re-registering the same fingerprint = update.
 """
 from __future__ import annotations
 
@@ -32,15 +32,15 @@ from .crypto import KeyPair, b64d, b64e
 from .errors import HAAPError, SignatureError
 from .identity import fingerprint_of_public_key
 
-ENTRY_TTL_S = 24 * 3600          # expiración sin heartbeat
-CHALLENGE_TTL_S = 60             # ventana del proof-of-endpoint
-MAX_AGENTS = 10_000              # tope anti-flooding del directorio
+ENTRY_TTL_S = 24 * 3600          # expiry without heartbeat
+CHALLENGE_TTL_S = 60             # proof-of-endpoint window
+MAX_AGENTS = 10_000              # anti-flooding cap for the directory
 
 _FP_RE = re.compile(r"^HF-[0-9a-f]{16}$")
 
 
 class RegistryStore:
-    """Estado del directorio en memoria con poda perezosa."""
+    """Directory state in memory with lazy pruning."""
 
     def __init__(self, entry_ttl: int = ENTRY_TTL_S):
         self._agents: dict[str, dict] = {}
@@ -56,50 +56,46 @@ class RegistryStore:
     def _alive(self, rec: dict) -> bool:
         return self._now() - rec["last_seen"] <= self.entry_ttl
 
-    # -- registro ----------------------------------------------------------
+    # -- registration ------------------------------------------------------
     def submit_registration(self, manifest: dict, public_key_b64: str,
                             manifest_signature: str) -> tuple[bool, str]:
-        """Verifica firma del manifest y emite challenge de endpoint.
-        Devuelve (ok, message). NO lista al agente todavía."""
+        """Verify the manifest signature and issue an endpoint challenge.
+        Returns (ok, message). Does NOT list the agent yet."""
         fp = str((manifest.get("agent") or {}).get("fingerprint", ""))
         if not _FP_RE.match(fp):
-            return False, "fingerprint inválido (formato HF-xxxxxxxxxxxxxxxx)"
+            return False, "invalid fingerprint (HF-xxxxxxxxxxxxxxxx format)"
         try:
             raw_pub = b64d(public_key_b64)
         except Exception:
-            return False, "public_key_b64 no es base64 válido"
+            return False, "public_key_b64 is not valid base64"
         if fingerprint_of_public_key(raw_pub) != fp:
-            return False, "fingerprint no coincide con la clave pública"
+            return False, "fingerprint does not match the public key"
         if not KeyPair.verify_with(raw_pub,
                                    json.dumps(manifest, sort_keys=True,
                                               separators=(",", ":"),
                                               ensure_ascii=False).encode(),
                                    base64.b64decode(manifest_signature)):
-            return False, "firma del manifest inválida"
+            return False, "invalid manifest signature"
         endpoint = str((manifest.get("agent") or {}).get("endpoint", "")).rstrip("/")
         if not endpoint.startswith(("http://", "https://")):
-            return False, "endpoint declarado inválido"
+            return False, "invalid declared endpoint"
         nonce = base64.b64encode(os.urandom(32)).decode()
         with self._lock:
             if len(self._agents) >= MAX_AGENTS and fp not in self._agents:
-                return False, "directorio lleno"
+                return False, "directory full"
             self._challenges[fp] = (nonce, self._now())
         return True, nonce
 
     def complete_registration(self, fingerprint: str, manifest: dict,
                               endpoint_proof_b64: str) -> tuple[bool, str]:
-        """Con el proof-of-endpoint firmado, lista al agente."""
+        """With the signed endpoint proof, list the agent."""
         with self._lock:
             pending = self._challenges.pop(fingerprint, None)
             if not pending:
-                return False, "sin challenge pendiente"
+                return False, "no pending challenge"
             nonce, issued = pending
             if self._now() - issued > CHALLENGE_TTL_S:
-                return False, "challenge expirado"
-            raw_pub = b64d((manifest.get("agent") or {}).get(
-                "public_key_b64", "")) or None
-            # la clave pública ya quedó validada en submit; el proof se
-            # verifica contra el nonce emitido
+                return False, "challenge expired"
             rec = {
                 "manifest": manifest,
                 "registered_at": self._now(),
@@ -108,11 +104,11 @@ class RegistryStore:
                 "endpoint_nonce": nonce,
             }
             self._agents[fingerprint] = rec
-            return True, "registrado"
+            return True, "registered"
 
     def verify_endpoint_proof(self, fingerprint: str, nonce: str,
                               public_key_b64: str, proof_b64: str) -> bool:
-        """El registro comprueba que el agente firmó el nonce con su clave."""
+        """The registry checks that the agent signed the nonce with its key."""
         try:
             raw_pub = b64d(public_key_b64)
             return KeyPair.verify_with(raw_pub, nonce.encode("ascii"),
@@ -128,7 +124,7 @@ class RegistryStore:
                 return True
             return False
 
-    # -- consultas ---------------------------------------------------------
+    # -- queries -----------------------------------------------------------
     def get(self, fingerprint: str) -> dict | None:
         with self._lock:
             rec = self._agents.get(fingerprint)
@@ -162,7 +158,7 @@ class RegistryStore:
 
 
 class RegistryServer:
-    """Servidor HTTP del directorio."""
+    """HTTP server for the directory."""
 
     def __init__(self, store: RegistryStore | None = None,
                  signing_keypair: KeyPair | None = None):
@@ -202,7 +198,7 @@ class RegistryServer:
                     rec = registry.store.get(m.group(1))
                     if rec:
                         return self._json(200, rec["manifest"])
-                    return self._json(404, {"error": "no registrado o expirado"})
+                    return self._json(404, {"error": "not registered or expired"})
                 return self._json(404, {"error": "not found"})
 
             def do_POST(self):
@@ -211,7 +207,7 @@ class RegistryServer:
                     length = int(self.headers.get("Content-Length", "0"))
                     data = json.loads(self.rfile.read(length) or b"{}")
                 except (ValueError, json.JSONDecodeError):
-                    return self._json(400, {"error": "JSON inválido"})
+                    return self._json(400, {"error": "invalid JSON"})
                 if parsed.path == "/register":
                     ok, msg = registry.store.submit_registration(
                         data.get("manifest") or {},
@@ -219,7 +215,7 @@ class RegistryServer:
                         str(data.get("manifest_signature", "")))
                     if not ok:
                         return self._json(400, {"error": msg})
-                    # challenge firmado por el registro
+                    # challenge signed by the registry
                     sig = b64e(registry.keypair.sign(msg.encode("ascii")))
                     return self._json(200, {"challenge_nonce": msg,
                                             "registry_fingerprint":
