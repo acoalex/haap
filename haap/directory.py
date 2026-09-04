@@ -235,7 +235,11 @@ class Directory:
                 fingerprint=fingerprint, name=name or fingerprint,
                 status="pending_out", public_key_b64=public_key_b64,
                 endpoints=list(endpoints or []),
-                permissions=dict(permissions or DEFAULT_GRANT_TEMPLATE),
+                # NOTE: permissions={} means deny-everything (explicit empty
+                # matrix); permissions=None means "use the conservative
+                # default template".
+                permissions=dict(permissions) if permissions is not None
+                else dict(DEFAULT_GRANT_TEMPLATE),
                 rate_limits=dict(rate_limits or {}),
                 notes="request sent by this agent")
             self._friends[fingerprint] = rec
