@@ -33,6 +33,7 @@ from .errors import (
     HAAPError, PermissionDeniedError, RateLimitedError, SignatureError,
 )
 from .permissions import PermissionMatrix
+from .policy import RequestPolicy, CompositeNotifier, ConsoleNotifier, build_request
 from .rate_limiter import RateLimiter
 from .tasks import TaskRegistry
 
@@ -54,6 +55,8 @@ class HAAPServer:
                  speciality: str = "",
                  marketplace_catalog: dict | None = None,
                  marketplace_policy: dict | None = None,
+                 notifier=None,            # policy.Notifier (default: console)
+                 policy=None,              # policy.RequestPolicy (default: queue-all)
                  on_friend_request=None,   # cb(fp, manifest) -> None (notify owner)
                  on_task=None,             # cb(task_id, payload) -> None | dict (result)
                  skills_dirs: list[str] | None = None,
@@ -67,6 +70,9 @@ class HAAPServer:
         self.speciality = speciality
         self.marketplace_catalog = marketplace_catalog  # service -> info/price
         self.marketplace_policy = marketplace_policy    # e.g. {"auto_accept": True}
+        self.policy = policy or RequestPolicy(
+            getattr(directory, "directory", None))
+        self.notifier = notifier or ConsoleNotifier()
         self.on_friend_request = on_friend_request
         self.on_task = on_task
         self.skills_dirs = skills_dirs
@@ -214,14 +220,56 @@ class HAAPServer:
         rec.declared_capabilities = dict(payload.get("capabilities") or {})
         rec.notes = "friend_request received"
         self.directory.upsert(rec)
-        if self.on_friend_request:
-            try:
-                self.on_friend_request(fp, payload.get("capabilities") or {})
-            except Exception:
-                pass  # notifications must never break the protocol
-        return env_mod.sign_body(self.identity, "friend_request", fp,
-                                 {"received": True,
-                                  "note": "awaiting human approval"})
+
+        # policy evaluation: deny / auto-approve / queue-for-human
+        decision, ctx = self.policy.evaluate(fp, payload)
+        requested_role = payload.get("requested_role") or None
+        message = str(payload.get("message", ""))
+
+        if decision == "deny":
+            self.directory.deny(fp) if self.directory.get(fp) and \
+                self.directory.get(fp).status == "pending_in" else None
+            if self.directory.get(fp) is not None:
+                self.directory.remove(fp)
+            self._audit("friend_request.denied_by_policy", fp, result="deny",
+                        detail={"reason": ctx.get("reason")})
+            return env_mod.sign_body(
+                self.identity, "error", fp,
+                {"error_code": "FRIEND_REQUEST_DENIED",
+                 "detail": "request rejected by local policy",
+                 "in_reply_to_nonce": env["nonce"]})
+
+        suggested_role = ctx.get("role") or "guest"
+        if decision == "auto":
+            from .roles import resolve_role
+            _, spec = resolve_role(suggested_role, self.policy.directory)
+            rec = self.directory.approve(
+                fp, grant=dict(spec.get("permissions") or {}),
+                rate_limits=dict(spec.get("rate_limits") or {}))
+            rec.notes = f"auto-approved by policy as '{suggested_role}'"
+            self.directory.upsert(rec)
+            self._audit("friend_request.auto_approved", fp,
+                        detail={"role": suggested_role})
+            return env_mod.sign_body(
+                self.identity, "friend_accept", fp,
+                {"endpoint": self.identity.endpoint_url,
+                 "granted": rec.permissions,
+                 "granted_role": suggested_role})
+
+        # queue: notify the human owner with an actionable card
+        request_card = build_request(
+            fp, str(payload.get("name", "")), message,
+            requested_role=str(requested_role) if requested_role else None,
+            suggested_role=suggested_role,
+            capabilities=rec.declared_capabilities)
+        if self.notifier:
+            self.notifier.notify(request_card)
+        self._audit("friend_request.queued", fp)
+        return env_mod.sign_body(
+            self.identity, "friend_request", fp,
+            {"received": True, "pending_human": True,
+             "suggested_role": suggested_role,
+             "note": "awaiting owner approval; you will be notified"})
 
     def _on_friend_accept(self, env: dict) -> dict:
         self.directory.mark_outbound_accepted(

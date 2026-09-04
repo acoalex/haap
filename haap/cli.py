@@ -77,6 +77,25 @@ def cmd_friends(args) -> int:
             print(f"{r.fingerprint}  {r.status:<12} {r.name:<24} "
                   f"endpoints={len(r.endpoints)}")
         return 0
+    if args.friends_command == "requests":
+        pending = directory.by_status("pending_in")
+        if not pending:
+            print("(no pending friend requests)")
+            return 0
+        from .roles import load_roles
+        roles = load_roles(getattr(args, "dir", None))
+        for r in pending:
+            caps = r.declared_capabilities or {}
+            print(f"{r.fingerprint}  {r.name}")
+            print(f"  message:    {r.notes}")
+            print(f"  speciality: {caps.get('speciality', '(none)')}")
+            print(f"  decide:     haap friends approve {r.fingerprint} --role "
+                  f"[{'|'.join(sorted(roles))}]")
+        return 0
+    if args.friends_command == "roles":
+        from .roles import role_summary
+        print(role_summary(getattr(args, "dir", None)))
+        return 0
     if args.friends_command == "add":
         rec = directory.add_pending_out(args.fingerprint, args.public_key,
                                         args.name or args.fingerprint,
@@ -85,8 +104,17 @@ def cmd_friends(args) -> int:
         return 0
     if args.friends_command == "approve":
         grant = json.loads(args.grant) if args.grant else None
-        rec = directory.approve(args.fingerprint, grant=grant)
-        print(f"accepted: {rec.fingerprint} with permissions {list(rec.permissions)}")
+        rate_limits = None
+        if args.role:
+            from .roles import resolve_role
+            _, spec = resolve_role(args.role, getattr(args, "dir", None))
+            grant = grant or dict(spec.get("permissions") or {})
+            rate_limits = dict(spec.get("rate_limits") or {})
+        rec = directory.approve(args.fingerprint, grant=grant,
+                                rate_limits=rate_limits)
+        granted = ", ".join(sorted(rec.permissions)) or "(none)"
+        print(f"accepted: {rec.fingerprint} as role '{args.role or 'custom'}'")
+        print(f"granted actions: {granted}")
         return 0
     if args.friends_command == "deny":
         directory.deny(args.fingerprint)
@@ -226,13 +254,14 @@ def build_parser() -> argparse.ArgumentParser:
     sp.set_defaults(func=cmd_whoami)
 
     sp = sub.add_parser("friends", help="manage friendships")
-    sp.add_argument("friends_command", choices=["list", "add", "approve",
-                                                "deny", "remove", "block"])
+    sp.add_argument("friends_command", choices=["list", "requests", "add", "approve",
+                                                "deny", "remove", "block", "roles"])
     sp.add_argument("fingerprint", nargs="?", default="")
     sp.add_argument("--public-key", default="", help="friend's public key (b64)")
     sp.add_argument("--name", default="")
     sp.add_argument("--endpoint", default="")
     sp.add_argument("--grant", default=None, help="JSON permission matrix (approve)")
+    sp.add_argument("--role", default="", help="named role template (approve)")
     sp.set_defaults(func=cmd_friends)
 
     sp = sub.add_parser("capabilities", help="show the capability manifest")
