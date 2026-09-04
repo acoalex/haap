@@ -1,15 +1,15 @@
 # -*- coding: utf-8 -*-
-"""Manifiesto de capacidades de un agente HAAP.
+"""HAAP agent capability manifest.
 
-Cada agente publica qué sabe hacer: nombre, descripción, especialidad,
-herramientas/canales que expone y versiones. El manifest público
-(``/.well-known/haap.json`` en el servidor HTTP y en respuestas a
-``hello`` entre amigos ya aceptados) NO contiene claves ni datos
-sensibles: solo identidad pública + capacidades.
+Each agent publishes what it can do: name, description, speciality,
+exposed tools/channels and versions. The public manifest
+(``/.well-known/haap.json`` on the HTTP server, and in replies to
+``hello`` between already-accepted friends) contains NO keys or
+sensitive data: only public identity + capabilities.
 
-El manifest completo (con introspección de skills de Hermes) se guarda
-en ``<HAAP_DIR>/capabilities.json`` para inspección local y para que el
-dueño decida qué publicar.
+The full manifest (with Hermes skill introspection) is stored at
+``<HAAP_DIR>/capabilities.json`` for local inspection and so the owner
+can decide what to publish.
 """
 
 from __future__ import annotations
@@ -26,7 +26,7 @@ from .identity import haap_dir
 
 CAPABILITIES_FILENAME = "capabilities.json"
 
-# Rutas donde Hermes instala skills (configurables por env).
+# Paths where Hermes installs skills (configurable via env).
 SKILLS_CANDIDATES = [
     os.path.expanduser("~/.hermes/skills"),
     os.path.expanduser("~/.hermes/profiles/default/skills"),
@@ -44,8 +44,8 @@ def _skill_name(path: Path) -> str:
 
 
 def _read_frontmatter(skill_dir: Path) -> dict:
-    """Lee el frontmatter YAML de SKILL.md de forma conservadora (solo
-    las claves description y name, sin depender de un parser YAML)."""
+    """Conservatively read the SKILL.md YAML frontmatter (only the
+    description and name keys, without depending on a YAML parser)."""
     meta = {}
     md = skill_dir / "SKILL.md"
     if not md.exists():
@@ -65,7 +65,7 @@ def _read_frontmatter(skill_dir: Path) -> dict:
 
 
 def scan_installed_skills(skills_dirs: list[str] | None = None) -> list[dict]:
-    """Lista de skills instalados (para Hermes: <~/.hermes/skills>/**/SKILL.md)."""
+    """List installed skills (for Hermes: <~/.hermes/skills>/**/SKILL.md)."""
     skills = []
     seen = set()
     for base in skills_dirs or SKILLS_CANDIDATES:
@@ -92,9 +92,9 @@ def scan_installed_skills(skills_dirs: list[str] | None = None) -> list[dict]:
 def build_manifest(identity_public: dict, speciality: str = "",
                    skills_dirs: list[str] | None = None,
                    extra_tools: list[str] | None = None) -> dict:
-    """Construye el capability manifest del agente local.
+    """Build the local agent's capability manifest.
 
-    ``identity_public``: salida de ``Identity.public_claims()``.
+    ``identity_public``: output of ``Identity.public_claims()``.
     """
     skills = scan_installed_skills(skills_dirs)
     manifest = {
@@ -114,10 +114,10 @@ def public_manifest(identity, speciality: str = "",
                     skills_dirs: list[str] | None = None,
                     messaging_url: str = "",
                     extra_tools: list[str] | None = None) -> dict:
-    """Manifest PÚBLICO para ``/.well-known/haap.json`` (A2A-style).
+    """PUBLIC manifest for ``/.well-known/haap.json`` (A2A-style).
 
-    Solo fingerprint, nombre, especialidad, tipos de mensaje soportados,
-    skills/herramientas y la URL de mensajería. NUNCA claves.
+    Only fingerprint, name, speciality, supported message types,
+    skills/tools and the messaging URL. NEVER keys.
     """
     claims = identity.public_claims()
     claims.pop("display_name", None)
@@ -138,7 +138,7 @@ def public_manifest(identity, speciality: str = "",
 
 def export_manifest(manifest: dict, directory: str | None = None,
                     filename: str = CAPABILITIES_FILENAME) -> str:
-    """Persiste el manifest en <dir>/capabilities.json."""
+    """Persist the manifest to <dir>/capabilities.json."""
     path = os.path.join(directory or haap_dir(), filename)
     os.makedirs(os.path.dirname(path), exist_ok=True)
     with open(path, "w", encoding="utf-8") as fh:
@@ -151,29 +151,29 @@ def load_manifest(directory: str | None = None,
                   filename: str = CAPABILITIES_FILENAME) -> dict:
     path = os.path.join(directory or haap_dir(), filename)
     if not os.path.exists(path):
-        raise HAAPError(f"no hay manifest en {path}")
+        raise HAAPError(f"no manifest at {path}")
     with open(path, "r", encoding="utf-8") as fh:
         return json.load(fh)
 
 
 def parse_manifest(data: str | bytes | dict) -> dict:
-    """Parsea y valida un manifest (str JSON, bytes o dict) recibido de
-    otro agente. Rechaza manifests con claves/secretos (defensa en
-    profundidad: aunque venga firmado, no se procesan)."""
+    """Parse and validate a manifest (JSON str, bytes or dict) received
+    from another agent. Rejects manifests carrying keys/secrets (defense
+    in depth: even if signed, they are not processed)."""
     if isinstance(data, (str, bytes)):
         try:
             manifest = json.loads(data)
         except ValueError as exc:
-            raise HAAPError(f"manifest JSON inválido: {exc}") from exc
+            raise HAAPError(f"invalid manifest JSON: {exc}") from exc
     else:
         manifest = data
     if not isinstance(manifest, dict):
-        raise HAAPError("manifest debe ser un objeto JSON")
+        raise HAAPError("manifest must be a JSON object")
     agent = manifest.get("agent") or {}
     if not isinstance(agent.get("fingerprint"), str):
-        raise HAAPError("manifest sin agent.fingerprint")
+        raise HAAPError("manifest missing agent.fingerprint")
     for secret_key in ("private_key", "public_key", "signature"):
         if secret_key in manifest or secret_key in agent:
             raise HAAPError(
-                f"manifest con campo prohibido '{secret_key}': no se procesa")
+                f"manifest contains forbidden field '{secret_key}': not processed")
     return manifest
