@@ -176,11 +176,28 @@ def cmd_registry(args) -> int:
             print("directory stopped")
         return 0
     if args.registry_command == "register":
-        raise HAAPError(
-            "registry register requires registry_client.py — pending implementation")
+        from .registry_client import register
+        ident = _load_identity(args)
+        endpoint = args.endpoint or ident.endpoint_url
+        if not endpoint:
+            raise HAAPError(
+                "no endpoint declared: pass --endpoint or set it at haap init")
+        resp = register(args.registry, ident, endpoint,
+                        speciality=args.speciality or "")
+        print(f"registered at {args.registry}: {resp.get('status')}")
+        return 0
     if args.registry_command == "search":
-        raise HAAPError(
-            "registry search requires registry_client.py — pending implementation")
+        from .registry_client import search
+        results = search(args.registry, capability=args.capability or "",
+                         q=args.query or "")
+        if not results:
+            print("(no results)")
+            return 0
+        for m in results:
+            a = m.get("agent") or {}
+            print(f"{a.get('fingerprint')}  {a.get('speciality', ''):<24} "
+                  f"{a.get('name', '')}  {a.get('endpoint', '')}")
+        return 0
     return 1
 
 
@@ -239,6 +256,11 @@ def build_parser() -> argparse.ArgumentParser:
     sp.add_argument("registry_command", choices=["serve", "register", "search"])
     sp.add_argument("--host", default="0.0.0.0")
     sp.add_argument("--port", type=int, default=8444)
+    sp.add_argument("--registry", default="", help="directory URL (register/search)")
+    sp.add_argument("--endpoint", default="", help="your public messaging URL (register)")
+    sp.add_argument("--speciality", default="", help="your speciality tag (register)")
+    sp.add_argument("--capability", default="", help="capability filter (search)")
+    sp.add_argument("--query", "--q", dest="query", default="", help="free-text filter (search)")
     sp.set_defaults(func=cmd_registry)
 
     sp = sub.add_parser("audit", help="recent audit entries")
