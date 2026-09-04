@@ -1,24 +1,24 @@
 # -*- coding: utf-8 -*-
-"""Envelope HAAP: serialización, canonicalización JSON determinista,
-firma Ed25519, ventana de tiempo (±300 s) y anti-replay por nonce.
+"""HAAP envelope: serialization, deterministic JSON canonicalization,
+Ed25519 signing, time window (±300 s) and nonce-based anti-replay.
 
-Estructura de un mensaje (JSON, UTF-8):
+Message structure (JSON, UTF-8):
 
     {
       "protocol_version":     "1.0",
       "message_type":         "task_request",
       "sender_fingerprint":   "HF-...",
       "recipient_fingerprint":"HF-...",
-      "timestamp":            1780000000,      # epoch segundos UTC
-      "nonce":                "<base64 16 bytes aleatorios>",
-      "payload":              { ... }          # cuerpo específico del tipo
-      "signature":            "<base64 Ed25519 de 64 B>"
+      "timestamp":            1780000000,      # UTC epoch seconds
+      "nonce":                "<base64 16 random bytes>",
+      "payload":              { ... }          # type-specific body
+      "signature":            "<base64 64 B Ed25519>"
     }
 
-La firma cubre el JSON canónico (claves ordenadas, sin espacios,
-``ensure_ascii=False``, recursivo) de TODOS los campos excepto
-``signature`` — de modo que el nonce, remitente, destinatario y
-timestamp quedan vinculados al cuerpo firmado (anti-reemplazo de campos).
+The signature covers the canonical JSON (sorted keys, no spaces,
+``ensure_ascii=False``, recursive) of ALL fields except ``signature`` —
+so nonce, sender, recipient and timestamp are bound to the signed body
+(field-substitution protection).
 """
 
 from __future__ import annotations
@@ -39,9 +39,9 @@ from .errors import (
 )
 from .identity import fingerprint_of_public_key
 
-# Ventana de tolerancia de reloj (±300 s) para timestamps.
+# Clock tolerance window (±300 s) for timestamps.
 MAX_CLOCK_SKEW = 300
-# Tipos de mensaje versionados soportados por el protocolo 1.0.
+# Versioned message types supported by protocol 1.0.
 MESSAGE_TYPES = frozenset({
     "hello", "hello_ack", "challenge", "verify", "friend_request", "friend_accept",
     "capabilities", "task_request", "task_accept", "task_result",
@@ -51,16 +51,16 @@ SIGNED_FIELDS = (
     "protocol_version", "message_type", "sender_fingerprint",
     "recipient_fingerprint", "timestamp", "nonce", "payload",
 )
-MAX_PAYLOAD_BYTES = 1_000_000  # 1 MB de cuerpo máximo (anti-flooding)
+MAX_PAYLOAD_BYTES = 1_000_000  # 1 MB max body (anti-flooding)
 
 
 def canonical_json(obj) -> bytes:
-    """JSON canónico determinista: claves ordenadas recursivamente,
-    separadores compactos, sin espacios, UTF-8 sin escapes innecesarios.
+    """Deterministic canonical JSON: recursively sorted keys, compact
+    separators, no spaces, UTF-8 without unnecessary escapes.
 
-    Solo se permiten tipos JSON nativos (dict/list/str/int/bool/None).
-    Los floats quedan PROHIBIDOS en payloads firmados (ambigüedad de
-    representación entre plataformas): se serializan como error.
+    Only native JSON types are allowed (dict/list/str/int/bool/None).
+    Floats are FORBIDDEN in signed payloads (representation ambiguity
+    across platforms): they raise an error.
     """
     if isinstance(obj, dict):
         items = b",".join(
@@ -81,24 +81,24 @@ def canonical_json(obj) -> bytes:
         return str(obj).encode("ascii")
     if isinstance(obj, float):
         raise MalformedEnvelopeError(
-            "floats no permitidos en JSON canónico firmado; usa enteros "
-            "(epoch ms) o cadenas")
+            "floats are not allowed in signed canonical JSON; use integers "
+            "(epoch ms) or strings")
     raise MalformedEnvelopeError(
-        f"tipo no serializable en JSON canónico: {type(obj).__name__}")
+        f"type not serializable in canonical JSON: {type(obj).__name__}")
 
 
 def _q(s: str) -> bytes:
-    # Escapado mínimo determinista: json.dumps de un str ya es canónico
-    # y no depende del orden de un dict.
+    # Minimal deterministic escaping: json.dumps of a str is already
+    # canonical and independent of dict ordering.
     return json.dumps(s, ensure_ascii=False).encode("utf-8")
 
 
 def _check_payload_jsonable(payload) -> None:
-    """Valida recursivamente que el payload sea JSON nativo (sin floats)."""
+    """Recursively validate that the payload is native JSON (no floats)."""
     if isinstance(payload, dict):
         for k, v in payload.items():
             if not isinstance(k, str):
-                raise MalformedEnvelopeError(f"clave no-string en payload: {k!r}")
+                raise MalformedEnvelopeError(f"non-string payload key: {k!r}")
             _check_payload_jsonable(v)
     elif isinstance(payload, list):
         for v in payload:
@@ -106,14 +106,14 @@ def _check_payload_jsonable(payload) -> None:
     elif isinstance(payload, (str, int, bool)) or payload is None:
         return
     elif isinstance(payload, float):
-        raise MalformedEnvelopeError("floats prohibidos en payload firmado")
+        raise MalformedEnvelopeError("floats forbidden in signed payload")
     else:
         raise MalformedEnvelopeError(
-            f"tipo no JSON en payload: {type(payload).__name__}")
+            f"non-JSON type in payload: {type(payload).__name__}")
 
 
 def signing_payload(envelope: dict) -> bytes:
-    """Bytes canónicos a firmar/verificar: envelope sin el campo signature."""
+    """Canonical bytes to sign/verify: the envelope minus the signature field."""
     to_sign = {k: v for k, v in envelope.items() if k != "signature"}
     return canonical_json(to_sign)
 
@@ -121,12 +121,12 @@ def signing_payload(envelope: dict) -> bytes:
 def sign_body(identity, message_type: str, recipient_fingerprint: str,
               payload: dict, timestamp: int | None = None,
               nonce: str | None = None) -> dict:
-    """Construye un envelope completo y firmado.
+    """Build a complete, signed envelope.
 
-    ``identity``: objeto ``Identity`` del remitente (clave privada local).
+    ``identity``: the sender's ``Identity`` object (local private key).
     """
     if message_type not in MESSAGE_TYPES:
-        raise MalformedEnvelopeError(f"message_type desconocido: {message_type}")
+        raise MalformedEnvelopeError(f"unknown message_type: {message_type}")
     _check_payload_jsonable(payload)
     envelope = {
         "protocol_version": PROTOCOL_VERSION,
@@ -142,66 +142,65 @@ def sign_body(identity, message_type: str, recipient_fingerprint: str,
 
 
 def envelope_to_bytes(envelope: dict) -> bytes:
-    """Serialización del envelope a JSON canónico (bytes UTF-8)."""
+    """Serialize the envelope to canonical JSON (UTF-8 bytes)."""
     return canonical_json(envelope)
 
 
 def envelope_from_bytes(data: bytes | str) -> dict:
-    """Deserializa bytes/cadena JSON a dict envelope, con validación
-    estructural básica (campos requeridos y tipos)."""
+    """Deserialize JSON bytes/str into an envelope dict with basic
+    structural validation (required fields and types)."""
     if isinstance(data, bytes):
         data = data.decode("utf-8")
     if len(data.encode("utf-8")) > MAX_PAYLOAD_BYTES + 4096:
-        raise MalformedEnvelopeError("mensaje excede el tamaño máximo")
+        raise MalformedEnvelopeError("message exceeds maximum size")
     try:
         env = json.loads(data)
     except ValueError as exc:
-        raise MalformedEnvelopeError(f"JSON inválido: {exc}") from exc
+        raise MalformedEnvelopeError(f"invalid JSON: {exc}") from exc
     if not isinstance(env, dict):
-        raise MalformedEnvelopeError("envelope debe ser un objeto JSON")
+        raise MalformedEnvelopeError("envelope must be a JSON object")
     for fld in ("protocol_version", "message_type", "sender_fingerprint",
                 "recipient_fingerprint", "signature"):
         if not isinstance(env.get(fld), str) or not env[fld]:
-            raise MalformedEnvelopeError(f"campo requerido ausente/vacío: {fld}")
+            raise MalformedEnvelopeError(f"required field missing/empty: {fld}")
     if not isinstance(env.get("timestamp"), int):
-        raise MalformedEnvelopeError("timestamp debe ser entero epoch")
+        raise MalformedEnvelopeError("timestamp must be an epoch integer")
     if not isinstance(env.get("nonce"), str) or not env["nonce"]:
-        raise MalformedEnvelopeError("nonce ausente")
+        raise MalformedEnvelopeError("missing nonce")
     if env.get("protocol_version") != PROTOCOL_VERSION:
         raise ProtocolVersionError(
-            f"versión de protocolo {env.get('protocol_version')!r} no soportada "
-            f"(esperada {PROTOCOL_VERSION})")
+            f"unsupported protocol version {env.get('protocol_version')!r} "
+            f"(expected {PROTOCOL_VERSION})")
     if env["message_type"] not in MESSAGE_TYPES:
         raise MalformedEnvelopeError(
-            f"message_type no soportado: {env['message_type']}")
+            f"unsupported message_type: {env['message_type']}")
     payload = env.get("payload")
     if payload is None:
         payload = {}
     if not isinstance(payload, dict):
-        raise MalformedEnvelopeError("payload debe ser un objeto JSON")
+        raise MalformedEnvelopeError("payload must be a JSON object")
     env["payload"] = payload
     return env
 
 
 def check_timestamp(envelope: dict, now: int | None = None) -> None:
-    """Rechaza mensajes con timestamp fuera de ``now ± MAX_CLOCK_SKEW``."""
+    """Reject messages whose timestamp falls outside ``now ± MAX_CLOCK_SKEW``."""
     now = int(now if now is not None else time.time())
     ts = envelope["timestamp"]
     if abs(now - ts) > MAX_CLOCK_SKEW:
         raise ClockSkewError(
-            f"timestamp {ts} fuera de la ventana ±{MAX_CLOCK_SKEW}s "
-            f"(ahora {now})")
+            f"timestamp {ts} outside the ±{MAX_CLOCK_SKEW}s window "
+            f"(now {now})")
 
 
 class NonceManager:
-    """Anti-replay: recuerda nonces vistos por (emisor, nonce) durante la
-    ventana de replay relevante (2×MAX_CLOCK_SKEW + margen), con poda
-    perezosa y tope de memoria.
+    """Anti-replay: remembers seen (sender, nonce) pairs for the relevant
+    replay window (2×MAX_CLOCK_SKEW + margin), with lazy pruning and a
+    memory cap.
 
-    No depende del reloj del emisor: un mensaje capturado y reenviado
-    dentro de ±300 s es rechazado; reenviado después de 10 min ya queda
-    fuera de la ventana de timestamp y es rechazado igualmente por
-    ``check_timestamp``.
+    Does not depend on the sender's clock: a captured message replayed
+    within ±300 s is rejected; replayed after 10 min it is already out of
+    the timestamp window and rejected by ``check_timestamp`` anyway.
     """
 
     TTL = 2 * MAX_CLOCK_SKEW + 60  # 660 s
@@ -213,7 +212,7 @@ class NonceManager:
 
     def check_and_mark(self, sender_fingerprint: str, nonce: str,
                        now: float | None = None) -> None:
-        """Marca el nonce como visto; lanza ReplayError si ya estaba."""
+        """Mark the nonce as seen; raise ReplayError if already present."""
         now = time.time() if now is None else now
         key = (sender_fingerprint, nonce)
         with self._lock:
@@ -221,7 +220,7 @@ class NonceManager:
                 self._prune(now)
             if key in self._seen:
                 raise ReplayError(
-                    f"nonce repetido del emisor {sender_fingerprint}")
+                    f"duplicate nonce from sender {sender_fingerprint}")
             self._seen[key] = now
 
     def _prune(self, now: float) -> None:
@@ -237,32 +236,32 @@ class NonceManager:
 def verify_envelope(envelope: dict, trusted_pubkeys: dict[str, bytes],
                     nonces: NonceManager | None = None,
                     now: int | None = None) -> dict:
-    """Verificación completa de un envelope entrante:
+    """Full verification of an inbound envelope:
 
-    1. estructura/versión (hecha por ``envelope_from_bytes``),
-    2. ventana de timestamp ±300 s,
-    3. firma Ed25519 contra la clave pública del remitente (búsqueda por
-       fingerprint en ``trusted_pubkeys``; si el fingerprint no está
-       mapeado a clave -> SignatureError/UNKNOWN_SENDER),
-    4. anti-replay por nonce (si se pasa un NonceManager).
+    1. structure/version (done by ``envelope_from_bytes``),
+    2. ±300 s timestamp window,
+    3. Ed25519 signature against the sender's public key (looked up by
+       fingerprint in ``trusted_pubkeys``; if the fingerprint is not
+       mapped to a key -> SignatureError/UNKNOWN_SENDER),
+    4. nonce anti-replay (if a NonceManager is provided).
 
-    Devuelve el envelope verificado (payload accesible en env["payload"]).
+    Returns the verified envelope (payload available at env["payload"]).
     """
     check_timestamp(envelope, now)
     sender = envelope["sender_fingerprint"]
     raw_pub = trusted_pubkeys.get(sender)
     if raw_pub is None:
         raise SignatureError(
-            f"remitente {sender} sin clave pública registrada; "
-            "no se puede verificar la firma")
-    # Comprobación de coherencia fingerprint <-> clave pública
+            f"sender {sender} has no registered public key; "
+            "signature cannot be verified")
+    # Fingerprint <-> public key consistency check
     if fingerprint_of_public_key(raw_pub) != sender:
         raise SignatureError(
-            "fingerprint del envelope no corresponde a su clave pública")
+            "envelope fingerprint does not match its public key")
     sig = b64d(envelope["signature"])
     from .crypto import KeyPair
     if not KeyPair.verify_with(raw_pub, signing_payload(envelope), sig):
-        raise SignatureError("firma Ed25519 inválida")
+        raise SignatureError("invalid Ed25519 signature")
     if nonces is not None:
         nonces.check_and_mark(sender, envelope["nonce"], now)
     return envelope
