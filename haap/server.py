@@ -1,19 +1,19 @@
 # -*- coding: utf-8 -*-
-"""Servidor de mensajería HAAP.
+"""HAAP messaging server.
 
-HTTP puro (``http.server`` ThreadingHTTPServer, cero dependencias nuevas):
+Pure HTTP (``http.server`` ThreadingHTTPServer, zero new dependencies):
 
-  * ``POST /haap/messages``          — punto de entrada de envelopes firmados.
-  * ``GET  /.well-known/haap.json``  — manifest público (A2A-style, sin claves).
+  * ``POST /haap/messages``          — entry point for signed envelopes.
+  * ``GET  /.well-known/haap.json``  — public manifest (A2A-style, no keys).
   * ``GET  /health``                 — liveness.
 
-Máquina de estados de amistad (ambos lados):
+Friendship state machine (both sides):
 
-    hello -> (challenge) -> friend_request -> [aprobación HUMANA] ->
+    hello -> (challenge) -> friend_request -> [HUMAN approval] ->
     friend_accept -> task_request/task_accept/task_result
 
-Los handlers son inyectables: ``on_friend_request`` y ``on_task`` permiten
-cablear el servidor a Hermes (webhook → chat del dueño; ejecución de tareas).
+Handlers are injectable: ``on_friend_request`` and ``on_task`` let you
+wire the server into Hermes (webhook -> owner chat; task execution).
 """
 from __future__ import annotations
 
@@ -42,9 +42,9 @@ def _b64(n: int = 32) -> str:
 
 
 class HAAPServer:
-    """Servidor HAAP de un agente. ``directory``/``identity`` vienen de
-    los módulos homónimos; los callbacks conectan con el mundo (Hermes,
-    humano dueño, ejecutor de tareas)."""
+    """HAAP server for one agent. ``directory``/``identity`` come from
+    the eponymous modules; the callbacks connect to the outside world
+    (Hermes, the human owner, task executors)."""
 
     def __init__(self, identity, directory: Directory, *,
                  audit: AuditLog | None = None,
@@ -52,8 +52,8 @@ class HAAPServer:
                  rate_limiter: RateLimiter | None = None,
                  tasks: TaskRegistry | None = None,
                  speciality: str = "",
-                 on_friend_request=None,   # cb(fp, manifest) -> None (notificar dueño)
-                 on_task=None,             # cb(task_id, payload) -> None | dict (resultado)
+                 on_friend_request=None,   # cb(fp, manifest) -> None (notify owner)
+                 on_task=None,             # cb(task_id, payload) -> None | dict (result)
                  skills_dirs: list[str] | None = None,
                  extra_tools: list[str] | None = None):
         self.identity = identity
@@ -72,9 +72,9 @@ class HAAPServer:
         self._lock = threading.RLock()
         self._http = None
 
-    # ------------------------------------------------------------------ util
+    # ------------------------------------------------------------------ utils
     def public_keys(self) -> dict[str, bytes]:
-        """Claves confiables: amigos (incl. pendientes) + yo mismo."""
+        """Trusted keys: friends (incl. pending) + ourselves."""
         keys = self.directory.public_keys()
         keys.setdefault(self.identity.fingerprint,
                         self.identity.keypair.public_key)
@@ -90,14 +90,16 @@ class HAAPServer:
             skills_dirs=self.skills_dirs, extra_tools=self.extra_tools)
 
     # ------------------------------------------------------------- routing
+    # Bootstrap messages carry the sender's public key in the payload:
+    # they arrive precisely when the receiver does not know the sender yet.
     BOOTSTRAP_TYPES = frozenset({"hello", "challenge", "friend_request"})
 
     def _resolve_sender_pubkey(self, envelope: dict) -> bytes | None:
-        """Clave pública del remitente: del directorio si es conocido; para
-        mensajes de bootstrap (hello, friend_request) también la incluida en
-        el payload (verificación autocontenida: fingerprint == SHA-256(clave)
-        y firma válida con esa clave — la confianza la da luego el challenge
-        y la aprobación humana, no la clave auto-declarada)."""
+        """Sender's public key: from the directory if known; for bootstrap
+        messages (hello, friend_request) also the one embedded in the
+        payload (self-contained verification: fingerprint == SHA-256(key)
+        and a valid signature with that key — trust comes later from the
+        challenge and human approval, not from the self-declared key)."""
         sender = envelope["sender_fingerprint"]
         known = self.directory.public_keys().get(sender)
         if known is not None or envelope["message_type"] not in self.BOOTSTRAP_TYPES:
@@ -110,38 +112,38 @@ class HAAPServer:
         raw = b64d(pub_b64)
         if fingerprint_of_public_key(raw) != sender:
             raise SignatureError(
-                "fingerprint no corresponde a la clave pública declarada")
+                "fingerprint does not match the declared public key")
         return raw
 
     def handle_message(self, envelope: dict) -> dict:
-        """Router puro (útil también para tests con MemoryTransport).
-        Verifica y despacha; convierte HAAPError en envelope ``error``."""
+        """Pure router (also useful for tests with MemoryTransport).
+        Verifies and dispatches; converts HAAPError into an ``error`` envelope."""
         sender = envelope.get("sender_fingerprint", "?")
         try:
             env_mod.envelope_from_bytes(env_mod.envelope_to_bytes(envelope))
             sender_pub = self._resolve_sender_pubkey(envelope)
             if sender_pub is None:
                 raise SignatureError(
-                    f"remitente {sender} sin clave pública registrada; "
-                    "no se puede verificar la firma")
+                    f"sender {sender} has no registered public key; "
+                    "signature cannot be verified")
             verified = env_mod.verify_envelope(
                 envelope, {sender: sender_pub}, nonces=self.nonces)
         except HAAPError as exc:
-            self._audit("mensaje.rechazado", sender, result="error",
+            self._audit("message.rejected", sender, result="error",
                         detail={"error": type(exc).__name__, "msg": str(exc)[:120]})
             return self._error_reply(envelope, exc)
         mtype = verified["message_type"]
         handler = getattr(self, f"_on_{mtype}", None)
         if handler is None:
             return self._error_reply(envelope,
-                                     HAAPError(f"tipo no manejado: {mtype}"))
+                                     HAAPError(f"unhandled type: {mtype}"))
         try:
             reply = handler(verified)
         except HAAPError as exc:
-            self._audit(f"mensaje.{mtype}", sender, result="error",
+            self._audit(f"message.{mtype}", sender, result="error",
                         detail={"error": type(exc).__name__})
             return self._error_reply(envelope, exc)
-        self._audit(f"mensaje.{mtype}", sender)
+        self._audit(f"message.{mtype}", sender)
         return reply or {}
 
     def _error_reply(self, envelope: dict, exc: HAAPError) -> dict:
@@ -151,7 +153,7 @@ class HAAPServer:
             {"error_code": code, "detail": str(exc)[:200],
              "in_reply_to_nonce": envelope.get("nonce", "")})
 
-    # ------------------------------------------------------ handshake amistad
+    # ------------------------------------------------------ friendship handshake
     def _on_hello(self, env: dict) -> dict:
         challenge = _b64(32)
         with self._lock:
@@ -168,25 +170,25 @@ class HAAPServer:
         with self._lock:
             pending = self._pending_challenges.pop(env["sender_fingerprint"], None)
         if not pending:
-            raise HAAPError("sin challenge pendiente para este emisor")
+            raise HAAPError("no pending challenge for this sender")
         expected, issued = pending
         if time.time() - issued > 120:
-            raise HAAPError("challenge expirado (>120s)")
+            raise HAAPError("challenge expired (>120s)")
         if challenge != expected:
-            raise HAAPError("challenge no coincide")
-        # En bootstrap el emisor declara su clave pública en el payload;
-        # el router ya verificó que fingerprint == SHA-256(clave) y que la
-        # firma del envelope es válida con ella.
+            raise HAAPError("challenge mismatch")
+        # In bootstrap the sender declares its public key in the payload;
+        # the router already verified fingerprint == SHA-256(key) and that
+        # the envelope signature is valid with it.
         from .crypto import b64d, KeyPair
         raw_pub = b64d(str(payload.get("public_key_b64", ""))) \
             if payload.get("public_key_b64") else \
             self.directory.public_keys().get(env["sender_fingerprint"])
         if raw_pub is None:
-            raise SignatureError("clave pública del emisor desconocida")
+            raise SignatureError("sender's public key unknown")
         if not KeyPair.verify_with(
                 raw_pub, challenge.encode("ascii"), base64.b64decode(sig_b64)):
-            raise SignatureError("firma del challenge inválida")
-        # Identidad probada: registrar como remitente conocido (pending_in)
+            raise SignatureError("invalid challenge signature")
+        # Identity proven: register as a known sender (pending_in)
         self.directory.register_known(
             env["sender_fingerprint"],
             base64.b64encode(raw_pub).decode("ascii"),
@@ -203,16 +205,16 @@ class HAAPServer:
             name=str(payload.get("name", "")))
         rec.status = "pending_in"
         rec.declared_capabilities = dict(payload.get("capabilities") or {})
-        rec.notes = "friend_request recibido"
+        rec.notes = "friend_request received"
         self.directory.upsert(rec)
         if self.on_friend_request:
             try:
                 self.on_friend_request(fp, payload.get("capabilities") or {})
             except Exception:
-                pass  # la notificación nunca rompe el protocolo
+                pass  # notifications must never break the protocol
         return env_mod.sign_body(self.identity, "friend_request", fp,
                                  {"received": True,
-                                  "note": "pendiente de aprobación humana"})
+                                  "note": "awaiting human approval"})
 
     def _on_friend_accept(self, env: dict) -> dict:
         self.directory.mark_outbound_accepted(
@@ -220,9 +222,9 @@ class HAAPServer:
             their_endpoints=[str(env["payload"].get("endpoint", ""))]
             if env["payload"].get("endpoint") else None)
         return env_mod.sign_body(self.identity, "ping", env["sender_fingerprint"],
-                                 {"note": "amistad establecida"})
+                                 {"note": "friendship established"})
 
-    # ---------------------------------------------------------------- tareas
+    # ---------------------------------------------------------------- tasks
     def _on_task_request(self, env: dict) -> dict:
         sender = env["sender_fingerprint"]
         rec = self.directory.require(sender, statuses=("accepted",))
@@ -230,9 +232,8 @@ class HAAPServer:
         resource = str(env["payload"].get("resource") or "")
         if not rec.has_permission(action) or not self.permissions.check(
                 rec.permissions, action, resource):
-            raise PermissionDeniedError(f"permiso {action} denegado para {sender}")
-        cap, refill = self.rate_limiter.config_for(rec.rate_limits, action)
-        self.rate_limiter.check(sender, action, rec.rate_limits)  # lanza si supera
+            raise PermissionDeniedError(f"permission {action} denied for {sender}")
+        self.rate_limiter.check(sender, action, rec.rate_limits)  # raises if exceeded
         task = self.tasks.create(
             role="server", friend_fingerprint=sender,
             prompt=str(env["payload"].get("prompt", "")),
@@ -250,13 +251,13 @@ class HAAPServer:
                                           "detail": {"error": str(exc)[:200]}})
         if result is not None:
             result_out = result if isinstance(result, dict) else {}
-            # Path síncrono: submitted -> accepted -> completed (transiciones legales)
+            # Synchronous path: submitted -> accepted -> completed (legal transitions)
             self.tasks.update(task.task_id, "accepted")
             self.tasks.update(task.task_id, "completed", detail=result_out)
             return env_mod.sign_body(self.identity, "task_result", sender,
                                      {"task_id": task.task_id, "state": "completed",
                                       "detail": result_out})
-        # Path asíncrono: submitted -> accepted (el resultado llegará con task_result)
+        # Asynchronous path: submitted -> accepted (result will arrive as task_result)
         self.tasks.update(task.task_id, "accepted")
         self.tasks.update(task.task_id, "working")
         return env_mod.sign_body(self.identity, "task_accept", sender,
@@ -277,7 +278,7 @@ class HAAPServer:
         server = self
 
         class Handler(BaseHTTPRequestHandler):
-            def log_message(self, *a):  # silenciar logging por defecto
+            def log_message(self, *a):  # silence default logging
                 pass
 
             def _send_json(self, code, obj):
