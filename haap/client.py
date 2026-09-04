@@ -234,6 +234,44 @@ class HAAPClient:
                     "detail": {"note": "still working; result will be pushed"}}
         raise HAAPError(f"unexpected reply to task_request: {mtype}")
 
+    # ------------------------------------------------------------- marketplace
+    def service_search(self, business_fp: str, business_endpoint: str,
+                       services: str = "", date: str = "") -> dict:
+        """Query a business agent's open catalog (no friendship needed).
+        Returns the service_quote payload."""
+        env = env_mod.sign_body(
+            self.identity, "service_search", business_fp,
+            {"services": services, "date": date,
+             "public_key_b64": base64.b64encode(
+                 self.identity.keypair.public_key).decode()})
+        reply = self.transport.send(env, business_endpoint.rstrip("/") + "/haap/messages")
+        if reply and reply.get("message_type") == "error":
+            p = reply.get("payload") or {}
+            raise error_from_code(str(p.get("error_code", "HAAP_ERROR")),
+                                  str(p.get("detail", "")))
+        return reply.get("payload") or {}
+
+    def service_book(self, business_fp: str, business_endpoint: str,
+                     service: str, when: str) -> dict:
+        """Book an open service at a business agent (no friendship needed).
+        Returns the booking result payload {status, cita, ...}."""
+        env = env_mod.sign_body(
+            self.identity, "service_book", business_fp,
+            {"service": service, "when": when,
+             "public_key_b64": base64.b64encode(
+                 self.identity.keypair.public_key).decode()})
+        reply = self.transport.send(env, business_endpoint.rstrip("/") + "/haap/messages")
+        if reply and reply.get("message_type") == "error":
+            p = reply.get("payload") or {}
+            self._audit("client.marketplace.book.error", business_fp,
+                        result="error", detail={"code": p.get("error_code")})
+            raise error_from_code(str(p.get("error_code", "HAAP_ERROR")),
+                                  str(p.get("detail", "")))
+        payload = reply.get("payload") or {}
+        self._audit("client.marketplace.booked", business_fp,
+                    detail={"service": service, "when": when})
+        return payload
+
     # ------------------------------------------------------------- discovery
     def refresh_endpoint(self, friend_fp: str) -> str:
         """Fetch the friend's current messaging URL from their
