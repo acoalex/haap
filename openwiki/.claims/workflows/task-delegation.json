@@ -1,0 +1,194 @@
+{
+  "schemaVersion": 1,
+  "pageVersion": "sha256:035c2f063154e506840cb7b60d2e4a708dd8a8e9d766e95903993a38fb18f9e4",
+  "claims": [
+    {
+      "id": "claim_828967737ae5406990081f436ba9d248",
+      "statement": "HAAPClient._send applies the outbound local guard and rate limit only to task_request messages: the friend record must exist with status accepted, the payload's action (default task:submit) and resource must pass has_permission plus PermissionMatrix.check against the client's own local record of the friend, and rate_limiter.check consumes tokens from the (local fingerprint, task:submit) and global buckets; any failure raises PermissionDeniedError, RateLimitedError or FriendNotFoundError locally before any envelope leaves the machine, while non-task messages (e.g. ping) skip the guard but still require an accepted endpoint.",
+      "evidence": [
+        {
+          "resource": "repo://haap/client.py#L95-L117",
+          "version": "repo-lines-v1:sha256:6dc2dd18304970b40045ea0e1a30741244cf8b6e51cf43ecbc0252aa295df72c:eyJzZWxlY3RlZExpbmVDb3VudCI6MjMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImFkYzczZTY5YmY5ZTdjODM0Y2QwODIzZjAxNjZhYmEzMTk1MzRkOTJjYTU4NjA2N2Q1NzAyMmQ1NDY0MzlkYTAiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjdhYzQwOTk2YmI3MzE2ZDI3ZmZkOTVjMzJmMzFiYjY1ZGM1Zjk4MDVkNDE4MGNmZWI0MzVkMDhjNDZjN2NkM2MiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjQ0NmM4NmFhNjgxZGZmMTIyZDNlYjMwZGE1Y2FiYTMxZjhmOTVjNTYxNmEzNTViZDM3MTM0MDgxYzdlYjMyZTciLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImYxMTU0YWJhNDRiYWUzNWZmYzlhM2YyMTBlYzEwMTE3ZDhlZjlkMTYwNDhkNjI0OWM5YmI3YTg1ODJhYTVlZWIifQ"
+        },
+        {
+          "resource": "repo://tests/test_client.py#L91-L107",
+          "version": "repo-lines-v1:sha256:ea3eb475fe5c6b318f1df4572f264af4dba9fb01ad24e0cc1ffcf8c97708d983:eyJzZWxlY3RlZExpbmVDb3VudCI6MTcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjY5N2QwNzJlOGFjM2JhMmY1MjI2ZmZkN2M5OWIzM2I0MDIxMDRiZDdmN2JlOTlmYzcyYTM4YmQ2MzllZjQzOGMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImZhNWU2M2Y2MWEzNTA3MjhjNmE3NjAyYzY0NDU3OWU1MDlhNWMwMjY3MGNiY2NjM2FjNzJiOWEyOWRjYmU1MDEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjkxZmYwNzBhMTgyYzE5NGQ5ZmRmMmIyOGI3MDQzMjU1MmViOTU0NTYyOTgxODgwNjkxYjNlNDFhMDRhZGY2ZjAiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjY4OTQ5YWYwMTQ0MTY3NzhhZmVkOGM1ZGVkMDE2N2UxNDFhNTk4MTQ5NGRlMTBjM2EyYWQ4YTc5NzI2ZDM4NjMifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_fbcd871be9754c11a740100bbbc10792",
+      "statement": "A delegation is authorized by two independent local matrices: the delegator's own directory record of the friend must grant the action/resource (outbound guard in HAAPClient._send) and the executor's directory record of the sender must grant the same action/resource (server gate in _on_task_request); tests pin that B granting task:submit with star scopes does not let A send when A's own record for B is empty.",
+      "evidence": [
+        {
+          "resource": "repo://haap/client.py#L99-L107",
+          "version": "repo-lines-v1:sha256:4f20527aea4035bafe265bf7b4133eef67ad4c3d2bff497f0bf7c964786169bb:eyJzZWxlY3RlZExpbmVDb3VudCI6OSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiODAwOGViNDRiOTQyMTg4OWQyNmMyNTdlYTk3M2M2NjA2ZjhkM2E2ZDcxNGM2NTEyZmYxNDc4MDZiODZjYWM2MSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiZmJkMWQ4ODkwNjk4ZDE0NzYzNzgzYmIwMmJlNGNmYzg1NzBmMzg3NTNkM2JiNDkxMmQ1NjYwMjhmMDk5MDkxMSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNmMzYTQxMTBhNzY4OWIxYzc3ZmJkM2U0ZTc2MjkwMGJlNTNhZWY0M2Y4N2M5MTkxOGEzZDg1MjFlMTVjZGFkNCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiOWFhNWNjZTVlYzU4YzEwMjU0YzQ2OGE2OWFkNmJkNmEwNTRlNjVjYjE2ZTNkYjhmNmViZmMzMDZkYjE2M2NjZCJ9"
+        },
+        {
+          "resource": "repo://haap/server.py#L285-L291",
+          "version": "repo-lines-v1:sha256:a7bbaee134affda9a5f10b216578213edf643bb8c29b0a1bad3d18b316c7915a:eyJzZWxlY3RlZExpbmVDb3VudCI6NywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMzcwMTU4ZjllMzA1NDdmMjdjNzNmYWRiYjMyZWFkZjg3YmUyZTE4ZjFkYzk2ZjY1ZDEzZjYzYWNhYjgzZjBhZCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMjk1MjcwZTM0ODM0Njg3MDJlOThhOWM4MDk0ZGI0NWQ0MTRiZjgxMjVkYTQwNjJkZjU5ZGRjMzU0ZjNmODA2NiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMjI3MTQ5YWUyZDg0NTdiMDgwYTUzODYyMGZjMzY3OGFhYmFlMWIzNTNiYTk3MGYyN2U1OTcyOWI2ZGI4ZTkzMyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZjRlMDYyOWY5ZWI1YWZkNmI2ZGZjYWE4MjU0ZmU0NWNkM2I4NDBhMGExNDQ1ODY3ZGVkZDA2YzBiY2QwZmVjZCJ9"
+        },
+        {
+          "resource": "repo://tests/test_client.py#L91-L107",
+          "version": "repo-lines-v1:sha256:ea3eb475fe5c6b318f1df4572f264af4dba9fb01ad24e0cc1ffcf8c97708d983:eyJzZWxlY3RlZExpbmVDb3VudCI6MTcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjY5N2QwNzJlOGFjM2JhMmY1MjI2ZmZkN2M5OWIzM2I0MDIxMDRiZDdmN2JlOTlmYzcyYTM4YmQ2MzllZjQzOGMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImZhNWU2M2Y2MWEzNTA3MjhjNmE3NjAyYzY0NDU3OWU1MDlhNWMwMjY3MGNiY2NjM2FjNzJiOWEyOWRjYmU1MDEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjkxZmYwNzBhMTgyYzE5NGQ5ZmRmMmIyOGI3MDQzMjU1MmViOTU0NTYyOTgxODgwNjkxYjNlNDFhMDRhZGY2ZjAiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjY4OTQ5YWYwMTQ0MTY3NzhhZmVkOGM1ZGVkMDE2N2UxNDFhNTk4MTQ5NGRlMTBjM2EyYWQ4YTc5NzI2ZDM4NjMifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_0f46fe64943c486d8e5a92f3214fd570",
+      "statement": "HAAPServer._on_task_request enforces a strict ordered gate before any work happens: directory.require(sender, statuses=(\"accepted\",)) (failure -> signed error FRIEND_NOT_FOUND), then the action/resource permission check against the sender's record (PERMISSION_DENIED), then rate_limiter.check(sender, action, rec.rate_limits) (RATE_LIMITED, transient); only after all three pass is a task created with role=server in state submitted and the on_task executor consulted, so denied or throttled requests create no task record and never invoke the executor.",
+      "evidence": [
+        {
+          "resource": "repo://haap/server.py#L283-L295",
+          "version": "repo-lines-v1:sha256:b742568e7ccdbc54c40b28b3e3d5d8d5e6940a06ec490871c7617bd241743d7f:eyJzZWxlY3RlZExpbmVDb3VudCI6MTMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjMxNjQ2NTk2NTg2MmZhM2IwYzA3ZWNlYzgyMzg1Y2RjOTBjNDk5OWM2YWFlNTFkNzc0NzRiNjMwYmIxYzNkZTMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjRlN2Y3NDI1ZDIwODZlOTU1YjhkNjE2NDYwYzQ0NjQ4ZTZjMDYxZDY1NjE4NTk2YmNhN2RhZGNiNWU0MDUxMzMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImQ0MWM4ZmI1MTJkMzZiMDVhOThiYjllODgwZGMzZWUxNjBhZTIxMzUyNjhlYzdmNmRkZGJjMzliYmQzNmE1ZDciLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImVmMWMyMWQ4ZjkyNjQyZjhkYjFiOGQ3NGRjZGQyNTVhODM1M2Y3NGU0YTAzM2ZkYmQ0N2E4MzVhNTU4NmQ4NDYifQ"
+        },
+        {
+          "resource": "repo://tests/test_server.py#L116-L153",
+          "version": "repo-lines-v1:sha256:18fe7d26993275cd4d877070970dbf519f1aac21b6c7e28acdaecaaaa8819f81:eyJzZWxlY3RlZExpbmVDb3VudCI6MzgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImQ0ODQ4ZTQ2YzA2Mzc3YTc0ZjViNDI2YzkwZDA0MmYzMDM3OTI3YTg2NWI4ODlmMjc4YmZiODEzNWZiZDM5NGIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ3NzlkMzM5MmU4MGMxOThkMzBjYjMwZjFjNDdmMzQ5YzVhZWIxMWUwYjAxMTJmMmYxMDZjZDAyYmY5Y2JjYTYiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImFiZmRkNmU3MWE5NDg1YmEyNmJhNjgyMmRiMmYxZDg1Y2ViYThmN2EyY2UwZWYxZTMyNzJhYTEzZjM0YWZiNTEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjgyYjAwODg1ODI1MzNhOGI0YmRkOTE5ZjUzYzBhMjQwM2Q2NDQ0N2VjNWJhNjU3OWIxMjVhNTMxOTFhNDY4ZTcifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_4232c795f99c4ef4a4ba4e374979fd63",
+      "statement": "FRIEND_NOT_FOUND, PERMISSION_DENIED and RATE_LIMITED are transport-level authorization failures that occur before a TaskRecord exists and are therefore not task lifecycle states; the A2A state rejected is by design an executor/agent decision after the task exists (the transition table admits submitted/accepted/working -> rejected), and in this revision no shipped code path writes rejected while the delegating client can mirror a rejected state reported in a received task_result.",
+      "evidence": [
+        {
+          "resource": "repo://haap/client.py#L195-L235",
+          "version": "repo-lines-v1:sha256:64977c5b236e3bf523c72835faf9fad1e870fd81b0f46966edc9f620e2c1cd87:eyJzZWxlY3RlZExpbmVDb3VudCI6NDEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImVmMzkyZDZlMTY2Yjc0Zjk0MGRiNzkwNGJkZjBiZGUyMTkwNDA2MjMxM2FiNjhkMmIxZGRhMWVjMTRlNmMyZTgiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQzYzM2YTNlYzg1NzI4ODRlOTYzYjczOGRmMjU5OGI2M2RhMTdhMmU5ZDdhNzI2NWMzNjA3YjVlODFiZTc4MDciLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImNlZWJmOGNlNDYyYzYwYzNhYzk4YjZmZjk3OGY2MTdhMjEwZGFjNmYwNGE0ODAwMjNjMDRjNzliMjhlZTMxZGQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUyMmU3MzFjZDIzNDY3NzIxZmE0YTc4NDU0ZDAwZDMyM2EyMzBjNjk0OTg2MTQ5OTg0ZTk0ODI5NGNlMGFmZDkifQ"
+        },
+        {
+          "resource": "repo://haap/tasks.py#L40-L49",
+          "version": "repo-lines-v1:sha256:40267042dba0e50e59308953fedc4c6faee6efde0fe3b0f3a93e198db7fbd770:eyJzZWxlY3RlZExpbmVDb3VudCI6MTAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjNhNDgyYzQzNjYxYjM3NDgyNWQ5MTJjOTM2NmNmMDhjNDIxZjA3YTJmOWMwOTUwNmY2ODg0ZjA5OGQ3NmEyYmUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImIwN2RiZjI0ZjIzMTlkZmExMjEyYTI0MTg4NDQ0NDVjMzhmZDkxZDk4ZTU2MzVkNzRmMGFmN2RjMTMzYmZkNjYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjkzNDcyZDExZDE2MzZlZGI1OWE0YWM0ZTAyOGJkMmE5M2IzN2IyMTQwZDdhNTE5YTI0ZjU5ZjJlNGI3Njk3MTgifQ"
+        },
+        {
+          "resource": "repo://haap/tasks.py#L6-L24",
+          "version": "repo-lines-v1:sha256:d438bfbdaaafd084b42dbe8e68605b96bf12a466e437f7ca1b5921ff0e6f559f:eyJzZWxlY3RlZExpbmVDb3VudCI6MTksImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImRlODhlYjIzNzc2ODk0NTQ1ZTUyMWFjZTEwMWE1YTZjZTQ2N2U0MjAzZDA4NGZhNDFjMjRjYWZlZGFlNGE5NGQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijg1OGRmOWRmYjQzZjM0MDk0N2I5NzdkY2MwMmMzNzkxZjEyNmQ4ZTFkYzZhZTI0N2ZkMGFjNTllZjAwMWI2OTQiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjVkMGNlYTU4NDYwNTYzZGVhZWM1YWMwNDBjOGE0NjZmZDRkY2M3MDE0YmFmMzc2Y2EyMjc3MzlhOTI2Y2VlYWEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjFhYWY3NjM3Y2I2ZTdlNWRiODVkNjM0Mjc0NjAxNGRmMDQxY2NkNTU4YTkyMGIyOWViNmFjNzE5ZDdiYWY1YzIifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_2623d60f412c4e50b20c1dbc6caff12d",
+      "statement": "The task lifecycle in haap/tasks.py follows the A2A names submitted, accepted, working, completed, failed, rejected with the legal transitions submitted -> accepted/rejected/failed, accepted -> working/completed/failed/rejected, working -> working/completed/failed/rejected; completed, failed and rejected are terminal, and TaskRecord.transition raises TaskStateError (wire code TASK_STATE_INVALID) for any other move, so the persisted state field is always authoritative and a duplicate or illegal push cannot rewrite history.",
+      "evidence": [
+        {
+          "resource": "repo://haap/tasks.py#L168-L174",
+          "version": "repo-lines-v1:sha256:f6bff74dfb4c7f9dab59a3097d54119af2a480f2f0ea64d6cf25e31a8b7ec2fc:eyJzZWxlY3RlZExpbmVDb3VudCI6NywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNWIyZWRiNTA3MWQ1YTcxM2Q2MDIwOGRmMjUxYjdiYmI2OGQwZmFiNDRjZGUxMmU4YjdiM2ZhOWMzZjM5YmMyNyIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiZjAxZmQwNzY2YWIyZTlhZmU0YTc2NzRkYzgwYTYwZmJhZDA5ZGFhNjc3MjAzODk5Njk0YTkyM2M1YjZlYWVkOCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMGM2ZThmNmQwZDlmYTkwNjMyZDhhMWFiMjJmNzNhOTViZWU1ZTcwYzYyYzM0MjIwNWVkOThkMWRjNGMxZWMxMyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiOGM2MGRkNWNiNWY2YjgwMmVmMzczNjM3NzJlZjdjYjY3OGRiMGVmZDZlMDdkODEzYjM5ZjQ0NGFiMTc3M2MwMSJ9"
+        },
+        {
+          "resource": "repo://haap/tasks.py#L40-L49",
+          "version": "repo-lines-v1:sha256:40267042dba0e50e59308953fedc4c6faee6efde0fe3b0f3a93e198db7fbd770:eyJzZWxlY3RlZExpbmVDb3VudCI6MTAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjNhNDgyYzQzNjYxYjM3NDgyNWQ5MTJjOTM2NmNmMDhjNDIxZjA3YTJmOWMwOTUwNmY2ODg0ZjA5OGQ3NmEyYmUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImIwN2RiZjI0ZjIzMTlkZmExMjEyYTI0MTg4NDQ0NDVjMzhmZDkxZDk4ZTU2MzVkNzRmMGFmN2RjMTMzYmZkNjYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjkzNDcyZDExZDE2MzZlZGI1OWE0YWM0ZTAyOGJkMmE5M2IzN2IyMTQwZDdhNTE5YTI0ZjU5ZjJlNGI3Njk3MTgifQ"
+        },
+        {
+          "resource": "repo://haap/tasks.py#L76-L85",
+          "version": "repo-lines-v1:sha256:99cdf7bfe7bfdaf4231ab2515f26ff50a777d33eae23a7f3d64007f7448a4b56:eyJzZWxlY3RlZExpbmVDb3VudCI6MTAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjY0MDQzNzljZjk3NmM2YWUwZWIzYmI0MTE0ZWRlZDIxMmZjNmRlNTFlMmQxZWY1MDJiM2Y4Mjk4ZmNmM2JhMTYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijg2MDlhNjcwZTVlYzZkMzRmNTM1MzEwODdhMTMwZjA1OWZmMThmM2UyYTgwNzRmNmEyMDQ5MmU1OTc4ZjZiNjciLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6Ijk4NzQ4Yjk2MWRhMGM2NmQ5NTY0MWQ0ZmQyZjMzMjAwM2M3NjhhMGQyMzhiMGQ0MzM2YWE1ZjZlNjUwZDlhODIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjEzZTlkMmRjZDlmNTk5MmE2ODdhYTAzOTdhOWQ0MmMxZWQ4ODk2ZmIzODRlNDhlOWI2OTYwOTk1ZDc5Yzg1ZjIifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_6425478d77144501aa9f74babdaf5873",
+      "statement": "The on_task executor contract has three outcomes in HAAPServer._on_task_request: returning a dict walks the task submitted -> accepted -> completed with the dict merged as detail and replies a signed task_result with state completed; returning None or having no executor walks submitted -> accepted -> working and replies task_accept carrying the assigned task_id (a plain haap serve has no executor, so tasks are accepted and left working forever); raising marks the task failed with detail.error truncated to 200 chars and replies a task_result with state failed rather than an error envelope, keeping the lifecycle intact and never leaking the raw exception.",
+      "evidence": [
+        {
+          "resource": "repo://haap/server.py#L296-L319",
+          "version": "repo-lines-v1:sha256:fa6d17988b463e3de2824fb422c6d71faa0c7b4c63b63626f08e1020480523e9:eyJzZWxlY3RlZExpbmVDb3VudCI6MjQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjEzZTNiNTJmNWEzMzAyNDc1NDc5NDE0OWE0YjQ0M2Q5MDJjZmVkNTFhMzI0M2IxYWQ4YjQwZDYzZDY0ZThmZDYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImIwYmY4YTQ5ODBjZDg0MTdiOTM1YjBjN2Y3OTZjNTlkYTVlY2FhMTIwMmE1NWQyZTBmY2I4YTBhYzQxZDQyZTgiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjZlMDUzNzBjZjBiMjJjMzBkY2EwOTdjNjJlY2Y0NDQ2ZmZhY2UyYzE1YjBjZGM2NjRkN2VhMTUwNDcyMWRlMmIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjE0NjZkOWNkNTkxOGQwZmY3NmY0OWNjYjdmOWYzZmVjOTI4OGNjNDE1NzZmNmE3NmI1MWY5YThhYjE3ZjRhNjUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_6b5c2c34fbb248cf8abf6be9dbef1c6a",
+      "statement": "On the synchronous path the delegating client, upon receiving a task_result reply, creates a role=delegate mirror task in state submitted and replays the remote terminal state through the legal transitions (submitted -> accepted -> completed with the remote detail, or a direct submitted -> failed/rejected for a non-completed state), audits client.task.completed (the event name does not vary with the outcome), and returns the friend's reply payload {task_id, state, detail}.",
+      "evidence": [
+        {
+          "resource": "repo://haap/client.py#L195-L212",
+          "version": "repo-lines-v1:sha256:5913decbdb8b2b6dd23d710b341e4e4447dd905ad4622fab2d9f1760bedd12b9:eyJzZWxlY3RlZExpbmVDb3VudCI6MTgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImVmMzkyZDZlMTY2Yjc0Zjk0MGRiNzkwNGJkZjBiZGUyMTkwNDA2MjMxM2FiNjhkMmIxZGRhMWVjMTRlNmMyZTgiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjhjYWM5ZGFmOGRjY2M2YmFjOTlmN2U5ZjZmMzIxNDFjNDI2MWY1NDVkYjk3MGMwZDI2MzEwNGI2Nzc0NDE2OWIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImNlZWJmOGNlNDYyYzYwYzNhYzk4YjZmZjk3OGY2MTdhMjEwZGFjNmYwNGE0ODAwMjNjMDRjNzliMjhlZTMxZGQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjllNjdiNmZjNjY5ZTg5NDgxOTkwMGEzMzYwMzMyOGY5MTkzOTQ2MjRkY2JlYzBkMWRkZWVkMTI5NTI3N2UyMjAifQ"
+        },
+        {
+          "resource": "repo://tests/test_client.py#L42-L89",
+          "version": "repo-lines-v1:sha256:3667b5000448dcc6b702af1e2632f2e63ab7ccf7b51c0512269839d7e09e8d18:eyJzZWxlY3RlZExpbmVDb3VudCI6NDgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijc0MmY0NTA0ZDI0NTM3Yzk4YzgzYmExNmViMzU1Y2RhN2NkY2FlZDg0MmZkYmU3ZTg4ZDZkODU4OWE5YzViYjciLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImI2ODFkNThhZDg5ZTc4MGM4ZjkyZGNjNjUxNWY2YzkxN2JmY2ZiNTEwYjE5NGY2NzE0NTVkZDdkZTBlOWQ1MzYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImFiOGViOWY2NTczNWM3NTBhMzUzZWVmMzk1Zjk0MTJlYWYyNDIxNmI4MDVkODkzYjhhYWZmMDkwMWYwM2UyMmEifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_26344be898964c0f84f7489baa9bc45b",
+      "statement": "On the asynchronous path the delegating client, upon receiving task_accept, mirrors the task submitted -> accepted -> working using the friend's task_id, then polls up to poll_max times sleeping poll_interval between attempts, sending a ping envelope each time through _send and re-reading its own TaskRegistry; it returns rec.to_dict() once the mirror reaches completed/failed/rejected and otherwise, when the poll budget is exhausted, returns {task_id, state: \"working\", detail: {note: \"still working; result will be pushed\"}} instead of raising; because inbound task_result pushes update the server-side registry, async completion in this revision is observed by the poller only in an embedding that shares one TaskRegistry between the local server and client.",
+      "evidence": [
+        {
+          "resource": "repo://haap/client.py#L213-L235",
+          "version": "repo-lines-v1:sha256:4f21bbdca141b43f0ed8d83dfe82f3f99b4598f138acf5c22151430f9e8315f4:eyJzZWxlY3RlZExpbmVDb3VudCI6MjMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImYyNWMyNjRmMGY3YTNjNDY1MjYxYzFjMTgwYTJmNDJjNzNhNGIzMmFmYzZiNTk5ZWJiMGVkYmFlZGRjYzUxZmEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQzYzM2YTNlYzg1NzI4ODRlOTYzYjczOGRmMjU5OGI2M2RhMTdhMmU5ZDdhNzI2NWMzNjA3YjVlODFiZTc4MDciLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImRlNmJjMDI2ZjhiYjI0ZmJmM2M2ODQ5MmNmMThjMjQxMWQwZDQ3OWVhMDkyMDA3ZWU2Y2M3YzNhZDg5NmIzOTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUyMmU3MzFjZDIzNDY3NzIxZmE0YTc4NDU0ZDAwZDMyM2EyMzBjNjk0OTg2MTQ5OTg0ZTk0ODI5NGNlMGFmZDkifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_d99f64a27e4b44b2acbedce17558e73a",
+      "statement": "HAAPServer._on_task_result applies a pushed task_result's reported state and detail to its own TaskRegistry via update (which requires the task to exist and the transition to be legal) and acknowledges with an empty reply mapped to HTTP 202; a push for a task id the receiving registry never recorded is answered with a signed error envelope with TASK_NOT_FOUND and an illegal reported transition with TASK_STATE_INVALID.",
+      "evidence": [
+        {
+          "resource": "repo://haap/server.py#L321-L325",
+          "version": "repo-lines-v1:sha256:ecabbb4027cf7364496e16ab047a43e1f69d59ed4812789dcd6194525b11ca32:eyJzZWxlY3RlZExpbmVDb3VudCI6NSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMTAyNTI1NDZmNTdjYWM4ZmNhMTUzZjY0ZGU1NmRiOTBmOWE5MTY4MjQ3MTM4NDAyNzIyZDhlM2M3ZDFkNzJkZiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiOGYyOGUxMDZjYjczYTg0MmZmOGUwODgzMDgzN2Q1MjBmOTU1YjRjMDk0YTk3MGQwZTYzZjQwNTI1YzE4ZmMyNSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZjk1MGFlZTQyOTYyYTA0OTg5ZGQzMTVhZTE0ZjM0ODdmNGNjYTFmYTNmZTA4ZmYzMmQwODRiZDUxMDYyN2Q3NyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZmJmNjhmYTcxMjBjZDk0ZDQ2ZTJlMzE4Mzg5ZjZlOTk2MWMzYzhiYTBkODdkMGI0MjgzMDQxZmU3MTY5N2QwYSJ9"
+        },
+        {
+          "resource": "repo://haap/server.py#L445-L457",
+          "version": "repo-lines-v1:sha256:f6d5caf5a067cee2289bd2812e5e795c2ce42f2e0ac5e6878f89ff265f6dc468:eyJzZWxlY3RlZExpbmVDb3VudCI6MTMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjExNDUwZDJmYjc4NTc4MTE3NTAxNWE4MmIwOTI1N2Q4MWZkNDgyZDlhYjk1MThlZmU1ZTg0NWZiMmE1YmM4ZDQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMjNiYTA0ZDA0Njg1YzI3Zjc2ZDBkOTAwM2FmZjU2MzU1NDUwNGQxMDMyODE3YTU4ODRkZGMyMDNkZjQyNTciLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjhmZDhkNzRjN2NjMjhkNTExZDJjOWFhMTUwNjA5YTU1ZDJjNWIxYmQ0MWY1NmY0Mzc0YTFiYzZlNTMwZDZjZTMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjcwMzJkOGU5M2I0NzQzYmQ2NTA0MzgxNTEwN2M4YjRiZGY1NzZmZTBjYmQ1YmEzMmY1ZjYxMTAyYjBjMGM2MDIifQ"
+        },
+        {
+          "resource": "repo://haap/tasks.py#L162-L174",
+          "version": "repo-lines-v1:sha256:df7006c796fe0db1002e0252638a69c7b347c182ee04c1a4cdbbba2681c2ecf0:eyJzZWxlY3RlZExpbmVDb3VudCI6MTMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjNiY2UzY2YwNDM4OTFlMWViNmI2OTAyNjgxZDZkNzNiOTQzOWUxNzAxOTQ0YzJlZWU4MWI0Y2FiNDczMjQwMWYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImYwMWZkMDc2NmFiMmU5YWZlNGE3Njc0ZGM4MGE2MGZiYWQwOWRhYTY3NzIwMzg5OTY5NGE5MjNjNWI2ZWFlZDgiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjEzMWJjMGU3M2U4MTkzZGU0ZTFkY2M5ZjBkNTVhOWNiNmJhZGYyMWRkMTViYTUwNTBiOWY3OTUyM2FhOTNlN2MiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjhjNjBkZDVjYjVmNmI4MDJlZjM3MzYzNzcyZWY3Y2I2NzhkYjBlZmQ2ZTA3ZDgxM2IzOWY0NDRhYjE3NzNjMDEifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_557146e4bba342d3b06ac8488231a346",
+      "statement": "TaskRegistry is a local, per-agent store holding both halves of an agent's task activity in one file: HAAPClient writes delegated-task mirrors with role=\"delegate\" and HAAPServer writes received/executed tasks with role=\"server\" (the module docstring and the CLI help text say delegate/submit, a naming caveat that makes a haap task list --role submit filter match nothing in this revision); records carry task_id of the form T plus 16 hex uuid4 chars, prompt, the action/resource pair used for scope checks, state, a merged detail dict and a progress_log whose last 20 entries are serialized.",
+      "evidence": [
+        {
+          "resource": "repo://haap/cli.py#L150-L166",
+          "version": "repo-lines-v1:sha256:e1e5ca5ce3c9807fc17a9d892f0a2b2c9844754bb3cd315cfddf1b74c48ec5d7:eyJzZWxlY3RlZExpbmVDb3VudCI6MTcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjE1YjQ4YzZiYmI1Y2U5MTNhZDM5N2E2YWM1Y2VkN2UyOGQ4ZjJmOTllNzhlODU4MTQ4MTAxNzcwOGVlYThlMGYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImM3NWVmYTBmMDQxYTc3MmMxMThiZWM0NDllNWUzNzExMTc5NTMwMGNkZmZhNTA3OTU1YzE4YTNlMjk4ZDU1YjAiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjA1NzIyYjhjNGYyODMxYTA4YTZmZjE2OGQxNjUxMTRiNmZkYmFjZjk4NDIxNTM2NjI3NzY5M2JkY2IzYmQwMjAiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjA3YWY1ZTJmNjFiNjdiMGRiODg0NzI0NjdlNmMwMDcxYzQ5ZmQ0MDJiNDY3NWI5NzhiMTcxMWUwYWFlNTYyNGMifQ"
+        },
+        {
+          "resource": "repo://haap/client.py#L195-L220",
+          "version": "repo-lines-v1:sha256:3c0c469258be3c0b719c8d9ab5dfd1e4d670a7f45bb792a035cc971e49d36a2f:eyJzZWxlY3RlZExpbmVDb3VudCI6MjYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImVmMzkyZDZlMTY2Yjc0Zjk0MGRiNzkwNGJkZjBiZGUyMTkwNDA2MjMxM2FiNjhkMmIxZGRhMWVjMTRlNmMyZTgiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjE4MmJiZGZhYzdlZTNmZjZmYmIzNjY4YWRlZDZkZmRmMDVlYjllYzFlYzIyMTRiYWUwOWFkMTY2YzM3OTVmYzAiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImNlZWJmOGNlNDYyYzYwYzNhYzk4YjZmZjk3OGY2MTdhMjEwZGFjNmYwNGE0ODAwMjNjMDRjNzliMjhlZTMxZGQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImVkZDRkZjFiOTE4M2UyMTU1NDkxMmYxMWE0OGMyYWMzY2UzMWJlOGUyY2U2ZjlhZTg0NDliNGQwZDkxNDhhOGIifQ"
+        },
+        {
+          "resource": "repo://haap/server.py#L292-L295",
+          "version": "repo-lines-v1:sha256:9a8ac559bf1692cf5f8b3c2992cfaab97ecb8546c04bfd2f3908d9d818fb8e7a:eyJzZWxlY3RlZExpbmVDb3VudCI6NCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiOTVhMmQ2ZTUyNzM5NDVhYTgzYzNhMTgxZDhiN2JjMTAwNmRmYjUzNzFlN2EwZTY4YmJiY2RmNDQ5YjY0MTU2MCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNGU3Zjc0MjVkMjA4NmU5NTViOGQ2MTY0NjBjNDQ2NDhlNmMwNjFkNjU2MTg1OTZiY2E3ZGFkY2I1ZTQwNTEzMyIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMmZhNjAyMGE3ZGQwYzcwY2MwOGNmZTlkNDQ3YzZlYTkwZGFjYjE1YjI0YTUzMGFkNWUxMGZmZGFmOWJlMDc5ZSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZWYxYzIxZDhmOTI2NDJmOGRiMWI4ZDc0ZGNkZDI1NWE4MzUzZjc0ZTRhMDMzZmRiZDQ3YTgzNWE1NTg2ZDg0NiJ9"
+        },
+        {
+          "resource": "repo://haap/tasks.py#L57-L105",
+          "version": "repo-lines-v1:sha256:552238e75b76aa23c8b30e6319fbc34632553c3a2868649286bd66ff25e54f9d:eyJzZWxlY3RlZExpbmVDb3VudCI6NDksImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjgyMmMwYmQyZWQ3YjJiYTI3NzI4OTg4MWMzNzFmNzAyZGQ2MjI1ZmM2MWRlMmU4NWI5M2FmMzQyZTkxYzMzOWYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImU2YjA0NDkxNDY5NzIyZTgzNjNhOTRlNDA0NDUzOGUwMTNhMmEyMTdlMzZiMWU1NjhiYTYwYWNiN2I0YzhmMmUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImZhYzNmYjhkZWRkMzQwYjBhZjEyMjYwZDc5N2NhOGM1ZGI1OTA2MDdkODk4MmYyZDQyM2M2M2E4ZGE4OTg4MDAiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImNjNmZiMDE0Y2NiOTIzMzRhMzlhOGJlM2I3MDQwNWNiNTJjOTkwYzM1NTA1ZGEyZDFmN2JjM2JjNmY4YzAxZWIifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_349b399ac9434bfebb9d526de0417e59",
+      "statement": "TaskRegistry persists a JSON list of records to tasks.json under its directory with atomic .tmp plus os.replace writes under a reentrant lock when constructed file-backed, and stays purely in memory when constructed with memory=True; both HAAPServer and HAAPClient default to TaskRegistry(memory=True), so stock wiring never writes tasks.json and embedders that want durable task history must construct TaskRegistry(directory) and inject it into the server and/or client.",
+      "evidence": [
+        {
+          "resource": "repo://haap/client.py#L65-L81",
+          "version": "repo-lines-v1:sha256:88074202b012111d1ae859565ba2c73496e81dbf2b4165a59d14b7126cf8d474:eyJzZWxlY3RlZExpbmVDb3VudCI6MTcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjE4OTBiMDA0ZDU0ZmIzNzI5MTM4MzY1M2IyM2VkMmNhNWUzZTI3MGJmMjI3ZTAwNTEwOThkZTg5NTYxOWNlMmYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjRjNDgzN2IxM2EwYzExYTJkNjMyYzBjZDliNDdhOWFjOTBhNTc4ODNhNWJiMjk1NTFhMjkzYzJmMTI3YjY4OTIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjI0OGYyZDViNjgzZmQ1ZjY1ZThiY2IxNjJkNDAxYWRlNjBkY2U0Yzc0OWMxYmJkMmNjNDExMDY2ZDgyN2RkMWUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6Ijc1MzA2ZDg3Mzk1ZTA1NDZlYjZjNmYwMzY1MDVkMGRlZTUzYjY1MzVkOTYzZWFhZjNmY2JlYWUxNmJjMmUxZjUifQ"
+        },
+        {
+          "resource": "repo://haap/server.py#L50-L79",
+          "version": "repo-lines-v1:sha256:9b3cb0dd2e72fee534fcf7b6bd9be47c497c85cd24ea5306bbf753b18be6d7e3:eyJzZWxlY3RlZExpbmVDb3VudCI6MzAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjE4OTBiMDA0ZDU0ZmIzNzI5MTM4MzY1M2IyM2VkMmNhNWUzZTI3MGJmMjI3ZTAwNTEwOThkZTg5NTYxOWNlMmYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImI1MjljOTk4MDhhMWQwN2I0NTE0ZmM5ZDk4MTEwYzI0MzZhZTBiZDM4MjViMTRkNzlmYTUzZDU0ZjVkMmFjNmQiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImQ5NTcyNDljNzhiMGNlZjEyZjE3Y2I2MjdlYzM3OGU4M2IyMTBhNGI0MTU4NzZjNzc4MTFhODAzZWQ5OGIwOTIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImIwNzliMDg0MjkzYzFiMWYwMTY3OGEzNTI0YTRjMjZiZTFjZjZjM2JkMjliMTg1NDczZGYwYTZmMDY4ZjRhMWIifQ"
+        },
+        {
+          "resource": "repo://haap/tasks.py#L108-L146",
+          "version": "repo-lines-v1:sha256:b4167de3c1c137c736d3f67535d5d1a3825f5e724f34325755193e84a6fa7c7d:eyJzZWxlY3RlZExpbmVDb3VudCI6MzksImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjY2ZmU4MDUzNjdlYTNmNDhlOTcyYTAzNmIzYmM1MWE4NDQxOTdhZDJhMGM2ZTFiZWE4NmUxNzM0MTdhMWFmZDgiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjUzZDViNGY0NWM4ZWNmYjM5NDE2OTliMjhkNDIwNjY5NDExZGQ2MTg1MjExOGM1ODQ4MTlhMmRkNzE5MmU4NjIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjBmOGNmNmU2MjBjMDg2ZDAzMTIyYzIxNThkMTY2ODZkMmIzYzBkZGE3YjY1ZDdkMjc4YjVkNWFlOGE2MDMxMmIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImQwY2U3NzYwMTM1ZjQxZjgyNjlkM2M3MWJkNTM4ZjhkZjIwNTVhZTcyMWNhZTdkMWM4YmRjMDBjYzIzNDc2MDEifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_f45064cfdcb74f318aeb843b588882d0",
+      "statement": "The same injectable on_task executor serves both trust modes: marketplace service_book bookings (HAAPServer._on_service_book with marketplace_policy.auto_accept enabled) create a task with role=\"server\", action=\"booking:reserve\" and resource set to the service, invoke on_task with the raw booking payload, merge the returned dict into the booking record, walk the task submitted -> accepted -> completed and reply a completed task_result with an MKT-prefixed task id, or mark the task failed and reply a TASK_ERROR error envelope when the callback raises.",
+      "evidence": [
+        {
+          "resource": "repo://haap/server.py#L383-L406",
+          "version": "repo-lines-v1:sha256:c397340d7565791a735d38cea2677aaad40c3b00ea2da1484bffb50144265c33:eyJzZWxlY3RlZExpbmVDb3VudCI6MjQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjVhMWY4NzBkN2EyNGEzNDcwNDI0OTNkMmViM2NjYTlmZjU5YmZjOGExOTRiOGExNzM4MWU1NzVhZjQ0YzdlNDMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjhmNTBjNGVjNGQ4MGEyZWM1MDE0Mzg5NzQyOTFiMjI3NTcxNGY3OWU3NWIyN2ViNzczYzI5YzgxNzAzMzZmYzIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6Ijk4YWRhZGUyMDFmZTAzOTA1OTFjMmExOGE4ODg0YWEyOGQ0NDEwMDNjYzBlZDEwZTAxZWM2NmZjMGJkNmE5ZTMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjJkZjlkZDZmOWNkYjFlYjk4M2Q4NjBlNTVkNWRiOTM4NmU1YmI1MzUzYTg5ZTU4MmRiNDA2NzhlNWZhNDg0OTEifQ"
+        }
+      ]
+    }
+  ],
+  "verification": {
+    "by": "openwiki/0.5.0",
+    "at": "2026-09-05T09:02:08.883Z"
+  }
+}

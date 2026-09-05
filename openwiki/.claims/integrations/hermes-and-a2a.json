@@ -1,0 +1,286 @@
+{
+  "schemaVersion": 1,
+  "pageVersion": "sha256:8e869fca39508e97ac4b6d290ea78708b0615e04afbb28d79bdf165838749373",
+  "claims": [
+    {
+      "id": "claim_6352a2e3177b4286b20512459505785a",
+      "statement": "The Hermes integration surface of an agent is HAAPServer: its constructor accepts injectable callbacks on_task (executor: cb(task_id, payload) -> None | dict) and on_friend_request (owner notification: cb(fp, manifest) -> None), and the module documents this as the way to wire the server into Hermes — webhook to the owner chat for friend requests, task execution for delegated work. The callbacks are plain attributes that may also be assigned after construction (demo_marketplace assigns server.on_task after building the server).",
+      "evidence": [
+        {
+          "resource": "repo://demo_marketplace.py#L32-L58",
+          "version": "repo-lines-v1:sha256:553bfbdb550cc126371fbc1657c092098a33f15ba57d5d4c991d04f05881d4a1:eyJzZWxlY3RlZExpbmVDb3VudCI6MjcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjNmM2FhYjRmOGJkMjZiMjJlNTU0YzdiN2YwMGVmZjBkMjdhNzg5MWUwOTdlYTZhZjE3MWMyZmVlOTQyMzg0MjAiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjI0MjA1M2E4YmUyZGM4YmE5NDRiMmM0NGU0ZWJlMjg5ZWRhYTQzZjBlMWQ3MDc4YjJjMTBiOWUwZDkwMGY1MDIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImRhYzk1OTYzNTBlZjdiMGM3NDFjOTAwNjRjZjNhM2MxZGY3MzI3ZGJkYmJhNjI3MjMyZDVhODA5MDc2YjVmNDciLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImJmNzVhMzFlMTZkMTQ3M2FlNGE1Zjg4ZjJmN2JiMzJkNDNhZWEyN2I4YjMwMTI5ZDMxMGE0NTk3NTEyZGM0MWMifQ"
+        },
+        {
+          "resource": "repo://haap/server.py#L15-L16",
+          "version": "repo-lines-v1:sha256:54914a01b9d0c2ec4dea0fb268d4e233a621f35e03e088c15e9c9d9086cd1d36:eyJzZWxlY3RlZExpbmVDb3VudCI6MiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMDEyODVlMTZkYTg4OGViNTM3ZGM2ODgzOTFjNWIzYzM2YjcwOWJiZTdjYmE2MGY1OWIyYzY1YjM0YWVkNmU4MCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiZDE0ZWUwMjIyOThhYzM1Njk2YzFlMGEyM2UyY2YzY2RiZDliODJhYzRlNjlhNTkzM2MzNDhjZmQ1YWE3NDU4ZCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNmNmMjYzZjk5OTBlMzQ4Y2EwYzdjNjE5ZTA4N2UxNjI1NTAxNjIyYzllZjc4MzhlNmIxZWVmYjY2ZmIzOTUxOSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiYmVjZTdmMTNiN2I2YTM1MTZmY2Q0YjU0MzJkODU4ZTVmNWEyNTIwNGU2Njc4ZDkzMTBmMDUzM2U5NTQ3OWY0NSJ9"
+        },
+        {
+          "resource": "repo://haap/server.py#L58-L79",
+          "version": "repo-lines-v1:sha256:5136ef33f302f10d3ca4f9d3237ddfb1857a0a2a2bc9dfa2eaa44f5a6ffd3d88:eyJzZWxlY3RlZExpbmVDb3VudCI6MjIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImJhNDBlMWY2NDBiM2QzNjhiZjkwZTAyOTNmYWUxNzM3N2NkYzllNmM4OTMxMDhkZjQ5MTUyYTMwNTI5MDIwYTciLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImI1MjljOTk4MDhhMWQwN2I0NTE0ZmM5ZDk4MTEwYzI0MzZhZTBiZDM4MjViMTRkNzlmYTUzZDU0ZjVkMmFjNmQiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjcwMDhlYTJlOWVhYTkwYzQwOTJlZGNlNmY3NGZlZTc0ODhhYjM4OGIxZGFkMzU2NWUyYjFhN2U1YzM0Nzk0ZWMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImIwNzliMDg0MjkzYzFiMWYwMTY3OGEzNTI0YTRjMjZiZTFjZjZjM2JkMjliMTg1NDczZGYwYTZmMDY4ZjRhMWIifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_fd65275d31254d258c55c6cfcc79b763",
+      "statement": "Inbound task_request execution is gated in fixed order before any task is created or callback invoked: the sender must be a friend in accepted state (FRIEND_NOT_FOUND otherwise), the granted permission matrix must allow the requested action/resource (PERMISSION_DENIED), and the per-friend/action token-bucket rate limiter must pass (RATE_LIMITED).",
+      "evidence": [
+        {
+          "resource": "repo://haap/server.py#L283-L295",
+          "version": "repo-lines-v1:sha256:b742568e7ccdbc54c40b28b3e3d5d8d5e6940a06ec490871c7617bd241743d7f:eyJzZWxlY3RlZExpbmVDb3VudCI6MTMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjMxNjQ2NTk2NTg2MmZhM2IwYzA3ZWNlYzgyMzg1Y2RjOTBjNDk5OWM2YWFlNTFkNzc0NzRiNjMwYmIxYzNkZTMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjRlN2Y3NDI1ZDIwODZlOTU1YjhkNjE2NDYwYzQ0NjQ4ZTZjMDYxZDY1NjE4NTk2YmNhN2RhZGNiNWU0MDUxMzMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImQ0MWM4ZmI1MTJkMzZiMDVhOThiYjllODgwZGMzZWUxNjBhZTIxMzUyNjhlYzdmNmRkZGJjMzliYmQzNmE1ZDciLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImVmMWMyMWQ4ZjkyNjQyZjhkYjFiOGQ3NGRjZGQyNTVhODM1M2Y3NGU0YTAzM2ZkYmQ0N2E4MzVhNTU4NmQ4NDYifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_af83c4c9bd334642b1251e0f9ca9b8f6",
+      "statement": "on_task(task_id, payload) drives the executor reply in three ways: a returned dict completes synchronously through the legal submitted -> accepted -> completed transitions and is answered with a task_result {state: completed, detail}; returning None moves the task to accepted then working and replies task_accept, with the final result pushed later as a task_result envelope; a raised callback marks the task failed and answers task_result {state: failed, detail.error}, so executor exceptions never leak to the sender. Incoming task_result envelopes are recorded into the local task registry by task_id.",
+      "evidence": [
+        {
+          "resource": "repo://haap/server.py#L296-L325",
+          "version": "repo-lines-v1:sha256:10dab5084214eb0c8e1f042bdb6d661b49029cd93f130bd89ce04d350da12f4e:eyJzZWxlY3RlZExpbmVDb3VudCI6MzAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjEzZTNiNTJmNWEzMzAyNDc1NDc5NDE0OWE0YjQ0M2Q5MDJjZmVkNTFhMzI0M2IxYWQ4YjQwZDYzZDY0ZThmZDYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjhmMjhlMTA2Y2I3M2E4NDJmZjhlMDg4MzA4MzdkNTIwZjk1NWI0YzA5NGE5NzBkMGU2M2Y0MDUyNWMxOGZjMjUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjZlMDUzNzBjZjBiMjJjMzBkY2EwOTdjNjJlY2Y0NDQ2ZmZhY2UyYzE1YjBjZGM2NjRkN2VhMTUwNDcyMWRlMmIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImZiZjY4ZmE3MTIwY2Q5NGQ0NmUyZTMxODM4OWY2ZTk5NjFjM2M4YmEwZDg3ZDBiNDI4MzA0MWZlNzE2OTdkMGEifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_51cb97f72424493180ae71a7779ffed1",
+      "statement": "Marketplace bookings route through the same on_task boundary as delegated tasks: _on_service_book refuses when marketplace_policy.auto_accept is false (PERMISSION_DENIED); otherwise it creates a task with action booking:reserve, invokes on_task so the booking lands in the business backend (e.g. a CalDAV calendar write in demo_marketplace), merges the returned dict into the booking, and answers a completed task_result with an MKT-<ts> task id; a raising callback becomes a TASK_ERROR envelope. Marketplace senders additionally face a blocklist check and a stricter dedicated token bucket.",
+      "evidence": [
+        {
+          "resource": "repo://demo_marketplace.py#L32-L58",
+          "version": "repo-lines-v1:sha256:553bfbdb550cc126371fbc1657c092098a33f15ba57d5d4c991d04f05881d4a1:eyJzZWxlY3RlZExpbmVDb3VudCI6MjcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjNmM2FhYjRmOGJkMjZiMjJlNTU0YzdiN2YwMGVmZjBkMjdhNzg5MWUwOTdlYTZhZjE3MWMyZmVlOTQyMzg0MjAiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjI0MjA1M2E4YmUyZGM4YmE5NDRiMmM0NGU0ZWJlMjg5ZWRhYTQzZjBlMWQ3MDc4YjJjMTBiOWUwZDkwMGY1MDIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImRhYzk1OTYzNTBlZjdiMGM3NDFjOTAwNjRjZjNhM2MxZGY3MzI3ZGJkYmJhNjI3MjMyZDVhODA5MDc2YjVmNDciLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImJmNzVhMzFlMTZkMTQ3M2FlNGE1Zjg4ZjJmN2JiMzJkNDNhZWEyN2I4YjMwMTI5ZDMxMGE0NTk3NTEyZGM0MWMifQ"
+        },
+        {
+          "resource": "repo://haap/server.py#L337-L406",
+          "version": "repo-lines-v1:sha256:9c6db93ce0ed02fb3d33e24f637a8970a38031743c3f2401ad918ba855dab6bf:eyJzZWxlY3RlZExpbmVDb3VudCI6NzAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjJiNzVlYzE0ODgyMGIzNmYyOGNlOTJkYTUzMTFiNWU2NGNhNTY0ZTBkMTQ1NjVkMzQyODY2YmFiYmFiZmY1M2UiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjhmNTBjNGVjNGQ4MGEyZWM1MDE0Mzg5NzQyOTFiMjI3NTcxNGY3OWU3NWIyN2ViNzczYzI5YzgxNzAzMzZmYzIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImU2Mzk3NDg3OTI5MTVlZTcwNWUxYmRiYWIzOWRjOTNmZjU2ZDRlYTIwNmYxOTFhNDk2YzhhOGFiNmRkMzA5MTMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjJkZjlkZDZmOWNkYjFlYjk4M2Q4NjBlNTVkNWRiOTM4NmU1YmI1MzUzYTg5ZTU4MmRiNDA2NzhlNWZhNDg0OTEifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_a242981fa2fb43d2995c8669b4aae5b1",
+      "statement": "Inbound friend_request is evaluated by RequestPolicy with three ordered outcomes: deny (blocklisted or default deny) answers an error envelope FRIEND_REQUEST_DENIED; auto-approve grants the matched role template capped by max_role and answers friend_accept carrying the exact granted matrix and granted_role; queue records the sender as pending_in, builds an actionable card via build_request, notifies the owner, and replies friend_request {received: true, pending_human: true, suggested_role}.",
+      "evidence": [
+        {
+          "resource": "repo://haap/policy.py#L208-L223",
+          "version": "repo-lines-v1:sha256:a3df8876d1e27df9491b4d8d40b928cb1ea41ca6f18931b100872334959da2e1:eyJzZWxlY3RlZExpbmVDb3VudCI6MTYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAzZjgxYjJlYmQwOGU0ZjY5OGVmNzQwZjJiYWNhNjcxNzY5Yjk2MjllNTQ2NTg0YTVmYzM0MzY0ZDcwNjUyMDMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ4OTNmNDBlMzc4MWViODk2YzgyZDA0NmEwODA2N2ExMWUzNWNkZjJmMWRmYWYyNmZlYTkwYjhkYjY2NzY0MTMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjM1NDI5YjFjYWI5YmI5MDNlNTU4ZWViNjRhNGI3ZTQzOTA4MWFlYjM2Yzc0OGU2MzA5ZGQ3NzU1MGM4NmE2YmMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        },
+        {
+          "resource": "repo://haap/policy.py#L81-L128",
+          "version": "repo-lines-v1:sha256:7a888b4e9806997ca207a1fe8417d9cd9025a79382e243c9ddb3144259465a3d:eyJzZWxlY3RlZExpbmVDb3VudCI6NDgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjJlOTU4NTdhODliMGE0NjkzNzBlNWRiNWI4NjhlOGIwNjlhNDY0MGZiYjljZDM1NmE5ZDZhMzgwNTRlOWUyYjciLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjU0NzgzOTcxMDc5Zjc1Y2RiNGEwMzA0ODQxZDE5YmIxMTMyYTkxODU4MDRkZjc1OWQwODRiMjBiM2M3YWQ5ZWQiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImViYzI5NzcwMzM2ZWEzYWI1NWEwMzE3ZDY3OTM2OTk2ZmY4M2RjODYyNGQwYmQ0MmFlMTE0M2ZkOWNkOWZjNzciLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjliOGRiY2IxZDM0ZjU3NmNmMWZjMzYxYTgyMGQ3NGI4MGRjZWEzNjkzYWVlN2UyYTE4ZGQyYThjZDkxMGE0MmQifQ"
+        },
+        {
+          "resource": "repo://haap/server.py#L213-L272",
+          "version": "repo-lines-v1:sha256:12c4c3a5d1817b629280144ba261141df70433c242b6ad94526240a8219d65f7:eyJzZWxlY3RlZExpbmVDb3VudCI6NjAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjE0MDNlNmE1MGEyMzk3YjA0YWVkYTM4OTIxNmY3YmNjYmZjOTc0YzQ0ZGQwYzE0NGY0OWUyNmE2NGZhZmY4MmMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjFjZDI4MTQ5YzljOTk3OGEyYTU5ZTQyMjNkZDZiMTFhYzlkNDcwMzE5YjA2YTQwNjA0MjhmNDBiYTI3NDdjNTQiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImZmMDk2N2Y4NjBkYjk5NTA4ZmY5N2U1ZDcyMDllMTg2YTJmNTE0ZTg0ZGIxYWE1ZmVjZjVmYWJkYmJhODYyNzEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjU1NWQzYzBkMGIwMDY0ZmQ5YzIzZjVjMzhkMDU0MTAyNDdjYjYwNTQ2Y2MzNTJkMDhjMDQ3MzhjMWQyZWY0ZWQifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_b397c13345a241ee9a2fdaffd2a5f2b6",
+      "statement": "Owner notification for queued friend requests goes through the Notifier interface, which must never raise: ConsoleNotifier (the server default) prints the actionable card to stderr; WebhookNotifier POSTs the card as HMAC-SHA256-signed JSON with an X-HAAP-Signature: sha256=<hex> header and a 5-second timeout, designed to target a Hermes webhook that lands the approval card in the owner's chat; CompositeNotifier fans out to several. Notification failures are swallowed so they never break the protocol.",
+      "evidence": [
+        {
+          "resource": "repo://haap/policy.py#L141-L205",
+          "version": "repo-lines-v1:sha256:1412eb0658e5b746d3762f21e3813d8a59c4c7bd1d5cecb943f4d2a81f7b0bcc:eyJzZWxlY3RlZExpbmVDb3VudCI6NjUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImIyNTBiNWVmNGVlNjI5MDkzMjJkZTg1MjMwOGVjZWY1YmI2MTAxMTA1NTZmZDM1Y2IwMGYxZTBiNjRhYTFlMjgiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjBlZWM1MGM5NjU0NDFlMGUxNWQ3ZjI3ZDc5M2QxZTg0NjhjY2M5MzczMWI5OGJiNDFhOWEwYzY2MDUxMDhjNWUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjIxZTZjNmE2MTMwMDQzMzZiYmQ4MWNkYmJmZjZkZmNkMzE4Zjg2YzY1YTU4ODRlMzQ5ZWFjMmZmZjdhM2U1YzgiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImJjZTYyODVhYWMyZDhhZWQyMTk5YmJkMzA3NDMxNTQwNzNlZGE4MDA0MDI5MjE5MmY3N2Q4NjQzMzFkMDEwNTMifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_ea257feb4e16473aba2f07b8efcc022c",
+      "statement": "Although HAAPServer stores an on_friend_request callback and the README and ARQUITECTURA describe that callback pushing requests to the owner's Hermes chat (Matrix/Telegram), the implemented friend_request queue path notifies only through the configured notifier (self.notifier.notify(request_card)); no code path currently invokes on_friend_request, so that native Hermes approval wiring remains documented design rather than a running integration.",
+      "evidence": [
+        {
+          "resource": "repo://README.en.md#L144-L169",
+          "version": "repo-lines-v1:sha256:f209afbaac02263fc2a7eca36393d948db1633b59d479b7d6764ce637354a7af:eyJzZWxlY3RlZExpbmVDb3VudCI6MjYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjYyODJiNTRlYzA5ZTY3OWZlYmNlN2FmNmNmNjcyZTkyYjk0ZjFhYjJhNjFlODUwZGFkNGM4Njc2Yjc5ZmMzNzgiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjUwNDFmZTFhNzBlZWZlNTM3ZTY0MTkzNGM1MDg4YmZjZWIxYjExNTg4YjQ4MjgwOTcxMWJjNGVjNWI4YjFmMzciLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjY4MWIxYjVhZGNkOWNiOTBmNDI4NjA0NWFkYzRkNmNiOWIwMWZhYWQ0OTZlOWQwMWM3ZTY3YjM5MjY0MDUyY2IifQ"
+        },
+        {
+          "resource": "repo://docs/ARQUITECTURA.md#L136-L151",
+          "version": "repo-lines-v1:sha256:eec36608db2be394447cc3bc2a1a9b82484e25e1a7f910f89ee95faac2903e73:eyJzZWxlY3RlZExpbmVDb3VudCI6MTYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ3YzA2YzU2MWQ1YzMyNzM0MzY4NTI2OGE0NmIzMzkxZjM5OThlZWU4OTBkMmJlNTFmMGQyMWNjNGE1M2FlNmQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjBmMTcyMjA1MmExNGZjNzFkYjQzMDFmMmM5MGFlYWFjZDdmYTk1Yjg2Mjk1MmRmOWZmZWE4NTYwYTQ3ZDBjYWUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImI3MWNiOWFjMDU4Zjg4ZWM3MzM4OGRiOWNjYWYwZWJmMDJjMTI3N2QyYjNjNjJjYTYyMWE4N2RlODQ2ZDk0ZmMifQ"
+        },
+        {
+          "resource": "repo://haap/server.py#L259-L267",
+          "version": "repo-lines-v1:sha256:a1dca2fe9002f4da7f92e4c41ba00e779fbc47a931508edd7d0203c31c120ed4:eyJzZWxlY3RlZExpbmVDb3VudCI6OSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiM2Q1ZDMwMTM0YzY5YzcyMGEwZmFjZTc1MjNjYjExNWRmMGJkZjM5MzI2YjQ2NjJmN2RlMTlmOWVlNmZkN2U0NyIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiY2VlYjI1YTk0NTg1NzJkZDQ4ZDliZGEyZDkwNTNlYzZmMjYzODdlNTI3MjE2NzU3Mzk3ZWY2NWUyZDgxYzU1MyIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMTZkOTQ3OTA0ZGFiNDk1MjlhOTBiNmExMzIwZmZmNzI4M2Q1MjFmYTQ4NzBiYTNkYjkyMDA3ODM1MmFlNGMzZSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNjUxMTg1OTdlODcyZDRjZTAxNTU5MDUwMTZmNzA4ZDE0MWRhYzlkMTU0NDE4NWMwOTRhYzdhNTBlMzQ0YjVjOSJ9"
+        },
+        {
+          "resource": "repo://haap/server.py#L60-L61",
+          "version": "repo-lines-v1:sha256:c2a7e081e103fd4dc2be2e575532fd857aca419f3b56fe289d1c933459cb6db4:eyJzZWxlY3RlZExpbmVDb3VudCI6MiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNmE3NWI1ZTc4MmE4N2MyNGZlOWI2NTQ4MTUwZDA3YzBhOGRjODA3NDlhY2FiNmZiZDUzZTdkZTk3ZWRjOGZmMSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiN2UzMDMzYmZiZGUxYmJkNGEzMzRlZmUzOTFkMmNkZTY0ZTlhYjZhZjkxOGE4MTU4NjVkN2MxNTQwZjE5MmFhMCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiY2UzOTA2MzIyNTM4ZTBkYWQ4ZDExYjg1YjIxZWI2YTFjNjkxYmU5YWVhMGI3ODlmZDllNTUwYzhjZDllOTMzNSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMmMyMzQwYzQyNWUzOGI4ZjJkYzkyOWRhZmE1MzI1MDI5MWRiMzVlZTM0ZjdkNDdmMGJhOWYwOGRiYTZjNmVjYyJ9"
+        },
+        {
+          "resource": "repo://haap/server.py#L76-L77",
+          "version": "repo-lines-v1:sha256:eb8e59e8c1cbfda9d84e787cf0f0ba27ddbd8e1a0d39aa147a65855536429030:eyJzZWxlY3RlZExpbmVDb3VudCI6MiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMTkxZDY2ZjRlNmIxODUxZDAzOWNiNWQ1ZmI2ZmM3MjVlMGI5NzNkZWJiZWE4NDA3ZjM4Yjg1OWFkOGI3YzhjYyIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiYmMxMjM1ZTA4NzAyNDAyNDAyYjI5ODczNmUyYjc0YTViYTliYTdlNzNlMjMxNWNhOTBkYTljODgyYWM3MjFhNiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZTVlOTczZDkyNDk0NWMxOGU1NWI0ZTNiYzhkYjM0MzVmNzBiNmI3ZTY4YzZkM2JiNmIxYjkwY2RjYzcxNzVmNCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiYzliMWM1NjUyNjE0Yjk4NjRkNzdkM2MzY2U5MzZiMjVkNTM4YzhmNGQxOWE0NGEzMmUwN2QzZWJiOWZhYWI5NSJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_c8012710c17c48d28c12196f837f0087",
+      "statement": "Because the HTTP intake is public, envelopes from unknown senders are honored only for bootstrap types (hello, challenge, friend_request, and the open-services service_search/service_book/service_cancel/service_quote): those must embed the sender's public key in the payload so the router can verify fingerprint == SHA-256(key) and a valid signature with that key before any state changes.",
+      "evidence": [
+        {
+          "resource": "repo://haap/server.py#L103-L129",
+          "version": "repo-lines-v1:sha256:4843543ab98942d5599c5bb526959d134b03cbafef44ffd14b0d0e1dc0e38315:eyJzZWxlY3RlZExpbmVDb3VudCI6MjcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjA0MTYwN2NlMmU0YmI3OGZjODJlZDgwZjgyNDU0NTA3ZWU1YWI5ZGY5NzBhNjEwOWRiNDMxYzI3NGY4MTUwMWMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjE1N2FjYTc4NDE1ZjRmMmE0ZjIwNzAwYTYyMDE5ZDZmOTM1MjIyMzA4YTJmOTA2ZGIwMGUxZDczM2JiMDRhNjQiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImRiNjA1NzIxZjU3ZGRmN2JjMWNlZGI4ZTkzMTFlMmRhNWNlMmU2MzUzNDdmYzU1ZGIwMDM0Y2I1YjRmMTRiOTIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjVmMmRlZmNiYTIyYmQ2NmVlMGE4MjNlMDcwMWYxMzE5Zjk3NjAwZDQ1NmFjNzdiMDJiYzBmYTUyMDk4MDg3MjUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_45cd593eac6a43e18172d9b630d66dd4",
+      "statement": "Hermes skill introspection powers the skills array of both manifest formats: scan_installed_skills scans ~/.hermes/skills and ~/.hermes/profiles/default/skills (SKILLS_CANDIDATES, overridable per call), reads each skill directory's SKILL.md frontmatter with a dependency-free regex extracting only the name and description keys, degrades gracefully on broken frontmatter (directory name plus empty description), and deduplicates skills by name.",
+      "evidence": [
+        {
+          "resource": "repo://haap/capabilities.py#L29-L33",
+          "version": "repo-lines-v1:sha256:8ba8215b25e7ba649c34b6b6e6d817e8864f4a91825dc5d5074731ccae135848:eyJzZWxlY3RlZExpbmVDb3VudCI6NSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNWNhM2YwY2Y4NTA5NTdiZTRkOWM4ZjQyMjk2NzFjNzc2ZDFjMDYzMTBkNDRlYmY0Yzk1YmIxNDM2OTFjMmVlMyIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiZjk0MTZlMDlmNzhiYTMxNmMwMzI1NjgyMTNiODU1ZWU3NTZlNDE1NjVkOTE4ZjA5NTE5YzgxZmQ2MjBmNDA2MCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNGNhYmRiMTJmMTU0ZTVjOTQ1ZDNkN2IxZThlNjNjNTI1NTQ4YTNiZGMwYmJkMjhkNjI4MGJkZTc2ZjdiYmQzMSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMjZlMzQ4YjliMjk3NTM1MWNjZmI4ZGRiMDcwMjg5N2I1ZGI2ZWVlMTVkNWMyYjMwM2Y5NDMwM2MwZGZkZjE2NCJ9"
+        },
+        {
+          "resource": "repo://haap/capabilities.py#L42-L89",
+          "version": "repo-lines-v1:sha256:72b00a0d1ad85704d43ea848ac310dee5248b6fc80d980304c7ee14ed543440a:eyJzZWxlY3RlZExpbmVDb3VudCI6NDgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImI0MWI3N2NiZjg2OTVhZTg0ZjcwMDM4ODYwNWYzYjA2MDU1NjIxMDJiMjgyM2EwNjllMzdiMGY4MjY5MWVjNjgiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImI4OGE1NTJmOGNjZDgzMzkzZWMxNjNkZmVjYmE5MjdlZGQ3MDk2NGFmMGM5N2E4YjUwZTk2YjJmNjIwYzYwMWEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImQzZDE3MWRlNzU0MzFhMDIxYTBkOTRmYTc2ZmFiZjBkNzEzOWM4OThjMWEwYjQ0YjQzY2E2MDkwM2ZhMWI4NDUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImM0NDY5NzIzZmI0NmFlOGQ4NTg1Y2RkMTE0NGI3YjZkMjRlNzdjYzY4ZGY3MjViNDY5MjAyODY4MmM2NTA3NTQifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_c8af10f4b7944aa8b755e6c853e3188e",
+      "statement": "The HTTP discovery surface of an agent is exactly three routes served live by the stdlib ThreadingHTTPServer layer: POST /haap/messages is the sole signed-envelope intake (200 with the reply envelope, 202 accepted when there is none, 400 on malformed envelope JSON); GET /.well-known/haap.json regenerates the public manifest on every request from the server's speciality/skills_dirs/extra_tools with no cached or on-disk copy; GET /health reports liveness; all other paths return 404.",
+      "evidence": [
+        {
+          "resource": "repo://haap/server.py#L438-L457",
+          "version": "repo-lines-v1:sha256:50c2a65d1f9328f66a8db57fcd6de650a813f4f0c9885506bdd67f3b9135822f:eyJzZWxlY3RlZExpbmVDb3VudCI6MjAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjdjNTI2ZTM4Njk5Yzc4OWFkNmIxZjMzZDMxYmE1MzI0ZDdlNDE5ZjhkNjg0MTgwODI1YWMyNDk3YWJmZWNjOGMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMjNiYTA0ZDA0Njg1YzI3Zjc2ZDBkOTAwM2FmZjU2MzU1NDUwNGQxMDMyODE3YTU4ODRkZGMyMDNkZjQyNTciLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjFjMmNlNDY1Y2M1NDBiN2FlM2ZjNzBlY2FjYWVmNzQyY2ZjYWNiZmJlYzgxOTAzZjhkZmVmMjc2MjQ3YmRmNzEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjcwMzJkOGU5M2I0NzQzYmQ2NTA0MzgxNTEwN2M4YjRiZGY1NzZmZTBjYmQ1YmEzMmY1ZjYxMTAyYjBjMGM2MDIifQ"
+        },
+        {
+          "resource": "repo://haap/server.py#L96-L100",
+          "version": "repo-lines-v1:sha256:222605b37ca5a556ea561e02debad48c971218c4553403a918f12485ad9028e9:eyJzZWxlY3RlZExpbmVDb3VudCI6NSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNTk4NTVlMTkxYjdiYWQ2NmM0MjA4MDJmZDkzYTg1MWIwYzQ2ZDVkMzQ0Njg4OWIyNWM3YzA5Y2Y5ZjI5MzVjYiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMzRlMzQxNTc1NGU4ZGRkNWEwZGZlODE4ZTdhMDg2NWFhNGUwYjA1M2NjNDNiMTJhZTc2MDgwODM0NDU4ODcyNSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZDliZjQzYTIwYjBiYjAwOTVjODMwYmRhZTk1M2EwMGZjOGRhMWU1MGM0MDYxZmUyOTQ1MDc1ZjQ3YTBkMjczNiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiYmMxN2M1NGY3MDVmZTQ2NTM1Y2NhZDQxMDIxYTE3YzZiYjQzYjU5ZTI1NmVhMDY3NzBiMzdlM2E2OTE2MGM1YiJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_5f22b9b331534033b371272464b9622b",
+      "statement": "The served well-known document is the key-free, unsigned haap-public-manifest-v1 card (agent block {fingerprint, name, speciality, endpoint} plus message_types/skills/tools arrays), whose agent.endpoint is a base URL from which peers derive the messaging endpoint by appending /haap/messages. Discovery is re-verified against the agent itself: client.refresh_endpoint fetches the friend's well-known card and raises DiscoveryError unless its fingerprint matches the recorded friend ('possible endpoint substitution'), implementing the rule that the directory is a phone book, not a notary.",
+      "evidence": [
+        {
+          "resource": "repo://docs/ARQUITECTURA.md#L208-L222",
+          "version": "repo-lines-v1:sha256:446478c1ff5b83974761edfd58ffdf9f641554a4da24c456e398183920facc09:eyJzZWxlY3RlZExpbmVDb3VudCI6MTUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjNiY2NkZWJmZjA2YzhhNDcwNmYxNWJiYjFkZTMyODZkYzUyZmU1NjdiMzZlMjQ0NzdmMDVhMDI4ZWRjMDBiNDYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImI4ZDg0MmFkZTZkZThhYTUyMDcyM2NiMTJlZDI1NTZjYmY2ZjhiOWYyNDdkNzI0Zjk2NmQ1ZWJiMmRkMGU1NDYiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImE3MjQ2N2NiMTM2NmQwMGMwMjAzOGNiNTU3ODI3ODY5ZmEzMDA0MzFjZjE0MDY3ZDM2NTBiOTMzNmViMmU1NzYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImMzOTI0N2QyNWZmYjFkZmE4MmNmMjFlY2QyYWExZTU5OTFjODc0NmM3M2U4MWEzZDZlYmJiZGVjYjFkZjVkNGQifQ"
+        },
+        {
+          "resource": "repo://haap/capabilities.py#L113-L136",
+          "version": "repo-lines-v1:sha256:5f48953782252374a0214e357781ce8c86e8b1bd233e55c7c2d41660bde46936:eyJzZWxlY3RlZExpbmVDb3VudCI6MjQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImViMzliMDVkZGI5NzAyZjcxNmQ4YmU0N2UxZTVmMWFhMGNlNWJlMGNkMDhiM2VhMDMxNjNlMWM0NzMyMzdmOWYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ4OTNmNDBlMzc4MWViODk2YzgyZDA0NmEwODA2N2ExMWUzNWNkZjJmMWRmYWYyNmZlYTkwYjhkYjY2NzY0MTMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjVlNjM4NDlhOGQ3NzY5NWJlZGQ3NDM4NzA1NjM3Mjg3NjA5MmUzYzg0M2U0M2I1YTA3Yjk0ZjUxZWE1NGI1MzgiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImJiMDliMGYxYjkwZjUyODJlODIzNmFhODA4ZGQ4YmJlZDAyMTc0YWQwNjA3MTY1OTNlMWNhNWU5YjFjMDU0MGUifQ"
+        },
+        {
+          "resource": "repo://haap/client.py#L276-L296",
+          "version": "repo-lines-v1:sha256:1b1a3c9bbd4ee2c12ff5d963b6f68292e7e5ea0c587fca8fe9b72fe28f9ca770:eyJzZWxlY3RlZExpbmVDb3VudCI6MjEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjE1MmY0NTcwYmUzMzZmZTY5ZTU2MGQ3YjllYzc2N2E4NDQyZmNjYmZkYjc5ZmQwOWQwNzVmNTlkZjI2MDNiZmMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImQxZWU0MDhlZDNkZDVmM2QxZGNiODI3ZThhYjQyMzlkOWU0ZDE5M2VmMzdiYzc3NmEyMmVmYTE3YmQ1Njc1NzQiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImIyYjhkODA4M2Y3NjExZDkzNmIwNjJkYzE1ZTRmMmFiNzczYzUzMDIyNjQ0ZTY2Yzg1ZWZhOTYxY2Y5NmE4NTkiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_0d1d709057fd4a62abd9c3f6ea5d185d",
+      "statement": "HAAP aligns with the A2A standard on discovery (public manifest at /.well-known/haap.json mirrors the A2A Agent Card pattern at /.well-known/agent-card.json) and lifecycle (identical task state names), while differing on transport (own signed envelope versus JSON-RPC 2.0 + SSE) and security (challenge-response friendship with human approval and granular permissions versus A2A OpenAPI/API-key schemes) — the trust layer being HAAP's stated differentiator, since A2A ships no trust layer of its own. A future A2A-HAAP bridge (exposing the manifest as an Agent Card and translating JSON-RPC to envelopes) is documented and deliberately not implemented in v1.",
+      "evidence": [
+        {
+          "resource": "repo://docs/ARQUITECTURA.md#L273-L286",
+          "version": "repo-lines-v1:sha256:79890723d26f2107564cbb1424a855d4fc165f7cced1be989bc207a9c8f74385:eyJzZWxlY3RlZExpbmVDb3VudCI6MTQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjNkMGNlNDY5YjU0YjIwZDZmY2Y5MjE2NmNlZTdlMjNlNGY3YjQ4ODFkMjMxMTExMjg2YzE2MGU5ZWZkM2Q4NGIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQzZjQ4OTBkODIzYTAwYjNjMWM2YTE3YWI0MDE0OWM0NzgzOGQzNWVmN2MzYWRmYjMxMTc2MjJlNjk3YWFkNzciLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjRiNDY4M2JmMmNiMWIxMDBlY2QxNWJmYjU4YWFhYWY4ZWVmZjZiNjRiY2VjZTNkNjZmNTljYWUwN2FmYzMxZDciLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjFjZTIzZmUyMmUyYjk3ZDViNWY2ZDU4MzZhY2FlYzYxMDdmZjQ3YzFjMjM5NWI1MDVjN2VkNjM3NmNlZTFmNWQifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_ffe1e64000814b4496842e294b19df4d",
+      "statement": "Task lifecycle states use A2A names (submitted, accepted, working, completed, failed, rejected) and are enforced locally per agent by an explicit transition table: submitted goes to accepted/rejected/failed; accepted to working/completed/failed/rejected; working to working/completed/failed/rejected; completed/failed/rejected are terminal. Invalid transitions raise TaskStateError, and the registry is local per agent, storing both tasks it delegated and tasks it executed.",
+      "evidence": [
+        {
+          "resource": "repo://haap/tasks.py#L22-L25",
+          "version": "repo-lines-v1:sha256:a7b257421a8aa315f9b1ade47377d2f13470fd39088a0dae9a6dfdb21f85b620:eyJzZWxlY3RlZExpbmVDb3VudCI6NCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiOTgxMmUyNjZlM2RiMTEwZDQxOTQ2MDY1MzYxZjQ2MDVjOWM3ZTM4ZjAxNmMxNWQ0OGNmMjM3NGMzNzBjZDBjNiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiYTMwM2VjZGQ0YTRkMTBmMTljNzNmZDQyZmQxMjQzN2ZkMzM1NGE4MjY4MTYwNWRhNTI1NWE5N2EzOTA2OGRiYiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMGFkOThhZjA0MDE3MmYzZmMwOWVjM2E5NTMyYTUwYTg3YjJmMTBkZDk3MzNjNjUxMmIxNWY3YmJmOGE0NmNlMCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNTViNmU4NzA2YjQzMDQ3ZjJhNmRiNjdmMTMyNjM4NTk1NjA0ZTY3ZjM2OTY2ODc2Y2UwMTU4ZjAwNTNlNmJkMSJ9"
+        },
+        {
+          "resource": "repo://haap/tasks.py#L40-L49",
+          "version": "repo-lines-v1:sha256:40267042dba0e50e59308953fedc4c6faee6efde0fe3b0f3a93e198db7fbd770:eyJzZWxlY3RlZExpbmVDb3VudCI6MTAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjNhNDgyYzQzNjYxYjM3NDgyNWQ5MTJjOTM2NmNmMDhjNDIxZjA3YTJmOWMwOTUwNmY2ODg0ZjA5OGQ3NmEyYmUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImIwN2RiZjI0ZjIzMTlkZmExMjEyYTI0MTg4NDQ0NDVjMzhmZDkxZDk4ZTU2MzVkNzRmMGFmN2RjMTMzYmZkNjYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjkzNDcyZDExZDE2MzZlZGI1OWE0YWM0ZTAyOGJkMmE5M2IzN2IyMTQwZDdhNTE5YTI0ZjU5ZjJlNGI3Njk3MTgifQ"
+        },
+        {
+          "resource": "repo://haap/tasks.py#L76-L85",
+          "version": "repo-lines-v1:sha256:99cdf7bfe7bfdaf4231ab2515f26ff50a777d33eae23a7f3d64007f7448a4b56:eyJzZWxlY3RlZExpbmVDb3VudCI6MTAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjY0MDQzNzljZjk3NmM2YWUwZWIzYmI0MTE0ZWRlZDIxMmZjNmRlNTFlMmQxZWY1MDJiM2Y4Mjk4ZmNmM2JhMTYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijg2MDlhNjcwZTVlYzZkMzRmNTM1MzEwODdhMTMwZjA1OWZmMThmM2UyYTgwNzRmNmEyMDQ5MmU1OTc4ZjZiNjciLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6Ijk4NzQ4Yjk2MWRhMGM2NmQ5NTY0MWQ0ZmQyZjMzMjAwM2M3NjhhMGQyMzhiMGQ0MzM2YWE1ZjZlNjUwZDlhODIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjEzZTlkMmRjZDlmNTk5MmE2ODdhYTAzOTdhOWQ0MmMxZWQ4ODk2ZmIzODRlNDhlOWI2OTYwOTk1ZDc5Yzg1ZjIifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_65301a8a6cd7440cb60a3c6a11ce1840",
+      "statement": "The transport layer is minimal by design — a transport only needs send(envelope, url) returning the reply envelope or None for fire-and-forget — and only MemoryTransport (in-process delivery to the peer router; tests and two agents in one process) and HttpTransport (HTTPS POST of the envelope JSON via a requests.Session) are implemented. Matrix and Email adapters are documented in ARQUITECTURA section 9 (signed envelopes as Matrix room events or email attachments), not code.",
+      "evidence": [
+        {
+          "resource": "repo://docs/ARQUITECTURA.md#L261-L271",
+          "version": "repo-lines-v1:sha256:71e720097ac37dad120c870d081356ba069a614cc62437ba2b0b43de4af874e0:eyJzZWxlY3RlZExpbmVDb3VudCI6MTEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjFiMjM2MWVhNjA2M2ZjOTMyYjAxYzI5MjNkZWM0NWIxMjlhODE0ODg3ZjEwYjU1NDYyOTFiNDhjN2Y4MzRjMWYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImNjNjQwMjc5NWQzYzEyZWY5ZWVjZWQzOGU2Y2I5ZWM1ZTIzYWFlMmUzMjFjYjEzNTMyMzZjYmQ2MDJlYWE0ZWUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImY3MTNhYzZlZjE4OWZlMGFlYjQyMGYwNmI3NGM4Y2QxMWQ0ZTYxOTBiNWU4ZWY2MTBjM2M0MGZjMjI2N2E4MTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjA0Y2JlMmQzZmM3YTYwMzY4ODAwYmNhMGIzYzM5ZjEwY2U0MTUwNTM5ZjVhZDdlYWQ2MzA1YjYwNzM0Mzc2NjUifQ"
+        },
+        {
+          "resource": "repo://haap/transport.py#L1-L19",
+          "version": "repo-lines-v1:sha256:fab9a4cfb718176a3b5c22a9b14fc2460be16d5bf3721f70fd2d3f463a9af73f:eyJzZWxlY3RlZExpbmVDb3VudCI6MTksImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjhiMDg0YTlmMzc4MTI0YjJiMWE1MTU2M2JmM2MyMjQ0NGViN2ZmMzM2OTIwMTdkYTI4YjIxMzZhZTU2OTg3ZWQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImEzMDNlY2RkNGE0ZDEwZjE5YzczZmQ0MmZkMTI0MzdmZDMzNTRhODI2ODE2MDVkYTUyNTVhOTdhMzkwNjhkYmIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjU1YjZlODcwNmI0MzA0N2YyYTZkYjY3ZjEzMjYzODU5NTYwNGU2N2YzNjk2Njg3NmNlMDE1OGYwMDUzZTZiZDEifQ"
+        },
+        {
+          "resource": "repo://haap/transport.py#L36-L54",
+          "version": "repo-lines-v1:sha256:c03eea568083786f902a0cc7d396506d385b88bc9b036e5d6e68ea36747c9960:eyJzZWxlY3RlZExpbmVDb3VudCI6MTksImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImYxNmFjOTgyOGJjMzEzOTgzODM2ZmZjZGVjNmIyMjk2NDI5ZmNiMTEyNzRmOGJiOGUxMzdlMmFhZjRlYTVhOWYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijc0YjMxNzYxODdlZDNlYjBjNmI4NTc3YjE1Mjc1ODkyZjUzZjY0MGM3ZDY5OGRjZTlmOTdmNmVkNTJmZjg4MjgiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjE5NWRhNGNlODg0NjI2MDU4MjU0ZDBjMjVhMmI0MWMwMzk0ZDBiZDAzYWQ2ZGNkYjljZTJjZmRmZWFiMDQ5MGMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjkzNjBlMTFkMTYyYjNkOTZmMjk5YTRmYjQ3NDgwYWYzMjkxZWQ5YTE0ZGE4MGM2NjNlNjgzN2U3ODhhYWQzZWQifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_48e372087559403da8edce08c4de3708",
+      "statement": "HttpTransport failure semantics are explicit: HTTP 200 with a body returns the reply envelope; 202 means accepted-with-no-reply and returns None; only transient statuses (408, 429, 500, 502, 503, 504) are retried up to 3 times with backoff [0.5, 2.0, 5.0] under a 30-second timeout; validation 4xx errors and exhausted retries raise TransportError.",
+      "evidence": [
+        {
+          "resource": "repo://haap/transport.py#L23-L33",
+          "version": "repo-lines-v1:sha256:abce6b03cb555eeff194e901364dc6481299d60f455e42c0f962bb139300d61c:eyJzZWxlY3RlZExpbmVDb3VudCI6MTEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImJmZGE4Nzk3ZDA1YTc4OGI1YjViZTI2NzAwNzhkNjNjZjVkZDk0MmY0Nzk2NzlkMjY0NmJlMWQ2NmQ2MzJlZjQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjU4ZjA1MTViYzdhNzQ5Y2ZmYWZhYzA1MzdmOTNmYjAzOGFiYjU5NThkZDVlN2Y0ZjQ5ZmQ5MzNlNWExY2M3YzgiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjU1YjZlODcwNmI0MzA0N2YyYTZkYjY3ZjEzMjYzODU5NTYwNGU2N2YzNjk2Njg3NmNlMDE1OGYwMDUzZTZiZDEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6Ijg2OTZlZjFmMDQ3MWY4MjNhZGM5Njg4MmY2NGZiNGE4MmZlNDIyNTliZTM5MTUzNWRkMzFjMTAzMzEyNmViZGIifQ"
+        },
+        {
+          "resource": "repo://haap/transport.py#L91-L121",
+          "version": "repo-lines-v1:sha256:28519048b9ee97b0879d6ee25f05d661de51860cecaa2aeb7dfd3be064b09ef8:eyJzZWxlY3RlZExpbmVDb3VudCI6MzEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjUxOTc1MWQ4ZjljNjJlZWM4MzI1MThmMTIxZDUyNjkxMjMzZGNhYjY0YTE1NDY1NmVjYTE5ZjhhNWMxZjJlNTMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImY5YjA5YjdiZmEwMjM1MGFiYWY0NzQyM2M1MjEwZDFkZmM2YzhlMGQzNmJjZWNiOTczN2IzNTVjMDVmN2RkZWYiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImEyNjM2NjhmMDQyOWQ3NjFmZjI0OWY0ZmM1NjkzNDk1NDIwOGY1YjcwNWRlMTNmZDdlMDk3OGI2ZmVkMDUzYzAiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImE2YTlmZWRmMTVkZDlmNjFhYzY2YmY3ZWY3ZWI1MDQwNjVkOGVjN2ZlOWI4MWY0ZTEyZWQ5ZjBiN2Q1ODU1OTcifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_c6b562da0ef447379a2445ee9eb739bf",
+      "statement": "A native Hermes inbound bridge — an incoming webhook feeding the HAAP router plus owner-chat notifications — is documented design, not shipped code: ARQUITECTURA's roadmap lists 'Puente a Hermes: webhook entrante -> router HAAP; notificaciones al dueno' as pending, the README names the native Hermes webhook bridge (owner chat notifications) as a roadmap item, and HttpTransport's docstring refers to 'the Hermes webhook bridge, which signs and forwards to the HAAP router' as the intended future inbound form.",
+      "evidence": [
+        {
+          "resource": "repo://README.en.md#L295-L297",
+          "version": "repo-lines-v1:sha256:c50ec3a68bbe15e99318a2a3c4904d89e319c0d5f36a60cbdc0352798188b682:eyJzZWxlY3RlZExpbmVDb3VudCI6MywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiN2ZiMmJlNjJlMzJjNGEzN2JhMzg0NWMyZWU0ZWU2NzM2ZDdhYTE3MTQ4OWVmZmU3M2MzMTc0OWYwNzJjM2VmZCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiZjhiYjZkNTc2ODVjNDg5NThlZTQ5OWM1MmU3MjViMGZlMTgzMDA5NmNjZTNkMjhiZGMwMWJkODUxNmI4OGEwMiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiOGYzYjFkZTVhYzBlODFlYTJiNjI3NGI1NGE0Mjk0MmI3ODI5YmFlZDQwNjA0ZmUzMWViY2E0NzEwZjNmYzM4YSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZDMwNDU1OGQ4YzMzZThjYWNlNTQxMDAwM2EwZjMxMTdkODQyMmE3ZDBhOWQ2OGFkZDY0OTBmMGM4ZWVkMWNhZiJ9"
+        },
+        {
+          "resource": "repo://docs/ARQUITECTURA.md#L288-L299",
+          "version": "repo-lines-v1:sha256:d89072cfde936f813daaad4305f67e25d1540a52366c6a85861d2f078cfaf904:eyJzZWxlY3RlZExpbmVDb3VudCI6MTIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImQ2MmM2ZGU2NTg2ZTNhMjUxZDg3ZjA1YTQyMGEyZTMxOWM5MDgwMDYxYzY5YjI4NDc3M2RhNzhkZWQ0NjZhNmUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImU0NDUyMDdlZWU3YTg3YmE4MGUwNDBhZWIwMTUwMWY4ZjM4ZDVlYTAzNDM1MWMwMjA0MDRiMmI5ZWQwODZkMDkiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6Ijk0NjU3OWRmYTBjMWM3ZTFjNDI3YzY2Y2M3OGZlMTAxMzJmZTUxOTZjNjg2NTI0ODJiM2E3MzVlZGUzMDQ4MDQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        },
+        {
+          "resource": "repo://haap/transport.py#L57-L64",
+          "version": "repo-lines-v1:sha256:849d1972ac8678c5387c797f60dd709a2c878e400294b9cbade05fea4290b1b6:eyJzZWxlY3RlZExpbmVDb3VudCI6OCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMjE2YjZiYWE2ZDllOTYxN2MyZjFmYjVhOWY1NmYwMDdhYTczNWMzNjE3ODNmNTg5NGQzNzg1NTUxNWQ4MmYwNSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiYTZhNzE1MjU3MmVlODRmMTA5MDZjNzRiOWYyYTkyNDM0ZGRhYjBlM2M0MjgxM2IwNGU1OTdlZmNlYzk1MWIyNiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiYWQ3MGY1NDg0ZGEyYzcyMWExNGRkM2JjZGU5MGM0YjA4ZWJiN2JhNWJlMDQxY2RlYmRmNDk3MmM3MDg4MWFjMyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZDFiMWNmNTZkZTFmNDYzODNlMDE3MjM3ZmI1M2QzYjZjZTMyNDRkYjkwYzVkY2M3N2NlMTM1ZTE2MmE3OTI5YSJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_6086220d477f4f3f9a578f17f3e6fbd0",
+      "statement": "Routing-level containment at the message boundary: handle_message verifies every envelope (round-trip serialization, sender public-key resolution, signature plus anti-replay nonces), audits each accepted or rejected message, and converts any HAAPError into a signed error envelope carrying a stable error_code and no internal detail, so verification and handler exceptions never escape the router as raw errors.",
+      "evidence": [
+        {
+          "resource": "repo://haap/server.py#L131-L167",
+          "version": "repo-lines-v1:sha256:77f592f3329aa6d1c015c982f910b0c03719745f535e0d86610739dd7a9487a4:eyJzZWxlY3RlZExpbmVDb3VudCI6MzcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjZkMGI0YTE3OGZlNmZjNGI2MzQ5N2U3MDdiNjZlZTUzODA0NWViODAyZGU0MTI1ZDIyNDRmMGNjYTRiZmQyNGIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjZlODlhYzQ5YjZkODNiMmM1M2U4MzEzMTk4YWI0ZTI3ODc5NjM3YWRiMmM4MDU4NDNhYjg2MDhiMWI2ZDdhZGMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImIxNjdjZmMwY2FkZmI1ZjVmZmI4ZTZiYmQ5MGNjZjhmOGRkNWYzOGZhZmJhYzUxMzgxMDRkNDIwMjkyYWE5MjUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImE3YzI1YmE3ZTAzZGFjMzE3YTY1YzEyNjcwYWM0NDNhMDljMWE1ODI4ODY3NjNkYTYxMDg4YTNjYjdjYjI2MGUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_ad07e798a86e4f5e964fbc360471c2e1",
+      "statement": "Two registry artifacts exist and must not be confused: the in-repo haap/registry.py is only a minimal in-memory reference directory (proof-of-endpoint registration, 24-hour entry TTL with lazy pruning, 10,000-agent anti-flooding cap), while the production public directory is the separate acoalex/haap-directory service, live at https://acoalex.com/haap-directory, whose entries expire after 7 days without renewal. The client-side HeartbeatLoop daemon thread renews an entry every 6 hours by default.",
+      "evidence": [
+        {
+          "resource": "repo://AGENTS.md#L9-L10",
+          "version": "repo-lines-v1:sha256:8b8ef765362f138a47c73fbf1e30947f47aaba10018cd90887a79e8321a4b527:eyJzZWxlY3RlZExpbmVDb3VudCI6MiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiZDU4Mzc5NmIwNTg0ODk4Y2Q5ODQxMWZjYTNmNjVjMGY4YmM4ZWUzNDJkNWQ4MmIwYzhmZWNhZGI3MTE2OThiZiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMTI1ZmM1YjJkMWE0YThlNDVkYzVmMmI1ZjI4ZjAwMDNiZmZhNDZkY2RiZmI4NGZhYjAwZTc1MWI3Mjg1NTcxOCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMzk4M2FjMjRlYzE4MGMwZDZjNGQ5NjVjMTc4YzVhYjQwNDVlMGY1MDQ1MjgxMDdhMTg5MzU5NTBlMDdiZjFkYyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNDQ3YzUzOWQyYjU5Y2MxMTk5OTg2ZGFjMGM3NWE5NDIxOGM1ZmUyODVlMjY2ZDQzMDM3OTU1YzE5ZmFjOGQ2MyJ9"
+        },
+        {
+          "resource": "repo://README.en.md#L112-L142",
+          "version": "repo-lines-v1:sha256:da56b66ed8ab0c36ee57679ddc51046e1b7527392a71c49bff5879ab09767de2:eyJzZWxlY3RlZExpbmVDb3VudCI6MzEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImU3Y2Y1YWYyYTk5M2JlZmQzNDFjMDllYjU0NDZiMTY5YWI0NWMxZjYxNjM3YjBhNDkzOWFlY2Q5MGJhMDY2OWMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ3YzA2YzU2MWQ1YzMyNzM0MzY4NTI2OGE0NmIzMzkxZjM5OThlZWU4OTBkMmJlNTFmMGQyMWNjNGE1M2FlNmQiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjEzOGY3ODUzYTc1OTQxNjE0ZDBkNGZhODdlNWIxNDQ0ODBjMDc1MjdlMjI3ZDA2ZjgzODViZmQ3NWE0YTY4ZGMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjA0NDMzNGZlNTBmYjVmOTVlNGZhMzhkMWJjMzY5YTNhZTY1ODEzM2JjOGNiNzc0YzYyY2E5ZTY3Y2JiNDdhYTgifQ"
+        },
+        {
+          "resource": "repo://haap/registry.py#L1-L19",
+          "version": "repo-lines-v1:sha256:8516740e9ba4797c365e7f7be6904ae95f73354657ed3bb79c5b082136b63ad4:eyJzZWxlY3RlZExpbmVDb3VudCI6MTksImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjhiMDg0YTlmMzc4MTI0YjJiMWE1MTU2M2JmM2MyMjQ0NGViN2ZmMzM2OTIwMTdkYTI4YjIxMzZhZTU2OTg3ZWQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImEzMDNlY2RkNGE0ZDEwZjE5YzczZmQ0MmZkMTI0MzdmZDMzNTRhODI2ODE2MDVkYTUyNTVhOTdhMzkwNjhkYmIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjdhNmRlNzkyNWM4NDA3NzAyODE1Yzc1Y2ZkZmU5YTAxM2Y4ODgwNjJhMTdmYTI1NjdiOWRiZmE3NTkzNTZiYzIifQ"
+        },
+        {
+          "resource": "repo://haap/registry.py#L35-L37",
+          "version": "repo-lines-v1:sha256:2d2f822f91acc270861d13fe60c7ab97fd67aba2906f02ed25a1176f7fbb6c98:eyJzZWxlY3RlZExpbmVDb3VudCI6MywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiY2ZiYmE4YzdhMGNiODkyYjRjNjc3YjI0NjA3N2Q0MDFhNzRkNTllYWFkYjI5ZDhiOTYyMmE3NzI5ODM2ODg0NiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiOTIwYzkxMTI4NzFhODQ2NjlkNmJlYTM0NDA4YWYxMWZjMDRlYTIxZTVlMjQwMDk1NjJjZGIzNGM5ZTNiOTg3ZSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiOTk0YTNmZTE3MTU2N2YyYzdkM2U0MTE1NGVkODllZDcxNGU0MTI0OTE2OTM0NWEyZWEyOGE1M2QxMTUxMDU5YyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiOGM5M2M0MGJlNjEyNDczNTU4N2E1ZjlkODI5ODNmNGNjYjNlNWNlODQxMjk1NGJiM2VmZmExMTA5OGQ5MTU5MyJ9"
+        },
+        {
+          "resource": "repo://haap/registry_client.py#L105-L130",
+          "version": "repo-lines-v1:sha256:6629642fb3c856681eb56fc398fe8b21466eff7f53eb78c364303fd42705b181:eyJzZWxlY3RlZExpbmVDb3VudCI6MjYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImU5YjJhOGFlYjFlMzhhZTEwNjNmNDk0NjgyMDlkZWU1ZTU1N2EzNTRiNjIxNjk2MTFmZGNhYjU0YWVkZjliODUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjI1Y2QyZTVkMDVlNTA3N2IwM2U4NDk3MTdmYTJjYmMzYzBjOWI0NGZiNzI5NTk5ODZiMDNjOGNmYmM0NmI5NjMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImRlYTUyOWU2OGRmMGYzN2Q0NjU4MDM5Mzc5NjQ4NmY3YzliNGVjNjQ4ZmNjYWZhZGExYTkzZDUyNzgwMDdhYjEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    }
+  ],
+  "verification": {
+    "by": "openwiki/0.5.0",
+    "at": "2026-09-05T09:02:08.883Z"
+  }
+}

@@ -1,0 +1,198 @@
+{
+  "schemaVersion": 1,
+  "pageVersion": "sha256:9fdeaa14a56b8ba06b70f7db5a2993f93c0a8e2e3dfc32cf92f6adb80245af4b",
+  "claims": [
+    {
+      "id": "claim_5d9e4177c2d4425ba375117fd3860da0",
+      "statement": "The behavioral test suite is 41 pytest tests across six files (tests/test_client.py, tests/test_marketplace.py, tests/test_policy.py, tests/test_registry.py, tests/test_registry_client.py, tests/test_server.py) and runs with plain pytest after pip install -e \".[dev]\"; pytest>=7.0 is the only dev dependency and each test module inserts the repository root into sys.path so no plugin or conftest wiring is needed.",
+      "evidence": [
+        {
+          "resource": "repo://AGENTS.md#L16-L27",
+          "version": "repo-lines-v1:sha256:449962d7539d692dd0ce62a20c04853d66c12f0386e255aa4571abd3b6c09667:eyJzZWxlY3RlZExpbmVDb3VudCI6MTIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjZjZGU2ZjY1MGQxZDk4NjgyMWJlZTdkY2ZmZmIxMDk3M2FhZDcxZjc4NWUzZGEwMzM4NjE4ODAxMmJhMjkyMjgiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjFmNWI1ODA1ZGI3OGRiNzUyMjEzNjEwZTEwZWIxYTU0YWRkN2RhZTdhZGE1OTU4MjUwYTZjZWYxMTEwNmY3MTMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjZkMzdmZWI4MzA1Y2I4MWU1MTM2OWVhNDM1ZGE0YzQ1ZWI3ODIxODQyMmFhZTAxNDlmYTU5YWE1NTBhYzBlNGQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImZkZTNlZDU4NzU3YjFjZTU5YTZkYmZkYmNkMzk4NzAzMTNhYzI0NDJhMWZjODc2YjIzZTRlOTI3MDNlZTQ5NDQifQ"
+        },
+        {
+          "resource": "repo://pyproject.toml#L18-L25",
+          "version": "repo-lines-v1:sha256:1d12cd422acd73ef9fb23ce9df192ca4ddd2f6b7173f52dadbd0a34e588aec07:eyJzZWxlY3RlZExpbmVDb3VudCI6OCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiZTkyMThkYzRjZTk3MWNiZTNkMzhkNzc0MzBlNjM5OTE4ODg0ZGQ3N2Q3MTg0YzdiOTNkZmRjMmU5OTg2OTFiNCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNzZiOGRlMTdiMGUzZWYzNGU4YThjMDlhNjBlNWU4YzE2MmJiNTM2YzBiOGM0YjZmNjQ3Zjg5MmExY2JlZTk4YyIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMWIwNGYyZGQxMTE4MDZkNTY1NDM0NDIyNjBmY2EyNWIzNjIwYTgxY2QzYzU4OTJhZGYxMjgzOGQ4Y2Q3MzliMiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjAsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSJ9"
+        },
+        {
+          "resource": "repo://tests/test_server.py#L10-L16",
+          "version": "repo-lines-v1:sha256:fe4c5c1783adfa900aa94dfc57bf497bf607897c031ea7bafc0d9fcd1e959e39:eyJzZWxlY3RlZExpbmVDb3VudCI6NywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiYzUxNzU3Nzg1MWM0ODllNDVhYmFlMjU5MTI1NmM0MDQwNGEwNWM2ZDE5Y2Q0ZDVhZTdmZDIyYjAwODRjZWM2YyIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMzFiNTNmNjllYWZhMjgwY2ExZDJhNjY5N2U5NGNlMmYxYTVhZDg3OTcxNDFmZWY3MTU1YzNiOGRkYjNkZTc3ZCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMThlZDFkNmMwOTNmMDg3ZDQ2Y2RlZTdlYWQzMzc1YWZkZTIwNThkYjczY2U0OWY1YjhiYjc3Yzg2NTRjNDEzNyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiN2U2YmIyYWIzZjc0MTBiYWQ1NjA2N2Q5ZDNjZGVlYjYzODY3ZTg3MjU5NmUwNjc1YmJjYzI5NDMwN2Q2NmUxYyJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_ad874dee1d504d53b7a4e3fd798bda77",
+      "statement": "The suite's fixtures (two_agents, pair, business, registry, directory) create real identities and Directory state under pytest tmp_path per agent and always build HAAPServer/RegistryServer with AuditLog(memory=True); they never touch ~/.haap, and the only sockets opened are 127.0.0.1 ThreadingHTTPServers bound to ephemeral ports, while client-side network helpers (haap.client._fetch_json) are monkeypatched in tests instead of hitting the network.",
+      "evidence": [
+        {
+          "resource": "repo://tests/test_client.py#L21-L35",
+          "version": "repo-lines-v1:sha256:15f938a3dff69ccee09f680448450c4e347f5806c77a434ae3f275e0c0e64d00:eyJzZWxlY3RlZExpbmVDb3VudCI6MTUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjNmYjYxNTVkY2VjNTBlMDQ0NzYyZmE2MmU2YWU2NjYxNDVmMDNmYjE0NGNlMGIwM2RiZGY0ODYyYjQyNWNhY2QiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImEzNmM5OTlkNjYzODgyOGM1NmU3YmIwMWIxMzNhMWI1MzI5Zjg4YTEyOTBiNzlkZWNiNmUxODlhNWQwYzdkN2UiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjY4YTQyNGRhYjRmMDNjMzAzYjliYTkzYmZiNjJhMTkyYWNmZGE5ODY4YTdiOGY1YzExYWIxODI0NGVjN2Y3MGMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjcwNDM4NmMzMjJhM2VkMzM0MzU2NDBkMDhiNmIyYTk5ZjNhYTkzNDg5ODcwNWVlMWIyMjVlMmViNmY2ZjNhYjIifQ"
+        },
+        {
+          "resource": "repo://tests/test_registry.py#L44-L50",
+          "version": "repo-lines-v1:sha256:24bb76d27042dc0834c6e97c168defe71f4022329a702b520f4b7e686fa14060:eyJzZWxlY3RlZExpbmVDb3VudCI6NywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiM2ZiNjE1NWRjZWM1MGUwNDQ3NjJmYTYyZTZhZTY2NjE0NWYwM2ZiMTQ0Y2UwYjAzZGJkZjQ4NjJiNDI1Y2FjZCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiODAxYjdjZWIxYzk0MTA4NTA4NGRiZTRkMDJlNmJkYmUxZWUzM2ZiM2ZhN2NlYjkxYTFlOTA0OWM2Y2MzNWU1YyIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiYTY1YzQ3MWMxN2FjODU5ZjM5YmZmNWRiY2ZhM2ZmOTQyNzZmZWIyMzZkMTQxZTU1ZjFhMzY4YTFjMTVhMTdkOCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZWM2YjRhYzM4YWZlNTI2OWE3NWExYTQzZTM4NTU1MzIwODk0MjBlMTVhYjk3MWE1MTNhYzYzOWUxNThhYTZkMCJ9"
+        },
+        {
+          "resource": "repo://tests/test_registry_client.py#L16-L22",
+          "version": "repo-lines-v1:sha256:300b429a12002c766cc8c6dc7d32877e2f3daff5e42ae75fbd833df4ec302086:eyJzZWxlY3RlZExpbmVDb3VudCI6NywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiM2ZiNjE1NWRjZWM1MGUwNDQ3NjJmYTYyZTZhZTY2NjE0NWYwM2ZiMTQ0Y2UwYjAzZGJkZjQ4NjJiNDI1Y2FjZCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiODAxYjdjZWIxYzk0MTA4NTA4NGRiZTRkMDJlNmJkYmUxZWUzM2ZiM2ZhN2NlYjkxYTFlOTA0OWM2Y2MzNWU1YyIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiN2E3MjQzYzY4NzkxMWY2NGNmNWRiNThiNmQwMzVjOTI1NGE3YTE2ODFhNzA2NTI4YzgyNTZkZGYwNTc1Y2FlMSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMDkyNGE0ZTU5MjM4OGNmODM2ZTFjZTVmYzc4NWFhMjQ1MjIyM2M5YjcwYWZiZmE2MDBjZjM0Nzg3NTQ2OTY3MCJ9"
+        },
+        {
+          "resource": "repo://tests/test_server.py#L26-L36",
+          "version": "repo-lines-v1:sha256:3ec9b6047cdf31f98dd15bfde84ac4fb239958aa0ba525fd40f334c5bc361c1e:eyJzZWxlY3RlZExpbmVDb3VudCI6MTEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjNmYjYxNTVkY2VjNTBlMDQ0NzYyZmE2MmU2YWU2NjYxNDVmMDNmYjE0NGNlMGIwM2RiZGY0ODYyYjQyNWNhY2QiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjJhM2U5NzdmZGFjNGNhNDk1OTZjZDQ2YmM3MTYwYWUzMDM5YjYyMTI1MTE4NDQ5ZWM3MGMyZTM3NDI2NWY3NGUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjJjYzg5MjRjZjhiZDY5YzNkMzM2ZTY2NTU4Njg5ZDg3OWY0Nzg0MTc0MzhkNzVkY2Y4YmRhMTFlMGQ2ZDYxZTkiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImZhZmQwZGY2ODU2OGMyZmM5NzYxNjRlZjkwNmRmYjYxODc5MjU5YWZmMDZlZWFiMTFmODIwMzM0MWE2YjE5ZWEifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_d372c3f780674fadb2913c2b184816b4",
+      "statement": "Two wiring styles dominate the suite: server-side tests sign envelopes with env_mod.sign_body and call server.handle_message directly, while end-to-end client tests couple HAAPClient A to HAAPServer B by assigning client_a.transport = MemoryTransport(lambda env, url: server_b.handle_message(env)) — MemoryTransport.send just invokes its deliver function and returns the reply dict, giving the same router semantics the HTTP layer uses.",
+      "evidence": [
+        {
+          "resource": "repo://haap/server.py#L131-L160",
+          "version": "repo-lines-v1:sha256:be05e4fb1055120deb04e264eb10134991bab4d0811e5df615593421f76d7633:eyJzZWxlY3RlZExpbmVDb3VudCI6MzAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjZkMGI0YTE3OGZlNmZjNGI2MzQ5N2U3MDdiNjZlZTUzODA0NWViODAyZGU0MTI1ZDIyNDRmMGNjYTRiZmQyNGIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjdhYzQwOTk2YmI3MzE2ZDI3ZmZkOTVjMzJmMzFiYjY1ZGM1Zjk4MDVkNDE4MGNmZWI0MzVkMDhjNDZjN2NkM2MiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImIxNjdjZmMwY2FkZmI1ZjVmZmI4ZTZiYmQ5MGNjZjhmOGRkNWYzOGZhZmJhYzUxMzgxMDRkNDIwMjkyYWE5MjUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImNmZWM0NzFjOWQ1NWRjNTBiMDlkMjk4MTViN2ZkNmI2OWIzZjU4NmEwYWQyNDY1M2EzY2E5NDc5MDg2MTE1NWQifQ"
+        },
+        {
+          "resource": "repo://haap/transport.py#L36-L54",
+          "version": "repo-lines-v1:sha256:c03eea568083786f902a0cc7d396506d385b88bc9b036e5d6e68ea36747c9960:eyJzZWxlY3RlZExpbmVDb3VudCI6MTksImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImYxNmFjOTgyOGJjMzEzOTgzODM2ZmZjZGVjNmIyMjk2NDI5ZmNiMTEyNzRmOGJiOGUxMzdlMmFhZjRlYTVhOWYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijc0YjMxNzYxODdlZDNlYjBjNmI4NTc3YjE1Mjc1ODkyZjUzZjY0MGM3ZDY5OGRjZTlmOTdmNmVkNTJmZjg4MjgiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjE5NWRhNGNlODg0NjI2MDU4MjU0ZDBjMjVhMmI0MWMwMzk0ZDBiZDAzYWQ2ZGNkYjljZTJjZmRmZWFiMDQ5MGMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjkzNjBlMTFkMTYyYjNkOTZmMjk5YTRmYjQ3NDgwYWYzMjkxZWQ5YTE0ZGE4MGM2NjNlNjgzN2U3ODhhYWQzZWQifQ"
+        },
+        {
+          "resource": "repo://tests/test_client.py#L30-L35",
+          "version": "repo-lines-v1:sha256:f85a0d2155a16f9d5ce7ff44c07b25be0af9e2e324fb0b50a05bd52f662b8cbb:eyJzZWxlY3RlZExpbmVDb3VudCI6NiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiOTdlNzM1ZDI3MmI3NTQ4Mzk3ZDY4NWYyZDZkNWJjZjBlNDk0N2UzYzc0ZjNlZmVhNjQ5NDU2N2U1ZDFiNzY4ZSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiYTM2Yzk5OWQ2NjM4ODI4YzU2ZTdiYjAxYjEzM2ExYjUzMjlmODhhMTI5MGI3OWRlY2I2ZTE4OWE1ZDBjN2Q3ZSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNTk1YWRiZTZkNzA4NWFhNGM0YjE0MzBjNjFiYzAwMDc4OGQxMDllMDI3MzI0ZTczNTMxNzcwZjg0NGUxODZjZSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNzA0Mzg2YzMyMmEzZWQzMzQzNTY0MGQwOGI2YjJhOTlmM2FhOTM0ODk4NzA1ZWUxYjIyNWUyZWI2ZjZmM2FiMiJ9"
+        },
+        {
+          "resource": "repo://tests/test_server.py#L43-L51",
+          "version": "repo-lines-v1:sha256:09641c27e3b67709637cf4d54b23e22d658d1c19c362fa34fee130258bceaa2a:eyJzZWxlY3RlZExpbmVDb3VudCI6OSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMzBlZTRiMDg4MTY4YThiNDUxNDA2NzQ1MGQyZDNlNDJjMDkxY2IwYjBjYTRhZTE4MjRjZjc5NTNjYjYzMTVjYSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNjVlMjlmNzRlMTc5MmYwYjJmZWNmM2Y0ZjQzY2UxOTc4OWI3NWJhYWJiNDczYTlhMjI3NmQ5NTgzNjg5OTIzOSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNjc0MDdkZjk4OTY4YTk1OTg3YWM1MzFmYmYzNGIyODM2YzU5NzNiZmIwMGMzNjUwMjE1ZmY4NjIwNWE0ZmEzZCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiN2Y4ZDk3Nzk0ZDEyZjEyZmNiYzRlZDNhYjA0MTg2Nzk3Y2RjMjIwYjE3ZDAxZGYzMGNmN2ZmZmQ4NzM1YjQ2ZCJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_555fff3b516b40d09f77edaf7289d14d",
+      "statement": "tests/test_server.py pins the full friendship handshake through the router: hello answered with a hello_ack challenge, challenge signed by the sender's private key answered with verify, a formal friend_request leaving the sender pending_in in the receiver's directory, human directory.approve with a concrete grant, friend_accept, and accepted status on both sides.",
+      "evidence": [
+        {
+          "resource": "repo://tests/test_server.py#L43-L87",
+          "version": "repo-lines-v1:sha256:dee8f14dd866bfcff842159c731fe5a3f18a45130dd995537ce1338814a7e7be:eyJzZWxlY3RlZExpbmVDb3VudCI6NDUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjMwZWU0YjA4ODE2OGE4YjQ1MTQwNjc0NTBkMmQzZTQyYzA5MWNiMGIwY2E0YWUxODI0Y2Y3OTUzY2I2MzE1Y2EiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjZlMmU1ZGQwMDRiYjE4NGE0NDg0NmIzMTI0ZTI4MThlNDcxMTczZDA4MDUzMzFhMGM3MDVkMTRlZGFjOWYwMzAiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjY3NDA3ZGY5ODk2OGE5NTk4N2FjNTMxZmJmMzRiMjgzNmM1OTczYmZiMDBjMzY1MDIxNWZmODYyMDVhNGZhM2QiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjJmYjM1NGJlOTQ0MjI3MzVjZjE1NTMxY2RkOTAyZDQ0MDJhOWU4NzkwMDBkZTBmMGQwNTFiNmViYmNiZmMxODgifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_8794f279e14e4b54a80b274411b295ae",
+      "statement": "tests/test_server.py pins the task authorization matrix against the router with assertable error codes: an approved friend granted task:submit with booking:* scope gets a synchronous task_result with state completed whose detail comes from the injected on_task callback; an unknown friend yields FRIEND_NOT_FOUND, an explicit allow:False grant yields PERMISSION_DENIED, and a capacity-1 rate limit makes the following request RATE_LIMITED.",
+      "evidence": [
+        {
+          "resource": "repo://tests/test_server.py#L90-L153",
+          "version": "repo-lines-v1:sha256:e4b616c5776be8d2993435c76f944a223d09df5f4942af442bbdf41320add5e6:eyJzZWxlY3RlZExpbmVDb3VudCI6NjQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjIxMWY3MmE3ZTZkNzg5MjA4ODcwMzRjZmMzNDMyZmI0NDdiZjRjYzFkNjMxZWNjZGE2Y2Q3ODNlZGQ3YTNhNjkiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ3NzlkMzM5MmU4MGMxOThkMzBjYjMwZjFjNDdmMzQ5YzVhZWIxMWUwYjAxMTJmMmYxMDZjZDAyYmY5Y2JjYTYiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImU1MjAxODk3NDM3YmNmMmMzZDg2MWYwYmNiODhjM2I0YzdlOWJiZTI3ZTBjYTQxMmMyNWNjMTE4MTE1ZjAwMTMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjgyYjAwODg1ODI1MzNhOGI0YmRkOTE5ZjUzYzBhMjQwM2Q2NDQ0N2VjNWJhNjU3OWIxMjVhNTMxOTFhNDY4ZTcifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_1af571b41803461b8845fe908b597e8b",
+      "statement": "tests/test_server.py pins envelope security rejections at the router boundary as signed error envelopes: a tampered signature yields BAD_SIGNATURE, replaying the identical envelope yields NONCE_REPLAY, a timestamp 4000 seconds in the past yields CLOCK_SKEW, a non-bootstrap ping from an unknown sender yields BAD_SIGNATURE (no key to verify against), and a bootstrap hello whose declared public key does not hash to the claimed fingerprint yields BAD_SIGNATURE.",
+      "evidence": [
+        {
+          "resource": "repo://tests/test_server.py#L156-L210",
+          "version": "repo-lines-v1:sha256:e31612f56a9a342bb1f4a21c2840a7cc3629bea1d3da2ff0ec0400b628dae9c4:eyJzZWxlY3RlZExpbmVDb3VudCI6NTUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImQzZjMyNzc2ZWJlNjFiNTZhZTIwMTM4MWYxZGQ1YjM1OGE5NWY2YzYwZGE2M2Y3MTNkYmI0OGMzODllMmNmNTMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImQxOTY5NTFiM2I2YjcxMmYyODIzZWI1YWQ3ZWI4MWQ3Y2IxNGM3OGQ1YmIwYzUwMTg0MTZmODVjNmM5Y2ZkOWIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImU5ZDgyNTNlMWIzM2JhNTRkOTZjMDA3NDIyNWYwNjgyNzg5NzMyZTE5NmY3ZDlkYzIyNDA1ZGI3NmZhZTM4ZjkiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjU2MjA2ZGZjODRhZGYzOTg4YTBiOGY0NDc1NTI3NjJmMTNlOWU4MmMzMjhiZTg1MmQyNTIxZjU3ZTg3MmE0NzIifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_93b3872f71ba4b9886bf48434d166891",
+      "statement": "tests/test_server.py closes with two surface tests: well_known_manifest() must expose the agent fingerprint and speciality with no private key material, and test_http_layer_end_to_end boots the real ThreadingHTTPServer on 127.0.0.1 with port 0, GETs /health, POSTs a signed hello to /haap/messages over the live socket, and asserts the hello_ack challenge comes back.",
+      "evidence": [
+        {
+          "resource": "repo://tests/test_server.py#L213-L247",
+          "version": "repo-lines-v1:sha256:5a5baee7281b92f1983caa46c335d4919fdad24727c0ef11d27949fc1b8036f2:eyJzZWxlY3RlZExpbmVDb3VudCI6MzUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImI2MjVlZGUwMjZlMWQ1MTg2MWFhZjNlNjFlYzQ1MmI4YzExNjg1Yjk5ZTc1YmQyMGQ1NmE4MzY5N2ZhMDBjMjYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImI4OTc3Yjk2MWJmMjg0ZTcwMmExNGFkMDBmZTE1OWZjOWVlNTA2OGYyMGYxMzNhZGM0MTRjNzIzM2E2ODJhY2UiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImYwODQ4MzIyYjMyNDdlNjYxZjY2OWM3ZWQ5ZjI1ZDMyMzQ2ZGZlNGI2M2FmYTQ0MDcxZjg4OTVhMTM3Zjg5MTYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_aed5ab74da604166b7e9f9723dd77403",
+      "statement": "tests/test_client.py covers the outbound half over MemoryTransport: start_friendship through delegate_task yields a completed booking whose detail comes from server B's injected executor with the task recorded on both sides; an empty local permission matrix makes the client's deny-by-default outbound guard raise PermissionDeniedError before any envelope is sent; and refresh_endpoint raises DiscoveryError when the well-known manifest fingerprint differs from the recorded friend while updating the stored endpoint when it matches (both via a monkeypatched _fetch_json).",
+      "evidence": [
+        {
+          "resource": "repo://tests/test_client.py#L42-L134",
+          "version": "repo-lines-v1:sha256:0b7c9564c9c6a5a673bce0d201389b49e2b4aa366fca6b65de1c73fc836dae99:eyJzZWxlY3RlZExpbmVDb3VudCI6OTMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijc0MmY0NTA0ZDI0NTM3Yzk4YzgzYmExNmViMzU1Y2RhN2NkY2FlZDg0MmZkYmU3ZTg4ZDZkODU4OWE5YzViYjciLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxODBlZmNkZTUwYzlkNWM3OWI0ODIwNjEwYTRkNTc3ZDc4OGVlYTk0ODZkNDEwMTc4ZDExYjBkM2JmOTZkZGEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImI2ODFkNThhZDg5ZTc4MGM4ZjkyZGNjNjUxNWY2YzkxN2JmY2ZiNTEwYjE5NGY2NzE0NTVkZDdkZTBlOWQ1MzYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_e0c17e14fe8442cf9760dd8ae2b7e6f3",
+      "statement": "tests/test_marketplace.py pins the no-friendship marketplace mode with self-signed bootstrap envelopes carrying the sender's public key: service_search answers service_quote with availability and the matched catalog, service_book under auto_accept executes the injected on_task and returns a completed task_result, disabling auto_accept rejects bookings with an error naming auto_accept, the dedicated marketplace bucket (capacity 10, refill 0.05/s) throttles a 12-request burst after the first requests pass, and a directory-blocked sender gets PERMISSION_DENIED.",
+      "evidence": [
+        {
+          "resource": "repo://haap/server.py#L337-L350",
+          "version": "repo-lines-v1:sha256:0db5512ed44780d2d5691ee96195ac8ef0dd448d89506222a7227ab2fcb0d664:eyJzZWxlY3RlZExpbmVDb3VudCI6MTQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjJiNzVlYzE0ODgyMGIzNmYyOGNlOTJkYTUzMTFiNWU2NGNhNTY0ZTBkMTQ1NjVkMzQyODY2YmFiYmFiZmY1M2UiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImI4MjQ3Nzk1NzY1ZmI0ZWM4NTQ2ZGZmZTU2NmI3ZDQwMjJhODMxNmQyNmQ2OGI3ODcxNzgwNThjYWZkNjg2NjciLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImU2Mzk3NDg3OTI5MTVlZTcwNWUxYmRiYWIzOWRjOTNmZjU2ZDRlYTIwNmYxOTFhNDk2YzhhOGFiNmRkMzA5MTMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjM1ZTI1NzFlN2IxYzRjYzk4YWIxODEzZDFjODAyOWI1ZTkxMzIzYzdkYjJhNWJkMzA5OGM3NTIxZjNlMTZhNjcifQ"
+        },
+        {
+          "resource": "repo://tests/test_marketplace.py#L20-L112",
+          "version": "repo-lines-v1:sha256:b0525943f6668e2b034ff8e25c7b54cc7c6f3773c57bd556ce9dcb57d0e0cfba:eyJzZWxlY3RlZExpbmVDb3VudCI6OTMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjNmYjYxNTVkY2VjNTBlMDQ0NzYyZmE2MmU2YWU2NjYxNDVmMDNmYjE0NGNlMGIwM2RiZGY0ODYyYjQyNWNhY2QiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImYyMjhmNTk1MTA0NDA3ZjBjYWE0MWZmNWJkOWJlM2YzZmNmMDEzYTc3MzkzMDJiMmYyMzMxYzU5MTYxYzIyYzUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjJjYzg5MjRjZjhiZDY5YzNkMzM2ZTY2NTU4Njg5ZDg3OWY0Nzg0MTc0MzhkNzVkY2Y4YmRhMTFlMGQ2ZDYxZTkiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_b05fb00b86684f619da9d33dc95c9fc5",
+      "statement": "tests/test_policy.py pins roles and the policy engine in isolation: the five built-in roles (guest, client, partner, family, admin) with deny-by-default semantics (guest has no task:delegate, only admin has exec:terminal), a user roles.json role that extends a built-in and overrides rate limits, resolve_role raising ValueError for unknown roles, and RequestPolicy.evaluate decisions — default queue, fingerprint and speciality auto-approve rules with max_role capping (an admin rule capped down to client), and default deny.",
+      "evidence": [
+        {
+          "resource": "repo://tests/test_policy.py#L35-L99",
+          "version": "repo-lines-v1:sha256:d9771a7ed800d7016663c8ee6834a7170c7510d5cc1a9db9145714af6ae68300:eyJzZWxlY3RlZExpbmVDb3VudCI6NjUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjMzYzZjZWFkMGRjZDlmM2Q2MWM0Njc3ZDMwNzEzYjhiMDQ2MjhjMzU4MjFjYjFkNmNlMGQ5NDhiNWFjYjRiN2EiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImYzMzAzYTIxZTEyMzc5YjI2OTk4YmZiYWQ3NjUzYWUxMzlkMTRiYzVmMWY1ZjIyZTA0ZGI4NGExMjIwOWZjMzkiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImYwMWUyYmFmMDVhMjQzNDZkYzNjZWNkYzAzNjdjOTIzNmUxOWVkMWJhNmE4ZmI2MGRkY2UzNGY4YzAyMTEzZTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_c1704903b617447994ee745a4da98afe",
+      "statement": "tests/test_policy.py pins the three friend_request policy branches through the server: queued requests stay pending_in, notify the injected notifier with an actionable card carrying how_to_approve, and reply with pending_human True; auto-approval replies friend_accept carrying granted_role and the exact role permission matrix (client grants task:submit, no file:write) and lands as accepted; a deny-default policy replies an error envelope with FRIEND_REQUEST_DENIED and leaves no directory record; ConsoleNotifier prints the human card; and directory.approve seeded from resolve_role matches the CLI role-template approval path including the client role's task_request capacity of 5.",
+      "evidence": [
+        {
+          "resource": "repo://tests/test_policy.py#L112-L206",
+          "version": "repo-lines-v1:sha256:cef6d2b82e3bbba4647e7d14f7676a790d1ff64837c9760f3dbda225900a8db3:eyJzZWxlY3RlZExpbmVDb3VudCI6OTUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjMwZDBlMWVmOWI5YzJmZDg0NTgzNzVlNDNjNzJkODMyMDViYzUyZmFlMGQ3ZDI3MDc2OGJlNTNmN2YzMjQ4ZmMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ4NWExNGUxMGJmOWVjZTVmNzBhM2EyNjgzZTVjZDFiNDRlMDFjYjY3YTIzN2NhYWUwMTk3ZTQ2OTRlZjMxNTYiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImVkZjZiMTFjZjQ2NjkxMWVkMTZlNTJlZWQ0MDJlYTY1MGI1ZWVmNjA5MGYzZGJiMDdkYzE1Mjc1MjQ1NTJiMzQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_287a211c979b4620af3ac7aa6be43b2b",
+      "statement": "tests/test_registry.py pins two-phase proof-of-endpoint registration over live loopback HTTP (POST /register validates the signed manifest and fingerprint-to-key binding and issues a challenge_nonce; POST /register/complete with the nonce signed by the private key lists the agent, which then appears in /search and /agents/{fingerprint}) plus the rejection and lifecycle paths: forged manifest signatures, fingerprint/key mismatches, and endpoint proofs signed by a different key are rejected and never listed; re-registering the same fingerprint updates a single entry rather than duplicating; heartbeat renews entries while silence past the entry_ttl expires them; and search matches capability and free text against the manifest.",
+      "evidence": [
+        {
+          "resource": "repo://tests/test_registry.py#L44-L50",
+          "version": "repo-lines-v1:sha256:24bb76d27042dc0834c6e97c168defe71f4022329a702b520f4b7e686fa14060:eyJzZWxlY3RlZExpbmVDb3VudCI6NywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiM2ZiNjE1NWRjZWM1MGUwNDQ3NjJmYTYyZTZhZTY2NjE0NWYwM2ZiMTQ0Y2UwYjAzZGJkZjQ4NjJiNDI1Y2FjZCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiODAxYjdjZWIxYzk0MTA4NTA4NGRiZTRkMDJlNmJkYmUxZWUzM2ZiM2ZhN2NlYjkxYTFlOTA0OWM2Y2MzNWU1YyIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiYTY1YzQ3MWMxN2FjODU5ZjM5YmZmNWRiY2ZhM2ZmOTQyNzZmZWIyMzZkMTQxZTU1ZjFhMzY4YTFjMTVhMTdkOCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZWM2YjRhYzM4YWZlNTI2OWE3NWExYTQzZTM4NTU1MzIwODk0MjBlMTVhYjk3MWE1MTNhYzYzOWUxNThhYTZkMCJ9"
+        },
+        {
+          "resource": "repo://tests/test_registry.py#L71-L210",
+          "version": "repo-lines-v1:sha256:532c21e6caca0849bb5a1e164a383434fce745125dda2b9bf48c77d7d60d1550:eyJzZWxlY3RlZExpbmVDb3VudCI6MTQwLCJmaXJzdFNlbGVjdGVkTGluZUhhc2giOiJkYzM4MjBlYTdmN2Y0YmUyODRhOWI3YjgyODFlYjhhNjJjMDQ0NmIzZjI5YzRkMjM5YzY3NDRkYWM1MTFhOGZkIiwibGFzdFNlbGVjdGVkTGluZUhhc2giOiI3MTNmODRiNWViNjEwM2I0ODcyMDQ0MTU1ZjZhZjMyNzc5NTA5NTNmMmE1MWQ5NGY0MmMxNjNiNzI3ZTMyYmY4IiwicHJlY2VkaW5nQ29udGV4dExpbmVDb3VudCI6MywicHJlY2VkaW5nQ29udGV4dEhhc2giOiJmYWJjOWYxYzA2MjRkODZlNzhkYTcyNjg1ZjYwMzc0ZDQ0OThjN2EyYTVjOTJmODAxZmVhZjgwMGVhZDkzMjY3IiwiZm9sbG93aW5nQ29udGV4dExpbmVDb3VudCI6MCwiZm9sbG93aW5nQ29udGV4dEhhc2giOiJlM2IwYzQ0Mjk4ZmMxYzE0OWFmYmY0Yzg5OTZmYjkyNDI3YWU0MWU0NjQ5YjkzNGNhNDk1OTkxYjc4NTJiODU1In0"
+        }
+      ]
+    },
+    {
+      "id": "claim_dd046810e21c457bbb3a8720fb05b057",
+      "statement": "tests/test_registry_client.py runs one full discovery story: register() from haap.registry_client performs submit, nonce signing and completion against a live RegistryServer on an ephemeral loopback port, heartbeat() works for the registered agent, and a second agent finds it by capability citas-peluqueria and by free text peluqueria with the correct fingerprint and messaging endpoint.",
+      "evidence": [
+        {
+          "resource": "repo://tests/test_registry_client.py#L16-L48",
+          "version": "repo-lines-v1:sha256:32f7d57a0c26be95cee16d9997fa9a1f9ac918ba3d98bb19382af68c53c099f4:eyJzZWxlY3RlZExpbmVDb3VudCI6MzMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjNmYjYxNTVkY2VjNTBlMDQ0NzYyZmE2MmU2YWU2NjYxNDVmMDNmYjE0NGNlMGIwM2RiZGY0ODYyYjQyNWNhY2QiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjcwOTAxNDIyOTJhZThkZDc4NzY3N2YwMTQzZGJiNmM0Mzg0ZWJiMWFjNmY1NzUwYzU5ZjMwZWJiYThiYzg3YTUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjdhNzI0M2M2ODc5MTFmNjRjZjVkYjU4YjZkMDM1YzkyNTRhN2ExNjgxYTcwNjUyOGM4MjU2ZGRmMDU3NWNhZTEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_e5e43a0b965c456eb779a91a014056e4",
+      "statement": "For extension tests the bootstrap rule matters: hello, challenge, friend_request, service_search, service_book, service_cancel and service_quote are the only message types whose sender public key may come from the payload when the receiver does not know the sender, and the declared key must hash to the claimed fingerprint; a non-bootstrap message from an unknown sender fails verification with BAD_SIGNATURE, so new-flow tests either embed public_key_b64 for bootstrap types or register_known/approve the sender first.",
+      "evidence": [
+        {
+          "resource": "repo://haap/server.py#L103-L129",
+          "version": "repo-lines-v1:sha256:4843543ab98942d5599c5bb526959d134b03cbafef44ffd14b0d0e1dc0e38315:eyJzZWxlY3RlZExpbmVDb3VudCI6MjcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjA0MTYwN2NlMmU0YmI3OGZjODJlZDgwZjgyNDU0NTA3ZWU1YWI5ZGY5NzBhNjEwOWRiNDMxYzI3NGY4MTUwMWMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjE1N2FjYTc4NDE1ZjRmMmE0ZjIwNzAwYTYyMDE5ZDZmOTM1MjIyMzA4YTJmOTA2ZGIwMGUxZDczM2JiMDRhNjQiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImRiNjA1NzIxZjU3ZGRmN2JjMWNlZGI4ZTkzMTFlMmRhNWNlMmU2MzUzNDdmYzU1ZGIwMDM0Y2I1YjRmMTRiOTIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjVmMmRlZmNiYTIyYmQ2NmVlMGE4MjNlMDcwMWYxMzE5Zjk3NjAwZDQ1NmFjNzdiMDJiYzBmYTUyMDk4MDg3MjUifQ"
+        },
+        {
+          "resource": "repo://tests/test_marketplace.py#L36-L42",
+          "version": "repo-lines-v1:sha256:a19533c22b297a2ccb8d6cee8816662d66dbeba16ac31aa2b727375368ef934d:eyJzZWxlY3RlZExpbmVDb3VudCI6NywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiM2U3OTdlYmU4ODRkNjFiNjk0Mzc3YmRjNDkyNjM3MzViMmNiY2FiZjg1ODk1NWFlNGVhNzBlNmFjY2Q1Y2E1MyIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNmYzM2JiODE3NjExNjRkZTRiZGRlNDE1NWFmY2ExODc4YTljZmQwZTJmY2UzZTQzZGRjNjJiYjE5MzczMDdhZiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiOTcxNzlkYmYxYTk3ZDNhMTIyOTkxMTc3MTQ4MzQ5NmNjMWM3MmU2MGIwNGNmYTgzMDg4OTA1MDJjNGQwMTg5ZSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZWM0MzhlZDVmYmRmMmFiNjc2YWRhMDkyOWFkMGJjM2UzYThmY2Q4ZjA0NmNjZmZkZGY2ZDBiYzdlOWJlNDU1ZCJ9"
+        },
+        {
+          "resource": "repo://tests/test_server.py#L188-L210",
+          "version": "repo-lines-v1:sha256:9d2b5fa4861f4dd700f81e1de82cb015f2e18fcc8059e12ac550af04491ae2fa:eyJzZWxlY3RlZExpbmVDb3VudCI6MjMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjBiODkyNTA1NTEwNGM0NTk0ZWJmMWFmNWJjY2E2YWYxMDFiMmY2MGRhYTM3NTkwZGQ2N2EyMjYzMzc1Nzk2OTUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImQxOTY5NTFiM2I2YjcxMmYyODIzZWI1YWQ3ZWI4MWQ3Y2IxNGM3OGQ1YmIwYzUwMTg0MTZmODVjNmM5Y2ZkOWIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImE1OGVmNjdiNWZlNTMyYTUxYjhiY2I3MmVmNjgxMDY1ZjY0MjljNzEwMTc2ZDBmZTg4NjA3NTgzMmY5NDhkMzEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjU2MjA2ZGZjODRhZGYzOTg4YTBiOGY0NDc1NTI3NjJmMTNlOWU4MmMzMjhiZTg1MmQyNTIxZjU3ZTg3MmE0NzIifQ"
+        }
+      ]
+    }
+  ],
+  "verification": {
+    "by": "openwiki/0.5.0",
+    "at": "2026-09-05T09:02:08.883Z"
+  }
+}

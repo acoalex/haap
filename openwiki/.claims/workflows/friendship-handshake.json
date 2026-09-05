@@ -1,0 +1,244 @@
+{
+  "schemaVersion": 1,
+  "pageVersion": "sha256:937ca2319054755e3382277460ad119ff89403807f6f42c3bb233b4e392b24bb",
+  "claims": [
+    {
+      "id": "claim_c2376a501b724a33beb2889e03cd1418",
+      "statement": "HAAPClient.start_friendship drives the full outbound handshake — records the peer locally as pending_out, sends hello with the sender's public key in the payload, replies to the issued challenge with an Ed25519 signature over the challenge ASCII, requires a verify acknowledgement, and finally sends friend_request carrying a capability manifest — over raw endpoint URLs, and the relationship stays pending_out until the remote owner approves and a friend_accept envelope arrives at the requester's server router, which consolidates it via Directory.mark_outbound_accepted.",
+      "evidence": [
+        {
+          "resource": "repo://haap/client.py#L120-L162",
+          "version": "repo-lines-v1:sha256:acf024697086d9817d04a9e3c66dff66acab8b39b56ab705858e7a3b5ba7af48:eyJzZWxlY3RlZExpbmVDb3VudCI6NDMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjI1YmVlMGRhMzhjMzlkNTczMTVhMzUxNjY5YzA1MjQyZDYxMjU1ZGU0ZDUxMjZiZGM1NzkwNTJmNDhhNDUzOTMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImU1MTc4YTE3MTZjYzExMGVkY2QxMDZiMDFkY2JjNjk5NWQ2N2IwYWUyZGU1YjIyYzVmNzA4ZjIxMzQ3ODA0OTUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjgyMjVjODg0NmNlY2E3M2E2ZjdjNTMyZGVjMTlhODM3MTRlYzA3NTY0MmVkYjkxOGE1NmNjYmUyZDlmZTYwMzQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6Ijk4ODQyZTZlNTYwZDJiZTQ3NjkyMDhmODA2OTVjODZjYjJmYjg0ZTUyZjgwOWY4NjczMjAxODFiMmViN2U0NzUifQ"
+        },
+        {
+          "resource": "repo://haap/client.py#L164-L174",
+          "version": "repo-lines-v1:sha256:35536fcd13147b794071a1e310fe567aac600a30cfb45e3da5cb611ccb741f38:eyJzZWxlY3RlZExpbmVDb3VudCI6MTEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImI0ODc3NTRkZmQxODE1ZTc5YzMyMDhmZjcyYjVkODNkNDA1YmNhODljMjI4MTg2ODVkYThlNjliNDEyMmI1NjQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjdhYzQwOTk2YmI3MzE2ZDI3ZmZkOTVjMzJmMzFiYjY1ZGM1Zjk4MDVkNDE4MGNmZWI0MzVkMDhjNDZjN2NkM2MiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjI5MWExMGI1MjUzNGExMGNiYjNhNzFlNGE4YTJkOTBjYmYyYmEzY2NiYjAyYmJiNWZjNWIyYjVkMjAyZTQxMjkiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImY4MWE2YTNmNjViMDhkNGRkYzg4MDQyMjExZmQ2OGJhYzIxZDZkZTc1NjIzYTBkM2RjY2E1OWFhMjcxNGQyNmUifQ"
+        },
+        {
+          "resource": "repo://haap/directory.py#L249-L271",
+          "version": "repo-lines-v1:sha256:2feb35fdfa23e46cc7e53ee83b68175299c41141ebe1277965e7373c17e025a6:eyJzZWxlY3RlZExpbmVDb3VudCI6MjMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImQzOGY5ZDg3YTJlNjAzYTAxOTI4NTc0YmM0ZjY2YTNkNDBjOWJjOWEzMDE0OTdmNWMzZjMxN2Y1M2NiYjU1YzUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImYwMWZkMDc2NmFiMmU5YWZlNGE3Njc0ZGM4MGE2MGZiYWQwOWRhYTY3NzIwMzg5OTY5NGE5MjNjNWI2ZWFlZDgiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImE4YmVhMGJjMWI3NWM0MTM4NTRjYTYyNTJiNWU3YTI2YTkxNzcwMzhjMmY0YjA3YzU4YmM3YjE1YmJkNjlkYWEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjJkOGQyMDRjMDczMzI1NDc3MGY1MTM5N2U3NWMwOGYxNGZlYWFiZGQ1OTNhYjFjN2YyNDExNjllYjg2OGVkNjIifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_23d5af1158414f75a398a14ebf793534",
+      "statement": "Directory.add_pending_out, used by start_friendship and `haap friends add`, refuses a blocked fingerprint (FriendBlockedError) and a duplicate start against an already-accepted friend (DuplicateRequestError), creates the record with status pending_out, and installs the conservative DEFAULT_GRANT_TEMPLATE (chat:converse, task:delegate, task:submit — never file/exec) unless an explicit matrix is passed, where an explicit {} means deny-everything.",
+      "evidence": [
+        {
+          "resource": "repo://haap/directory.py#L222-L247",
+          "version": "repo-lines-v1:sha256:dfc543fe0d265d9f81886ffb9bdf3d8b8191f56362149c67cce3defc1ef6c898:eyJzZWxlY3RlZExpbmVDb3VudCI6MjYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijc5OTA5NDk4NWE3MjVhODUxNzM1YzkwNjNiNWEwZjZhOGU1ZWY5YzI3YjJhYzc5M2M4M2ZmNGU4NWE4MjE0OWEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImYwMWZkMDc2NmFiMmU5YWZlNGE3Njc0ZGM4MGE2MGZiYWQwOWRhYTY3NzIwMzg5OTY5NGE5MjNjNWI2ZWFlZDgiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImE4YmVhMGJjMWI3NWM0MTM4NTRjYTYyNTJiNWU3YTI2YTkxNzcwMzhjMmY0YjA3YzU4YmM3YjE1YmJkNjlkYWEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjM3ZTM2MWEzMGM2MjRkZTRiM2EzNWEzNTNiNmI1MWI2YTAwNmFmZDVjM2YyZWJjM2Y1ODdlMmI2ZDM4ZDBmOWEifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_8bd4de59899a4e77a098f896980155b1",
+      "statement": "The server's challenge machinery (hello -> hello_ack -> challenge -> verify) proves private-key possession: _on_hello mints a fresh random 32-byte challenge remembered under the sender's fingerprint with an issue timestamp, and _on_challenge pops that single-use pending challenge (none left raises), enforces 120-second expiry and exact challenge match, verifies the Ed25519 signature over the ASCII challenge against the bootstrap-declared or directory key, registers the sender via register_known (implicit pending_in), and replies verify {verified: True}.",
+      "evidence": [
+        {
+          "resource": "repo://haap/server.py#L170-L211",
+          "version": "repo-lines-v1:sha256:ef121eb1b108f25fbfb52a0cedfbdb18de1343e65d5e89a439388c9c3c3d168c:eyJzZWxlY3RlZExpbmVDb3VudCI6NDIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjlkZWIzYzRjOTY2MzYxZmU5NGQzNmFjZWQzMjU1YjA1ZTNiY2ZjODU4ZmRmZWUwY2UzNDBiZmE2MGEwOWI3YmUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjkyMDFkZWNiYTcwOWEyOTU5MDNhY2RlYzRhZmNhOTNmZjNiMTk1ZGM1MDVjNzliOTM4NDllMDY3ZDliN2I5ZGQiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6Ijg2OGZiY2ZkOGVjYmJjNmU1YWExM2U1MjQ4ZmY2NDMyZDc1NDVhYjM2MDIyZDhkM2FjNjhiODVjMmQ1ZWEzODYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImEzMGMzNGNlNDAwMGY3MTM5NDQwYTg4YWVmNWQwMmJhMGU0ODQ1YTMxYzlkYzUwYjlhOTUzMGRhMzE5NzM1ODYifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_c636a712d43c422bb42ddaf998cda2d3",
+      "statement": "Bootstrap messages (hello, challenge, friend_request, and the marketplace service_* types) are verified self-containedly before any handler runs: for an unknown sender the router takes the public key embedded in the payload, requires fingerprint_of_public_key(key) to equal the envelope's sender_fingerprint (else SignatureError/BAD_SIGNATURE), and runs the full envelope verification (±300 s timestamp window, Ed25519 signature, per-sender nonce anti-replay); a non-bootstrap type from an unknown sender is rejected because no key exists to verify it.",
+      "evidence": [
+        {
+          "resource": "repo://haap/envelope.py#L240-L271",
+          "version": "repo-lines-v1:sha256:1543197e523fc7d85a2c4a30d0eb19acc251b40b00be0bdb27071c3823a3fd7a:eyJzZWxlY3RlZExpbmVDb3VudCI6MzIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjE3YTAzZmM4YmU5ZTAwOGNjMTgzNGMzNGNkNDFlYjRlMzAzNzQzZmU2YWFhNTI0NmI0ZjgxOGE3NDc1NTM5NzIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjFmYjFhZjk0M2U3MTJmMjRjZDg4YWFkY2RmN2M2ZGVlNDQ1MDJlOTc4NmE3MzRlZDJmYTk5MDdiZTQ3YTBkNzUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImM4Yjc0N2UzZTRlZGMxZTVkMjY3NWE3MWMyMzEwNjJhYjk4NGZkYjA4NDkxNzE4ODkyYmQyNTIwMGY0YTQyYTEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        },
+        {
+          "resource": "repo://haap/server.py#L103-L129",
+          "version": "repo-lines-v1:sha256:4843543ab98942d5599c5bb526959d134b03cbafef44ffd14b0d0e1dc0e38315:eyJzZWxlY3RlZExpbmVDb3VudCI6MjcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjA0MTYwN2NlMmU0YmI3OGZjODJlZDgwZjgyNDU0NTA3ZWU1YWI5ZGY5NzBhNjEwOWRiNDMxYzI3NGY4MTUwMWMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjE1N2FjYTc4NDE1ZjRmMmE0ZjIwNzAwYTYyMDE5ZDZmOTM1MjIyMzA4YTJmOTA2ZGIwMGUxZDczM2JiMDRhNjQiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImRiNjA1NzIxZjU3ZGRmN2JjMWNlZGI4ZTkzMTFlMmRhNWNlMmU2MzUzNDdmYzU1ZGIwMDM0Y2I1YjRmMTRiOTIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjVmMmRlZmNiYTIyYmQ2NmVlMGE4MjNlMDcwMWYxMzE5Zjk3NjAwZDQ1NmFjNzdiMDJiYzBmYTUyMDk4MDg3MjUifQ"
+        },
+        {
+          "resource": "repo://haap/server.py#L131-L160",
+          "version": "repo-lines-v1:sha256:be05e4fb1055120deb04e264eb10134991bab4d0811e5df615593421f76d7633:eyJzZWxlY3RlZExpbmVDb3VudCI6MzAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjZkMGI0YTE3OGZlNmZjNGI2MzQ5N2U3MDdiNjZlZTUzODA0NWViODAyZGU0MTI1ZDIyNDRmMGNjYTRiZmQyNGIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjdhYzQwOTk2YmI3MzE2ZDI3ZmZkOTVjMzJmMzFiYjY1ZGM1Zjk4MDVkNDE4MGNmZWI0MzVkMDhjNDZjN2NkM2MiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImIxNjdjZmMwY2FkZmI1ZjVmZmI4ZTZiYmQ5MGNjZjhmOGRkNWYzOGZhZmJhYzUxMzgxMDRkNDIwMjkyYWE5MjUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImNmZWM0NzFjOWQ1NWRjNTBiMDlkMjk4MTViN2ZkNmI2OWIzZjU4NmEwYWQyNDY1M2EzY2E5NDc5MDg2MTE1NWQifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_fff9a20586cb43e0835f098aef1c1a4f",
+      "statement": "Server._on_friend_request registers/consolidates the sender, forces the record to pending_in, stores the declared capabilities, and routes to RequestPolicy.evaluate with three reply paths: deny removes the record and answers a signed error envelope with error_code FRIEND_REQUEST_DENIED; auto resolves the capped role template, grants it via directory.approve, and answers friend_accept carrying endpoint, the granted matrix and granted_role; queue keeps the record pending_in, notifies the owner through the Notifier, and answers a friend_request acknowledgement {received: True, pending_human: True, suggested_role, note}. The three paths are audited as friend_request.denied_by_policy, friend_request.auto_approved, and friend_request.queued respectively.",
+      "evidence": [
+        {
+          "resource": "repo://haap/server.py#L213-L272",
+          "version": "repo-lines-v1:sha256:12c4c3a5d1817b629280144ba261141df70433c242b6ad94526240a8219d65f7:eyJzZWxlY3RlZExpbmVDb3VudCI6NjAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjE0MDNlNmE1MGEyMzk3YjA0YWVkYTM4OTIxNmY3YmNjYmZjOTc0YzQ0ZGQwYzE0NGY0OWUyNmE2NGZhZmY4MmMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjFjZDI4MTQ5YzljOTk3OGEyYTU5ZTQyMjNkZDZiMTFhYzlkNDcwMzE5YjA2YTQwNjA0MjhmNDBiYTI3NDdjNTQiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImZmMDk2N2Y4NjBkYjk5NTA4ZmY5N2U1ZDcyMDllMTg2YTJmNTE0ZTg0ZGIxYWE1ZmVjZjVmYWJkYmJhODYyNzEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjU1NWQzYzBkMGIwMDY0ZmQ5YzIzZjVjMzhkMDU0MTAyNDdjYjYwNTQ2Y2MzNTJkMDhjMDQ3MzhjMWQyZWY0ZWQifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_812b40c4d6744cc1ad294845dbd07ac4",
+      "statement": "Human approval is mandatory in the queue path: pending_in -> accepted happens only through Directory.approve, which is invoked either by the human decision tooling (haap friends approve --role X) or by the server's auto-approve branch of the policy engine — the queue branch only notifies the owner and leaves the record pending_in, so no timer or server path ever self-approves a queued friend request.",
+      "evidence": [
+        {
+          "resource": "repo://haap/cli.py#L105-L118",
+          "version": "repo-lines-v1:sha256:6045528f9672a1bb0bdf8a8eebc35e36dd6f995169e9a5b4100afa5790d1823f:eyJzZWxlY3RlZExpbmVDb3VudCI6MTQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImM5NGVlMTVhNmFkNmUyZTY3N2ZhMWNmNjg0MzJmMmE1ZDAzNmJkMDViOWQyMzFjMWZmMWQ5ZjFjMjE4MzRhNzgiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjVhMTY4MDljMDc1ZGIzMDllMDliYmM5YWI3ZWZlZTY5ZWZiNWY0MTliZDRkODkzMGQwMzgwNjYwMmRkMDJmZDQiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImIzYzU2ZGNjNGFiMmQ0ZjUxYThhOTYyMDA0OTI1NjI3ZWUzZDI5MWUxM2Y0MTQzOTZkMjQ0OWUxMDFmMmQ5MDMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjIwMWYxYWRkODA0MjY5NzE2YTk1M2MxMzA1NTBkYzE4ZDE5OWQ2NWFmZjJlNmIwZjY0YWU1ZDg5NzEwMTVjMjMifQ"
+        },
+        {
+          "resource": "repo://haap/directory.py#L273-L286",
+          "version": "repo-lines-v1:sha256:1ad92010a5d90f8d0564c16e13a37efaaef9acf13e6c371bcd3d68f8ed8eb2f4:eyJzZWxlY3RlZExpbmVDb3VudCI6MTQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjJmNjRjOTkyNTQ4MjRkOGUzOTc1YzFmMTMxMmI3MTNiM2Y1OGMzN2MzMzM5YjUxZTNkMDYwYjg5ZTBhNzYxNDAiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImYwMWZkMDc2NmFiMmU5YWZlNGE3Njc0ZGM4MGE2MGZiYWQwOWRhYTY3NzIwMzg5OTY5NGE5MjNjNWI2ZWFlZDgiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImE4YmVhMGJjMWI3NWM0MTM4NTRjYTYyNTJiNWU3YTI2YTkxNzcwMzhjMmY0YjA3YzU4YmM3YjE1YmJkNjlkYWEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImQ1MzU5ZDlhN2M0NDMwN2UxZDI0NzRiNTY1OWExZmVhYWUxMTJlNDhkNTMyOGE4MDZmODdjNWIxNTIwYTEyMGMifQ"
+        },
+        {
+          "resource": "repo://haap/server.py#L242-L272",
+          "version": "repo-lines-v1:sha256:5cdc497edad2363ed737fd2b590e17d25deb5c86d806b64216a267228f4aff74:eyJzZWxlY3RlZExpbmVDb3VudCI6MzEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjNhYWU3ZWZkODc0NDZlMDI5NjRlNjhkYjkxZTYzMDUzZTgzZmFkNDBkMmE1MGZkZTYxMDYyZjYxZDEwZGI1NjciLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjFjZDI4MTQ5YzljOTk3OGEyYTU5ZTQyMjNkZDZiMTFhYzlkNDcwMzE5YjA2YTQwNjA0MjhmNDBiYTI3NDdjNTQiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjBkYzAyZWU3ODVmMWM5YzNlODU1YmMyYzVmYTdlZjk4NjJmNzhmNjA3YjI5ZmM4ZGZkMzEzODg3NmQ3NGQwNWYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjU1NWQzYzBkMGIwMDY0ZmQ5YzIzZjVjMzhkMDU0MTAyNDdjYjYwNTQ2Y2MzNTJkMDhjMDQ3MzhjMWQyZWY0ZWQifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_7d1ed6c5a7f244889695e73b52cee5f1",
+      "statement": "RequestPolicy.evaluate decides in a fixed order: deny when the policy default is deny and no auto-approve rule matches; otherwise auto when a rule matches by exact fingerprint or case-insensitive declared speciality (first match wins), with the role taken from the rule or the requested role; otherwise queue as the fallback, whose suggested role equals the requested role capped at max_role. A default: deny policy still auto-approves allowlisted senders.",
+      "evidence": [
+        {
+          "resource": "repo://haap/policy.py#L81-L116",
+          "version": "repo-lines-v1:sha256:5019a3a9381628687fdc2be7c71e1cd22fb6dceda686f81887cedcb0876373a1:eyJzZWxlY3RlZExpbmVDb3VudCI6MzYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjJlOTU4NTdhODliMGE0NjkzNzBlNWRiNWI4NjhlOGIwNjlhNDY0MGZiYjljZDM1NmE5ZDZhMzgwNTRlOWUyYjciLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImVlN2M5NTdiY2I0NGZiNjczYzk4YjAwNTBhNzVkMzgwODJkYjgxZDkxOGRlMzEzYTNmMDdjMTIzNTMwNmQ3ZWMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImViYzI5NzcwMzM2ZWEzYWI1NWEwMzE3ZDY3OTM2OTk2ZmY4M2RjODYyNGQwYmQ0MmFlMTE0M2ZkOWNkOWZjNzciLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImFhOWQ3MmM4MmFlNzI1YTVkZWM0ODJiYTQ4ZmM5OWFkODU2MWYxMzQ0YTM3ODk2NmVhOGU4MTgzMzNjYzNlY2UifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_3324005c51bd4e60a028d7c03faa497b",
+      "statement": "Auto-approval never exceeds max_role: RequestPolicy._cap_role caps a resolved role at the index of max_role on the ladder guest < client < partner < family < admin (default max_role is partner), and a role name not on the ladder — including custom roles.json roles — auto-approves capped at client; the human CLI approval path is not subject to this cap because it resolves the named role directly.",
+      "evidence": [
+        {
+          "resource": "repo://haap/cli.py#L105-L118",
+          "version": "repo-lines-v1:sha256:6045528f9672a1bb0bdf8a8eebc35e36dd6f995169e9a5b4100afa5790d1823f:eyJzZWxlY3RlZExpbmVDb3VudCI6MTQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImM5NGVlMTVhNmFkNmUyZTY3N2ZhMWNmNjg0MzJmMmE1ZDAzNmJkMDViOWQyMzFjMWZmMWQ5ZjFjMjE4MzRhNzgiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjVhMTY4MDljMDc1ZGIzMDllMDliYmM5YWI3ZWZlZTY5ZWZiNWY0MTliZDRkODkzMGQwMzgwNjYwMmRkMDJmZDQiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImIzYzU2ZGNjNGFiMmQ0ZjUxYThhOTYyMDA0OTI1NjI3ZWUzZDI5MWUxM2Y0MTQzOTZkMjQ0OWUxMDFmMmQ5MDMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjIwMWYxYWRkODA0MjY5NzE2YTk1M2MxMzA1NTBkYzE4ZDE5OWQ2NWFmZjJlNmIwZjY0YWU1ZDg5NzEwMTVjMjMifQ"
+        },
+        {
+          "resource": "repo://haap/policy.py#L118-L128",
+          "version": "repo-lines-v1:sha256:2159fe7742d5654c2843f4566c2a9bbc5aa85600637c84f70495c1028f9daf0a:eyJzZWxlY3RlZExpbmVDb3VudCI6MTEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjkxOTU5YzczZGUxMzkxZjM5MGYxMjBkZGFlMDkzMzA2M2E5ZmQ1NzZhNmFkYTBmODgwYmJiN2U1YWYyMGY0MTciLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjU0NzgzOTcxMDc5Zjc1Y2RiNGEwMzA0ODQxZDE5YmIxMTMyYTkxODU4MDRkZjc1OWQwODRiMjBiM2M3YWQ5ZWQiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjcxNzVkZGY1NDI2NWEwYzhiYzdlMzExZjgyODRmYzljMDkwNGU4NGMzYmZhOTlmZTQxOGMwYWFlZWVlYjA4MDQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjliOGRiY2IxZDM0ZjU3NmNmMWZjMzYxYTgyMGQ3NGI4MGRjZWEzNjkzYWVlN2UyYTE4ZGQyYThjZDkxMGE0MmQifQ"
+        },
+        {
+          "resource": "repo://haap/policy.py#L48-L49",
+          "version": "repo-lines-v1:sha256:8e602fd9e6ac7c52cc9207e760c2d60d035f7af21db524601961e75f554fcfed:eyJzZWxlY3RlZExpbmVDb3VudCI6MiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiZDVkOGUwMGNiYzI4Y2RlMmJiYjNkMTZiOTJjOGViMzM2N2IwZjZiMTJmYzJhMGU4MjA3YzZkZmEzNGZlYzE1OSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiYzQ1NGE0NzQ1N2ZkMjNjNmU0MjBiZGRhYTkzMjE1NjQ3YmI4NDdhZjFhOTE0MDI3MjQxMjY4ZDY4MTRkOGZjNyIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiYWVhMjI4NWY2ODVhNjQzMTEwMWI3OTc2YWI3NTE0MTBjYjRkYzZmNmU0OWFlOTc3YjlhZDVmZmRhYjU0MzczOSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMTM5ODAyOGJiY2MyMjkzNmU0YTgxNDQ4NTg3MDM5MTdlODc4YzlkZmUxNDBlZTc2YmVkMjM1MmEzM2E5ZjIzNiJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_383439f550c5407dae463be0077ea1b7",
+      "statement": "The friend-request policy is read from $HAAP_DIR/policy.json (structure: default queue|deny, auto_approve rules by fingerprint or speciality with a role, max_role cap); a missing or unreadable/corrupt file falls back to {default: queue, auto_approve: [], max_role: partner}, so the engine's default stance without any configuration is to queue requests for human decision.",
+      "evidence": [
+        {
+          "resource": "repo://haap/policy.py#L47-L70",
+          "version": "repo-lines-v1:sha256:9fb1605701da398a3d3ac98d966e6f01ae6e08c2f92b1f46ff85d73b78540a78:eyJzZWxlY3RlZExpbmVDb3VudCI6MjQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImQ1ZDk2MjAxNTE2MTk1NzZhOTU5NjY5OTEyNDEyZTQ5YWU5OWU5MTBkNjg0OTQyZDkzZTUyYmZmMWVmMmMzY2UiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjBlMWVkOGRhNGU2MTIyZWIwOTBlZjk2MjFlMmU1YzI4ZWI2MjY5MGJjMGY4YjA0YTliNjZkNDI5OGYyMjY1ODMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImFhNmY2ZTU3NGFkYTg4MmIwNjgwN2E3ZjcxM2JmMWNkYWU4ZGQ2ZjA5MjI4MTAxYWRkZGZlZTNkYjc2NDRkOWMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImI4MjhkNTlhZDhjODdjNzQxZTY4MjcxYmI5Y2I1YTc1NmEzYTE5YmYyNmJiYjZkZDU2YzczMWYzYjFiY2NmOWYifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_c00120d9cc7144368c5a3c317596387e",
+      "statement": "Role templates in roles.py bundle a deny-by-default permission matrix plus per-action rate limits: guest (chat/ping only), client (booking scopes booking:*/service:*), partner (task delegation with * scopes plus schedule/calendar reads), family (partner scopes with higher rate limits), admin (adds file:read/write and exec:terminal). Per-instance roles.json entries may extend a built-in via an extends key merged at load time, and resolve_role raises ValueError for unknown role names — the auto-approve branch and the CLI both rely on it to turn one role word into the granted matrix and rate limits.",
+      "evidence": [
+        {
+          "resource": "repo://haap/roles.py#L30-L91",
+          "version": "repo-lines-v1:sha256:b5a5f0627c68402c82669caf4c80ae4d23419220538dd5861b9331a62c5b2f41:eyJzZWxlY3RlZExpbmVDb3VudCI6NjIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjI1YzczMjkxYTZlYjBmNWIxMGIwYmViZDNkZDFjY2M1YzMzZmUwZTMzYWIzMTVjOTEwMThlZTJiYjU3YTI4MzgiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6Ijc2MGFkMjk5YzE4MTA0NTk2MjMxYTYzMzNiOWRmMzQzODY5MDkzMGY1MDhkMGE0NzcyZjg1NDdjZWVhZTA4MmEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6Ijc3ZDVjMDBmZTIxN2E1MTlkNDQyMDExM2VkNWFiOWI1ZDJlMmRmNTkyNWY2NjU2NjM2ZjEwZGExM2U5NmQwYTMifQ"
+        },
+        {
+          "resource": "repo://haap/roles.py#L8-L19",
+          "version": "repo-lines-v1:sha256:2faecc6b52c2ba9942f98ad5ae82493dcb1b24857601e9bb9cbdbb34d0223657:eyJzZWxlY3RlZExpbmVDb3VudCI6MTIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImExMDdlZTQ0OGFlNmIzNzI4ZjMxNTg2ODg4YjMxMTdkOWM0OGYxZThiODViMWE2YjY1Yjc5ODI2YWJhMDhmZWQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImEzMDNlY2RkNGE0ZDEwZjE5YzczZmQ0MmZkMTI0MzdmZDMzNTRhODI2ODE2MDVkYTUyNTVhOTdhMzkwNjhkYmIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjBhYjA3YTU5ZjM2ZDZiMmVhYjBhMmI3M2RiNTFjZGNkZWRmZmU5NTE2ZTVjNWU1NjNlMzAxZDEyZTU4MjE0YzIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjU1YjZlODcwNmI0MzA0N2YyYTZkYjY3ZjEzMjYzODU5NTYwNGU2N2YzNjk2Njg3NmNlMDE1OGYwMDUzZTZiZDEifQ"
+        },
+        {
+          "resource": "repo://haap/roles.py#L98-L130",
+          "version": "repo-lines-v1:sha256:e7384255573d10cf513d183a4173fc58cd47dfa2a037c1ac082424dbb40072d5:eyJzZWxlY3RlZExpbmVDb3VudCI6MzMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjliYzFmYmYxNmE4NWQ3NjVlZDgzNWI5NDdmZmI2NWRkMGRhODFlMDI0OTYyOWRiNjI4OGExZTFjMWNlY2NiMmEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImRjY2M4MmRlOWNmMWM4ZmJjMWE0YjE5NjZiNzhlMjVlMTNkMjI2NmExNWQ5M2E2MDQ5N2MwMWI0MDk2NmI0OGEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImE4NTA3YjY0M2YzYTViYmYxN2NiM2Q2Zjg2NDlkMjU3N2M3NGFiNzg0YzZhYzVlMDMyYTliZjU3ZjdiZWFlODciLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjE0MWJhMjdjZmU2YzdmMGFiZDgzYmY1NGM2MDc1MzY1ODcwOWFmNDkwNzE0Y2EyOTBmMjg1NWY1OWYxOTJjNTkifQ"
+        },
+        {
+          "resource": "repo://haap/server.py#L243-L250",
+          "version": "repo-lines-v1:sha256:c68e6d82ba959dc7fe68cf6685c8382bd164b08eb6c4667bc2ad575fc1408813:eyJzZWxlY3RlZExpbmVDb3VudCI6OCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMTY1MDcwNGJkOWRkMDljZjhmZDEwOWRjZDA3YzRhYzY3YzBkZWQwY2ZjZWQxN2EzZjg2NWNjZDA3YmVlM2U1MyIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNDg2NDFjNGI3OTc3NmIyMzk4NmQ1YjUwNjZhOWIxMDlkNGQ4MDc0OWI1ZTJhZDRhMDVjMTQ3MjUwYmY3N2Y4NiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiODIyMDcyYzVmNDE2ZDJlMjRmMTM3ZTYyZDRmMDA1MDk1MDYzYzA2NGIyMDlhYTFkYzQwMmE4OGI0OGM5OGYxNyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiY2FiYjU3MjczOTE1MzA2N2YyNzYzMDBlYTUwOWFhN2Q1OWE4OTQyNDkyZTAwNzNmYmJlZjllNWM4MmNiOTliOCJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_c36a62d6f03d4897a388ed2feb726818",
+      "statement": "Queued friend requests notify the owner through an injectable Notifier with an actionable card built by policy.build_request (type haap.friend_request, fingerprint, name, truncated message, requested vs suggested role, capabilities, and the exact decision commands how_to_approve = `haap friends approve <fp> --role <suggested_role>` and how_to_deny = `haap friends deny <fp>`); ConsoleNotifier prints the card to stderr, WebhookNotifier POSTs it with an HMAC-SHA256 signature in the X-HAAP-Signature: sha256=... header (targeted at a Hermes owner-chat webhook), CompositeNotifier fans out, and notification failures are swallowed so they never break the protocol.",
+      "evidence": [
+        {
+          "resource": "repo://haap/policy.py#L134-L223",
+          "version": "repo-lines-v1:sha256:9a2e6a626d2e530ff4377cbef125b5b722fab2168a09e72bcac86b14cc8b655b:eyJzZWxlY3RlZExpbmVDb3VudCI6OTAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImQwNTJmMWJkNTFhOTJkZTQyNzZmOWYxMjI3OWIwODlkZjcwM2ZlMzYyOTEzYTI2YTc2YTc3MTVlOGQxZWEyMDkiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ4OTNmNDBlMzc4MWViODk2YzgyZDA0NmEwODA2N2ExMWUzNWNkZjJmMWRmYWYyNmZlYTkwYjhkYjY2NzY0MTMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjM5OGQ0NzdlYmRjMDAxMTE5NWZiMTRlNzJkZjdiMTUxNDU4NjNiYTQ2Yzk0ZDc5ZTU5MDYyMDMyMTM3ODM3YmUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_798af92a12444176852fabf33a4c6332",
+      "statement": "friend_accept on the requester side is handled by Server._on_friend_accept, which calls Directory.mark_outbound_accepted: pending_out, pending_in (both sides initiated at once) and already-accepted records all consolidate to accepted idempotently with the peer's declared endpoint merged, while a blocked fingerprint raises FriendBlockedError; the handler replies ping {note: friendship established}.",
+      "evidence": [
+        {
+          "resource": "repo://haap/directory.py#L249-L271",
+          "version": "repo-lines-v1:sha256:2feb35fdfa23e46cc7e53ee83b68175299c41141ebe1277965e7373c17e025a6:eyJzZWxlY3RlZExpbmVDb3VudCI6MjMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImQzOGY5ZDg3YTJlNjAzYTAxOTI4NTc0YmM0ZjY2YTNkNDBjOWJjOWEzMDE0OTdmNWMzZjMxN2Y1M2NiYjU1YzUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImYwMWZkMDc2NmFiMmU5YWZlNGE3Njc0ZGM4MGE2MGZiYWQwOWRhYTY3NzIwMzg5OTY5NGE5MjNjNWI2ZWFlZDgiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImE4YmVhMGJjMWI3NWM0MTM4NTRjYTYyNTJiNWU3YTI2YTkxNzcwMzhjMmY0YjA3YzU4YmM3YjE1YmJkNjlkYWEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjJkOGQyMDRjMDczMzI1NDc3MGY1MTM5N2U3NWMwOGYxNGZlYWFiZGQ1OTNhYjFjN2YyNDExNjllYjg2OGVkNjIifQ"
+        },
+        {
+          "resource": "repo://haap/server.py#L274-L280",
+          "version": "repo-lines-v1:sha256:1b4646f05aedbc74be2afc4cb20cf4316a2bbe616b40c35a065ef361175dca0f:eyJzZWxlY3RlZExpbmVDb3VudCI6NywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiZTJhMzIwN2ZhZmZlM2JhMTdkYjI3YjljNDU2Y2YzMGNmY2U1YTlhZjUzOTQ5ZDQ4MTAyNzQ4ZGRkMjhjNDJmYSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNTA2MjU3MWViZGFmZTYyMTY5ZjE2MWVhZDljNzkxZWU5YmUwNDEyY2NmOTAzNGVjZWZmZGZlZDZlMWJjNTg0ZSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiY2EwZWI2NDI3MDAxYzU5YjhhNmUyMWU2YTdiOTAyMzNmZTUzMjVkNzU4MWI1ZGY3MmU4NzM4OWE1OThjNWJmZSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZTk0MmY4MDdhODJhZDVjYjc5Nzg3MjI1MWQ0MmFjNGJkZTI3ZTEzZjE3YjhhNzQ2NTZmNjU5NTVmOTFlNmY0ZSJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_6ec7a3c7831d41c28b0806f978b73b6f",
+      "statement": "Directory human-decision semantics: register_known records a verified sender and creates an implicit pending_in record only when none exists, never changing an existing relationship's status; approve requires status pending_in and stamps the granted matrix (grant or DEFAULT_GRANT_TEMPLATE) with the note approved by the human owner; deny removes the pending_in record; block marks the fingerprint blocked (creating a tombstone if unknown) and clears permissions to {} so a blocked sender can never act.",
+      "evidence": [
+        {
+          "resource": "repo://haap/directory.py#L193-L220",
+          "version": "repo-lines-v1:sha256:7a43afa75fbd4b0f81ff03a59499599ceba4af6e9e33d202b77ac3870c57260b:eyJzZWxlY3RlZExpbmVDb3VudCI6MjgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImM0NjNkNWM0ZDgxMjNjYWIxOWY4NTM2YmYzODg2NDllY2U5N2VhYzE4MmU0YjY5YjU1MDA4MWU0YzI1ZTJmMTAiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImYwMWZkMDc2NmFiMmU5YWZlNGE3Njc0ZGM4MGE2MGZiYWQwOWRhYTY3NzIwMzg5OTY5NGE5MjNjNWI2ZWFlZDgiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImJiMzc4ODIyNzIzMjNhMTQ1YWNjZTBjNzY2ZTVmMWRkN2RjMDBiZGIxYmRiNmQ1ZmQxZTMyNGE5NmFkZWQ4ZGEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjU3NjY1NmNlNGJiYjhkZjExNTk3YjE1NDg5NTYyYzc0NmE5N2VjODdkMmQ2MzI4MjM0NGQwOGRkMzMyMjY5NmMifQ"
+        },
+        {
+          "resource": "repo://haap/directory.py#L273-L310",
+          "version": "repo-lines-v1:sha256:c4142b50194d19b11fc77a7d88291c7f9f67c63bdd3dba100dff5dbef4af1b5c:eyJzZWxlY3RlZExpbmVDb3VudCI6MzgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjJmNjRjOTkyNTQ4MjRkOGUzOTc1YzFmMTMxMmI3MTNiM2Y1OGMzN2MzMzM5YjUxZTNkMDYwYjg5ZTBhNzYxNDAiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImYwMWZkMDc2NmFiMmU5YWZlNGE3Njc0ZGM4MGE2MGZiYWQwOWRhYTY3NzIwMzg5OTY5NGE5MjNjNWI2ZWFlZDgiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImE4YmVhMGJjMWI3NWM0MTM4NTRjYTYyNTJiNWU3YTI2YTkxNzcwMzhjMmY0YjA3YzU4YmM3YjE1YmJkNjlkYWEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_d35878b5523c459eacb86c6a6e6bdc84",
+      "statement": "The friend_accept envelope is the transparent counteroffer: in the auto-approve path the server replies with payload {endpoint: identity.endpoint_url, granted: rec.permissions, granted_role} where granted is the exact matrix installed from the resolved role template; tests assert the granted matrix equals the role template exactly and that the client role grants task:submit but never file:write.",
+      "evidence": [
+        {
+          "resource": "repo://haap/server.py#L253-L257",
+          "version": "repo-lines-v1:sha256:9a610b685c506b4d70a40befdb8302bc08666dafa4f7c0210bb94a2958d8e672:eyJzZWxlY3RlZExpbmVDb3VudCI6NSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMzEwYTc5MGYxZjRkZWJlZjZjMWFjYTRjYTg1MzhhOWUyYmM2MGVkNWFiZDgyZjk3NTQwOGIzOTdmMGNiNTkwYyIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiYWYyMWMxZDA0Y2EyMWU3ODc5NDY4OGQ4ZGIyMGZlMGU2OWMxNTMwN2Y0MzAyYTViNWNiNGUzMjI4NTFjNjUwMyIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiOTRmNTkxZTVjZjU5OGRlYzIyZGRhZWZkYjc3MGQzYzczMGRjODc5NmNiODllYjFkYWI2NWFhOWJmNWUxNWMzMCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMjM1Y2M4YmZjNDk5MmNlMDdlYjQ5OGViYTRlYjIzMGM0ZjU2ZDliYmE3ODM1MmRmZmQyMzdlMzY1MGEwZjFhMyJ9"
+        },
+        {
+          "resource": "repo://tests/test_policy.py#L132-L160",
+          "version": "repo-lines-v1:sha256:e9ab379c97391d9eace5051d2de0f5cdb3f4a1624960a99630f1647ad1878e8e:eyJzZWxlY3RlZExpbmVDb3VudCI6MjksImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjNlNmZjNGJjY2Q5MGRmNmNlOTNlMDEzYTY1MDFhOWZkMDZhZWI2N2Q4ZDZhNDE4ZTE4ZTgyMWMyM2I0ZGIyYjEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjNjMDRhMWMwMGJjZGYwM2I2NWJjMmY4OGI0MjBmODQ4OGYyMWI5YzgwYmNkYmU0N2I1ZGZjNzMwZTdlMTEyZDIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjUzYTU2MWFiMTA1MTNiZjc2ZDE1MDU1MDgxZjZjZDdjMmJkMDI5OTkwZjlhZjA1NjI0ZmNkYTFhYjk2M2UyMDIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImQ0Yzc0MzU0ZDRjYWIwYzk5YzYxMzg1MTk0NWMyNzY3NjU1NDAyOTI3NTczNzk1MzcwNGY5MzU4MzEwNzZmZDIifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_e68de478b79f4c5984ca096872255927",
+      "statement": "Handshake failure semantics are pinned by tests against the real router: a tampered signature answers BAD_SIGNATURE, a replayed envelope answers NONCE_REPLAY, an out-of-window timestamp answers CLOCK_SKEW, a non-bootstrap message from an unknown sender answers BAD_SIGNATURE, and an impostor envelope signed under A's identity but declaring a foreign public key is rejected with BAD_SIGNATURE because fingerprint != SHA-256(declared key) — so the bootstrap channel cannot be used to hijack a fingerprint.",
+      "evidence": [
+        {
+          "resource": "repo://tests/test_server.py#L156-L210",
+          "version": "repo-lines-v1:sha256:e31612f56a9a342bb1f4a21c2840a7cc3629bea1d3da2ff0ec0400b628dae9c4:eyJzZWxlY3RlZExpbmVDb3VudCI6NTUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImQzZjMyNzc2ZWJlNjFiNTZhZTIwMTM4MWYxZGQ1YjM1OGE5NWY2YzYwZGE2M2Y3MTNkYmI0OGMzODllMmNmNTMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImQxOTY5NTFiM2I2YjcxMmYyODIzZWI1YWQ3ZWI4MWQ3Y2IxNGM3OGQ1YmIwYzUwMTg0MTZmODVjNmM5Y2ZkOWIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImU5ZDgyNTNlMWIzM2JhNTRkOTZjMDA3NDIyNWYwNjgyNzg5NzMyZTE5NmY3ZDlkYzIyNDA1ZGI3NmZhZTM4ZjkiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjU2MjA2ZGZjODRhZGYzOTg4YTBiOGY0NDc1NTI3NjJmMTNlOWU4MmMzMjhiZTg1MmQyNTIxZjU3ZTg3MmE0NzIifQ"
+        },
+        {
+          "resource": "repo://tests/test_server.py#L43-L88",
+          "version": "repo-lines-v1:sha256:98c06fe60e499b58163e6b2605f5d0457b56cc21d807a8deea4ca0f4f74450d5:eyJzZWxlY3RlZExpbmVDb3VudCI6NDYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjMwZWU0YjA4ODE2OGE4YjQ1MTQwNjc0NTBkMmQzZTQyYzA5MWNiMGIwY2E0YWUxODI0Y2Y3OTUzY2I2MzE1Y2EiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjY3NDA3ZGY5ODk2OGE5NTk4N2FjNTMxZmJmMzRiMjgzNmM1OTczYmZiMDBjMzY1MDIxNWZmODYyMDVhNGZhM2QiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjNiM2NhOGJmYjQ2NTUxMTUxMGY1Nzk0ZmE3ZTA1MzI0NGYyM2M0NTJmMDc2YWRiMGI0ZjY0YmY3MDRiODdkNWEifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_5a64d20508594e92944233d407e27abc",
+      "statement": "policy.py defines PENDING_TTL_DAYS = 7 for expiry of undecided friend requests, but in this revision no code path enforces it: a queued request stays pending_in indefinitely until a human decides, which operators of a long-running server should account for.",
+      "evidence": [
+        {
+          "resource": "repo://haap/policy.py#L49-L49",
+          "version": "repo-lines-v1:sha256:c454a47457fd23c6e420bddaa93215647bb847af1a914027241268d6814d8fc7:eyJzZWxlY3RlZExpbmVDb3VudCI6MSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiYzQ1NGE0NzQ1N2ZkMjNjNmU0MjBiZGRhYTkzMjE1NjQ3YmI4NDdhZjFhOTE0MDI3MjQxMjY4ZDY4MTRkOGZjNyIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiYzQ1NGE0NzQ1N2ZkMjNjNmU0MjBiZGRhYTkzMjE1NjQ3YmI4NDdhZjFhOTE0MDI3MjQxMjY4ZDY4MTRkOGZjNyIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNjI1MTRmMDQzZDg4YjU1ZjlmZGQ0NWNjZDMwNzFlYjU0ZDM3ZmVkYWE2ODYwNGE2OTUwYzY2OGI5OWYxYjU5MCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMTM5ODAyOGJiY2MyMjkzNmU0YTgxNDQ4NTg3MDM5MTdlODc4YzlkZmUxNDBlZTc2YmVkMjM1MmEzM2E5ZjIzNiJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_831e57bb68c947beb3d77f0d0eb04757",
+      "statement": "A friendship only becomes usable for task delegation after the requester's record is accepted: the server's _on_task_request requires the sender record to have status accepted (otherwise FRIEND_NOT_FOUND), and the client's outbound _send guard for task_request requires the friend record to be accepted and the local permission matrix to allow the action (PermissionDeniedError) before any envelope leaves the machine.",
+      "evidence": [
+        {
+          "resource": "repo://haap/client.py#L95-L117",
+          "version": "repo-lines-v1:sha256:6dc2dd18304970b40045ea0e1a30741244cf8b6e51cf43ecbc0252aa295df72c:eyJzZWxlY3RlZExpbmVDb3VudCI6MjMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImFkYzczZTY5YmY5ZTdjODM0Y2QwODIzZjAxNjZhYmEzMTk1MzRkOTJjYTU4NjA2N2Q1NzAyMmQ1NDY0MzlkYTAiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjdhYzQwOTk2YmI3MzE2ZDI3ZmZkOTVjMzJmMzFiYjY1ZGM1Zjk4MDVkNDE4MGNmZWI0MzVkMDhjNDZjN2NkM2MiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjQ0NmM4NmFhNjgxZGZmMTIyZDNlYjMwZGE1Y2FiYTMxZjhmOTVjNTYxNmEzNTViZDM3MTM0MDgxYzdlYjMyZTciLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImYxMTU0YWJhNDRiYWUzNWZmYzlhM2YyMTBlYzEwMTE3ZDhlZjlkMTYwNDhkNjI0OWM5YmI3YTg1ODJhYTVlZWIifQ"
+        },
+        {
+          "resource": "repo://haap/server.py#L283-L291",
+          "version": "repo-lines-v1:sha256:24f8e162e20d6481555f45e6f4823798bf75981447224c57aa7939fb7f619393:eyJzZWxlY3RlZExpbmVDb3VudCI6OSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMzE2NDY1OTY1ODYyZmEzYjBjMDdlY2VjODIzODVjZGM5MGM0OTk5YzZhYWU1MWQ3NzQ3NGI2MzBiYjFjM2RlMyIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMjk1MjcwZTM0ODM0Njg3MDJlOThhOWM4MDk0ZGI0NWQ0MTRiZjgxMjVkYTQwNjJkZjU5ZGRjMzU0ZjNmODA2NiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZDQxYzhmYjUxMmQzNmIwNWE5OGJiOWU4ODBkYzNlZTE2MGFlMjEzNTI2OGVjN2Y2ZGRkYmMzOWJiZDM2YTVkNyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZjRlMDYyOWY5ZWI1YWZkNmI2ZGZjYWE4MjU0ZmU0NWNkM2I4NDBhMGExNDQ1ODY3ZGVkZDA2YzBiY2QwZmVjZCJ9"
+        }
+      ]
+    }
+  ],
+  "verification": {
+    "by": "openwiki/0.5.0",
+    "at": "2026-09-05T09:02:08.883Z"
+  }
+}

@@ -1,0 +1,276 @@
+{
+  "schemaVersion": 1,
+  "pageVersion": "sha256:fc7b7c58436e8be85278e6d371ad906e9903f3a45d7dcbf215a1a26e9c2a856c",
+  "claims": [
+    {
+      "id": "claim_37c299d258d84c62ac2fb3e984e7c326",
+      "statement": "HAAP's rate limiter (haap/rate_limiter.py) is a token-bucket abuse control that bounds message-driven cost: every checked message consumes one token from the per-(friend, action) bucket and one from the friend's global '*' bucket, and when either bucket is empty the message is rejected. RateLimiter.check() returns True only if both takes succeed, returns False instead of raising when raise_on_limit=False, and otherwise raises RateLimitedError with a retry_after hint.",
+      "evidence": [
+        {
+          "resource": "repo://haap/rate_limiter.py#L1-L12",
+          "version": "repo-lines-v1:sha256:87d343e2b553d1f27e5b9f7af84cd06f7ed2d7a326d634a3a153511c1d2cb7a8:eyJzZWxlY3RlZExpbmVDb3VudCI6MTIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjhiMDg0YTlmMzc4MTI0YjJiMWE1MTU2M2JmM2MyMjQ0NGViN2ZmMzM2OTIwMTdkYTI4YjIxMzZhZTU2OTg3ZWQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImEzMDNlY2RkNGE0ZDEwZjE5YzczZmQ0MmZkMTI0MzdmZDMzNTRhODI2ODE2MDVkYTUyNTVhOTdhMzkwNjhkYmIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjU1YjZlODcwNmI0MzA0N2YyYTZkYjY3ZjEzMjYzODU5NTYwNGU2N2YzNjk2Njg3NmNlMDE1OGYwMDUzZTZiZDEifQ"
+        },
+        {
+          "resource": "repo://haap/rate_limiter.py#L109-L131",
+          "version": "repo-lines-v1:sha256:60a8cd863187af658856f65e3a643a87a94665528efd043d20a6b60ed851de49:eyJzZWxlY3RlZExpbmVDb3VudCI6MjMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImQwZjY0OWI1YzhkZTU1ZTZkYzU3YmZjMjA1MmEwOGJiMGJhNzgzN2Y0ZTNjMDk0ZTdkMWFhYzI4M2MyMWRhZjEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjU1ZWZkZmQ1NmNkODIxMzc0N2U5MTBlNzFkNTAxYTk0N2YxNTRkNjM0OTVkZGEwYzliOTM2MjkxNDgxN2NmMmYiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImVlOTE5MjAxYTc5ZWMyNTcyMmM0ZWVjMWVlNzdlMmMxNTJiNmNiNGFjMDdlMjU1NmI5ZjE2Y2JiOTEzNTVhODciLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImU1ZTg5Y2IzODNhMTAzZGIyYTZhYmNlY2VlY2ZlYjcyNDBmZTE2OTk2MzZiZWQwYzAxYmQ4ZmI0MzY4NWYwNTcifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_8d777f14a14c4b5aaedb7cf766813b5a",
+      "statement": "Each token bucket (haap/rate_limiter.py _Bucket) holds a burst capacity plus a continuous per-second refill; buckets start full (tokens == capacity), refill lazily on access to at most capacity, and take() requires at least 1.0 token and removes exactly one. A zero refill_per_sec disables refill and wait_seconds() returns infinity.",
+      "evidence": [
+        {
+          "resource": "repo://haap/rate_limiter.py#L35-L65",
+          "version": "repo-lines-v1:sha256:cc4b96338d84c1d4c09cc8cec720c5b1c93773cce946dc61de49daccafde875c:eyJzZWxlY3RlZExpbmVDb3VudCI6MzEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjdjN2VlNTlhNzE3NjBlMjQzNmZjY2NlYTRmZGFkMTQ0NzExYjY5ZDMyMjc0ZmViMjJhNDE2YWQ4Nzk3MjIwYWQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjI0ZDkyOGU0NjEyNDgyODk4MGFkNDkzMDI1NmQ5Mzk3NDc3ZWU0NGFhOGE5OTAzOWRmYWZkYzEwYTg0NTIzYjMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjA5ZjkzMDgzYzE5NzEyMWI5ODI3MDBiYThhZmFiZDE3MjJjZjFkM2U3NDA0NTA5ZTgwZWZhMjcyNDdmNjJmMDciLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjhkY2U0OTc5ZDhjMzM4N2ZmNjVmYTcyMTIwNTU3NjYyNTY3NTFhNGM4MTgxZTlmZDJiMWU3ZGFjZTRkZDViMWEifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_5b58af81d94a4784aed423db2b6e66d8",
+      "statement": "Rate limiter state is process-local and deliberately not persisted: token math is serialized by the process-wide class lock RateLimiter._GLOBAL_LOCK inside _Bucket.take, a per-instance lock guards the bucket dictionary, buckets are created lazily on first check, and the whole set is rebuilt full on restart. RateLimiter.reset() clears one fingerprint's buckets or all of them and configure() pre-creates a bucket; neither is called by the server or client today.",
+      "evidence": [
+        {
+          "resource": "repo://haap/rate_limiter.py#L100-L107",
+          "version": "repo-lines-v1:sha256:68ad971ab63cc4a97d442845e5d38632641ac3bbf3624dde3ab7bca23f3d43de:eyJzZWxlY3RlZExpbmVDb3VudCI6OCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNGQ5YTM1ZTJiMGUwYjlhNTM2MDBmMzRjNGExYzg2NWNlZjY1MWVlMjQ0YzYzYTgxMTEyM2E1OWU3YjExYTkxMiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiZWUzZTQ0NDc5MjIwMWIxZDU5NGQ5NjZlNmE0NjA2ZjNjZTAwM2E1N2NiZmY0MDcyZTk1M2M0NmU4OTE2NmM4NiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiM2Q5ZTYxOWQ4YTVhMWIwMWNlMjBiNmM4YmRmMzkxNzUxYTIyOTUyNzI4MjNjMTJkZDVlZTE5NTljZjNmNGZhOSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNWJiNWQ3ZjczMGE4YTgyNWMzOGEwNDZmYjM1NTlkMTc5ZmNiOGFlNGNkZTgzZmI0YmEwZDk0MGM2ZWVlN2I3MSJ9"
+        },
+        {
+          "resource": "repo://haap/rate_limiter.py#L133-L139",
+          "version": "repo-lines-v1:sha256:36d304696024310adde1f8f4a0d92dc21c7b1ece56470c90f1d20b07e8d3f94a:eyJzZWxlY3RlZExpbmVDb3VudCI6NywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiOTE4NWFhOGUzYTFlZTEwZWY3YmJlYmQzNTFlNzllOGU2YjA0M2I4ZWFkZDJmMjNhMTQwOTk5ZjU1YjJmMDhlNiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNDZmNDM2NjYyYWEzYTJlMDlmZGU5YWMzOGIwMGRlZTNjMTI1MjMzNTU3ZjJmMTVmODk0NWM2ZTdiZDRkZWViNyIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNWI1NDQzNTM1YmQ4N2E3YTQ5YmNiYzc1NzE5ODJmODkzNzcwMjNmODQ0M2UzZTU2NTI5NmRiZTRlNmYyMGQxYSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZmIyNDFjYWE2YjllZjk3NTcyNjE2ZWMwZWFmYTg2NzIxZTMzNjNkYjczMDg1MmI2ODViZWJmNWQ1ZTQ2NWM1MiJ9"
+        },
+        {
+          "resource": "repo://haap/rate_limiter.py#L52-L77",
+          "version": "repo-lines-v1:sha256:2a25348a4ccf35eb8d0c19b8db482e7d4084979c866230f97db502b7af299ba0:eyJzZWxlY3RlZExpbmVDb3VudCI6MjYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ5MGE0MWYwY2ZiYmUzMjNjZDAwMjQ2OWI2NzIxZTZkZTMwMjhkYWEyZWEzNWMwYjlkYTJhYTA2MTkwZDVlMWIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImM3NmU3M2I1MTZjNzk2YWM2OTNlY2ZhZmNkMWIzZWM1MWFkN2UyNWJmOWQwMDEzMDc1NjQxZDJiOTEyZTBhZTgiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjJhN2U3YjJmZmJlNmVmN2NiMzBjZjcxN2I3ZDU0YzUwNDgxZGEwZjI2YTY1ODAwYjkxNDIwODA5OTBlY2FhNzciLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjViYTVlZjNmMDU0MTNkYWRlMWMzYWEyZjllYjEwOTI4NjJiNDg3NDY0MjBhMDcwOWQ5NWYwOTA0MWMyNWFlNWUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_3a114102eadb46c8a9c4812c26d897e2",
+      "statement": "Per-friend rate limits are durable configuration stored as FriendRecord.rate_limits (an action-keyed map of {action: {capacity, refill_per_sec}}) inside friends.json, stamped at approval time by Directory.approve(rate_limits=...); at runtime config_for() resolves a friend's limits per action and per field with fallback order: friend's own entry, then the RateLimiter default catalog entry, then the catalog's '*' global entry.",
+      "evidence": [
+        {
+          "resource": "repo://haap/directory.py#L273-L286",
+          "version": "repo-lines-v1:sha256:1ad92010a5d90f8d0564c16e13a37efaaef9acf13e6c371bcd3d68f8ed8eb2f4:eyJzZWxlY3RlZExpbmVDb3VudCI6MTQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjJmNjRjOTkyNTQ4MjRkOGUzOTc1YzFmMTMxMmI3MTNiM2Y1OGMzN2MzMzM5YjUxZTNkMDYwYjg5ZTBhNzYxNDAiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImYwMWZkMDc2NmFiMmU5YWZlNGE3Njc0ZGM4MGE2MGZiYWQwOWRhYTY3NzIwMzg5OTY5NGE5MjNjNWI2ZWFlZDgiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImE4YmVhMGJjMWI3NWM0MTM4NTRjYTYyNTJiNWU3YTI2YTkxNzcwMzhjMmY0YjA3YzU4YmM3YjE1YmJkNjlkYWEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImQ1MzU5ZDlhN2M0NDMwN2UxZDI0NzRiNTY1OWExZmVhYWUxMTJlNDhkNTMyOGE4MDZmODdjNWIxNTIwYTEyMGMifQ"
+        },
+        {
+          "resource": "repo://haap/directory.py#L58-L86",
+          "version": "repo-lines-v1:sha256:3cbb4038be135be06575a5550e99d0ae2e4564425da4528c312be172f81a1878:eyJzZWxlY3RlZExpbmVDb3VudCI6MjksImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImI2ZmJhZTBiOTFkNDRmYzBkNDlmNWRlNjkxZGE2ZmM0MzFmMjYwMTM0YmY3MzFlMGUyMWY3NjQ4MDk0MzM0Y2IiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjU1MTRjNDI1MWQ4YTk1MzhmYzA4ZTVjYTg4ZTJiYWY3NjYwYzhkNjRkMzliNTE0NzIxYTAxZmM4YWNhYzRiOGUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjA3NDdlNzE4MTE3YmUwMmZlN2MyNDhlM2JmNWU5YTA4ZDc0ZmE2MDUzNjBiMGQ4ZmY2NmViODFkYmY0ZjMxNGIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjZjOGM3NDZlNWQzMTBhZjM1YjViNjA0NTExY2Y1NzNkODhkM2JiNTEwYmVjZjIwNzEzYjNlMzc2OWJlMGMwNGUifQ"
+        },
+        {
+          "resource": "repo://haap/rate_limiter.py#L88-L97",
+          "version": "repo-lines-v1:sha256:35afd3f8adb93de21a19ca28a8477dc14ae8c753f1826febb120ef2f37eaa1f2:eyJzZWxlY3RlZExpbmVDb3VudCI6MTAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjNjODYxMGE4NTA2YjE1MGE3MTRkYTMxODYyOTgyMGU5NmM4NmIyNWQwOGZkOTQxMjJhODI5NTc0MTE3MTY4YTMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjU1MTRjNDI1MWQ4YTk1MzhmYzA4ZTVjYTg4ZTJiYWY3NjYwYzhkNjRkMzliNTE0NzIxYTAxZmM4YWNhYzRiOGUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjA2Njk4ZWZhOWUwYjE2ZjM5NGJiMzYzNzUzNjlmZDI1YjAzOTM2MTg5ZDQ5MGU1Y2Q4ZjY0ZDAyMjY1MTFlZDgiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjYyYzUxMWVlN2I0ZThkZGRiZGFjNTc5YmQ5ZmU0NWQ4ZTBhNDQ5MzE3ZDRlNTIzZjQxMmQ5MWQ5ZmUxMDVkN2UifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_7900c8ef6ef94e0eabf494e10c922f53",
+      "statement": "The shipped default catalog rate_limiter.DEFAULT_CATALOG applies when a friend configures no limit: global '*' capacity 60 refill 0.5/s, task_request 5/0.05, task_result 10/0.1, task_progress 20/0.2, chat:converse 20/0.2, hello 10/0.1, friend_request 3/0.02, verify 10/0.1, error 10/0.1; directory.DEFAULT_RATE_LIMITS is an illustrative subset copy of the same idea.",
+      "evidence": [
+        {
+          "resource": "repo://haap/directory.py#L44-L51",
+          "version": "repo-lines-v1:sha256:611b65e5e38e1a08cb938d0156a64c15c3abe790e107ab4955347116275833c2:eyJzZWxlY3RlZExpbmVDb3VudCI6OCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNzI3YzRlOGRkOTEyM2M0OTU1MmI5NmM3MTI3YWZlODhjMjI3NDBlNTVlZTNjNTg4MmFmOTUwODZjNTE5OGEyNyIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNDEyY2EzNDVjY2Y3NWJmOWMwODA2YmNlNjk1YmU4ZGU4MDhiNzk5ODQyNTFhN2E1NGQyMDJjZjYxMDFkZDQ1MSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMGY0ODEyODNjMzA2YjhkNTFjOGUyMGI5MmFkZDA3NjcxMDU4Y2QwMzcyMTM5MGJjODRiOTQwMjAxYTMwYzIyNiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMzkyYzhkOGM4YTNhOGYzNGUxYmExY2Y2ZTZhZGQ3ZTg5ZmIxMWI5MDFhODQ1MjBkYzkyYjAxZGIxYjkwZDZmNiJ9"
+        },
+        {
+          "resource": "repo://haap/rate_limiter.py#L21-L32",
+          "version": "repo-lines-v1:sha256:586267fe9b626d89e8046b5e32f2a71a9638f2a9e21d75766cd0b6ca368a8219:eyJzZWxlY3RlZExpbmVDb3VudCI6MTIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjFhM2UxM2ZkNWNkMDRkZTY1NTliNWY0ZDMzZTJjNjk1MjI0YWUxNzUxZjExNTdhZTAyYWMwYTgyNjQ0ZmIzNjAiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImM0OTBjNTk0NDUzYjFlODMwMjI2MDkyZGQzMDg2YzdlNDkzZDU0ZjIzYTQyOGNiYzkzZTYwNjAzMGQ2Y2MzYjYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjA0M2M5MTg4N2I1ZDhmYTNkY2RjMDUxOWQ1MmQ1YTQ1NTVkYzAxMWVlZTJkMjU4NjQ2MGZlODdiMDkzNGM4M2IifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_e08b7f60aca748d4897abf4a143b6588",
+      "statement": "The reference enforcement point is the inbound task_request handler (server.py::_on_task_request): after the sender must be an accepted friend and the payload action/resource must pass the permission matrix, rate_limiter.check(sender, action, rec.rate_limits) runs before the task is created and the executor invoked — so a permission-denied task_request never reaches the model and never consumes a token bucket (denial-of-wallet defense T8).",
+      "evidence": [
+        {
+          "resource": "repo://haap/server.py#L283-L295",
+          "version": "repo-lines-v1:sha256:b742568e7ccdbc54c40b28b3e3d5d8d5e6940a06ec490871c7617bd241743d7f:eyJzZWxlY3RlZExpbmVDb3VudCI6MTMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjMxNjQ2NTk2NTg2MmZhM2IwYzA3ZWNlYzgyMzg1Y2RjOTBjNDk5OWM2YWFlNTFkNzc0NzRiNjMwYmIxYzNkZTMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjRlN2Y3NDI1ZDIwODZlOTU1YjhkNjE2NDYwYzQ0NjQ4ZTZjMDYxZDY1NjE4NTk2YmNhN2RhZGNiNWU0MDUxMzMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImQ0MWM4ZmI1MTJkMzZiMDVhOThiYjllODgwZGMzZWUxNjBhZTIxMzUyNjhlYzdmNmRkZGJjMzliYmQzNmE1ZDciLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImVmMWMyMWQ4ZjkyNjQyZjhkYjFiOGQ3NGRjZGQyNTVhODM1M2Y3NGU0YTAzM2ZkYmQ0N2E4MzVhNTU4NmQ4NDYifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_beb2b339b97c4cde82e2d50ca9d55ec2",
+      "statement": "Marketplace open-service traffic (service_search, service_book, service_cancel) is gated by server._check_marketplace_sender with a dedicated stricter inline catalog — a 'marketplace' bucket of capacity 10 refill 0.05/s plus a global of 20 refill 0.1/s — and a blocked sender fingerprint is rejected with PERMISSION_DENIED before the rate-limit check runs.",
+      "evidence": [
+        {
+          "resource": "repo://haap/server.py#L337-L350",
+          "version": "repo-lines-v1:sha256:0db5512ed44780d2d5691ee96195ac8ef0dd448d89506222a7227ab2fcb0d664:eyJzZWxlY3RlZExpbmVDb3VudCI6MTQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjJiNzVlYzE0ODgyMGIzNmYyOGNlOTJkYTUzMTFiNWU2NGNhNTY0ZTBkMTQ1NjVkMzQyODY2YmFiYmFiZmY1M2UiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImI4MjQ3Nzk1NzY1ZmI0ZWM4NTQ2ZGZmZTU2NmI3ZDQwMjJhODMxNmQyNmQ2OGI3ODcxNzgwNThjYWZkNjg2NjciLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImU2Mzk3NDg3OTI5MTVlZTcwNWUxYmRiYWIzOWRjOTNmZjU2ZDRlYTIwNmYxOTFhNDk2YzhhOGFiNmRkMzA5MTMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjM1ZTI1NzFlN2IxYzRjYzk4YWIxODEzZDFjODAyOWI1ZTkxMzIzYzdkYjJhNWJkMzA5OGM3NTIxZjNlMTZhNjcifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_18bc29de6f7c4373bb0b755b31246880",
+      "statement": "The client mirrors the guard outbound: client.py::_send checks the friend is accepted and the action passes the local permission matrix, then calls rate_limiter.check(self.identity.fingerprint, 'task:submit') with no friend limits (so the default catalog applies) before the envelope leaves the machine — an outbound self-throttle keyed on the local identity fingerprint.",
+      "evidence": [
+        {
+          "resource": "repo://haap/client.py#L95-L117",
+          "version": "repo-lines-v1:sha256:6dc2dd18304970b40045ea0e1a30741244cf8b6e51cf43ecbc0252aa295df72c:eyJzZWxlY3RlZExpbmVDb3VudCI6MjMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImFkYzczZTY5YmY5ZTdjODM0Y2QwODIzZjAxNjZhYmEzMTk1MzRkOTJjYTU4NjA2N2Q1NzAyMmQ1NDY0MzlkYTAiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjdhYzQwOTk2YmI3MzE2ZDI3ZmZkOTVjMzJmMzFiYjY1ZGM1Zjk4MDVkNDE4MGNmZWI0MzVkMDhjNDZjN2NkM2MiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjQ0NmM4NmFhNjgxZGZmMTIyZDNlYjMwZGE1Y2FiYTMxZjhmOTVjNTYxNmEzNTViZDM3MTM0MDgxYzdlYjMyZTciLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImYxMTU0YWJhNDRiYWUzNWZmYzlhM2YyMTBlYzEwMTE3ZDhlZjlkMTYwNDhkNjI0OWM5YmI3YTg1ODJhYTVlZWIifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_c33603592ec5491e8b8cea10928b4c61",
+      "statement": "Only three enforcement points call rate_limiter.check today (inbound task_request, marketplace open services, client outbound task_request): the handshake and housekeeping message types — hello, challenge, friend_request, friend_accept, ping, inbound task_result — are not token-gated even though the default catalog names hello/friend_request/verify/error buckets; pre-friendship flooding is instead bounded by the envelope size cap and nonce/timestamp machinery.",
+      "evidence": [
+        {
+          "resource": "repo://haap/rate_limiter.py#L21-L32",
+          "version": "repo-lines-v1:sha256:586267fe9b626d89e8046b5e32f2a71a9638f2a9e21d75766cd0b6ca368a8219:eyJzZWxlY3RlZExpbmVDb3VudCI6MTIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjFhM2UxM2ZkNWNkMDRkZTY1NTliNWY0ZDMzZTJjNjk1MjI0YWUxNzUxZjExNTdhZTAyYWMwYTgyNjQ0ZmIzNjAiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImM0OTBjNTk0NDUzYjFlODMwMjI2MDkyZGQzMDg2YzdlNDkzZDU0ZjIzYTQyOGNiYzkzZTYwNjAzMGQ2Y2MzYjYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjA0M2M5MTg4N2I1ZDhmYTNkY2RjMDUxOWQ1MmQ1YTQ1NTVkYzAxMWVlZTJkMjU4NjQ2MGZlODdiMDkzNGM4M2IifQ"
+        },
+        {
+          "resource": "repo://haap/server.py#L170-L281",
+          "version": "repo-lines-v1:sha256:fe5b8f5bfbdfc33301f38f9b29fe7dbb9e9340af98a1e717888814e10a3cebbb:eyJzZWxlY3RlZExpbmVDb3VudCI6MTEyLCJmaXJzdFNlbGVjdGVkTGluZUhhc2giOiI5ZGViM2M0Yzk2NjM2MWZlOTRkMzZhY2VkMzI1NWIwNWUzYmNmYzg1OGZkZmVlMGNlMzQwYmZhNjBhMDliN2JlIiwibGFzdFNlbGVjdGVkTGluZUhhc2giOiIwMWJhNDcxOWM4MGI2ZmU5MTFiMDkxYTdjMDUxMjRiNjRlZWVjZTk2NGUwOWMwNThlZjhmOTgwNWRhY2E1NDZiIiwicHJlY2VkaW5nQ29udGV4dExpbmVDb3VudCI6MywicHJlY2VkaW5nQ29udGV4dEhhc2giOiI4NjhmYmNmZDhlY2JiYzZlNWFhMTNlNTI0OGZmNjQzMmQ3NTQ1YWIzNjAyMmQ4ZDNhYzY4Yjg1YzJkNWVhMzg2IiwiZm9sbG93aW5nQ29udGV4dExpbmVDb3VudCI6MywiZm9sbG93aW5nQ29udGV4dEhhc2giOiIyMjcxNDlhZTJkODQ1N2IwODBhNTM4NjIwZmMzNjc4YWFiYWUxYjM1M2JhOTcwZjI3ZTU5NzI5YjZkYjhlOTMzIn0"
+        }
+      ]
+    },
+    {
+      "id": "claim_fc2001bfdecf422f82393519780dbeb6",
+      "statement": "A rate-limit rejection is transparent on the wire: RateLimitedError (errors.py) has code RATE_LIMITED, transient=True, and a retry_after of max(1, int(wait)+1) seconds derived from the emptier of the action and global buckets; the server converts it into a signed error envelope carrying error_code, detail truncated to 200 chars, and in_reply_to_nonce, and clients translate received codes back into a transient local exception via ERROR_MAP/error_from_code.",
+      "evidence": [
+        {
+          "resource": "repo://haap/client.py#L111-L117",
+          "version": "repo-lines-v1:sha256:3a6cc8f7b1cbb24ead7734dd5ce3e25af5c2ff2f25e8e22e416917d739c1d146:eyJzZWxlY3RlZExpbmVDb3VudCI6NywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiYzJmY2I0ZDdkMjNmNzM2NzRjYmM3NzY3MDk3YTRiODc0ZTIzODA2ZTAyNGZiNmQwMjdmMmY4NWZlZTAwZWExYyIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiN2FjNDA5OTZiYjczMTZkMjdmZmQ5NWMzMmYzMWJiNjVkYzVmOTgwNWQ0MTgwY2ZlYjQzNWQwOGM0NmM3Y2QzYyIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiOWFhNWNjZTVlYzU4YzEwMjU0YzQ2OGE2OWFkNmJkNmEwNTRlNjVjYjE2ZTNkYjhmNmViZmMzMDZkYjE2M2NjZCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZjExNTRhYmE0NGJhZTM1ZmZjOWEzZjIxMGVjMTAxMTdkOGVmOWQxNjA0OGQ2MjQ5YzliYjdhODU4MmFhNWVlYiJ9"
+        },
+        {
+          "resource": "repo://haap/errors.py#L87-L92",
+          "version": "repo-lines-v1:sha256:9752c2a381d190ff22580f287d7beebee58e67faaab28c6a2d9064155186287b:eyJzZWxlY3RlZExpbmVDb3VudCI6NiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiOTcyNzI3MTM3ZWQ1ZjA1Y2RkZmJkM2Q2YmUwNDI2OTBiYjhiMjVlYzU4ZTIwZDMzMzYwMmYxNjY0YzM2NjJjOCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMmVjNDRmMDc0OTA4NDNmMzZiY2UyZDQ2NmRmM2NhNWYxMDU0MDA2OGEzZjE5NTdiZTdmYjdhMDAxNTliOWY4NCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZTlhZmJmMTcwY2YwZDRiNDAxODg0NjY2OGFkYmM3OGJhZDhiYTM2MDM1NDY5NjY4ZWI0NDkwNWQxOGIxZWMxZSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiOWI4ZGJjYjFkMzRmNTc2Y2YxZmMzNjFhODIwZDc0YjgwZGNlYTM2OTNhZWU3ZTJhMThkZDJhOGNkOTEwYTQyZCJ9"
+        },
+        {
+          "resource": "repo://haap/rate_limiter.py#L125-L131",
+          "version": "repo-lines-v1:sha256:45e331b4eccd371fe45692a7a712956c76914c41f37036f8db3590e38def27fd:eyJzZWxlY3RlZExpbmVDb3VudCI6NywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiODVlYmJlYTFlZDMxMDJhOWExOTIxYWE5NTY3ZTdjZDJhZjFlN2I3NDI1YWZlOWE5YzdlN2YzYmFhNzUwZTYxNiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNTVlZmRmZDU2Y2Q4MjEzNzQ3ZTkxMGU3MWQ1MDFhOTQ3ZjE1NGQ2MzQ5NWRkYTBjOWI5MzYyOTE0ODE3Y2YyZiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiYmM3ZjgyMzk3ZmQxZjE4N2U0NGY4ZmE0NGRjYzQ3MGY5ZWM3NmYwMjZjODQ5ZGViZmNkODViM2I5MDExM2I4YSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZTVlODljYjM4M2ExMDNkYjJhNmFiY2VjZWVjZmViNzI0MGZlMTY5OTYzNmJlZDBjMDFiZDhmYjQzNjg1ZjA1NyJ9"
+        },
+        {
+          "resource": "repo://haap/server.py#L162-L167",
+          "version": "repo-lines-v1:sha256:c23ac6232abbf4250a5fc85d166be0ee8a14d2dc408d3b62d6a30e48a195c1be:eyJzZWxlY3RlZExpbmVDb3VudCI6NiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMDJmZWRkM2ZkYzgxMGY5ZGJlOTJhNmY2ZDhjMjU0MGMyZmM2MDlkYmViODAyMTNkNDgyZWYwMWEwMjc4NmYwOSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNmU4OWFjNDliNmQ4M2IyYzUzZTgzMTMxOThhYjRlMjc4Nzk2MzdhZGIyYzgwNTg0M2FiODYwOGIxYjZkN2FkYyIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNTEyMzM5ZDM2NjUzNWY0MTc1Mjk3YmUxOTg4ZTdhNWVlYmZmOTA0YzM2NmNjZTg5NTdhOWFhNGI1NTc2Y2E5YyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiYTdjMjViYTdlMDNkYWMzMTdhNjVjMTI2NzBhYzQ0M2EwOWMxYTU4Mjg4Njc2M2RhNjEwODhhM2NiN2NiMjYwZSJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_e17bfcda51564d7faa0edf3841f4dcb5",
+      "statement": "AuditLog writes an append-only JSON-lines trail to <HAAP_DIR>/audit.log ($HAAP_DIR or ~/.haap): each event() call builds {ts rounded to 3 decimals, event, friend, action, result defaulting to 'ok', detail} and appends one line under a single per-instance lock, opening the file in append mode per event so entries are never modified or removed in place.",
+      "evidence": [
+        {
+          "resource": "repo://haap/audit.py#L19-L21",
+          "version": "repo-lines-v1:sha256:ca0ce45e70ce584f960ea8b936f77703e14fe8caa1ed9b9b757d1cb2e90f5f5a:eyJzZWxlY3RlZExpbmVDb3VudCI6MywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNzE4ZTNjM2JmMTE4OTk1NzE1N2RlNzM1NmRlMDI1MmU4N2Y1ZmRlMjYyNTk2NzRhMTg5ZTA3YzBjMTAzM2U0YSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNWEzYmZjY2NkMTBlOTdlOTlkMjFhNzcwZWFhMjAzYzhiMWU0N2I4YjVhZjAxMmM0ZDI1NTUyMmU5NTEzODQxOSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZjM0N2NmMTc3MzNjMzczZTY4ZGJhNjQ5YjA1YTgyOTYwZTQ0N2I3YTk3ZmYxZmVkMzQ4N2U3ZjEwZGY0OTJlMCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiY2YyNWM5OGU3NDYzODVjNGRkYjA5NDFjNzc5MGNiNDJkZTZjYjY0ZTA0ZTM4ZDY3Njk2NzA5MmU5NWE2NTJlOCJ9"
+        },
+        {
+          "resource": "repo://haap/audit.py#L39-L67",
+          "version": "repo-lines-v1:sha256:9f224ea57a1502acfd5821ea6d399268c50e531a5a5e03688be72828efc0b5e1:eyJzZWxlY3RlZExpbmVDb3VudCI6MjksImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImJlNzUzYmU4YTQ1MzlmODFiOTczMzVmNTllYTMzZmQ5ZTYyYjU4MWJmNGZmMWVkYjM2NmVkZjc1NTAyNmE2ZGQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjE1ZWVmZjNjNDc3NmY1ZmI5Yzk1OTg0ZDFhMTc0NmIxZTU2OGRkNjhkNWVkZTZlNDQ4NWFhNzM1ODhhNDM3ZWIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjAwZDc2MzQzNGFhZmNiOTE0MTFhY2FiOWM2YTdiNWFmYjRjYTg1YmJlZjhlNGRiNzM4N2Q1OTA2ZmVlMGVkMjMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjdjNDMxMzJmYjJmY2UzNjhhZDM5YzU4ZjljOTlhMjAzNGRjMWIxYjY0NTZjNWNjYjI0ODM2YWFmYjdlMTY0MzQifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_1b37a24595874a1889d69dd9cf0e441d",
+      "statement": "Audit entries are redacted before writing (threat T7): _safe() replaces the value of any top-level detail key in _SENSITIVE_KEYS — challenge_token, private_key, signature, task_payload — with '<redacted>', so key material, handshake challenges, and task payloads never land in the log and the file stays safe to share.",
+      "evidence": [
+        {
+          "resource": "repo://haap/audit.py#L23-L33",
+          "version": "repo-lines-v1:sha256:c52f3b365644be57cd620b04351b6d034ead0aff3292e51590507943c994e36e:eyJzZWxlY3RlZExpbmVDb3VudCI6MTEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImZkZjJmNmY3ZjU4OTAwZTY5M2Q5ZTJmY2U5YThmZjQ3ZGJkZjExNTAwODQzYmIwZWE2Nzk2MjhlZjIyYjkzNzAiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjcwYTZhNjQ5YzAyMDc0NWYxNWE4ODIyNjk3OGJlYmExNmMzNDA2ZTMyNGNjYjNjNzcxNmE4Mjk0MzE5MTIxMTAiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImNkZGFkOTNkNjNiZjVmZjc5ZDZiNzdhZmIyZjBmMzM0YjZmMzRiN2I1NGUzYjUxNDEwMmNhMWQ2OTExYTg0NjEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjgwMmFmNzIwY2ZkZDdjNmUwMWMwMzMxODBhMTlhNjE4NGZjZjQ5ZjkxZDMwODY3OTkyNzgzNDcxODhmYTJhNTUifQ"
+        },
+        {
+          "resource": "repo://haap/audit.py#L48-L58",
+          "version": "repo-lines-v1:sha256:907cff12ace5d76d8871c83ded625d23fdf8d3f0a7b4a98eb5bcadc8ae4dbac6:eyJzZWxlY3RlZExpbmVDb3VudCI6MTEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjExNmFiNWI5NzU4MGQyMDAxYzdhM2Y5ZDkzZDc5NTAyMWEyZTljYTIxN2Q0YmFlYTBlYzA4NDJkNzI5ZTVjYjUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImU2YjA0NDkxNDY5NzIyZTgzNjNhOTRlNDA0NDUzOGUwMTNhMmEyMTdlMzZiMWU1NjhiYTYwYWNiN2I0YzhmMmUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImZiZDAwNWRjNmIyYjczZmE1MmY2MTFlMmE5NmZiYTM4OTQzNzNmMjhlNzJjNjUzOTRlYmNiNDg5YzZmMzNlMTQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjlkNjhjMTBhYjRkYzZiZWI2ODUwMGFlMWE4ZmY1YWUzNzBlMGM1OTA3ZGQ3NzczMDE2NDUyNzY3NjQ3NTZjNzkifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_21537f12169147ab813b1d3177ed68a8",
+      "statement": "In file mode the audit log rotates by size: when audit.log reaches MAX_FILE_BYTES (5 MB) it is shifted to audit.log.1, the previous .1 to .2, and anything older than KEEP_ROTATED (2 backups) is dropped; rotation failures are swallowed (OSError) so logging never breaks the protocol.",
+      "evidence": [
+        {
+          "resource": "repo://haap/audit.py#L69-L83",
+          "version": "repo-lines-v1:sha256:8fda269be1edf06f493a8fc514193960402a36684ce657917b9e7e322154fd9b:eyJzZWxlY3RlZExpbmVDb3VudCI6MTUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjRmMzFlNGNmZDRhNDRkZmM2OWRiMTc2OWFkNzJlMWUzNGY3MTdhYTRlNTlkNTJjNDEwZmZlNDRjOTNjNDZlN2IiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjUwNDhlNjQ3ODkxODllYjcwOTY2ZjE0ZGI0Nzg2NzQ1NjllYjkzYWNlMDgyMTNhNGE4ZWNiN2U2MWFhMDllYTAiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjE3ZjM5ZTcwYmFlYWMzNjIwMjViMGE1M2NlNjExN2I5MzE5ZTVlZWE3ZDMwNDVjOGRiMWUwMjM4ZGVhYTlkMmUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjNjYTBmNWIyOTJhZjQ0YWRkZDhjNjMwNTVhYjg1MTM5YWU2MTI2ZWFmNzYyYWVmNDU2NzA1MTM1NzE4OTA1YzMifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_9ab868a6b7024fefad11bf82d53d5ad2",
+      "statement": "AuditLog supports two modes: memory mode (AuditLog(memory=True)) accumulates entries in a list and is what the tests inject, and it is also HAAPServer's fallback when constructed without an audit argument (server.py defaults to AuditLog(memory=True)); the real 'haap serve' command constructs a file-mode AuditLog bound to the agent directory.",
+      "evidence": [
+        {
+          "resource": "repo://haap/audit.py#L39-L67",
+          "version": "repo-lines-v1:sha256:9f224ea57a1502acfd5821ea6d399268c50e531a5a5e03688be72828efc0b5e1:eyJzZWxlY3RlZExpbmVDb3VudCI6MjksImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImJlNzUzYmU4YTQ1MzlmODFiOTczMzVmNTllYTMzZmQ5ZTYyYjU4MWJmNGZmMWVkYjM2NmVkZjc1NTAyNmE2ZGQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjE1ZWVmZjNjNDc3NmY1ZmI5Yzk1OTg0ZDFhMTc0NmIxZTU2OGRkNjhkNWVkZTZlNDQ4NWFhNzM1ODhhNDM3ZWIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjAwZDc2MzQzNGFhZmNiOTE0MTFhY2FiOWM2YTdiNWFmYjRjYTg1YmJlZjhlNGRiNzM4N2Q1OTA2ZmVlMGVkMjMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjdjNDMxMzJmYjJmY2UzNjhhZDM5YzU4ZjljOTlhMjAzNGRjMWIxYjY0NTZjNWNjYjI0ODM2YWFmYjdlMTY0MzQifQ"
+        },
+        {
+          "resource": "repo://haap/cli.py#L170-L174",
+          "version": "repo-lines-v1:sha256:7b57ee7227c9ccd6c7f604db6d59f25feb02cf246aeef25a288d448033f07ee9:eyJzZWxlY3RlZExpbmVDb3VudCI6NSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNjlhYjMyYTYzNGU4ZGQ2NDJiZjkzMGM3ZTdiODZjNTYwYzA1NWFlMGFiOWFiNDNkNDRkN2NjMTJiZDA5ZGY3ZCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNGRlMzBmMDk2MmY0OGFhMTk1MjA3OTZhYjJkYjRmMjI4NzJkYWRkNzE4NDkzMDBlMzNlODExNGM3YmI3ZTQ1MiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMDdhZjVlMmY2MWI2N2IwZGI4ODQ3MjQ2N2U2YzAwNzFjNDlmZDQwMmI0Njc1Yjk3OGIxNzExZTBhYWU1NjI0YyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMTdlM2NmMmRkM2VkYmViMzQxZWM0MTQyMDY1YmY1ZDdmZTM4YWQyNjNhODNkN2I2ZWJiOGI1MWJhMmJmYjhmMCJ9"
+        },
+        {
+          "resource": "repo://haap/server.py#L66-L66",
+          "version": "repo-lines-v1:sha256:3029bc500f6b04a5a49f1c62c0b427febe8c6c09a82bdd65ab65dff8ed1fe0f7:eyJzZWxlY3RlZExpbmVDb3VudCI6MSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMzAyOWJjNTAwZjZiMDRhNWE0OWYxYzYyYzBiNDI3ZmViZThjNmMwOWE4MmJkZDY1YWI2NWRmZjhlZDFmZTBmNyIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMzAyOWJjNTAwZjZiMDRhNWE0OWYxYzYyYzBiNDI3ZmViZThjNmMwOWE4MmJkZDY1YWI2NWRmZjhlZDFmZTBmNyIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMTE2NGQyOThhMDc3NDMzYWEzNTk1NDVmMDE1NzBiZTM0YmMwYjJmZjg3MTZkYWI2NWEwNGExN2I5YTBlNmQwNyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiYjgwNzcxYTEwMmE2NDYzMTc0YWVmN2MzNjc3Nzc0ZjNjN2Y4ZGViNjliYTU0Mzc1Y2I4ZTYzZTFmNmQyYjcyZCJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_95d96488224e468f8460346dc6acccb0",
+      "statement": "Audit entries are read back through AuditLog.recent(), which in file mode re-reads and parses the whole log per call (skipping malformed lines), sorts by ts, filters by since-timestamp/friend fingerprint/event-name prefix, and returns the newest last entries; the CLI exposes this as 'haap audit [--last N] [--friend FP]'.",
+      "evidence": [
+        {
+          "resource": "repo://haap/audit.py#L85-L115",
+          "version": "repo-lines-v1:sha256:d51f554e2e44d0a9298398d4d7ecde231ab446d0118b5c8d6b49505eb9be48ce:eyJzZWxlY3RlZExpbmVDb3VudCI6MzEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImY5Y2YxYWUzZGU1MjZkOTJiMzAxNTY1YjQ1YWVhNTFhNmM2NDNiZGQ3Nzg1NTUwOTRlMWFjZTlhNDdjY2U2NTkiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjVhMTUzY2RjMWQ4ODRkNWQyMjhmMThlYWJhMzFhYzBhMzQ2ZWEzNGZjYTRiNTBkZGQyOTMwMjJiY2M1N2MxMjYiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImVmYTU4MzE1M2I5MTdkOGVjNWNlOGY0N2JjNGY2NDFkNzUzNTdhOTJkZjk2NWU4MDE0YWJkMzAxN2IyOTJiNDciLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImFjODVjNzcwODMyMzY4ZWI3MThhN2FjYjNmZjU1NDFiMmRjNDM4Yzk4NTQ1NGMzN2E0MWEyYjMyZDFlMmJhYjEifQ"
+        },
+        {
+          "resource": "repo://haap/cli.py#L232-L237",
+          "version": "repo-lines-v1:sha256:fc91f6a31a9d62c899bd51c4ea7cb4a99e2f42b43e6eb7f34ecf41461c151d0f:eyJzZWxlY3RlZExpbmVDb3VudCI6NiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiZDNkMjU0NDc4ZjVkODA4Y2QyNGM3YjNiZjNlMzEwYjI1ZWVmMjQ2MDJiM2Q3NDczZjdkMTU5M2E2NGU5NGVkNSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMTYyMzNiM2ZmZWEzMmEyM2RmNTMwNjUzNDM0OGYyZGVlNzc2YTVhNmY3NGZiNTMzMTc1ZGRjNTM5YThmZTQ2NCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiYTllMjUzYTc4MTRhNjU0N2E1MGU1NGQ2ZDkyMzc2ZjlmZWVkM2EwMWRlMDg0MzkwODQyMDMyYjA2NGI1OGM5MSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNzcxZjg2YzYzMDBlZmMzYzIxMjYyMzlhNDY2YzU5ZWRhODg2OGE3MDAxMGE3M2QxN2QzYjljY2RjMWQzMGZiYiJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_aeb16e4ab68248a08649e23b4bc6f369",
+      "statement": "The router's try/except structure in server.handle_message guarantees every handled inbound message is audited: verification failures are logged as message.rejected with result 'error' and the exception class plus a 120-character excerpt, handler failures as message.<type> with result 'error', successes as message.<type> with result 'ok'; friendship decisions emit friend_request.denied_by_policy (result 'deny' with reason), friend_request.auto_approved (role), and friend_request.queued; marketplace handlers emit marketplace.search/book/cancel; the client emits client.friend_request.sent, client.task.completed, client.marketplace.booked and client.<type>.error; and PermissionMatrix.grant/revoke emit permission.grant/permission.revoke.",
+      "evidence": [
+        {
+          "resource": "repo://haap/client.py#L161-L162",
+          "version": "repo-lines-v1:sha256:ef4dd53e944fd294ecc2d025132652f407c30f108a7991dd6d90af47350b9723:eyJzZWxlY3RlZExpbmVDb3VudCI6MiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiOGRkYzQzNjc3YTk4MTY1ZDNhNDE1MjBlZTM5OWE1ZTg0Y2U2YzA1ZGMxZGRhODA4MzFiOWJhYjBjY2JkNWFmMyIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiZTUxNzhhMTcxNmNjMTEwZWRjZDEwNmIwMWRjYmM2OTk1ZDY3YjBhZTJkZTViMjJjNWY3MDhmMjEzNDc4MDQ5NSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiYjFhMDBhMzg1OTZjMjMxZWM3NWFiMTk4N2Q1YjUwZTAwMjQwMDIwOTFmN2Q2YjNlOTFiZmUxMWJjMThjNGJlNiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiOTg4NDJlNmU1NjBkMmJlNDc2OTIwOGY4MDY5NWM4NmNiMmZiODRlNTJmODA5Zjg2NzMyMDE4MWIyZWI3ZTQ3NSJ9"
+        },
+        {
+          "resource": "repo://haap/client.py#L211-L211",
+          "version": "repo-lines-v1:sha256:040c054b937a866bd73b649782922514b8cabe41b2f997c8bffd8e9aabf0ec38:eyJzZWxlY3RlZExpbmVDb3VudCI6MSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMDQwYzA1NGI5MzdhODY2YmQ3M2I2NDk3ODI5MjI1MTRiOGNhYmU0MWIyZjk5N2M4YmZmZDhlOWFhYmYwZWMzOCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMDQwYzA1NGI5MzdhODY2YmQ3M2I2NDk3ODI5MjI1MTRiOGNhYmU0MWIyZjk5N2M4YmZmZDhlOWFhYmYwZWMzOCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiYmM3OTEzZjRmNjNhNTczODcwMzBiOWEyMDE5OWZjYmI5YThiMWNjMjMyZGMxM2VjMjllYzM3ZjczN2EzZmQxZiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZmI1MjJlNzc5NGEwOGNlMGZlMzg4MjI3MzJmMjM2OGVhNjgzN2JlYThlYWMxZDgxNmQ4NGU3ZmZmYzBjNDg5NSJ9"
+        },
+        {
+          "resource": "repo://haap/client.py#L266-L272",
+          "version": "repo-lines-v1:sha256:6f60a36f9bdc75e0404bd755647c7bf83522bfbe6bf91b1a51b41603863ce01c:eyJzZWxlY3RlZExpbmVDb3VudCI6NywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiZTU1OTI2N2IwYjhkMWNkM2UyYzBhZmFmYmY3MDI3ZDUxYzJjN2NmMWJjM2VhM2U4ZWYzZTc4NDc3YTE3YTQ0NSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiY2ZhOGJmODUyODY2ZDNkYTIyMGNiZjQyMDJjM2MxMzFlM2Y0MTM1MTEzOWI3ZGM0ZWNiMzgxM2RmYTU2MzQzNCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZjYzNzE0MDkwMmQ5MThjZmNjMWEwMTFmOTUzYWZmNWQxNmE0NGMzYTgxMzI3MWJiYWUyZDA2NzMxNTA1Y2JhMCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiYjJiOGQ4MDgzZjc2MTFkOTM2YjA2MmRjMTVlNGYyYWI3NzNjNTMwMjI2NDRlNjZjODVlZmE5NjFjZjk2YTg1OSJ9"
+        },
+        {
+          "resource": "repo://haap/client.py#L84-L86",
+          "version": "repo-lines-v1:sha256:84b05852b334efd22e889df5459fc44d67b15366bb896ee8aa649f979c0ebc49:eyJzZWxlY3RlZExpbmVDb3VudCI6MywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiODY5YjE4YmEyMTE5ZDE1ZDlkODAyY2Q3ZjFiYzBlODBhMWMyYzg1ZDk3NzQ2ZmE2MTMxZmMwNmQ5NTVmMGVlNCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiN2YwMDNjMDUwZjVkNjA4NWZiOTk5M2ZlZWNiODYyOTMwYTYxODEzZTg4ZTljOGU5MDMzYzE5YTk5Y2U2MmE5ZCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZTM5NzljOGViMTM2N2UxZWUyOWE3MDQwMTlmNzEwNGI2YWQwNWZhMTExYjZmYTEyNWM1MGZkNzczMTJjMjliMiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNmJkMzYwMzlmZmY0YzY4MDM0Njc4MGI4Y2Q0YjUyMmZmYWU3OTAwZDFmMjgxNzAyNzBkMTMzYmJlMzcxMTgxNSJ9"
+        },
+        {
+          "resource": "repo://haap/permissions.py#L80-L100",
+          "version": "repo-lines-v1:sha256:0d882fde59c6be301b816753cf09536de0229bc27c1859ca1dfa4323492e22d2:eyJzZWxlY3RlZExpbmVDb3VudCI6MjEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjBjZDE2NjdiN2Y5MGMyMDgxZTdlNTFlMDljMDkxZDgzODhhYTRhY2NlMzM3ZGE0ZmRkNTJlN2U1ZmI3NmNjMTciLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjZlMWEwMzUwZjk4MjFlOTIzM2QwMjZlZTU5ODJkNzQ2MWRjYWE4Yjg1ZjRmNjViMTc5YzJiZmQ5YzJlMTgzOWYiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImU2ODFjZmNiMmViOGYyMGIyMjAyNjNiNTM1MDBjYjRlOTY1MTc2OGE0MDhiMzliM2I1NzZlNzE5NzI1MDcxZmMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjM3YmZmNWEzNTM5MzM1ODViMDE2NWQ3ZmYyZTZlZThkYzg2ODkzMGQxZmQxMzkzNTUwY2Y4YzliOTExMmYwZGEifQ"
+        },
+        {
+          "resource": "repo://haap/server.py#L131-L160",
+          "version": "repo-lines-v1:sha256:be05e4fb1055120deb04e264eb10134991bab4d0811e5df615593421f76d7633:eyJzZWxlY3RlZExpbmVDb3VudCI6MzAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjZkMGI0YTE3OGZlNmZjNGI2MzQ5N2U3MDdiNjZlZTUzODA0NWViODAyZGU0MTI1ZDIyNDRmMGNjYTRiZmQyNGIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjdhYzQwOTk2YmI3MzE2ZDI3ZmZkOTVjMzJmMzFiYjY1ZGM1Zjk4MDVkNDE4MGNmZWI0MzVkMDhjNDZjN2NkM2MiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImIxNjdjZmMwY2FkZmI1ZjVmZmI4ZTZiYmQ5MGNjZjhmOGRkNWYzOGZhZmJhYzUxMzgxMDRkNDIwMjkyYWE5MjUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImNmZWM0NzFjOWQ1NWRjNTBiMDlkMjk4MTViN2ZkNmI2OWIzZjU4NmEwYWQyNDY1M2EzY2E5NDc5MDg2MTE1NWQifQ"
+        },
+        {
+          "resource": "repo://haap/server.py#L229-L272",
+          "version": "repo-lines-v1:sha256:f7152a4b517464d1711392075277ae1df01e3841c1ae4baf8e6c786e970c806d:eyJzZWxlY3RlZExpbmVDb3VudCI6NDQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjI0MmRmNjdjYjc0MTZiYTcxNmI2ZTY1MjM4NDJlMTRjMGI1MGVmMTQwNjJiOTNhMDkyYTJhNTEyMWI0NWUwNmEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjFjZDI4MTQ5YzljOTk3OGEyYTU5ZTQyMjNkZDZiMTFhYzlkNDcwMzE5YjA2YTQwNjA0MjhmNDBiYTI3NDdjNTQiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjI0OTA4Y2YyZTBhM2E2NjBmYTVhMTRjZmJjNWI3MzY1OTY1NTBkYzZjN2YzNzRhNDY5MWQyNDczMDM0YzUzZjYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjU1NWQzYzBkMGIwMDY0ZmQ5YzIzZjVjMzhkMDU0MTAyNDdjYjYwNTQ2Y2MzNTJkMDhjMDQ3MzhjMWQyZWY0ZWQifQ"
+        },
+        {
+          "resource": "repo://haap/server.py#L352-L416",
+          "version": "repo-lines-v1:sha256:15593e90dd37255f1f66d70b11dca5be2fc205023c02f6072e5eca65f7589373:eyJzZWxlY3RlZExpbmVDb3VudCI6NjUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjhjZGI4ZTc1NTFjODBmMWQ5N2Y5NzlkMjUwZDJmYjY0ODYxNGY2ODk3NDM0NGE0YzAwOWNjMzI5NGY0ZWYwZDMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImFiMDg0NTk4NGI3ZDJiYzFlZjFjNjQ1NTY2MGI5NWI1MzAzNzk2ODQ0OTI4MDE2NTliOWExZTU1MzRjNGI3NWUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImI5N2EyYjgzZmEzNTQ4ZTZiYTk3ZjkwNDNlZmY3NTMwOGRjMTU0NzY3ZTk2MmIzMGU3ZDJhMGUxNjViYjY4M2EiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjczMjE0YTc1MTBkNmQ0MmE2MDIzY2I4ZGRmMTQ4MzkzZTM1Y2QzMDIyOTY0YTE4NDk0OTA5MzljOWJhNzg3MWMifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_1f332f9d291843a9acddc80d717f1080",
+      "statement": "Focused tests exercise the abuse controls end-to-end through the same router the HTTP layer uses: test_server.py::test_task_rate_limit approves a friend with a capacity-1 task:submit bucket and asserts the second task_request returns an error envelope with error_code RATE_LIMITED; test_marketplace.py::test_marketplace_rate_limit sends 12 service_search messages against the capacity-10 marketplace bucket and asserts requests eventually fail; and every fixture in the test suite attaches AuditLog(memory=True), so all handled messages run the real event/redaction code path.",
+      "evidence": [
+        {
+          "resource": "repo://tests/test_marketplace.py#L85-L98",
+          "version": "repo-lines-v1:sha256:12d9d6404ac6c075a876ed1caecd8d82a716929880ac240cf6f269ea5f7b4611:eyJzZWxlY3RlZExpbmVDb3VudCI6MTQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjhhNDg0NDBkNTA3ODJmNWE1Nzc2OTI1ODBhM2U5YTcyNjkyNDcxNjlhMTQzYWNiMzI5NjEyM2I4N2ZjYjY1OWYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjZkOGYwN2RkNWEyZWVmNzVlNjk0NTc0MjIzYTFjMTgxMTk5MDVlZGE2YTc4MTRlN2MyNmM4YmQwOTcxYjc4ZTIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImM0ZWE3MjFhY2YzZTIyMzFlNDYzYzEyNWVlODJmNWMzODU3NzM4YjhkODJhOWZiMTY2OTQwNjRjMTYwMWE1N2IiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjA1NGM5M2IyNGVjMjEwMDUxZmRmNDQ1ZmNjNGFiZjI1YjE0Njk2NzJhZDFmODhjMTkwZDdmMjgwZmY0OWE3MTgifQ"
+        },
+        {
+          "resource": "repo://tests/test_server.py#L138-L153",
+          "version": "repo-lines-v1:sha256:e1904148abd65595c0a7eeb99a2dc826040a09ee8e98713af971c52a9c78e446:eyJzZWxlY3RlZExpbmVDb3VudCI6MTYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjY4MGE1ODllNzkxNGFhMTY4MzdjN2QyMDk0MmIxYWI0MjgxNmMzYTJiOTY0ZjA0OGQzOThjZGMxM2FjNGNhZmUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ3NzlkMzM5MmU4MGMxOThkMzBjYjMwZjFjNDdmMzQ5YzVhZWIxMWUwYjAxMTJmMmYxMDZjZDAyYmY5Y2JjYTYiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImQ5ZWMyYTQwYjFkZWFlZDVjYmRiZWRmOTYyNjkyODA1MGQ4OTk5YWI3ZjM3MTNmMGVhZDM2NGVlZjI4YzU1ZWMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjgyYjAwODg1ODI1MzNhOGI0YmRkOTE5ZjUzYzBhMjQwM2Q2NDQ0N2VjNWJhNjU3OWIxMjVhNTMxOTFhNDY4ZTcifQ"
+        },
+        {
+          "resource": "repo://tests/test_server.py#L33-L34",
+          "version": "repo-lines-v1:sha256:4ce4cd1cc28d9811399a0f42a40a4c22f63b3d3efad68381efa27450550abd9a:eyJzZWxlY3RlZExpbmVDb3VudCI6MiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNmM1MjE2ZTdhYTQyOGYxZTRiNTFiY2FkNzlhYTYzMDEwNGU5NzM5NWQxMGVmZWM3MTQyYzc4OGY1YzZjNjkzNCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMTQ4OWQ1YWYzNTk5ZmFjYjliYjM0ZGEyOGEyNmMzOGUyNmVmMTkxM2ZlNWQ0YzQ4ODYzMmE4MjI2NjRmYTkzYiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZWY2ZTc0YzZmZDg2Nzc2OWJlYTE0ODRiMzcxMTc5YmJhNDBhOTYxNzczNTcwMWVhMmQxZjBjYTg4ZDFjYWU0NyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNDliZWE3NDJhMTUxNTk2OTJmMmJmOTg1MWM1YjYxNGE1NjdhYTE5OGUzNWUzOTMyNWUyNDdlMjQ2ZmEyMWEyZCJ9"
+        }
+      ]
+    }
+  ],
+  "verification": {
+    "by": "openwiki/0.5.0",
+    "at": "2026-09-05T09:02:08.883Z"
+  }
+}

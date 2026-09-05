@@ -1,0 +1,242 @@
+{
+  "schemaVersion": 1,
+  "pageVersion": "sha256:e15fffdd7b524f99b73a5d01f2ef9c861007efdf2144e2efe69f58ccdebadb52",
+  "claims": [
+    {
+      "id": "claim_cbe141e33cff4b42af816db1f479238f",
+      "statement": "Marketplace mode is the no-friendship trust surface of HAAP: the service_search, service_quote, service_book and service_cancel message types are the only protocol messages a stranger may send, while everything else on the server stays deny-by-default — inbound task_request still requires an accepted friendship plus a granted task:submit permission, and unhandled message types are answered with a signed error envelope.",
+      "evidence": [
+        {
+          "resource": "repo://haap/envelope.py#L45-L53",
+          "version": "repo-lines-v1:sha256:65d5a2cdba20cbde11a7cb7f78c33dce472974180d8cebc99668b434a3a6692b:eyJzZWxlY3RlZExpbmVDb3VudCI6OSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMzIxNmEwYjQ2NDczMWQ2MTE0MTc4NWY5MjhhOWU3YWM5MjExMTVkY2RjNGQ1NGRhMTliYWY1NjgzYzA0ZjljYSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiODU4MGI3NjUxOGRhZTk3OWZhZWJkMDIzNjdhMjkyOTJhNTBkOTc2MDkyMjUxYTM4YTZjZTMwODgwYmE0MjgyNSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiOGZmNzg1OGJlZjVjYjk3NWYxMWViZWQxYjEwYTA4NDE5NWI0MmFiYTljZTFkMGVlM2Q3Mjc4MTA2OTkxNDg4ZCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiYmI4MTNjZmU0MGQ1MzJjY2FmOTNhYTFlNzMyZDU4NzU1ZTFhYmU2MzY5NzJkNmVmNDJjYzAxZTI1Mzc1MzJlOSJ9"
+        },
+        {
+          "resource": "repo://haap/server.py#L283-L291",
+          "version": "repo-lines-v1:sha256:24f8e162e20d6481555f45e6f4823798bf75981447224c57aa7939fb7f619393:eyJzZWxlY3RlZExpbmVDb3VudCI6OSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMzE2NDY1OTY1ODYyZmEzYjBjMDdlY2VjODIzODVjZGM5MGM0OTk5YzZhYWU1MWQ3NzQ3NGI2MzBiYjFjM2RlMyIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMjk1MjcwZTM0ODM0Njg3MDJlOThhOWM4MDk0ZGI0NWQ0MTRiZjgxMjVkYTQwNjJkZjU5ZGRjMzU0ZjNmODA2NiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZDQxYzhmYjUxMmQzNmIwNWE5OGJiOWU4ODBkYzNlZTE2MGFlMjEzNTI2OGVjN2Y2ZGRkYmMzOWJiZDM2YTVkNyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZjRlMDYyOWY5ZWI1YWZkNmI2ZGZjYWE4MjU0ZmU0NWNkM2I4NDBhMGExNDQ1ODY3ZGVkZDA2YzBiY2QwZmVjZCJ9"
+        },
+        {
+          "resource": "repo://haap/server.py#L331-L335",
+          "version": "repo-lines-v1:sha256:5a6d62d2096795d4c26ea3827e9d24d2a4172a7aca3055fa4d1164bd255b3666:eyJzZWxlY3RlZExpbmVDb3VudCI6NSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiYWFmN2I2ZjFiN2NhOGQyNDhkMWM2NjE1NTNkOWYyYWQzZGE0OGJjY2Q2OTM4NDk3NmYxNzM1Y2EyOWJhYjQ4OCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiODRkMDliZWI5YjdiY2RlYjM4NWFlN2RiZDYyNmZkNjVmNmJlOTJlMWM3YTQ4ZDU3MGZmMTc3YmZhMDY4NWNkMiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiYzZlM2Q0NTgyYTk0OTU3ZmVhMGQ0MzAwZmI3OGNiNTI1MjAxYWE0YjZkZDgyZWViZDBhODFiZGYyMDI4MDI0MiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiYzAwNWIwNTY2NjcyMmM0YmFkMGQ2YzdiZjU3ZmVhNDFkNGQwYWYwMDY5OWQ4NTk1ODQwNzgzOTA5MTlhNzQzMiJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_296561c207f64d6d8869e204d6a89355",
+      "statement": "Because a marketplace sender may be a complete stranger, service_search/service_book/service_cancel/service_quote are bootstrap types: the router resolves the sender's public key from the payload's public_key_b64, enforces fingerprint == SHA-256(key) before use, and runs full envelope verification (Ed25519 signature, ±300 s clock window, nonce anti-replay) before any marketplace handler executes.",
+      "evidence": [
+        {
+          "resource": "repo://haap/server.py#L106-L129",
+          "version": "repo-lines-v1:sha256:c2339e000445b948a32457fe4789dd352c2a320fe04487e6facfee2c878f7518:eyJzZWxlY3RlZExpbmVDb3VudCI6MjQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjlhOTI0YWY4OWNkM2RjNjFkYjQ2ZDQ1YTZjYjBmY2MyMWQyZTA2ZWM1YjRiMTRhYzdlOThmOGRkNTcxOGVkOGIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjE1N2FjYTc4NDE1ZjRmMmE0ZjIwNzAwYTYyMDE5ZDZmOTM1MjIyMzA4YTJmOTA2ZGIwMGUxZDczM2JiMDRhNjQiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImJhZjc3YzYxMWRlYjRlOTAxMWVjYjZlOTZiMmE0ZWY5Zjg2OTJiZTE2MWFmYTk4ZDU3MGZlZTRlOTBlNTEyODYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjVmMmRlZmNiYTIyYmQ2NmVlMGE4MjNlMDcwMWYxMzE5Zjk3NjAwZDQ1NmFjNzdiMDJiYzBmYTUyMDk4MDg3MjUifQ"
+        },
+        {
+          "resource": "repo://tests/test_marketplace.py#L36-L42",
+          "version": "repo-lines-v1:sha256:a19533c22b297a2ccb8d6cee8816662d66dbeba16ac31aa2b727375368ef934d:eyJzZWxlY3RlZExpbmVDb3VudCI6NywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiM2U3OTdlYmU4ODRkNjFiNjk0Mzc3YmRjNDkyNjM3MzViMmNiY2FiZjg1ODk1NWFlNGVhNzBlNmFjY2Q1Y2E1MyIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNmYzM2JiODE3NjExNjRkZTRiZGRlNDE1NWFmY2ExODc4YTljZmQwZTJmY2UzZTQzZGRjNjJiYjE5MzczMDdhZiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiOTcxNzlkYmYxYTk3ZDNhMTIyOTkxMTc3MTQ4MzQ5NmNjMWM3MmU2MGIwNGNmYTgzMDg4OTA1MDJjNGQwMTg5ZSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZWM0MzhlZDVmYmRmMmFiNjc2YWRhMDkyOWFkMGJjM2UzYThmY2Q4ZjA0NmNjZmZkZGY2ZDBiYzdlOWJlNDU1ZCJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_76257bdacfc9417c8dbecb32d2254a5e",
+      "statement": "A business publishes open services purely through HAAPServer constructor arguments: marketplace_catalog (service -> info dict) and marketplace_policy; auto_accept defaults to False and is the only policy key the server enforces (a service_book without it is refused with PERMISSION_DENIED whose detail names auto_accept), while other keys such as open_hours are echoed in quotes but never enforced; the handlers answer even without configuration, so a bare server returns an empty-catalog service_quote with available false and can never book.",
+      "evidence": [
+        {
+          "resource": "repo://haap/server.py#L352-L369",
+          "version": "repo-lines-v1:sha256:55fb4651e7789e7b8a03313d26526cce75a60176c40f8d5fdcbcfae1cd904af8:eyJzZWxlY3RlZExpbmVDb3VudCI6MTgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjhjZGI4ZTc1NTFjODBmMWQ5N2Y5NzlkMjUwZDJmYjY0ODYxNGY2ODk3NDM0NGE0YzAwOWNjMzI5NGY0ZWYwZDMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjUzZmU1YzgzNDZlZTIwMWQ2M2NmYmYxOWZiMDk4MDk0MjM5NTI0MDFmNTRmNDFjZDIzYTYxMzYxMTU4MDQyMTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImI5N2EyYjgzZmEzNTQ4ZTZiYTk3ZjkwNDNlZmY3NTMwOGRjMTU0NzY3ZTk2MmIzMGU3ZDJhMGUxNjViYjY4M2EiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUwMDkwZWU0ODM4ZTI5NmNhZjY3ODE0YzNjMmUxNTA1MmNkMWI0MzUyNmE5OTU0YTU4ZGRiZjAwZGVjM2U2ODUifQ"
+        },
+        {
+          "resource": "repo://haap/server.py#L371-L380",
+          "version": "repo-lines-v1:sha256:2a919ba249409835c0818bffd18d4a9a2904b56be046c386c0f901e8ffd76274:eyJzZWxlY3RlZExpbmVDb3VudCI6MTAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijk2OGY1ODUzZGEwNmUzNzBlMjJhNDFmNzNlNDc1MzBjOWMyZGNmMGI5MDVlMTQ4OWQ3NzI4NDkzZmE1OWYzN2MiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjkwMTRhMzhhMzEwYWQyOGY5MGY2ZGJhNjVkN2JjNWRjOWRlOTJhYmJlNmY4NjgyM2VjYWZiODgxOGNiYzIzMmYiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjNlODRlNDc2YjY0YzY5ZDQwYTBlMzJmMmI4MGQ5Njc5ZmZlODFiNDU1Yjc0ZTlhMjdlMGExN2E4NWRkYTJjYjgiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjRkN2UyNzJiMGMyNDI2Y2YwMjBjMzk1NDlhNzlkY2E3ZWUyZmM1YjA3YWQwY2JhNmQwZTg4NzgzMjU4MWMxOTYifQ"
+        },
+        {
+          "resource": "repo://haap/server.py#L50-L72",
+          "version": "repo-lines-v1:sha256:b98903a3ec4d543581e41c5a522a0b7f16785e916e3efd28ec8638558ddb5edf:eyJzZWxlY3RlZExpbmVDb3VudCI6MjMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjE4OTBiMDA0ZDU0ZmIzNzI5MTM4MzY1M2IyM2VkMmNhNWUzZTI3MGJmMjI3ZTAwNTEwOThkZTg5NTYxOWNlMmYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjMxNGFjNDA2OTRlYmYxMGNjYWNmY2UxYTNiMjE0N2QyOWNlN2Q0ZGY1YmE0NjEzY2YwYmVkNTFiNTU2NWRlZmQiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImQ5NTcyNDljNzhiMGNlZjEyZjE3Y2I2MjdlYzM3OGU4M2IyMTBhNGI0MTU4NzZjNzc4MTFhODAzZWQ5OGIwOTIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImU1ZTk3M2Q5MjQ5NDVjMThlNTViNGUzYmM4ZGIzNDM1ZjcwYjZiN2U2OGM2ZDNiYjZiMWI5MGNkY2M3MTc1ZjQifQ"
+        },
+        {
+          "resource": "repo://tests/test_marketplace.py#L72-L82",
+          "version": "repo-lines-v1:sha256:6deb2dc4abefec69ebc19829ee09820f0cf3fd100ab51041cea245f8db1afe07:eyJzZWxlY3RlZExpbmVDb3VudCI6MTEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImQzZGRhOGIzY2UwYTA3ZTAyNTIzNTgwODRjODQ4YjVkNTNmYzlkZjgwZjVhNDlmMjEzMjZiNDBhOTcwZDI0MWUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjA1MmM4OWExNDNmZmVkNzU0NDczZWViMTRkZjllZjMyMTk2NTkwYTlhNGFjOTk5NTc3ZmMzNzQ0YThhMDI1ZGEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjIxMjY4YmI4YWMwZmJkMmEyOTY1OWFjMjA4ZTgwZTkzZjI1N2YxMjg4MTUyNGFiZjViNzA0MjY3Njk0NDc1ODMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImE2OTNjMzQ0N2EwMDViMDAyNzI5Yzg3NzQ2YjY2NGM0NjM3NjI5MTY0OWIzMWNhOTkxYTQyNGI4ZmQyMGJhYTMifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_8a4d4e9ce1e04020aea13e83ce8ac34f",
+      "statement": "service_search answers with a signed service_quote whose payload echoes the query, reports available as bool(matched), returns the matched catalog subset by bidirectional lowercased substring matching (empty services matches everything; a 'corte' query also matches 'corte+barba'), echoes the full marketplace_policy dict, and is audited as marketplace.search; availability is catalog presence, not live calendar state, and the requested date is echoed but not used.",
+      "evidence": [
+        {
+          "resource": "repo://haap/client.py#L238-L252",
+          "version": "repo-lines-v1:sha256:bd33463e6c50c140c6136ded8318cedf58dbd578a30bec0ecc943610c2a62e32:eyJzZWxlY3RlZExpbmVDb3VudCI6MTUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjcwYTMwYTQzOWVhNDI2NzNjOGFjODQwOGQ0ZTkwOWZlMzlhNjA5YTBiNjI4YTBlYzI3NzEyYTE4ZDcwMTU1ZWUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijk3NTkxMjliZWZhYjA5ZDA4ZDAyZGYyNzQzZThmZjIyZDcxMWQyNGJhYTBhYzczMTQ4OWM5ODM0ODY0ZjIwMWIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImViZTRlODdjYzE4ODM5ZjExYTYwMGQ3OGZkNzA1NzgyYjU2YWU0NmFhYzQ2YzIzMWVkNmQxOWRlZGRkODk2YmEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjE0NDQ0YjI2ZDA1YTZkODgwZGE0YzRhMmFjNzRkYWM1MWQ0MzUxMjJlYWVjM2MwYmExNTUwNDI5ZWUxZGUyMTkifQ"
+        },
+        {
+          "resource": "repo://haap/server.py#L352-L369",
+          "version": "repo-lines-v1:sha256:55fb4651e7789e7b8a03313d26526cce75a60176c40f8d5fdcbcfae1cd904af8:eyJzZWxlY3RlZExpbmVDb3VudCI6MTgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjhjZGI4ZTc1NTFjODBmMWQ5N2Y5NzlkMjUwZDJmYjY0ODYxNGY2ODk3NDM0NGE0YzAwOWNjMzI5NGY0ZWYwZDMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjUzZmU1YzgzNDZlZTIwMWQ2M2NmYmYxOWZiMDk4MDk0MjM5NTI0MDFmNTRmNDFjZDIzYTYxMzYxMTU4MDQyMTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImI5N2EyYjgzZmEzNTQ4ZTZiYTk3ZjkwNDNlZmY3NTMwOGRjMTU0NzY3ZTk2MmIzMGU3ZDJhMGUxNjViYjY4M2EiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUwMDkwZWU0ODM4ZTI5NmNhZjY3ODE0YzNjMmUxNTA1MmNkMWI0MzUyNmE5OTU0YTU4ZGRiZjAwZGVjM2U2ODUifQ"
+        },
+        {
+          "resource": "repo://tests/test_marketplace.py#L45-L53",
+          "version": "repo-lines-v1:sha256:24a1ce1ff407adadc59de4e446706330569ef65f3aead774d4860e0f4e3de6ba:eyJzZWxlY3RlZExpbmVDb3VudCI6OSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiZGI4MDJhYTc2MjcxOGMwZGE0YmJmMTdhMGU0NTQ0ZTg5MWU0Y2JkMWE4NzU5ODc0NWU5NGRlNjQ3YzczZWQ5MSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiYzkyMmQwMWM0MjZhNTY1OTFhYmQ1YTNjMjJiNTBlZjRiMGE4MWJmM2RjM2ZhODkyYzFhODhiNDk1NTg1NDJkMSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZDE2ODcwYmFmZjI3OGQ4NTRmZWUyMTAyMzliYTY1ODQ0YWNlMDYxMTE4NjAyOTIyM2JjYzQxNzMzMWQyZjA5MyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZDlmMTllN2U4NDA0MzczZTQ1NDI2YWUyMzhlZTA3ZTRmZDQ0MmRjODJhNTM1MzEwMWFjZThhNWQ2ODBmMTI0ZSJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_0b0c3e799bb54f70adb09df8d6506d7e",
+      "statement": "Every inbound marketplace message first passes _check_marketplace_sender, which rejects a directory-blocked sender fingerprint with PERMISSION_DENIED before consuming any token, then charges the sender from a dedicated stricter rate-limit catalog: a marketplace bucket with capacity 10 and refill 0.05/s plus a per-sender global bucket with capacity 20 and refill 0.1/s, both consumed on each message via RateLimiter.check (which raises transient RATE_LIMITED with a retry_after hint when either is empty).",
+      "evidence": [
+        {
+          "resource": "repo://haap/rate_limiter.py#L109-L131",
+          "version": "repo-lines-v1:sha256:60a8cd863187af658856f65e3a643a87a94665528efd043d20a6b60ed851de49:eyJzZWxlY3RlZExpbmVDb3VudCI6MjMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImQwZjY0OWI1YzhkZTU1ZTZkYzU3YmZjMjA1MmEwOGJiMGJhNzgzN2Y0ZTNjMDk0ZTdkMWFhYzI4M2MyMWRhZjEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjU1ZWZkZmQ1NmNkODIxMzc0N2U5MTBlNzFkNTAxYTk0N2YxNTRkNjM0OTVkZGEwYzliOTM2MjkxNDgxN2NmMmYiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImVlOTE5MjAxYTc5ZWMyNTcyMmM0ZWVjMWVlNzdlMmMxNTJiNmNiNGFjMDdlMjU1NmI5ZjE2Y2JiOTEzNTVhODciLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImU1ZTg5Y2IzODNhMTAzZGIyYTZhYmNlY2VlY2ZlYjcyNDBmZTE2OTk2MzZiZWQwYzAxYmQ4ZmI0MzY4NWYwNTcifQ"
+        },
+        {
+          "resource": "repo://haap/server.py#L337-L350",
+          "version": "repo-lines-v1:sha256:0db5512ed44780d2d5691ee96195ac8ef0dd448d89506222a7227ab2fcb0d664:eyJzZWxlY3RlZExpbmVDb3VudCI6MTQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjJiNzVlYzE0ODgyMGIzNmYyOGNlOTJkYTUzMTFiNWU2NGNhNTY0ZTBkMTQ1NjVkMzQyODY2YmFiYmFiZmY1M2UiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImI4MjQ3Nzk1NzY1ZmI0ZWM4NTQ2ZGZmZTU2NmI3ZDQwMjJhODMxNmQyNmQ2OGI3ODcxNzgwNThjYWZkNjg2NjciLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImU2Mzk3NDg3OTI5MTVlZTcwNWUxYmRiYWIzOWRjOTNmZjU2ZDRlYTIwNmYxOTFhNDk2YzhhOGFiNmRkMzA5MTMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjM1ZTI1NzFlN2IxYzRjYzk4YWIxODEzZDFjODAyOWI1ZTkxMzIzYzdkYjJhNWJkMzA5OGM3NTIxZjNlMTZhNjcifQ"
+        },
+        {
+          "resource": "repo://tests/test_marketplace.py#L85-L98",
+          "version": "repo-lines-v1:sha256:12d9d6404ac6c075a876ed1caecd8d82a716929880ac240cf6f269ea5f7b4611:eyJzZWxlY3RlZExpbmVDb3VudCI6MTQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjhhNDg0NDBkNTA3ODJmNWE1Nzc2OTI1ODBhM2U5YTcyNjkyNDcxNjlhMTQzYWNiMzI5NjEyM2I4N2ZjYjY1OWYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjZkOGYwN2RkNWEyZWVmNzVlNjk0NTc0MjIzYTFjMTgxMTk5MDVlZGE2YTc4MTRlN2MyNmM4YmQwOTcxYjc4ZTIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImM0ZWE3MjFhY2YzZTIyMzFlNDYzYzEyNWVlODJmNWMzODU3NzM4YjhkODJhOWZiMTY2OTQwNjRjMTYwMWE1N2IiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjA1NGM5M2IyNGVjMjEwMDUxZmRmNDQ1ZmNjNGFiZjI1YjE0Njk2NzJhZDFmODhjMTkwZDdmMjgwZmY0OWE3MTgifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_1fd1c425cba149b28123a412de3beb5d",
+      "statement": "Blocking is the instant kill switch for marketplace traffic: Directory.block creates or flips a blocked tombstone and empties the record's permission matrix even for a fingerprint never seen as a friend, and because bootstrap verification works for unknown senders, a blocked stranger is still identity-verified and then refused with PERMISSION_DENIED rather than left indistinguishable from an impostor.",
+      "evidence": [
+        {
+          "resource": "repo://haap/directory.py#L295-L310",
+          "version": "repo-lines-v1:sha256:de343e29888e4a2dba84325de26ca51f5a15492d98d713c54dff2f4a27e47979:eyJzZWxlY3RlZExpbmVDb3VudCI6MTYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImYxYzQ1YTdhNzk2NWNhMjU0Y2ZmNDA0ZjkyOTQ4MmRlNzE1NGE0OTRjNGYyNDMzN2NhZDBkMDQxZWIwNzQ0MzAiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImYwMWZkMDc2NmFiMmU5YWZlNGE3Njc0ZGM4MGE2MGZiYWQwOWRhYTY3NzIwMzg5OTY5NGE5MjNjNWI2ZWFlZDgiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImJiMzc4ODIyNzIzMjNhMTQ1YWNjZTBjNzY2ZTVmMWRkN2RjMDBiZGIxYmRiNmQ1ZmQxZTMyNGE5NmFkZWQ4ZGEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        },
+        {
+          "resource": "repo://haap/server.py#L337-L350",
+          "version": "repo-lines-v1:sha256:0db5512ed44780d2d5691ee96195ac8ef0dd448d89506222a7227ab2fcb0d664:eyJzZWxlY3RlZExpbmVDb3VudCI6MTQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjJiNzVlYzE0ODgyMGIzNmYyOGNlOTJkYTUzMTFiNWU2NGNhNTY0ZTBkMTQ1NjVkMzQyODY2YmFiYmFiZmY1M2UiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImI4MjQ3Nzk1NzY1ZmI0ZWM4NTQ2ZGZmZTU2NmI3ZDQwMjJhODMxNmQyNmQ2OGI3ODcxNzgwNThjYWZkNjg2NjciLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImU2Mzk3NDg3OTI5MTVlZTcwNWUxYmRiYWIzOWRjOTNmZjU2ZDRlYTIwNmYxOTFhNDk2YzhhOGFiNmRkMzA5MTMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjM1ZTI1NzFlN2IxYzRjYzk4YWIxODEzZDFjODAyOWI1ZTkxMzIzYzdkYjJhNWJkMzA5OGM3NTIxZjNlMTZhNjcifQ"
+        },
+        {
+          "resource": "repo://tests/test_marketplace.py#L101-L112",
+          "version": "repo-lines-v1:sha256:82ce03be9588e3a32aecff30f605b788aed2cb74d9dad9ad6f5611271a4f5a87:eyJzZWxlY3RlZExpbmVDb3VudCI6MTIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImQyNzA3ZDdhZjBiNTk0OGFlMjc2NzAxYmE4MjhmYTUyYjliOGM3OThhNGI1NThlMjA5NTg4ZWE5MjExOTViZDQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImYyMjhmNTk1MTA0NDA3ZjBjYWE0MWZmNWJkOWJlM2YzZmNmMDEzYTc3MzkzMDJiMmYyMzMxYzU5MTYxYzIyYzUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6Ijc2YzdjYzg4ZTYxMjlmN2VjZGJjNDZjZmFlYWFjNTFkZDZjMGIxMTA5YjM0NGQzZmNiMDNmNWQ4ZGE3ZmE2Y2QiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_0a78c2bdf67240dc837408ff8ae482d8",
+      "statement": "service_book is gated in order: shared sender checks, then marketplace_policy auto_accept (default off -> PERMISSION_DENIED error envelope), then the booking record {service, when, client_fingerprint: sender, status: 'reserved'} is built and, when an on_task executor exists, handed to the task pipeline; when no executor is configured the booking is still reported as a completed reservation with status reserved and no backend side effect.",
+      "evidence": [
+        {
+          "resource": "repo://haap/server.py#L371-L406",
+          "version": "repo-lines-v1:sha256:4e76c3d23f8176384da91c550f611b8ae7c37c70a4fe88736d5c9514c3fae1ce:eyJzZWxlY3RlZExpbmVDb3VudCI6MzYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijk2OGY1ODUzZGEwNmUzNzBlMjJhNDFmNzNlNDc1MzBjOWMyZGNmMGI5MDVlMTQ4OWQ3NzI4NDkzZmE1OWYzN2MiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjhmNTBjNGVjNGQ4MGEyZWM1MDE0Mzg5NzQyOTFiMjI3NTcxNGY3OWU3NWIyN2ViNzczYzI5YzgxNzAzMzZmYzIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjNlODRlNDc2YjY0YzY5ZDQwYTBlMzJmMmI4MGQ5Njc5ZmZlODFiNDU1Yjc0ZTlhMjdlMGExN2E4NWRkYTJjYjgiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjJkZjlkZDZmOWNkYjFlYjk4M2Q4NjBlNTVkNWRiOTM4NmU1YmI1MzUzYTg5ZTU4MmRiNDA2NzhlNWZhNDg0OTEifQ"
+        },
+        {
+          "resource": "repo://tests/test_marketplace.py#L56-L69",
+          "version": "repo-lines-v1:sha256:2db13412ba37342dd04a9775ca4c3ef55600f187a26dfb5e6d7fdf83a7766f65:eyJzZWxlY3RlZExpbmVDb3VudCI6MTQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImZjMTViY2E2YTZiM2FjOTY3NjQyOWQ0ZDkwNjljNDdlZTg3ZDc4MjFkM2EzNGM5MGI2ZDQzYjY4ZmNlOWQ1ODciLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjkzZjI4ZTQxMzA5OWM4N2RjM2U3MDAyYTVmNzAxMjY4NGVjYWU1MzQzZWQyYmY0NGIwNzJiZGZmYmQzM2E0NTkiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6Ijk3YzUxM2Y0N2M5YzM2ZWRjMTg5MmYwNTFlYTBiYzgzOTliNjZiODU1YTFhY2Y0MDQ1NjQ3NzVmOWRhYWM2ZGMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImU0YjZkNzQ2ODk2Y2RhODM4NjMwMjgxYTk2ZDU1MDI0OWU4ZTEyYWMwOGFlYzFiMGZmY2YzMGI0MWQ5MDVlM2QifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_60ab14a7664a476b9c9cd04dbe9636bb",
+      "statement": "Marketplace bookings reuse the task pipeline: the server creates a task with role server, action booking:reserve and resource equal to the service, invokes on_task(task_id, <the raw service_book payload>) so the booking reaches the business backend (e.g. a CalDAV or iCalendar write), merges the callback's returned dict into the booking record, walks the legal transitions submitted -> accepted -> completed, and on a callback exception marks the task failed and replies a signed error envelope with TASK_ERROR.",
+      "evidence": [
+        {
+          "resource": "repo://demo_marketplace.py#L45-L58",
+          "version": "repo-lines-v1:sha256:c8e31f157222627a86b10e307da5200c46e01e18de085c01018fbdda88359331:eyJzZWxlY3RlZExpbmVDb3VudCI6MTQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjU5YWFkN2ZhMGZhYTQyNWUyZGY0NjlhOTZkY2I1ZDE2YjNjYTJkMTUyMDUyOGRhMjUyODQ1NThmNjllNzFiMzgiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjI0MjA1M2E4YmUyZGM4YmE5NDRiMmM0NGU0ZWJlMjg5ZWRhYTQzZjBlMWQ3MDc4YjJjMTBiOWUwZDkwMGY1MDIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImE3NjM2NzQ3NWUwOTBkMTZhNzY2MDU5ZDM2MDU0N2MxZDY2ZmYzOWE4NTYyOGI2Y2MyNGY3OTdlOTVkOTEzYjkiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImJmNzVhMzFlMTZkMTQ3M2FlNGE1Zjg4ZjJmN2JiMzJkNDNhZWEyN2I4YjMwMTI5ZDMxMGE0NTk3NTEyZGM0MWMifQ"
+        },
+        {
+          "resource": "repo://haap/server.py#L383-L402",
+          "version": "repo-lines-v1:sha256:b3c81571ece20d4656402822c88ebf87ca4bb0e2cf44757dd1c9e34614115aa3:eyJzZWxlY3RlZExpbmVDb3VudCI6MjAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjVhMWY4NzBkN2EyNGEzNDcwNDI0OTNkMmViM2NjYTlmZjU5YmZjOGExOTRiOGExNzM4MWU1NzVhZjQ0YzdlNDMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImNlYWRjMzdiYzU0NDVlZmMxZThiYmE2MTBlMjA2Mjg4ODIyYjZhZjczYzMwYjMwNmU2ZGM4YWEyNzVjZjdmZjMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6Ijk4YWRhZGUyMDFmZTAzOTA1OTFjMmExOGE4ODg0YWEyOGQ0NDEwMDNjYzBlZDEwZTAxZWM2NmZjMGJkNmE5ZTMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjE5NzNhMDY2NmI1NWUyM2E5YzNkZGZhYTRjMDdhYzg0MjNlYzU4Y2ExYzk4M2ZkZjQ1NTIzYzEyNzM0ZjhiMTEifQ"
+        },
+        {
+          "resource": "repo://haap/tasks.py#L40-L49",
+          "version": "repo-lines-v1:sha256:40267042dba0e50e59308953fedc4c6faee6efde0fe3b0f3a93e198db7fbd770:eyJzZWxlY3RlZExpbmVDb3VudCI6MTAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjNhNDgyYzQzNjYxYjM3NDgyNWQ5MTJjOTM2NmNmMDhjNDIxZjA3YTJmOWMwOTUwNmY2ODg0ZjA5OGQ3NmEyYmUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImIwN2RiZjI0ZjIzMTlkZmExMjEyYTI0MTg4NDQ0NDVjMzhmZDkxZDk4ZTU2MzVkNzRmMGFmN2RjMTMzYmZkNjYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjkzNDcyZDExZDE2MzZlZGI1OWE0YWM0ZTAyOGJkMmE5M2IzN2IyMTQwZDdhNTE5YTI0ZjU5ZjJlNGI3Njk3MTgifQ"
+        },
+        {
+          "resource": "repo://tests/test_marketplace.py#L56-L69",
+          "version": "repo-lines-v1:sha256:2db13412ba37342dd04a9775ca4c3ef55600f187a26dfb5e6d7fdf83a7766f65:eyJzZWxlY3RlZExpbmVDb3VudCI6MTQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImZjMTViY2E2YTZiM2FjOTY3NjQyOWQ0ZDkwNjljNDdlZTg3ZDc4MjFkM2EzNGM5MGI2ZDQzYjY4ZmNlOWQ1ODciLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjkzZjI4ZTQxMzA5OWM4N2RjM2U3MDAyYTVmNzAxMjY4NGVjYWU1MzQzZWQyYmY0NGIwNzJiZGZmYmQzM2E0NTkiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6Ijk3YzUxM2Y0N2M5YzM2ZWRjMTg5MmYwNTFlYTBiYzgzOTliNjZiODU1YTFhY2Y0MDQ1NjQ3NzVmOWRhYWM2ZGMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImU0YjZkNzQ2ODk2Y2RhODM4NjMwMjgxYTk2ZDU1MDI0OWU4ZTEyYWMwOGFlYzFiMGZmY2YzMGI0MWQ5MDVlM2QifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_f206c13d32db4a9895249b38a3b39688",
+      "statement": "A successful service_book is answered with a signed task_result envelope whose task_id is 'MKT-' plus epoch seconds, state completed, and detail equal to the merged booking; HAAPClient.service_book returns that raw task_result payload (task_id/state/detail) rather than unwrapping the booking fields, so booking fields are nested under detail.",
+      "evidence": [
+        {
+          "resource": "repo://haap/client.py#L254-L273",
+          "version": "repo-lines-v1:sha256:11c5b52ac7ab8a75ce3d868aa2f7447316eb492173990574bbf8884c16faf1d6:eyJzZWxlY3RlZExpbmVDb3VudCI6MjAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijg5ZmVhNzc3ZDQwNWRmNjFiZWQyMWQwZjMzNWQ1MzIwMzZmZDMyNWZiNTc1MzQ3ZWRiOWRkMDA5YjdiMmE0YTAiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjBmMjM0N2NmYWEyYzE1NGI2MmUzZjdkM2M0OWFkNTMyODQ5OWZhNTIxNGYyYWY3ZTM1MjQ2ODk3MTcxOTUwMzEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjkyZDU0ZDBhNjA5ZWU2NmI5ODlkNWVhMDY5ZDQ1YTgxMDQyZGY4OGM1YTg5ZDExMzkyODViMmY2YzNhNWY3M2IiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImI1YzM1OWUwYTQwNWVlY2QwOTE2NDFlN2NhYTZmODM3MjUzNDJkMDE3N2NiMTI5MGQyZGFkYThlMGU5OGQ4NmEifQ"
+        },
+        {
+          "resource": "repo://haap/server.py#L403-L406",
+          "version": "repo-lines-v1:sha256:73bbe3dbec2f3246731556a3142a1a71b1b852b9cb44d874797407c86ded9cb8:eyJzZWxlY3RlZExpbmVDb3VudCI6NCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiZWZmYTRkN2Y3Y2EyNDRmYmM3OTRlNDU4NjhkNzg1MjA3ZGQwMTVkNzE4ODlhNzJmN2I0NDliZDg1ZDUyNmM3NyIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiOGY1MGM0ZWM0ZDgwYTJlYzUwMTQzODk3NDI5MWIyMjc1NzE0Zjc5ZTc1YjI3ZWI3NzNjMjljODE3MDMzNmZjMiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiOTMwNGJmZTcwNmY3NTBkNTFkODRhYWU5NDUyZjYxYTgzMTYxOWVjNmUwZWRhYjY0MzhiMTI0N2QwMGY1MjMzYSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMmRmOWRkNmY5Y2RiMWViOTgzZDg2MGU1NWQ1ZGI5Mzg2ZTViYjUzNTNhODllNTgyZGI0MDY3OGU1ZmE0ODQ5MSJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_2b476740d0de476ca004d57fca708b92",
+      "statement": "The client marketplace helpers are stateless outbound calls that bypass the alliance machinery: service_search and service_book sign envelopes embedding the sender's public key and POST them directly to business_endpoint + '/haap/messages', never consulting the local directory, the outbound permission guard, or the client rate limiter (unlike delegate_task through _send), and they record no task or friend state locally; error replies are normalized into raised exceptions via error_from_code, service_book audits client.marketplace.booked on success and client.marketplace.book.error on failure, and service_search leaves no client-side audit event.",
+      "evidence": [
+        {
+          "resource": "repo://haap/client.py#L237-L273",
+          "version": "repo-lines-v1:sha256:490020bd0586fc990842e752246ce7a0161db8d1657a4971a79f7193a86f195f:eyJzZWxlY3RlZExpbmVDb3VudCI6MzcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijk4N2E5YzlhNDQ1OGVhNGU1YWE4N2IzZWFlN2IzMzJjY2U2M2NiYjUwMzVlYjEzNTEwMzk5ZDNhNjM5YjU0NzQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjBmMjM0N2NmYWEyYzE1NGI2MmUzZjdkM2M0OWFkNTMyODQ5OWZhNTIxNGYyYWY3ZTM1MjQ2ODk3MTcxOTUwMzEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6Ijc1ZTEzZTIzOTUzZGNkZTM1NWY1N2Q2ZTJjNjY3YjIxODQ2ZmQ5NTQ2ZTU1YzQ2MjQ2ZjA5NzE4ZWJhMDdlZmYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImI1YzM1OWUwYTQwNWVlY2QwOTE2NDFlN2NhYTZmODM3MjUzNDJkMDE3N2NiMTI5MGQyZGFkYThlMGU5OGQ4NmEifQ"
+        },
+        {
+          "resource": "repo://haap/client.py#L95-L117",
+          "version": "repo-lines-v1:sha256:6dc2dd18304970b40045ea0e1a30741244cf8b6e51cf43ecbc0252aa295df72c:eyJzZWxlY3RlZExpbmVDb3VudCI6MjMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImFkYzczZTY5YmY5ZTdjODM0Y2QwODIzZjAxNjZhYmEzMTk1MzRkOTJjYTU4NjA2N2Q1NzAyMmQ1NDY0MzlkYTAiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjdhYzQwOTk2YmI3MzE2ZDI3ZmZkOTVjMzJmMzFiYjY1ZGM1Zjk4MDVkNDE4MGNmZWI0MzVkMDhjNDZjN2NkM2MiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjQ0NmM4NmFhNjgxZGZmMTIyZDNlYjMwZGE1Y2FiYTMxZjhmOTVjNTYxNmEzNTViZDM3MTM0MDgxYzdlYjMyZTciLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImYxMTU0YWJhNDRiYWUzNWZmYzlhM2YyMTBlYzEwMTE3ZDhlZjlkMTYwNDhkNjI0OWM5YmI3YTg1ODJhYTVlZWIifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_5ad3701aed6342a495b9fa1190fe6f1f",
+      "statement": "service_cancel exists at the protocol and server level but is incomplete as a backend operation: _on_service_cancel runs the shared sender checks, audits marketplace.cancel with the booking id truncated to 40 characters, and replies a completed task_result with detail cancelled true, but it neither creates a task nor calls on_task, and HAAPClient exposes no service_cancel helper in this revision.",
+      "evidence": [
+        {
+          "resource": "repo://haap/client.py#L237-L273",
+          "version": "repo-lines-v1:sha256:490020bd0586fc990842e752246ce7a0161db8d1657a4971a79f7193a86f195f:eyJzZWxlY3RlZExpbmVDb3VudCI6MzcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijk4N2E5YzlhNDQ1OGVhNGU1YWE4N2IzZWFlN2IzMzJjY2U2M2NiYjUwMzVlYjEzNTEwMzk5ZDNhNjM5YjU0NzQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjBmMjM0N2NmYWEyYzE1NGI2MmUzZjdkM2M0OWFkNTMyODQ5OWZhNTIxNGYyYWY3ZTM1MjQ2ODk3MTcxOTUwMzEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6Ijc1ZTEzZTIzOTUzZGNkZTM1NWY1N2Q2ZTJjNjY3YjIxODQ2ZmQ5NTQ2ZTU1YzQ2MjQ2ZjA5NzE4ZWJhMDdlZmYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImI1YzM1OWUwYTQwNWVlY2QwOTE2NDFlN2NhYTZmODM3MjUzNDJkMDE3N2NiMTI5MGQyZGFkYThlMGU5OGQ4NmEifQ"
+        },
+        {
+          "resource": "repo://haap/server.py#L408-L416",
+          "version": "repo-lines-v1:sha256:2362bcb0d3bcaa7b72e32e598d325fb750c422767cf058040965d4fc4f50df52:eyJzZWxlY3RlZExpbmVDb3VudCI6OSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMTRlMTQ1YmRlYmU4YTA5MDE0OGVhMTI5Y2MzZTNmM2E3ZDMzMGM3NWE3MTM1NGFjNWFhYzgzMTNiZTY2YzEzYyIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiYWIwODQ1OTg0YjdkMmJjMWVmMWM2NDU1NjYwYjk1YjUzMDM3OTY4NDQ5MjgwMTY1OWI5YTFlNTUzNGM0Yjc1ZSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiODk2MThmMDFhOGVmMzAwMjExODZjNGUzMjBjYjk0MmViMjQxZjExNDIxMzQwMGJjMjEyYmNiZjIxMmJlYmQ1NyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNzMyMTRhNzUxMGQ2ZDQyYTYwMjNjYjhkZGYxNDgzOTNlMzVjZDMwMjI5NjRhMTg0OTQ5MDkzOWM5YmE3ODcxYyJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_b8a353bd179040f0aa8387f9d2eba4dd",
+      "statement": "Quotes are one-way: a service_quote arriving at a business is verified as a bootstrap message and then answered with a signed error envelope ('service_quote not expected here'), and a booking is acknowledged with a task_result envelope, never a service_quote.",
+      "evidence": [
+        {
+          "resource": "repo://haap/server.py#L106-L108",
+          "version": "repo-lines-v1:sha256:24e91aa037430d266b76abf24999c7f86c3fbc6566d7de84b8889c62481092a6:eyJzZWxlY3RlZExpbmVDb3VudCI6MywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiOWE5MjRhZjg5Y2QzZGM2MWRiNDZkNDVhNmNiMGZjYzIxZDJlMDZlYzViNGIxNGFjN2U5OGY4ZGQ1NzE4ZWQ4YiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNTdjMzgzZmM3MzA2YjRhNzhmYWZkNmIxZjVlYWQ0Y2ZiM2MzMWMyYjNjOGNhODMxZTUwMzRmNmNjNjVjOWQwNiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiYmFmNzdjNjExZGViNGU5MDExZWNiNmU5NmIyYTRlZjlmODY5MmJlMTYxYWZhOThkNTcwZmVlNGU5MGU1MTI4NiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiYTQ2YmE3MjNlNTAzMzUzMDQzYmFkNjM5YjEyMWNiMDU5ZjY2OGQ3MmFiNGJkNTQ3OTBkYWQ5NjIwM2Y1ZTU0NSJ9"
+        },
+        {
+          "resource": "repo://haap/server.py#L418-L420",
+          "version": "repo-lines-v1:sha256:6ff8f2f2f0480f2f2a4b67baf04696d7000f9db211094e687bc8786160d00827:eyJzZWxlY3RlZExpbmVDb3VudCI6MywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNTQ5MWJkYjU1Njc0NzE1NTMzYzM5ZWI0MWVjOGFlOTE3YjU5ZDcxNjMzMjU4YjEwNDQ5M2E5YTU5Njk0MTI4MSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNmIyMWM2M2IxZDdjMzk0ZmZiOGQ3YTA0Mjg2MjEzNGRmMjVmYmM5ZjQyYjc4YmVjODJmZjRmYThjOTU2YjNiMCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiYWNlMmIzNmRjMTY2YWU4MzM0N2MyOTkxMzNhODllMzFhMzc0N2Q5MTExN2U3NWYwZDE1M2Q0ZTZlMjhkN2JkNSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiYmJkZDI4NjRmMTc1ZDJmNzA4OWNjYmFhYThkOThkOWE5ZTBmYjA4NWYwZGMzMWZlYzBhNzZiNDQ2MzhkMDZlMiJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_1181d0f258f94ea7b7b4bcc6140b81aa",
+      "statement": "The public capability manifest advertises only MESSAGE_TYPES_PUBLIC and deliberately omits the service_* marketplace types, so open services are gated by marketplace policy rather than advertised as offered capabilities; marketplace discovery means discovering the business (fingerprint and endpoint via registry or well-known) and then learning services by asking with service_search.",
+      "evidence": [
+        {
+          "resource": "repo://demo_marketplace.py#L64-L73",
+          "version": "repo-lines-v1:sha256:84835c44b302dc0f52877f793addeb20ea44bdb6808b30851e15315e11ca9760:eyJzZWxlY3RlZExpbmVDb3VudCI6MTAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjMxNmI5YjliMmU1ZWUyYzBjODc4OWEzNmU0MWJjMThlYTA0NmJmNWEyNmUxMmQwNjcwYmYzOWVmNTkwNGUzMDgiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImY5NWUwNjY3YTcwYTUxN2U2MGQ3NjJlMzRlOWM5NjA3MmQ5MGZlOTZhZDVhZTlhMzJiODQ5MDU5NGM3NzhhODAiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjU0M2E1Nzc5MGNlZTMxZWQ2Y2VlOWNhZWYwYzQyZDY4Mjk2NjNlOTgyNDAyNjI0NjFhZGU3Y2ZkNWUwOWIzNWEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjBlNGVmNjE0YTRmOTc3N2M0YjJkNWZiNDkwM2FiNDA2ODU3YjhhMGI1MzA3NTM4MGI1YjkyNDkzMjJiYzExNWEifQ"
+        },
+        {
+          "resource": "repo://haap/capabilities.py#L35-L39",
+          "version": "repo-lines-v1:sha256:0360db82fcfd8bc4c6524db495f4c1a24a9f71203400b25d58585d8d006acec9:eyJzZWxlY3RlZExpbmVDb3VudCI6NSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMDYwZDRlYWFkNDgwM2EwOTc3ZDViZWQyNzQxNDk1Y2YxMDkzZTQxNGNlZjg3YmU5NjAyZjc0NjFmYzY2ODU3NCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiZjk0MTZlMDlmNzhiYTMxNmMwMzI1NjgyMTNiODU1ZWU3NTZlNDE1NjVkOTE4ZjA5NTE5YzgxZmQ2MjBmNDA2MCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiYWEzZTllMDA1ODgwM2MxNTY3MGRiMDFjNjg4NDc4YjUxNWQ3ZTNjNmMyNTgwN2UyM2QwZjhjZjFhOGQwM2U5ZSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiY2IxYTk4MWNmMmYwNzdmYTgyZmJiOWE5ODRiZjIxZDA3YjI2NTIyMDE1ZmY1YWMwNzU2NzRkMzU3MzQ3Yjk3MCJ9"
+        },
+        {
+          "resource": "repo://haap/server.py#L97-L100",
+          "version": "repo-lines-v1:sha256:b18b54b04f870433472fea76c87a6cca5f64f72a8b310f21a9f6466f863a8a17:eyJzZWxlY3RlZExpbmVDb3VudCI6NCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiZTNlOGFhZjk3ZWY3YmZjNDhkYjBhMWVjYWMzOWFjYjIxZGFhMGJjNGRjMzlhYTNkMWNmZTI1MmNjMDk5NjNhMyIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMzRlMzQxNTc1NGU4ZGRkNWEwZGZlODE4ZTdhMDg2NWFhNGUwYjA1M2NjNDNiMTJhZTc2MDgwODM0NDU4ODcyNSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZDU0MDQ5MzdlZjY1YWViY2ZkMDE1OGRlYzZmMWFkYmNhMTNlZjRkZjlmNTk4NTM1YTkyYWEyY2I5MDY4ZjMyNSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiYmMxN2M1NGY3MDVmZTQ2NTM1Y2NhZDQxMDIxYTE3YzZiYjQzYjU5ZTI1NmVhMDY3NzBiMzdlM2E2OTE2MGM1YiJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_1fcebdfb87b043d5acceda75d84835cb",
+      "statement": "demo_marketplace.py is the canonical working example of the workflow: two full agents with real Ed25519 identities (business Peluqueria Euraka publishing the corte/corte+barba catalog with auto_accept True, personal agent Agente Personal) running over real loopback HTTP, where the business's on_task writes an iCalendar appointment into demo_data/citas_peluqueria.ics and the personal agent drives service_search then service_book end to end, finishing by printing the calendar file and the business's audit trail.",
+      "evidence": [
+        {
+          "resource": "repo://demo_marketplace.py#L27-L90",
+          "version": "repo-lines-v1:sha256:3a369607df8b71dc270f7e76a70917251bc823d30c33c70eab08d662b66d7407:eyJzZWxlY3RlZExpbmVDb3VudCI6NjQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjcwYmM1MTI2NWRhM2M0OTRiZGQyOTQwOGMwZTE3NzY2NWJmZWFkNmZkMjc5MzZmMDU5ZDJjNTU3YjE5YTNjZTEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImMxMTM1Mzc2ZWJkZjNhY2ZhNGI2NDJlZTQ4YTA4NmQ3ZGE2MjBmMmFjNWQwYThhODdmNjExODU4NzVlNzUyOWEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImYwMGM5MGViMjRlYzMyMWQxNGE4Mjk2YWRlMTQ0NjE5NjUyYWZhOGNjYzMwM2M5MTUxMzdkOWI1OTE3ZmUxNzEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjNkNDEzNDBjYzIzOWExNTljZTliNjAyMmU5ZjYzMjI4MzJlMmVhZDc2Y2FlOWU0NzU0ZDIxMGViOGZiNmQ1ZTgifQ"
+        },
+        {
+          "resource": "repo://haap/client.py#L238-L273",
+          "version": "repo-lines-v1:sha256:54d6590a1cfe486d351beb1c9188892e3b2b823662d48d83a88846a52f597cc5:eyJzZWxlY3RlZExpbmVDb3VudCI6MzYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjcwYTMwYTQzOWVhNDI2NzNjOGFjODQwOGQ0ZTkwOWZlMzlhNjA5YTBiNjI4YTBlYzI3NzEyYTE4ZDcwMTU1ZWUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjBmMjM0N2NmYWEyYzE1NGI2MmUzZjdkM2M0OWFkNTMyODQ5OWZhNTIxNGYyYWY3ZTM1MjQ2ODk3MTcxOTUwMzEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImViZTRlODdjYzE4ODM5ZjExYTYwMGQ3OGZkNzA1NzgyYjU2YWU0NmFhYzQ2YzIzMWVkNmQxOWRlZGRkODk2YmEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImI1YzM1OWUwYTQwNWVlY2QwOTE2NDFlN2NhYTZmODM3MjUzNDJkMDE3N2NiMTI5MGQyZGFkYThlMGU5OGQ4NmEifQ"
+        }
+      ]
+    }
+  ],
+  "verification": {
+    "by": "openwiki/0.5.0",
+    "at": "2026-09-05T09:02:08.883Z"
+  }
+}

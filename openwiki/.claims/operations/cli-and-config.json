@@ -1,0 +1,356 @@
+{
+  "schemaVersion": 1,
+  "pageVersion": "sha256:a49af5d11bdce4660f7593d4215d5f9d2efafdfa29fda82c46f8dccecac4a6e0",
+  "claims": [
+    {
+      "id": "claim_eb75488da62b418bb87a865c86c6c92c",
+      "statement": "The `haap` executable is declared in `[project.scripts]` as `haap = \"haap.cli:main\"`; `main()` builds one argparse parser whose subcommand handlers are registered with `set_defaults(func=...)` and dispatched by calling `args.func(args)`.",
+      "evidence": [
+        {
+          "resource": "repo://haap/cli.py#L241-L313",
+          "version": "repo-lines-v1:sha256:4b0b88392f276ea635daa5424336341f5f601a72c33bb8c2ccd09909feb8116c:eyJzZWxlY3RlZExpbmVDb3VudCI6NzMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAyN2QxYWJhMmQ5OGU3ZjZiZWEzMTI2NjljOTI3Yjg0OGRjMzNhMmJlOTVjYjIxY2NlZTRjYzNmMTQ2ZDBmYzAiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImQ1ZWQyNjMxOTNjMDY0NGM3ZTYwYmEzOGZlZjU2ZmRhZTNiOWZkNmE0MTdlZTM1NGM0YjRjMTY5NGNiMTBlZWEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6Ijc3MWY4NmM2MzAwZWZjM2MyMTI2MjM5YTQ2NmM1OWVkYTg4NjhhNzAwMTBhNzNkMTdkM2I5Y2NkYzFkMzBmYmIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjNkNDEzNDBjYzIzOWExNTljZTliNjAyMmU5ZjYzMjI4MzJlMmVhZDc2Y2FlOWU0NzU0ZDIxMGViOGZiNmQ1ZTgifQ"
+        },
+        {
+          "resource": "repo://pyproject.toml#L21-L22",
+          "version": "repo-lines-v1:sha256:6d389c50922a4b0cef25c9f8df27568d498bbab48572bb6f34b7cfd6ab4928fb:eyJzZWxlY3RlZExpbmVDb3VudCI6MiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNGVhYjRlYzYzZGU1MTdkYTRjZDhlNWM4MzA3ZmIyYzc3MzdkMzkxOTBhYjY5ZjMyYTVlOWVmODFlYTQ0MTZkZSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiZGEzYzBmODE5OGJiNDdjY2QxMTNiYjk4NzhjZGNiOTJlMjU1MjBlMzMwNDgxZTVlMDBlMWJiMTA3NGQ2ZmYwNSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiOTQyYzk2ZDI4Njk5NmEyMTk2ODhiNzQ2NWEzZTkzM2M2MWU2ODNkYjAxNzAxMDEzNmYzNzA2ZDA0YWVmYTE3OCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMTM4YmJhNzQyYjBkYmM1MjUxNzczMmEzYTBkMTU0Njc4ZGNkZWE3ODJmZDE2NDAyZTNkYzE5YWYyZTllNjQwNSJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_c4926758a31243eca0ef55e8a7fbcc10",
+      "statement": "CLI exit conventions: command-level failures print to stdout and return 1 (e.g. `haap init` when an identity already exists); `HAAPError` subclasses raised in handlers are caught by `main()`, printed to stderr as `HAAP error [<code>]: <detail>` and yield exit code 2; a `KeyboardInterrupt` reaching `main()` returns 130, while the `serve` and `registry serve` handlers catch Ctrl+C themselves, stop the server and return 0.",
+      "evidence": [
+        {
+          "resource": "repo://haap/cli.py#L162-L166",
+          "version": "repo-lines-v1:sha256:29daf39de8a860bc350e1907b0099c22d0c2938838ce942bf316bcf70f72b19e:eyJzZWxlY3RlZExpbmVDb3VudCI6NSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiODE3ZDQzYjJlNzUxNjI1Mzg5MDMyMGRkY2NhMTNkYmU5ZTY5NDY0NjBjZmYzZmNkMzIwNWFhZGE5YTk1OTc3YiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiYzc1ZWZhMGYwNDFhNzcyYzExOGJlYzQ0OWU1ZTM3MTExNzk1MzAwY2RmZmE1MDc5NTVjMThhM2UyOThkNTViMCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNGNkNDRlMjYxYjA5YzFjYjdhMjJkMWRiNzQzZWVhYzY3ZjdmNmRhNjYzNGU1ZTI2Y2RhOGY2MTQwNmQ3MjliMiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMDdhZjVlMmY2MWI2N2IwZGI4ODQ3MjQ2N2U2YzAwNzFjNDlmZDQwMmI0Njc1Yjk3OGIxNzExZTBhYWU1NjI0YyJ9"
+        },
+        {
+          "resource": "repo://haap/cli.py#L170-L187",
+          "version": "repo-lines-v1:sha256:576c632ac91eb67c6445f467d178a008b769d50e4c6e203d19fb3434280f2088:eyJzZWxlY3RlZExpbmVDb3VudCI6MTgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjY5YWIzMmE2MzRlOGRkNjQyYmY5MzBjN2U3Yjg2YzU2MGMwNTVhZTBhYjlhYjQzZDQ0ZDdjYzEyYmQwOWRmN2QiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjE2MjMzYjNmZmVhMzJhMjNkZjUzMDY1MzQzNDhmMmRlZTc3NmE1YTZmNzRmYjUzMzE3NWRkYzUzOWE4ZmU0NjQiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjA3YWY1ZTJmNjFiNjdiMGRiODg0NzI0NjdlNmMwMDcxYzQ5ZmQ0MDJiNDY3NWI5NzhiMTcxMWUwYWFlNTYyNGMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjQ4NDJkMzE2YWMwYmViNWJlNTAwOTVjODA1NjIxZDQyOTA3YjBkYTg1YTQzNTkxMmRjMTFiOTAxYjgxMTZmZGMifQ"
+        },
+        {
+          "resource": "repo://haap/cli.py#L303-L313",
+          "version": "repo-lines-v1:sha256:fc7090e241c2b6e641bfa7496fad720ea81b47b7c9bd5f986d7ef1ecfc595f9c:eyJzZWxlY3RlZExpbmVDb3VudCI6MTEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjI2OWFkZTE1ZTc0NDY1ZDczODAyYjg2ZWI0MjViYTk4OTA4MzgzOTdhMjdjNTNiNDUyMmUzZTVkNDRmNmQxYjUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImQ1ZWQyNjMxOTNjMDY0NGM3ZTYwYmEzOGZlZjU2ZmRhZTNiOWZkNmE0MTdlZTM1NGM0YjRjMTY5NGNiMTBlZWEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6Ijg1MmRkZjY1YmFkMDdiNjhiMDA2ODM2OTUzOGVjZDI3NDVjZjRmZjZkZTY5MWM5ZjliOGEyNzUyZTU3Njg2Y2QiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjNkNDEzNDBjYzIzOWExNTljZTliNjAyMmU5ZjYzMjI4MzJlMmVhZDc2Y2FlOWU0NzU0ZDIxMGViOGZiNmQ1ZTgifQ"
+        },
+        {
+          "resource": "repo://haap/cli.py#L51-L59",
+          "version": "repo-lines-v1:sha256:d601b0bd8849c1af6866dda373e861ec9a5eecbeede9a6de046fb7c3b75a3deb:eyJzZWxlY3RlZExpbmVDb3VudCI6OSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiZTM4ZjY5NTY4ZDJlODU1MmIxNmJjMWZiOWJiM2I3YTIyN2NlZWUyNzc5ODVmN2RjYmQzMTQwM2Q5MWM5MWMzOCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMTYyMzNiM2ZmZWEzMmEyM2RmNTMwNjUzNDM0OGYyZGVlNzc2YTVhNmY3NGZiNTMzMTc1ZGRjNTM5YThmZTQ2NCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMmEwMWM2ZTMyMjI1ZDJjNGZiZGJiMmZiNjA1N2I1ZWRiZTA4Y2M3MjBkZmJhMzg3ZjhhOTNkNmJiYmQ0ZWU2YyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNGYzNWFkMTM5ZmQ2MDRiMmQ1MDZlMDIwY2U3YjdiMWJhYjY3NDkzMDRkZWE4OTIxZWYwMGJkM2RlMjMwYzM4MyJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_12aebc1b2c6e4ca9af9c8ea9f3396f2c",
+      "statement": "Stores resolve the agent state root as `$HAAP_DIR` falling back to `~/.haap` (`haap_dir()`); each `cmd_*` handler constructs fresh `IdentityStore`/`Directory`/`TaskRegistry`/`AuditLog` per invocation passing the top-level `--dir` value, which overrides the environment variable and, being declared only on the root parser, must appear before the subcommand (e.g. `haap --dir /srv/agent-b friends list`).",
+      "evidence": [
+        {
+          "resource": "repo://haap/cli.py#L241-L246",
+          "version": "repo-lines-v1:sha256:dfa947cfb62cbc12ac954dc325808d2c8d89f79cd9e00041391446fc3731282f:eyJzZWxlY3RlZExpbmVDb3VudCI6NiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMDI3ZDFhYmEyZDk4ZTdmNmJlYTMxMjY2OWM5MjdiODQ4ZGMzM2EyYmU5NWNiMjFjY2VlNGNjM2YxNDZkMGZjMCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMWJjMDFlNzgwM2I3YmE0MjljNjBkZGIxMGUzZTQ4YzUyM2U1MjdhNzg2MjExZTRjNjM4Mjc0NmE3ODljOGVkNiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNzcxZjg2YzYzMDBlZmMzYzIxMjYyMzlhNDY2YzU5ZWRhODg2OGE3MDAxMGE3M2QxN2QzYjljY2RjMWQzMGZiYiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNTM0MTU4MGYwN2U2YmQ0NDFlMTkxMzQ1OTNhODMxNDA5YjVhYzIxZjU4ZTljNDdlMWJkYjExNjU2MzA0NThlNyJ9"
+        },
+        {
+          "resource": "repo://haap/cli.py#L42-L47",
+          "version": "repo-lines-v1:sha256:b009ae6c4352be20c6f7a076f7fc36c339eea36935f45e7053f50e46588dff6a:eyJzZWxlY3RlZExpbmVDb3VudCI6NiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiZjQzY2YzYjhmMTAwMGNhNDQ4MmFmNTIxY2FmOTU5ZTE2YWMzY2M0MzkyNWViZTYxN2MyMGIyMzgyMDlkNTUxMSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiYWMzMzU5ZGE3ZjQ1OTNkYTFmNzZjNWY5MTZiMDljYTAxNmE5Yjk3YzAwYmEzNjZmMGI3NDc4NGQ5YjUxMTIwOSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiYjcyYTYxYTY3ZGY4YTI3OTUwNDQxMWNjZDYyNThiMjU5NmJlMmRhZTdiZDRkNDZmODNmZDk3ZTkyODM2ODM3NCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMmEwMWM2ZTMyMjI1ZDJjNGZiZGJiMmZiNjA1N2I1ZWRiZTA4Y2M3MjBkZmJhMzg3ZjhhOTNkNmJiYmQ0ZWU2YyJ9"
+        },
+        {
+          "resource": "repo://haap/identity.py#L32-L34",
+          "version": "repo-lines-v1:sha256:0739a0256e660e0fed2b5cb6587fd2ae627d94c92b85befd93fb7a80f41db256:eyJzZWxlY3RlZExpbmVDb3VudCI6MywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNTAwNzNmYTM0NWE4ODZjYWEzMGNjNjZmNTUxNzUwNWQ1MmYxYTcyMTlmOGVlNzUxNmMxODdkNjc4ZjM2ZDlkNSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMzhhNDExYTRhMWU0NTQwOTc3MjNmOWEzOGQwNGEyMjRmOWU5ZWE1ZDBjMTQ0NmQ2NjBhZjI1YzA4YWE1ZWYxNiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNmJhNzlmMzVkOWI3MDkzNGVhOGRjNWRhMDc0ZWYxNGYwNTA3YjBmMGM3MTBhYWNiZGUzMjUyNmM2OWE2NGNiYyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNGJiZjk4NjA4MDVjNWEwYjQ1MzkwYWQwYjMzYjcxZDgwNTA1ZWZlZDhiMjQ0MTJlN2Y0ZmZjYjNhNDUzYjkwNyJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_88c2d93dae334368b2b3fe823fcfb0de",
+      "statement": "`haap init --name --endpoint` generates a fresh Ed25519 identity through `IdentityStore.create(display_name, endpoint_url)` and persists `<dir>/identity.json` atomically with 0600 permissions; running init again against the same directory prints 'identity already exists at ...' and exits 1 because `create()` refuses to overwrite unless `overwrite=True`.",
+      "evidence": [
+        {
+          "resource": "repo://haap/cli.py#L51-L59",
+          "version": "repo-lines-v1:sha256:d601b0bd8849c1af6866dda373e861ec9a5eecbeede9a6de046fb7c3b75a3deb:eyJzZWxlY3RlZExpbmVDb3VudCI6OSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiZTM4ZjY5NTY4ZDJlODU1MmIxNmJjMWZiOWJiM2I3YTIyN2NlZWUyNzc5ODVmN2RjYmQzMTQwM2Q5MWM5MWMzOCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMTYyMzNiM2ZmZWEzMmEyM2RmNTMwNjUzNDM0OGYyZGVlNzc2YTVhNmY3NGZiNTMzMTc1ZGRjNTM5YThmZTQ2NCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMmEwMWM2ZTMyMjI1ZDJjNGZiZGJiMmZiNjA1N2I1ZWRiZTA4Y2M3MjBkZmJhMzg3ZjhhOTNkNmJiYmQ0ZWU2YyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNGYzNWFkMTM5ZmQ2MDRiMmQ1MDZlMDIwY2U3YjdiMWJhYjY3NDkzMDRkZWE4OTIxZWYwMGJkM2RlMjMwYzM4MyJ9"
+        },
+        {
+          "resource": "repo://haap/identity.py#L120-L146",
+          "version": "repo-lines-v1:sha256:14dccb07a90bf0f884642ed670eb4d57f45296cf3e982188d2b148e59a26fb65:eyJzZWxlY3RlZExpbmVDb3VudCI6MjcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjUwNjNhN2ZiOTExMTQzNjQyNTcxMTRiMzg2Mzg4Yzc2ZjRkMTc4NzQzMTBiYjgyZmU3Y2FhNjgyNGM0ZTgyOGYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjZkYmQ5MDVmNTYwNjE4NTQ0MzBjOWI1ZjdkODc3MDhiNWExYmZmNDAzYTA0NDIxMTI4OGNmZWMxZTJjNWYzYjMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImRlMmQxNGY3NjEyOTlmYzBjNDA4NzFjYTU1NzcyNzE0OTM1NWM4MzcwOTVhODYyNjY0YTE4ZGI1NTk0ZTIyY2MiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_b96160a71b9b40d1a76ff0b81dcf4500",
+      "statement": "`haap whoami` prints `Identity.public_claims()` as indented JSON — display_name, fingerprint and an endpoint {transport, url} block only when configured — the key-free public projection also used to build manifests; before `haap init` it fails via `NotInitializedError` (exit code 2).",
+      "evidence": [
+        {
+          "resource": "repo://haap/cli.py#L62-L65",
+          "version": "repo-lines-v1:sha256:817a0aa51675b29cc8beec3395968ab1858db6fdb1588fbd225dcfaedc81d884:eyJzZWxlY3RlZExpbmVDb3VudCI6NCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiOTNlZWMyMWYzNDQzZDhkODRlZjMxMGM5M2RlNzVjYmJjZDllMGQ2OTEzMmU2MTVhMWFkZjQ4MjBhMjJjN2U0NCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMTYyMzNiM2ZmZWEzMmEyM2RmNTMwNjUzNDM0OGYyZGVlNzc2YTVhNmY3NGZiNTMzMTc1ZGRjNTM5YThmZTQ2NCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMDU3MjJiOGM0ZjI4MzFhMDhhNmZmMTY4ZDE2NTExNGI2ZmRiYWNmOTg0MjE1MzY2Mjc3NjkzYmRjYjNiZDAyMCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMzVjMzVhMGFiZDVlMTRjOThkMzIxYzUxYjJjZjIwMzQzNDAwYWExNDk0YTg2ZmVhYWYxOTU5MDI0ZDI1ZjM0ZiJ9"
+        },
+        {
+          "resource": "repo://haap/identity.py#L61-L72",
+          "version": "repo-lines-v1:sha256:f04a3c64fb978d6b5f350a23b519789c1c82c2b30d7b54382791da4509fdebeb:eyJzZWxlY3RlZExpbmVDb3VudCI6MTIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjgxOTY2YTU0Yjc2ZTZlYWM5MjVlODViMTZkMjJiZGJjMDUwMWE5M2FkYzY1ZjZlNTdkMDRlMTM0YjMzOGQxYzEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjBkY2U0NGZhZDcyMjFiMThjNGIyMjVjNWY5OGY0OWYyYzZlMzZhNmM5MjcwZWYwY2M4YTA3NGMwMmUwM2ViNDgiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjFlOTc3YmU1ZmFhNDg4ZDY0NjVlMmFhNWQ5M2I1YmIxNjgzMTNkNDZlNzQ4OGM3ZTY3MzQxNjVkMGMyNGRlMmQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzMzdjZGVkZGFhN2RkNTczZGJkNjJjYjQ5MTExZThkYzVmOTFmYzNjYjAxMWVjMGJhNGYyMjg5ODBjYmM4MGEifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_0b4099c26b344a61827d87ab9c1bb567",
+      "statement": "`haap friends add FP --public-key --name --endpoint` only records the peer locally as a `pending_out` entry via `Directory.add_pending_out` (fingerprint, friend's public key, endpoints, conservative default grant template) and performs no network I/O; sending the wire-level `friend_request` is done from Python with `HAAPClient.start_friendship(...)`, which the README documents as the companion step.",
+      "evidence": [
+        {
+          "resource": "repo://README.en.md#L146-L155",
+          "version": "repo-lines-v1:sha256:8c4c40e6e82027a087010d79293832bf21af33172e48a7a5109c1105226b2c31:eyJzZWxlY3RlZExpbmVDb3VudCI6MTAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjMyZDhjZjkxMWU3N2YzM2U4YWEwYjNlNzI4MzVjMjc3M2UyODYxMDE4Mjk4ZjY3MjBiMDg5MTkyZDZmYTlkOGYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjViN2NiMGJmNGM3MTdkMTQ3YmMzOGNmNzEzYjdlZDE3NGI3Njk3YmNiZDIyYTM1YjYwOGRkZGVlZDA5Y2E3OTAiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjA0NDMzNGZlNTBmYjVmOTVlNGZhMzhkMWJjMzY5YTNhZTY1ODEzM2JjOGNiNzc0YzYyY2E5ZTY3Y2JiNDdhYTgiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImVmNDViOTg0NDJhNjgwMDJjNmJiMjU4ZDY2NjZlOTFmOGE4YmU4MTFlN2Q0ODJlNzZiZDk4YWIwMzBkNDE2NzYifQ"
+        },
+        {
+          "resource": "repo://haap/cli.py#L99-L104",
+          "version": "repo-lines-v1:sha256:5d378a063c1eb26fa20eb5726651c75df90e388a04cb346672d851abfcd84910:eyJzZWxlY3RlZExpbmVDb3VudCI6NiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiOWJiZDM2MjQyNWY3ZTg0MmQyMDA0MDRmZDAyNThmOWQwYzYzNDdjNjdlZmNiYmNkNTg1NTY0YWM4NGVkNjQ0MSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNWExNjgwOWMwNzVkYjMwOWUwOWJiYzlhYjdlZmVlNjllZmI1ZjQxOWJkNGQ4OTMwZDAzODA2NjAyZGQwMmZkNCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiODQ3ODkxZDJkYzQ4OTgwNjU4ZjdkNTRiN2QwMGFlMjc1NzY1OGNmNzcwYjA3MTQ2NTFjYTVlODc1YWM3ODMzNCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiY2MwOTQ4NWQ1NWY2NDMxY2FlMzVlZDk4ZjM5NzM2MTcxZTE0ZDFhZDhmMzg0ZGUzOTE0YzU3NTA5YWZmMmE3NCJ9"
+        },
+        {
+          "resource": "repo://haap/client.py#L120-L125",
+          "version": "repo-lines-v1:sha256:b73362d409891ee62f63a87ee0557b3b75fcf69d9698a6c65f6edaa86d1e7242:eyJzZWxlY3RlZExpbmVDb3VudCI6NiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMjViZWUwZGEzOGMzOWQ1NzMxNWEzNTE2NjljMDUyNDJkNjEyNTVkZTRkNTEyNmJkYzU3OTA1MmY0OGE0NTM5MyIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiOWQ3YzU3ODhiMWQ0MmNkYzBkYjUyNDVmZWFjYmNkNzYzOGJmNWQ1ZDVhNWRiYTFhOWQxY2VjNzQ0MTdiMmQxZiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiODIyNWM4ODQ2Y2VjYTczYTZmN2M1MzJkZWMxOWE4MzcxNGVjMDc1NjQyZWRiOTE4YTU2Y2NiZTJkOWZlNjAzNCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMzFlZjEyYzUyNWUwNzk2NDJkZTNiNmUyYmZjZTJmZjA2NDM0OTljNjI5NDZiYjNiNGY5YzgzOWE1ZDE0YjdhMCJ9"
+        },
+        {
+          "resource": "repo://haap/directory.py#L222-L247",
+          "version": "repo-lines-v1:sha256:dfc543fe0d265d9f81886ffb9bdf3d8b8191f56362149c67cce3defc1ef6c898:eyJzZWxlY3RlZExpbmVDb3VudCI6MjYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijc5OTA5NDk4NWE3MjVhODUxNzM1YzkwNjNiNWEwZjZhOGU1ZWY5YzI3YjJhYzc5M2M4M2ZmNGU4NWE4MjE0OWEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImYwMWZkMDc2NmFiMmU5YWZlNGE3Njc0ZGM4MGE2MGZiYWQwOWRhYTY3NzIwMzg5OTY5NGE5MjNjNWI2ZWFlZDgiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImE4YmVhMGJjMWI3NWM0MTM4NTRjYTYyNTJiNWU3YTI2YTkxNzcwMzhjMmY0YjA3YzU4YmM3YjE1YmJkNjlkYWEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjM3ZTM2MWEzMGM2MjRkZTRiM2EzNWEzNTNiNmI1MWI2YTAwNmFmZDVjM2YyZWJjM2Y1ODdlMmI2ZDM4ZDBmOWEifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_3951c92d830a43888d68ae88531cb8c9",
+      "statement": "`haap friends requests` lists the `pending_in` queue (fingerprint, name, message, declared speciality) and ends each entry with a copy-ready `haap friends approve <fp> --role [...]` command listing the currently available roles, while `haap friends roles` prints one line per available role template (built-ins plus roles.json overrides) with its description and granted action keys.",
+      "evidence": [
+        {
+          "resource": "repo://haap/cli.py#L80-L98",
+          "version": "repo-lines-v1:sha256:611979b52c8bb6626a1020c792625ce4adb1f5314f17f7821a52a7dba4888876:eyJzZWxlY3RlZExpbmVDb3VudCI6MTksImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijg2NmNhY2IzOTc5N2QzOGVmOTUyZTg5YTUwZDgzNzI1YWMyYzQ5NTFkMDlhNzU5ZWQwMzJiYjg0YTdjYWJmZGQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjVhMTY4MDljMDc1ZGIzMDllMDliYmM5YWI3ZWZlZTY5ZWZiNWY0MTliZDRkODkzMGQwMzgwNjYwMmRkMDJmZDQiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjM1MDhlMWIyYjYyOGRmOTE3Zjg4YzM2Nzk3ZWRkMDVjYzY3NTI2Yzc5YmFkZTliZGZmN2YwMGMyNjgwNWIxMjkiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImQyMjE2YTQwNmI5YWI3ZWU2MDBkZDBkNmJmYmExZmFkYzI3OWY3OTg2ZjM4YjEwNWIzZTMzYzZkZGIyNjU5ZGMifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_f32303e5881f4bd4840f7680c593e4f1",
+      "statement": "`haap friends approve FP --role R` is the human approval: it resolves the named role with `resolve_role` and calls `Directory.approve(fp, grant=spec permissions, rate_limits=spec rate_limits)`, transitioning the record from `pending_in` to `accepted` with that template's matrix; `--grant` supplies a raw JSON matrix instead, and approving a fingerprint not in `pending_in` raises `FriendNotFoundError` (exit 2).",
+      "evidence": [
+        {
+          "resource": "repo://haap/cli.py#L105-L118",
+          "version": "repo-lines-v1:sha256:6045528f9672a1bb0bdf8a8eebc35e36dd6f995169e9a5b4100afa5790d1823f:eyJzZWxlY3RlZExpbmVDb3VudCI6MTQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImM5NGVlMTVhNmFkNmUyZTY3N2ZhMWNmNjg0MzJmMmE1ZDAzNmJkMDViOWQyMzFjMWZmMWQ5ZjFjMjE4MzRhNzgiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjVhMTY4MDljMDc1ZGIzMDllMDliYmM5YWI3ZWZlZTY5ZWZiNWY0MTliZDRkODkzMGQwMzgwNjYwMmRkMDJmZDQiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImIzYzU2ZGNjNGFiMmQ0ZjUxYThhOTYyMDA0OTI1NjI3ZWUzZDI5MWUxM2Y0MTQzOTZkMjQ0OWUxMDFmMmQ5MDMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjIwMWYxYWRkODA0MjY5NzE2YTk1M2MxMzA1NTBkYzE4ZDE5OWQ2NWFmZjJlNmIwZjY0YWU1ZDg5NzEwMTVjMjMifQ"
+        },
+        {
+          "resource": "repo://haap/directory.py#L273-L286",
+          "version": "repo-lines-v1:sha256:1ad92010a5d90f8d0564c16e13a37efaaef9acf13e6c371bcd3d68f8ed8eb2f4:eyJzZWxlY3RlZExpbmVDb3VudCI6MTQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjJmNjRjOTkyNTQ4MjRkOGUzOTc1YzFmMTMxMmI3MTNiM2Y1OGMzN2MzMzM5YjUxZTNkMDYwYjg5ZTBhNzYxNDAiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImYwMWZkMDc2NmFiMmU5YWZlNGE3Njc0ZGM4MGE2MGZiYWQwOWRhYTY3NzIwMzg5OTY5NGE5MjNjNWI2ZWFlZDgiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImE4YmVhMGJjMWI3NWM0MTM4NTRjYTYyNTJiNWU3YTI2YTkxNzcwMzhjMmY0YjA3YzU4YmM3YjE1YmJkNjlkYWEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImQ1MzU5ZDlhN2M0NDMwN2UxZDI0NzRiNTY1OWExZmVhYWUxMTJlNDhkNTMyOGE4MDZmODdjNWIxNTIwYTEyMGMifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_e562c86e6ccd4fb5988455c7198f2209",
+      "statement": "CLI friendship approval changes local `friends.json` state only: `cli.py` never sends envelopes, and the only code path that emits a wire `friend_accept` is the server's policy auto-approve branch, so notifying a queued requester of a CLI approval requires embedding integration — flagged on the README roadmap as the unfinished Hermes-webhook bridge.",
+      "evidence": [
+        {
+          "resource": "repo://README.en.md#L295-L297",
+          "version": "repo-lines-v1:sha256:c50ec3a68bbe15e99318a2a3c4904d89e319c0d5f36a60cbdc0352798188b682:eyJzZWxlY3RlZExpbmVDb3VudCI6MywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiN2ZiMmJlNjJlMzJjNGEzN2JhMzg0NWMyZWU0ZWU2NzM2ZDdhYTE3MTQ4OWVmZmU3M2MzMTc0OWYwNzJjM2VmZCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiZjhiYjZkNTc2ODVjNDg5NThlZTQ5OWM1MmU3MjViMGZlMTgzMDA5NmNjZTNkMjhiZGMwMWJkODUxNmI4OGEwMiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiOGYzYjFkZTVhYzBlODFlYTJiNjI3NGI1NGE0Mjk0MmI3ODI5YmFlZDQwNjA0ZmUzMWViY2E0NzEwZjNmYzM4YSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZDMwNDU1OGQ4YzMzZThjYWNlNTQxMDAwM2EwZjMxMTdkODQyMmE3ZDBhOWQ2OGFkZDY0OTBmMGM4ZWVkMWNhZiJ9"
+        },
+        {
+          "resource": "repo://haap/cli.py#L105-L118",
+          "version": "repo-lines-v1:sha256:6045528f9672a1bb0bdf8a8eebc35e36dd6f995169e9a5b4100afa5790d1823f:eyJzZWxlY3RlZExpbmVDb3VudCI6MTQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImM5NGVlMTVhNmFkNmUyZTY3N2ZhMWNmNjg0MzJmMmE1ZDAzNmJkMDViOWQyMzFjMWZmMWQ5ZjFjMjE4MzRhNzgiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjVhMTY4MDljMDc1ZGIzMDllMDliYmM5YWI3ZWZlZTY5ZWZiNWY0MTliZDRkODkzMGQwMzgwNjYwMmRkMDJmZDQiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImIzYzU2ZGNjNGFiMmQ0ZjUxYThhOTYyMDA0OTI1NjI3ZWUzZDI5MWUxM2Y0MTQzOTZkMjQ0OWUxMDFmMmQ5MDMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjIwMWYxYWRkODA0MjY5NzE2YTk1M2MxMzA1NTBkYzE4ZDE5OWQ2NWFmZjJlNmIwZjY0YWU1ZDg5NzEwMTVjMjMifQ"
+        },
+        {
+          "resource": "repo://haap/server.py#L243-L257",
+          "version": "repo-lines-v1:sha256:2772039841b7f06860dcc1335ac79244359a34fbc785d7faa20a07f5024ca088:eyJzZWxlY3RlZExpbmVDb3VudCI6MTUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjE2NTA3MDRiZDlkZDA5Y2Y4ZmQxMDlkY2QwN2M0YWM2N2MwZGVkMGNmY2VkMTdhM2Y4NjVjY2QwN2JlZTNlNTMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImFmMjFjMWQwNGNhMjFlNzg3OTQ2ODhkOGRiMjBmZTBlNjljMTUzMDdmNDMwMmE1YjVjYjRlMzIyODUxYzY1MDMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjgyMjA3MmM1ZjQxNmQyZTI0ZjEzN2U2MmQ0ZjAwNTA5NTA2M2MwNjRiMjA5YWExZGM0MDJhODhiNDhjOThmMTciLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjIzNWNjOGJmYzQ5OTJjZTA3ZWI0OThlYmE0ZWIyMzBjNGY1NmQ5YmJhNzgzNTJkZmZkMjM3ZTM2NTBhMGYxYTMifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_3db6413ee03e41b9a40d89295ad2b85b",
+      "statement": "`haap friends deny FP` rejects an inbound request by deleting the `pending_in` record; `haap friends remove FP` deletes any relationship regardless of status; `haap friends block FP` sets or creates a `blocked` record with an emptied permission matrix, which makes the server reject every future message from that fingerprint (the documented way to stop marketplace abuse).",
+      "evidence": [
+        {
+          "resource": "repo://haap/cli.py#L119-L130",
+          "version": "repo-lines-v1:sha256:02d639d82944a983f1d9f150f215d59ed0afc3d53f77fff44abad04dcc48e559:eyJzZWxlY3RlZExpbmVDb3VudCI6MTIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImI2M2Y1NjliMTQxZDkyMWYyNTEwOTA5ZjZkODYyY2ZmNDQ4MzhhOWM0OGRmOGQ4MGM0MWJiY2Q3ZDNhYjNkMmEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjVhMTY4MDljMDc1ZGIzMDllMDliYmM5YWI3ZWZlZTY5ZWZiNWY0MTliZDRkODkzMGQwMzgwNjYwMmRkMDJmZDQiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImZkNGJlMDY0ODgwMmU4YzRmOWQwZDEyYzdlNWQ0YWZhZjljNDcxYmU4ZmQwMGMwZjI3M2IzNzUwMTQzOTE5N2IiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjdlNjZjYTIxZTE0MWRlMDY0N2JiYjRkOTllOWQyMDUzZWM2MmQ2OGMxMjE4Yjg1ZTJmZTljMWQ1NTQ0ZmU5YzcifQ"
+        },
+        {
+          "resource": "repo://haap/directory.py#L186-L191",
+          "version": "repo-lines-v1:sha256:5cf44ab7b754818ac444712c92cd9f549ce9127bcf5de7446c9de5b67d648c3f:eyJzZWxlY3RlZExpbmVDb3VudCI6NiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNDVkNzA5NGEyODUwZWJlMzdlNzllODc3NzY3NGI3YzZmYTUwNzkzNDk4ZmM4YWIxZGYyNzQwNzE1M2FjZGM1OSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMWYyOWViODljYTcyNDE2MDkxYmQ5MGVlMmEwZTA0MDE4MGMwMmEyM2RhY2JmYjAyMDNjMmY5ZmUyM2NlNzIzNCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiYThiZWEwYmMxYjc1YzQxMzg1NGNhNjI1MmI1ZTdhMjZhOTE3NzAzOGMyZjRiMDdjNThiYzdiMTViYmQ2OWRhYSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNDVjNTg0NWEwODZlNzI4ZGQxZGUyYWY1YzE4NTdjNDU3NjlkOTg5ZmYwNTAzMzI4OTNmMzIyOTE2ZWNhZjAxYyJ9"
+        },
+        {
+          "resource": "repo://haap/directory.py#L288-L310",
+          "version": "repo-lines-v1:sha256:7e1686de800d6e9ce73afa558db09ab916d8e2c37103c6c70fef7dad34fbb944:eyJzZWxlY3RlZExpbmVDb3VudCI6MjMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImVjZTU1YjliMDg4YmQxMWRjNGJiYThiN2RkMjk5NzEyN2IzMTU3ODg3NGRlYWJiZTk3NjUzOTBmN2U3OWZlMjkiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImYwMWZkMDc2NmFiMmU5YWZlNGE3Njc0ZGM4MGE2MGZiYWQwOWRhYTY3NzIwMzg5OTY5NGE5MjNjNWI2ZWFlZDgiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImE4YmVhMGJjMWI3NWM0MTM4NTRjYTYyNTJiNWU3YTI2YTkxNzcwMzhjMmY0YjA3YzU4YmM3YjE1YmJkNjlkYWEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_28d36391d00f4d5c97dcdb8e214afc3a",
+      "statement": "`haap capabilities [--speciality S] [--show-all]` builds the capability manifest on the fly from `Identity.public_claims()` plus an introspection of installed Hermes skills; by default it prints a one-line summary (fingerprint, name, skills/tools counts) and with `--show-all` the full JSON, but it never writes `capabilities.json` — that optional export (`capabilities.export_manifest`) belongs to embedding code.",
+      "evidence": [
+        {
+          "resource": "repo://haap/capabilities.py#L139-L147",
+          "version": "repo-lines-v1:sha256:e411def966afe2242b9789f65365edd0bec7f8880716e24f9757050c2cdc34d6:eyJzZWxlY3RlZExpbmVDb3VudCI6OSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMDFkY2NiM2IwNjU2MTNkYmYwMjFhZTM3OTU5NzlhZDc3MzkxYjQ3NjU0N2NhNzQ4M2IwMmNmMjRlOWE4N2Y3ZiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiYWFjYmMyNTQ0NTQ5Y2Y5Njg4ZTNmMjA2OGE2YWNjZjdhYTMyYzM4ZDZiMWQwNGFhNjVjYjMzZmIxNTZlMTU3YiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNGZiZDAwOTMxNGJjMjcwODQxNjczNGEwMmFlNWZmMzlhMWU0OGEwNTBiZTkxZjQzYjJmYWE5MjAwMmM2MmJmYyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiYzRlYjNjZTRjYTQ1NDExNzViMWE5NjBjNTk5ZjY1ZGJhYzBlZjlmYzM2NGQ5ZThmMWQ2N2U4ZTgzNTBjZDBmNSJ9"
+        },
+        {
+          "resource": "repo://haap/capabilities.py#L92-L110",
+          "version": "repo-lines-v1:sha256:222db236587e3e4a65b4e23bca6557e0cff6bf062c56a2db7d2cbb3ffaeaff38:eyJzZWxlY3RlZExpbmVDb3VudCI6MTksImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImExMWQyZWJmZWE5N2MwMjYwNGIyNjI2NGFjNWI5NWNlMWY3YjdiNzRlODAyMWMwNmUwMTdkZTU1ZTkwOWVlMmMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjdkN2ZhNWI1MDVlYTNlNWFiMTc0YjU4MDg2M2FkODlmYWNkYzIyMTM4NGY2NTBjZmZlNmJmMTFiOWM5MDI5ZjciLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImJmYjQyNDM1NjMzODgxYThlYjljMmNiZDUxZTE1MmY3NzIyMjdjOTQ5OWEyY2I4ZGI0MmFmMTVhODE5NDEzYmQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjY4ZTY5YjJlNDUzN2IxNTFhYmFhYTIxM2RlZDdhOGU2NmY2MDU4ODliN2FlZjJiYmQ1MTE5M2Y2YThjNWIyYmUifQ"
+        },
+        {
+          "resource": "repo://haap/cli.py#L136-L147",
+          "version": "repo-lines-v1:sha256:a65ae294b4cec8651eeb0e5f8ef8bb8a4c0fc4f313ac62188e8b3b5e30478622:eyJzZWxlY3RlZExpbmVDb3VudCI6MTIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjU2MTJkYTNkZjQwZTlmNzM0OWIzODA3ZGFhYTdkZTRhMjkwODI0YzNmNzZkOTQxZjNhYTNiNTkxOGZhNzg4NjEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjE2MjMzYjNmZmVhMzJhMjNkZjUzMDY1MzQzNDhmMmRlZTc3NmE1YTZmNzRmYjUzMzE3NWRkYzUzOWE4ZmU0NjQiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjM1YzdlYjk5ODc2NjE3MjI3NDliNWQ3ZDczODZkZmI2ZDk1MWQzYmYzNjgyZDhkNzk0MDFmMjBiODk3NDEzYmMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjdjY2I1NGNkNWNhYmU3ZTc3ZDhmYmZlNGMyNTBjNWRjZTZmZTc1M2UzNThiMDViMzc0YTFlMWJlYWY1YjRjNzQifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_8fc2c25e731b46fcb9477c9956ec6c07",
+      "statement": "`haap task list` reads a file-backed `TaskRegistry` from `tasks.json` filtering by `--role` (delegate|submit) and `--friend`; `haap task send` always raises `HAAPError` directing operators to the Python API, because HAAPServer and HAAPClient default to in-memory TaskRegistries (`memory=True`) so under a stock CLI setup nothing writes tasks.json and the list stays empty until an embedder injects a file-backed registry.",
+      "evidence": [
+        {
+          "resource": "repo://haap/cli.py#L151-L166",
+          "version": "repo-lines-v1:sha256:9a6fea0d55839cb50c0a2dc2496c3d0b51b365e2568a1556244871803577af7d:eyJzZWxlY3RlZExpbmVDb3VudCI6MTYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImRkMmY4ZmI3NDM0Nzc2MDE5YzYwMjg5NTYxODYwMWExZTI1OWJlMTYwOTczMjU2ZDJiZDNlZmIzZGJlMjdkNWYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImM3NWVmYTBmMDQxYTc3MmMxMThiZWM0NDllNWUzNzExMTc5NTMwMGNkZmZhNTA3OTU1YzE4YTNlMjk4ZDU1YjAiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjdjY2I1NGNkNWNhYmU3ZTc3ZDhmYmZlNGMyNTBjNWRjZTZmZTc1M2UzNThiMDViMzc0YTFlMWJlYWY1YjRjNzQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjA3YWY1ZTJmNjFiNjdiMGRiODg0NzI0NjdlNmMwMDcxYzQ5ZmQ0MDJiNDY3NWI5NzhiMTcxMWUwYWFlNTYyNGMifQ"
+        },
+        {
+          "resource": "repo://haap/client.py#L80-L80",
+          "version": "repo-lines-v1:sha256:69b2b5676374c3a5ff044a6e2ce85f56f028a79898c82aad17b8959bca094320:eyJzZWxlY3RlZExpbmVDb3VudCI6MSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNjliMmI1Njc2Mzc0YzNhNWZmMDQ0YTZlMmNlODVmNTZmMDI4YTc5ODk4YzgyYWFkMTdiODk1OWJjYTA5NDMyMCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNjliMmI1Njc2Mzc0YzNhNWZmMDQ0YTZlMmNlODVmNTZmMDI4YTc5ODk4YzgyYWFkMTdiODk1OWJjYTA5NDMyMCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiYWMwNGVhMTIxNGRhNDYyZThiZjM4YWNiZWJiMTFkZTRiY2FmYzQ5MDliNjk0ZTU3OWI4MTk4ZmNhMDEwNmI0NyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZTM5NzljOGViMTM2N2UxZWUyOWE3MDQwMTlmNzEwNGI2YWQwNWZhMTExYjZmYTEyNWM1MGZkNzczMTJjMjliMiJ9"
+        },
+        {
+          "resource": "repo://haap/server.py#L69-L69",
+          "version": "repo-lines-v1:sha256:69b2b5676374c3a5ff044a6e2ce85f56f028a79898c82aad17b8959bca094320:eyJzZWxlY3RlZExpbmVDb3VudCI6MSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNjliMmI1Njc2Mzc0YzNhNWZmMDQ0YTZlMmNlODVmNTZmMDI4YTc5ODk4YzgyYWFkMTdiODk1OWJjYTA5NDMyMCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNjliMmI1Njc2Mzc0YzNhNWZmMDQ0YTZlMmNlODVmNTZmMDI4YTc5ODk4YzgyYWFkMTdiODk1OWJjYTA5NDMyMCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiYTYwMDg0ODRiZDI3OTFlNjVlMTBhZWRhMjNlNDdlZDdlZGU5ZjIwZDJmYzhkZThhZjBhYzQ3N2ZkODFhODMxYyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNDc5MDZkMWJhNTkxYjA5NTE1MDhiZDRlMDQwMTdlNGRhZGEyMmMzYTczOTEzOGM2ZTA1YzI3M2ZjNDQyNWFmMCJ9"
+        },
+        {
+          "resource": "repo://haap/tasks.py#L184-L191",
+          "version": "repo-lines-v1:sha256:88a8eb1c43b08279863549d62331b48ea28c3c55fb440f92e1e9d312fe7db0a0:eyJzZWxlY3RlZExpbmVDb3VudCI6OCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiYzk1NjNhYzM0OWZjZGNiZTdiYTVlNTY1MDJlZDlmZWNhZDM5YmFhMmYzZDE4MTNlOTMwNTlmMTNlNmYxNDk4YiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMDc3NjY2OTEwM2NlYzU4ZGEzNTllZjcwMDkzMzU1ODNjNjM5YmEzMjU1YzBhNjVhN2MwMzM0YjYyNWQwOGZhMiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZDFhMTMyMGJiMzdkZjA1MWMzNmFmNWQ4YWZhNjQ5YzhkZDg5MWU2YjU4NTRhMmJjOGVlOWMwZDliYzAzOTkxMCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZWM0NTJhMTU1NTkwNjI4OWE3YTczZjk0M2Y1MjZjNzRhMGQzMjQzNGMzMzZlNjAwMjg5Zjk5ZTY0ZjYzYjAxNCJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_42d9216ba60b4c9bac75b0b3a9ddbfb2",
+      "statement": "`haap serve --host --port --speciality` (defaults 0.0.0.0:8443) loads the local identity, a file-backed Directory and AuditLog, constructs HAAPServer and starts a ThreadingHTTPServer exposing `POST /haap/messages`, `GET /.well-known/haap.json` and `GET /health`; it blocks until Ctrl+C, then calls `server.stop()` and exits 0.",
+      "evidence": [
+        {
+          "resource": "repo://haap/cli.py#L170-L187",
+          "version": "repo-lines-v1:sha256:576c632ac91eb67c6445f467d178a008b769d50e4c6e203d19fb3434280f2088:eyJzZWxlY3RlZExpbmVDb3VudCI6MTgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjY5YWIzMmE2MzRlOGRkNjQyYmY5MzBjN2U3Yjg2YzU2MGMwNTVhZTBhYjlhYjQzZDQ0ZDdjYzEyYmQwOWRmN2QiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjE2MjMzYjNmZmVhMzJhMjNkZjUzMDY1MzQzNDhmMmRlZTc3NmE1YTZmNzRmYjUzMzE3NWRkYzUzOWE4ZmU0NjQiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjA3YWY1ZTJmNjFiNjdiMGRiODg0NzI0NjdlNmMwMDcxYzQ5ZmQ0MDJiNDY3NWI5NzhiMTcxMWUwYWFlNTYyNGMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjQ4NDJkMzE2YWMwYmViNWJlNTAwOTVjODA1NjIxZDQyOTA3YjBkYTg1YTQzNTkxMmRjMTFiOTAxYjgxMTZmZGMifQ"
+        },
+        {
+          "resource": "repo://haap/server.py#L461-L472",
+          "version": "repo-lines-v1:sha256:961b2b030f6dabb1881d3da6ceb3dc08839737fb145202d21c99964030ca81be:eyJzZWxlY3RlZExpbmVDb3VudCI6MTIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijg4ZDlkNTA5MWMyNjBlYzVhYTY2ZmFlZDAxZTY5OGFiY2ViMDIxOTg4M2IwODZiN2I3YTJhZDEzODAzNWE4MmIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImNiOGM0OGQ2NzQ4NTI5NTc2OTQyYWU1ZWNiOWNlODYzZjM0YjgxZTdmY2RiN2IyYzk2MjBlZWY1YjM1ODE1YjgiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjcwMzJkOGU5M2I0NzQzYmQ2NTA0MzgxNTEwN2M4YjRiZGY1NzZmZTBjYmQ1YmEzMmY1ZjYxMTAyYjBjMGM2MDIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_3d9fd8b18722499d88121adebb6a8917",
+      "statement": "A stock `haap serve` constructs its own `RequestPolicy` from the data directory's policy.json (read once at server construction, so policy edits require a restart) and defaults its notifier to `ConsoleNotifier`, printing pending-approval cards to stderr; when an inbound request auto-approves, the server resolves the capped role through `resolve_role` — which reloads roles.json on each call — and returns a `friend_accept` carrying the real granted matrix and granted_role.",
+      "evidence": [
+        {
+          "resource": "repo://haap/policy.py#L73-L79",
+          "version": "repo-lines-v1:sha256:808d138d0fa1553d264386ba4b937b1a43d2721a2335b43a4abac1f3e1476583:eyJzZWxlY3RlZExpbmVDb3VudCI6NywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiOGIxNzE1NzFjYWM5YWQ4ZThiMWZiYmEyZDQ5NjczNWQ1OGVkZGMxNjk4ZTVmNzUxY2RlMWMyMTI5MmQzYmYyNSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMDFiYTQ3MTljODBiNmZlOTExYjA5MWE3YzA1MTI0YjY0ZWVlY2U5NjRlMDljMDU4ZWY4Zjk4MDVkYWNhNTQ2YiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNTI0NWU5OTIyM2Y4MzgxOGZjZTc4ZWM4ZWM2OTBkNGY4NWEzNGJkOTk3NjBhYjNmODUxYWVjMGEwYzFkYzEyMyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZjJlODQ3ZTc1MGI2ODFhYzhkZDJlNDYwZmI4OGU1YWZkMDY4ZmUxYzc1MTNhNDQ4OGIwYzc4ODA2OTRkNmJiYSJ9"
+        },
+        {
+          "resource": "repo://haap/roles.py#L124-L130",
+          "version": "repo-lines-v1:sha256:913d485d7946f9cdc36fee6c6f0cc1bca577818ae671a0e64c23059decdb1ca9:eyJzZWxlY3RlZExpbmVDb3VudCI6NywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiOTliMDAyNDJmZjI4Njg4MmI2NDQ4ZGI0OWFjY2M0NDg0ODMxNTA3Zjg3Yzk3ZTdmYTJiNGIxNDliODE0Njc0OSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiZGNjYzgyZGU5Y2YxYzhmYmMxYTRiMTk2NmI3OGUyNWUxM2QyMjY2YTE1ZDkzYTYwNDk3YzAxYjQwOTY2YjQ4YSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNzZkNjBkZGJhMmQ0YjRkZTQ3M2EyNThjOTdjNGVjYmUwZDlhOWNkN2FiM2Q4NDMxZWFhMzU4NDU2MDA0OWUzMSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMTQxYmEyN2NmZTZjN2YwYWJkODNiZjU0YzYwNzUzNjU4NzA5YWY0OTA3MTRjYTI5MGYyODU1ZjU5ZjE5MmM1OSJ9"
+        },
+        {
+          "resource": "repo://haap/server.py#L224-L272",
+          "version": "repo-lines-v1:sha256:95493c3c0ed25d1de27c829f83b0833cb384befeda29ef2691cd0eee247d72ef:eyJzZWxlY3RlZExpbmVDb3VudCI6NDksImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjY5NDg4NzFmY2VhNzMxMWIwZDkzOTMwZTllN2Q2MWZkYTlkYTA5ZmUzMWI0MDc3ZDc2OTI0N2Q0NWQ3Y2YyMGEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjFjZDI4MTQ5YzljOTk3OGEyYTU5ZTQyMjNkZDZiMTFhYzlkNDcwMzE5YjA2YTQwNjA0MjhmNDBiYTI3NDdjNTQiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjMyZWZlMDJkOTY2Yjg0ODM4MjdmNzY4OWQ5Zjk1OGE5NDliZTQ1YzQ4N2QzN2ZjMWY0ODg2YWFlNjlmMTZiNTciLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjU1NWQzYzBkMGIwMDY0ZmQ5YzIzZjVjMzhkMDU0MTAyNDdjYjYwNTQ2Y2MzNTJkMDhjMDQ3MzhjMWQyZWY0ZWQifQ"
+        },
+        {
+          "resource": "repo://haap/server.py#L50-L79",
+          "version": "repo-lines-v1:sha256:9b3cb0dd2e72fee534fcf7b6bd9be47c497c85cd24ea5306bbf753b18be6d7e3:eyJzZWxlY3RlZExpbmVDb3VudCI6MzAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjE4OTBiMDA0ZDU0ZmIzNzI5MTM4MzY1M2IyM2VkMmNhNWUzZTI3MGJmMjI3ZTAwNTEwOThkZTg5NTYxOWNlMmYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImI1MjljOTk4MDhhMWQwN2I0NTE0ZmM5ZDk4MTEwYzI0MzZhZTBiZDM4MjViMTRkNzlmYTUzZDU0ZjVkMmFjNmQiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImQ5NTcyNDljNzhiMGNlZjEyZjE3Y2I2MjdlYzM3OGU4M2IyMTBhNGI0MTU4NzZjNzc4MTFhODAzZWQ5OGIwOTIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImIwNzliMDg0MjkzYzFiMWYwMTY3OGEzNTI0YTRjMjZiZTFjZjZjM2JkMjliMTg1NDczZGYwYTZmMDY4ZjRhMWIifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_79f95b2443604ea3b3dc75ad512fe4cf",
+      "statement": "`haap registry serve` (default 0.0.0.0:8444) runs the in-repo, in-memory RegistryServer with proof-of-endpoint registration, heartbeat renewal and search, and prints its generated directory fingerprint; the README presents it for demos/communities and points production at the standalone `haap-dird` service.",
+      "evidence": [
+        {
+          "resource": "repo://README.en.md#L128-L131",
+          "version": "repo-lines-v1:sha256:baf17146ec97e35a1cfd2bffbb9d97ece02509d240a4e954725f51fa64b0257f:eyJzZWxlY3RlZExpbmVDb3VudCI6NCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiZDRiMDI0N2FmM2IwOWM4YWU1MjczYjQxYTMzMmYzMjAwN2E1NDA5OWE1YTFmNzlhZTM0YmM4ZjdlMGM1NDAzNyIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiZDU1YTExYmYzMGQ0YjFlNmYxOWY5M2M5YWRhOWU0ZTVhMmI1NDczYTk2YWY1ZDBiNWU0NDQ1ZjIxOGUxZTc3YyIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiM2YxNzZkMzY0ZWIyOTI2OTQ2MWJkZTRhY2QyMjhjZGQ0ZmQ0NWQzM2M3ZjI5M2ZiOTQzYzlmMWUwZDMxYTkyYSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNzcwM2JjZjRkNDZkMDJkOTEyNjMyNzEwNjllZDdmMGY5N2RkMDM2MTQ2NGQ3NWRhYmJiMzY1ZmYwMDFlNGYwYyJ9"
+        },
+        {
+          "resource": "repo://haap/cli.py#L191-L205",
+          "version": "repo-lines-v1:sha256:85a13f90ded8bf3909263b6ea49016070618f8b23b3fe1c9f7322acb05885981:eyJzZWxlY3RlZExpbmVDb3VudCI6MTUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjZmZGM3MGJjZjc3OTgxNzYxNWQ3ODFjODA0NjNlY2I1NjI1YzBiNWI3ODUwNjBlNzBkM2I2YzAzOTkwOTA1ZGMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjVhMTY4MDljMDc1ZGIzMDllMDliYmM5YWI3ZWZlZTY5ZWZiNWY0MTliZDRkODkzMGQwMzgwNjYwMmRkMDJmZDQiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjQ4NDJkMzE2YWMwYmViNWJlNTAwOTVjODA1NjIxZDQyOTA3YjBkYTg1YTQzNTkxMmRjMTFiOTAxYjgxMTZmZGMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjAyNGZhMDc0MjE1ODQ4Njc5MzI2OWI0YmYxNGI4N2VkYWVjMTUzYzk3ZjMwNGQ5NTAyMzI1Y2I2OWIyN2Q5NTgifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_e52014dd4f6b42c0843e299d5736ec69",
+      "statement": "`haap registry register` performs the full signed registration flow (`register()` in registry_client: submit signed manifest, sign the returned challenge nonce as endpoint proof, complete at /register/complete) against `--registry`, using `--endpoint` or the identity's declared endpoint_url and raising `HAAPError` when neither exists; `haap registry search` GETs /search with `--capability`/`--query` and prints matching agents or '(no results)'.",
+      "evidence": [
+        {
+          "resource": "repo://haap/cli.py#L206-L228",
+          "version": "repo-lines-v1:sha256:33e7d42e73e0c9e5a3fe5e31ed8bfd02c77bea7d75a4d3befd609b67fe6767ff:eyJzZWxlY3RlZExpbmVDb3VudCI6MjMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjkzZDVkMzdmZWE2OTNlMmU0ZmI1ZWJkNmI5ZWFkZmMyMTM0MmQ1MzBiYjM3NTU3MjA0MjU4YzUxMzU3MzQ0OWYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjVhMTY4MDljMDc1ZGIzMDllMDliYmM5YWI3ZWZlZTY5ZWZiNWY0MTliZDRkODkzMGQwMzgwNjYwMmRkMDJmZDQiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6Ijk3ZWU3NzFkODQ4NWVlYzRjZDQ2OGMxYWM0NmI2MzNhNzU0NmJjODA1NmQxNmNhMmM1NGZmZmNlNTVlN2FlOTYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImE5ZTI1M2E3ODE0YTY1NDdhNTBlNTRkNmQ5MjM3NmY5ZmVlZDNhMDFkZTA4NDM5MDg0MjAzMmIwNjRiNThjOTEifQ"
+        },
+        {
+          "resource": "repo://haap/registry_client.py#L67-L96",
+          "version": "repo-lines-v1:sha256:8b5864f239046fa58d9e3e5d6a455918f2f1a5affb317c8a1f0472194bf1fb40:eyJzZWxlY3RlZExpbmVDb3VudCI6MzAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImNkNzRiZmU0OTAwMWFlM2YwODUxYzFlMmQwY2UxY2E1N2E2MDIzOGEzMmVjZmNmMWRiYzViNTJlYWI3N2Y2NmIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImFlZTFiYzhkYWM0YmYwMDJkYWU1MzNhZjM4ZWRmODk1Yzc1Mzc4MzQzNjFiMzI2NDE4ZWUzMmFjMjk4YmI2NGUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjY1Y2IxYWI4Yzg1ZGFjNzY0NmU4YjkzYjliY2I2ZTJiNDJmMTdmZDQ5YTE2ZWJhNGNkZTRkYWI2NzU3MzEyOWQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImQ2MzEwMmI3MDBkOGNkMWNlNDUwOWFhYWU5M2ZjZjk3YzQ4NzZhOGY2N2ZhYWIyNWQ3OWI1MzU5YThkN2UzNmQifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_4bbc1c2a68dc4d4ca2dbbeb759820ac2",
+      "statement": "`haap audit [--last N] [--friend FP]` prints the most recent entries (default 30) of the append-only JSON-lines `audit.log` as timestamp, event, friend and result; the log rotates at 5 MB keeping two rotated copies, and sensitive keys (challenge_token, private_key, signature, task_payload) are redacted before writing.",
+      "evidence": [
+        {
+          "resource": "repo://haap/audit.py#L19-L21",
+          "version": "repo-lines-v1:sha256:ca0ce45e70ce584f960ea8b936f77703e14fe8caa1ed9b9b757d1cb2e90f5f5a:eyJzZWxlY3RlZExpbmVDb3VudCI6MywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNzE4ZTNjM2JmMTE4OTk1NzE1N2RlNzM1NmRlMDI1MmU4N2Y1ZmRlMjYyNTk2NzRhMTg5ZTA3YzBjMTAzM2U0YSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNWEzYmZjY2NkMTBlOTdlOTlkMjFhNzcwZWFhMjAzYzhiMWU0N2I4YjVhZjAxMmM0ZDI1NTUyMmU5NTEzODQxOSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZjM0N2NmMTc3MzNjMzczZTY4ZGJhNjQ5YjA1YTgyOTYwZTQ0N2I3YTk3ZmYxZmVkMzQ4N2U3ZjEwZGY0OTJlMCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiY2YyNWM5OGU3NDYzODVjNGRkYjA5NDFjNzc5MGNiNDJkZTZjYjY0ZTA0ZTM4ZDY3Njk2NzA5MmU5NWE2NTJlOCJ9"
+        },
+        {
+          "resource": "repo://haap/audit.py#L85-L100",
+          "version": "repo-lines-v1:sha256:cdd37c71657a627bd200e12cd6a4102d0942b643e255a5129b01692cf4a50b17:eyJzZWxlY3RlZExpbmVDb3VudCI6MTYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImY5Y2YxYWUzZGU1MjZkOTJiMzAxNTY1YjQ1YWVhNTFhNmM2NDNiZGQ3Nzg1NTUwOTRlMWFjZTlhNDdjY2U2NTkiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijc4ZmQ0NzU3NGNmYjMwNmM2Mjc3ZDU4MTBmZTdkY2U5M2I0NzUxYzY4M2IyOTcwYmQ0MGNhYjY2Y2JmMzJhYTUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImVmYTU4MzE1M2I5MTdkOGVjNWNlOGY0N2JjNGY2NDFkNzUzNTdhOTJkZjk2NWU4MDE0YWJkMzAxN2IyOTJiNDciLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImE1ZGI3MjM4ZTM3M2E0NTc1YThiOGVmYzc3OTk4MjJkNDcwZTI1Zjg2ZDFlNjc0YTdhYTVmZDc2OGE4ZGI3MWEifQ"
+        },
+        {
+          "resource": "repo://haap/cli.py#L233-L237",
+          "version": "repo-lines-v1:sha256:7b1d885febf314390b5c86f8839f1069d5e144bef8d705bf529a6917ead40366:eyJzZWxlY3RlZExpbmVDb3VudCI6NSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiODA1Yjk2NTNjYzI5OWYxODA0ODM0NTUyNWQ3MzQ1ZDEyMmM1NjU4ZjFhMDNmMTBlMjYxYWU3ZDBiZGUzYTdmMiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMTYyMzNiM2ZmZWEzMmEyM2RmNTMwNjUzNDM0OGYyZGVlNzc2YTVhNmY3NGZiNTMzMTc1ZGRjNTM5YThmZTQ2NCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZjg0MWNmNTVmZDBlMWE2NTA3ODQwOWM0YmZhMGEwNzUyNTY3MjFiZjcxNDUyMDg4NjVhZGU0NzY2ZjRkNTE5MCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNzcxZjg2YzYzMDBlZmMzYzIxMjYyMzlhNDY2YzU5ZWRhODg2OGE3MDAxMGE3M2QxN2QzYjljY2RjMWQzMGZiYiJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_68b7874340b146a88bc245e0d187c636",
+      "statement": "`roles.json` overlays user roles on the built-ins guest/client/partner/family/admin: a role spec may set `extends` to inherit from a built-in (or earlier user role), the extends key is consumed, and other top-level keys replace the base wholesale; a missing, unreadable or invalid-entry file silently falls back to built-ins, and roles.json is re-read on every `resolve_role` call so edits take effect on the next approve or auto-approval without restart.",
+      "evidence": [
+        {
+          "resource": "repo://haap/roles.py#L30-L91",
+          "version": "repo-lines-v1:sha256:b5a5f0627c68402c82669caf4c80ae4d23419220538dd5861b9331a62c5b2f41:eyJzZWxlY3RlZExpbmVDb3VudCI6NjIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjI1YzczMjkxYTZlYjBmNWIxMGIwYmViZDNkZDFjY2M1YzMzZmUwZTMzYWIzMTVjOTEwMThlZTJiYjU3YTI4MzgiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6Ijc2MGFkMjk5YzE4MTA0NTk2MjMxYTYzMzNiOWRmMzQzODY5MDkzMGY1MDhkMGE0NzcyZjg1NDdjZWVhZTA4MmEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6Ijc3ZDVjMDBmZTIxN2E1MTlkNDQyMDExM2VkNWFiOWI1ZDJlMmRmNTkyNWY2NjU2NjM2ZjEwZGExM2U5NmQwYTMifQ"
+        },
+        {
+          "resource": "repo://haap/roles.py#L94-L121",
+          "version": "repo-lines-v1:sha256:2c1d512d4a06d95b88ee2eb442044d74b9d9b962f3ad5d4a47f8cf6b7986fe1d:eyJzZWxlY3RlZExpbmVDb3VudCI6MjgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijk3ZTAxYTRiZWM4ZjFlYzUwYzI3ZTcwYjIyMDE1MjEzODcyODdkMGFhZDUxMDk2MjBkMTY5MDFhN2Y3YTFjYjciLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImFjNDk0OTcwODE4NzAxMDgxZjkyMzYxMmY4ZDY3MGJkOGVmNDI1MDA4MTRmYjBkOTMyNDQzNmNjYWI1M2NhZmQiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjA5ZjkzMDgzYzE5NzEyMWI5ODI3MDBiYThhZmFiZDE3MjJjZjFkM2U3NDA0NTA5ZTgwZWZhMjcyNDdmNjJmMDciLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjM1M2JiNzFhMTcwNDkxYTZhMWViMTEyYzVjMjQxMmRkZDA0N2Q3YTUxNmY2MTk3MDY2MjE2Njk5NDBhYmU1YzQifQ"
+        },
+        {
+          "resource": "repo://tests/test_policy.py#L44-L55",
+          "version": "repo-lines-v1:sha256:52ecee093ba7312ac145dd839ea9d5fd91c4db724f05d4bf13cb10197bf1f814:eyJzZWxlY3RlZExpbmVDb3VudCI6MTIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImE3ODM4Yjk4MDk4M2IyYjc2ODE4ZTE4ZGQ5OTRlOThmMzkyM2ViYmRlNzQ3NmRkZjI5NGY2MTAzNjk5YWNjNjAiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjY3OTFiY2U3Y2FkYjNiNWM5MGE3NzkyMWY4MDliNDA5ZDYzZTkzMzVkYTIwN2I2MTY0MmQ5MzI3ZWM0NmNmZmQiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjI4YWFhNTI0YWQxMzZkYTJjODRiNTZiOGZkYTQ2NDZjNzJiOTA5NzNhOTg1YTFlYmY4N2RkOWVhZWVhYWUxY2YiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6Ijk2ZGRjNzEzZDIyOWZkZGFjYmJmNmFlYzFiOGE3YjBmODZkYWVkNzZmNjdhZjUwZDZiOWQ5YjlmMTc0MmFhYTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_6592912dbf7744eb941b15e62191c993",
+      "statement": "`policy.json` configures the friend-request engine evaluated in fixed order deny → auto-approve → queue: `default` is queue (the fallback when the file is missing or malformed) or deny; `auto_approve` rules match first-wins on exact fingerprint or case-insensitive speciality; `max_role` caps auto-approvals on the ladder guest < client < partner < family < admin, and unknown/custom role names auto-approve capped at client.",
+      "evidence": [
+        {
+          "resource": "repo://haap/policy.py#L48-L70",
+          "version": "repo-lines-v1:sha256:c7857ecd969b85a3d9329208f048fa2415dd47bff95ce2e0a5026078b5758a53:eyJzZWxlY3RlZExpbmVDb3VudCI6MjMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImQ1ZDhlMDBjYmMyOGNkZTJiYmIzZDE2YjkyYzhlYjMzNjdiMGY2YjEyZmMyYTBlODIwN2M2ZGZhMzRmZWMxNTkiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjBlMWVkOGRhNGU2MTIyZWIwOTBlZjk2MjFlMmU1YzI4ZWI2MjY5MGJjMGY4YjA0YTliNjZkNDI5OGYyMjY1ODMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImFlYTIyODVmNjg1YTY0MzExMDFiNzk3NmFiNzUxNDEwY2I0ZGM2ZjZlNDlhZTk3N2I5YWQ1ZmZkYWI1NDM3MzkiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImI4MjhkNTlhZDhjODdjNzQxZTY4MjcxYmI5Y2I1YTc1NmEzYTE5YmYyNmJiYjZkZDU2YzczMWYzYjFiY2NmOWYifQ"
+        },
+        {
+          "resource": "repo://haap/policy.py#L81-L128",
+          "version": "repo-lines-v1:sha256:7a888b4e9806997ca207a1fe8417d9cd9025a79382e243c9ddb3144259465a3d:eyJzZWxlY3RlZExpbmVDb3VudCI6NDgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjJlOTU4NTdhODliMGE0NjkzNzBlNWRiNWI4NjhlOGIwNjlhNDY0MGZiYjljZDM1NmE5ZDZhMzgwNTRlOWUyYjciLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjU0NzgzOTcxMDc5Zjc1Y2RiNGEwMzA0ODQxZDE5YmIxMTMyYTkxODU4MDRkZjc1OWQwODRiMjBiM2M3YWQ5ZWQiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImViYzI5NzcwMzM2ZWEzYWI1NWEwMzE3ZDY3OTM2OTk2ZmY4M2RjODYyNGQwYmQ0MmFlMTE0M2ZkOWNkOWZjNzciLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjliOGRiY2IxZDM0ZjU3NmNmMWZjMzYxYTgyMGQ3NGI4MGRjZWEzNjkzYWVlN2UyYTE4ZGQyYThjZDkxMGE0MmQifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_0770b272bf344de3a7d5a25a8001696e",
+      "statement": "The README's production recipe runs `haap serve` as a systemd unit (`ExecStart=/usr/local/bin/haap serve --port 8443`, `Restart=on-failure`, `WantedBy=multi-user.target`) and advises opening the port in the firewall and terminating HTTPS with a reverse proxy (Caddy/nginx) or tunnel (cloudflared) because the built-in server is plain HTTP.",
+      "evidence": [
+        {
+          "resource": "repo://README.en.md#L44-L73",
+          "version": "repo-lines-v1:sha256:a6cdabef1bf4165194e9ebfdeb7aabac53e557bbdfe7ff6e2ff7eda2cfa7fc69:eyJzZWxlY3RlZExpbmVDb3VudCI6MzAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjVkZTJmNTMyOGVlNmU4MDUwZThhYWZkOGRjODY5YTA2OWNkOTU4NGVkYWFmNTRmZTU4OWQ3M2MzYjdkY2Q3OTkiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijk2MmZlNDNmNGU3NTYzYjlmNmI3ZTIxMWRhNGJjY2M2ZGY5ZTE3YjJiOGFkN2QxMTQ0OTBlYTY1NDhjZjQ2ZGUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjlmODcwMmRlNTg0NDEzYjZhYWZiNzM0ODdjNzE0NDUxMjMyZGZiMmJhOWI1Yjg5MzE4NWY2ODYyY2NiZjg1NGQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImNjMGRiMTc1NTE2M2M2NmE3NzA1OWJhZTdjYjY5M2I2ZmQ4OGJiZWIwNWM1YzEyNDI2NGRiNmM2MTczN2E0MTgifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_5cca82d903c14554909bf50b1a87be89",
+      "statement": "The pytest suite does not invoke the argparse CLI; CLI-facing semantics are pinned through the underlying libraries: `test_policy.py::test_approve_with_role_template` reproduces the `friends approve --role` path (resolve_role then Directory.approve with the template's permissions and rate limits), policy tests cover roles.json inheritance, max_role capping and queue/auto/deny outcomes, and `test_registry_client.py` exercises the register/search flow behind the registry subcommands.",
+      "evidence": [
+        {
+          "resource": "repo://tests/test_policy.py#L192-L206",
+          "version": "repo-lines-v1:sha256:ddf67eb8c682280c64212f459abed2dc89ee4b563d49d696fd155d7569e0e070:eyJzZWxlY3RlZExpbmVDb3VudCI6MTUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjNmODVmMzc4ZmU4MTkyMjkwYjYyYjk5Y2JhMjc5M2M3NzliN2NlNDAyNjM4YjI1YmU0Yzc4NDc0NDY0ZDkzZjUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ4NWExNGUxMGJmOWVjZTVmNzBhM2EyNjgzZTVjZDFiNDRlMDFjYjY3YTIzN2NhYWUwMTk3ZTQ2OTRlZjMxNTYiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjgyNjdhODFhZDY5ZmQxNTNkYjNmZjIyY2QwYTUyYzM3NTA3ODBkOTkwMjU5MTlmODk1ZjVlYTkxNjliMDBiNTEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        },
+        {
+          "resource": "repo://tests/test_policy.py#L44-L91",
+          "version": "repo-lines-v1:sha256:063e65f1884d09fc570376c2370539c78e80b0e909729ac2c303f1582af8d318:eyJzZWxlY3RlZExpbmVDb3VudCI6NDgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImE3ODM4Yjk4MDk4M2IyYjc2ODE4ZTE4ZGQ5OTRlOThmMzkyM2ViYmRlNzQ3NmRkZjI5NGY2MTAzNjk5YWNjNjAiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjUyNzdiNTgxZDlhZmFiMGU0ODRjOGU5NDc5MDE4YzIyNWFiMjAzNTBmMGQ0YmY3YjQxZjNmNDg0NGJhYjM5OTkiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjI4YWFhNTI0YWQxMzZkYTJjODRiNTZiOGZkYTQ2NDZjNzJiOTA5NzNhOTg1YTFlYmY4N2RkOWVhZWVhYWUxY2YiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjI1OGE2Mzc3ZjU4Mjc5NzIyZTVhYjUwYjc4MWI4NjBlOWYyNmU2NDhlMjdkNmYxOWRlMzljNzEyYjQ0ZDlhOTEifQ"
+        },
+        {
+          "resource": "repo://tests/test_registry_client.py#L25-L27",
+          "version": "repo-lines-v1:sha256:f8be512165e38ab5b14c956c85276668cece9f13928d3a022ce2acc5d92c36c5:eyJzZWxlY3RlZExpbmVDb3VudCI6MywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMjQwYWY1NGFlYjQ1M2JkYzJlYzljZjI5YTk5ZDg2YjlmOGJhZWJmMDkzOTE2MGI5ZDYzZmJlMTIyYzM5ODUxOSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiZTdhNmIxMzlmMTc2YjFiN2E0MGE1ODkxNzAxNTBiYWRhZDQ2Zjg4ZjllN2NjZjEyYjk4YjZhZGM0MTdhYTIzZCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNDJiMjk4OGE0MDA0NGVhNWZkZGFhYjkwYWQ5NTM2NDg4NGY0OGJmYTkyOWU5M2YxZDhlZjk0Y2Y2NmZiZDg5NCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNmRiYjg3OThiZGQ2YmY5NDQzYjBmMWRkYjhkNmI4MGIyNjVjMDE4Y2JlMzViNjYwZTMxZDFiYWVhZDc5MjhhMiJ9"
+        }
+      ]
+    }
+  ],
+  "verification": {
+    "by": "openwiki/0.5.0",
+    "at": "2026-09-05T09:02:08.883Z"
+  }
+}

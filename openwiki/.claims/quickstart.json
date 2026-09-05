@@ -1,0 +1,102 @@
+{
+  "schemaVersion": 1,
+  "pageVersion": "sha256:7bde4a649912fe918be253227d56d528192fbfa3bbc86fae0261d47a2b0b7c6f",
+  "claims": [
+    {
+      "id": "claim_52ef838cacb846479e85eddd3d66ec5b",
+      "statement": "HAAP is an open, pure-Python agent protocol/library that requires Python >= 3.10, depends only on cryptography>=41.0 and requests>=2.28, uses no web framework (its HTTP surface is stdlib http.server), installs as the `haap` package, and exposes the `haap` console command whose entry point is haap.cli:main.",
+      "evidence": [
+        {
+          "resource": "repo://AGENTS.md#L5-L10",
+          "version": "repo-lines-v1:sha256:a0856ed755b140e81625152f05d324efa3116450a72c4961fda612d7cb9bbd4f:eyJzZWxlY3RlZExpbmVDb3VudCI6NiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNmNhMWZjOTNkOGQ4ZDhiNDVkYjIxMjBiMDY2MjgzNmFhZjQzM2U4MDE0M2M1N2M1YjhlYzEwNzNmNTRjZjRiYSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMTI1ZmM1YjJkMWE0YThlNDVkYzVmMmI1ZjI4ZjAwMDNiZmZhNDZkY2RiZmI4NGZhYjAwZTc1MWI3Mjg1NTcxOCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiYjk4ZTQxNWNmMWViZjhjMmE5ZjRjZWFiNDJjYzlhNTYxYzQ3MjA2NzRjZjRhNmM3MzM5MGQ4MTQwZDM5ODVmMyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNDQ3YzUzOWQyYjU5Y2MxMTk5OTg2ZGFjMGM3NWE5NDIxOGM1ZmUyODVlMjY2ZDQzMDM3OTU1YzE5ZmFjOGQ2MyJ9"
+        },
+        {
+          "resource": "repo://pyproject.toml#L5-L22",
+          "version": "repo-lines-v1:sha256:71fb5c01aa27828eaa75da7b643cb444ded6cdc74da18db5631c2a9b104cba34:eyJzZWxlY3RlZExpbmVDb3VudCI6MTgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjcwMmE4MWMzODM2ZWRlZjJkMGJhMTFkMjM1M2ZiNmRhYmM3NzcxNTBhN2NhODNlYTBkOWU5YTcwMzEzZmVhYmIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImRhM2MwZjgxOThiYjQ3Y2NkMTEzYmI5ODc4Y2RjYjkyZTI1NTIwZTMzMDQ4MWU1ZTAwZTFiYjEwNzRkNmZmMDUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjVmOTIxN2ExOTZhNTczYmUyNGE0MGMxNDdjZWY3MDI0NThjODU2MmFhN2ZiNzViOWFjZjRhYmFjMDYyNmNlMjciLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjEzOGJiYTc0MmIwZGJjNTI1MTc3MzJhM2EwZDE1NDY3OGRjZGVhNzgyZmQxNjQwMmUzZGMxOWFmMmU5ZTY0MDUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_cf0c6e0d20d845008d6c508c327751f9",
+      "statement": "An agent's identity is an Ed25519 key pair persisted at $HAAP_DIR/identity.json (default ~/.haap) with mode 0600; the public identifier is the fingerprint 'HF-' plus the first 16 hex characters of SHA-256 of the raw public key, and the private key never leaves the machine (never in messages, manifests or audit records).",
+      "evidence": [
+        {
+          "resource": "repo://docs/ARQUITECTURA.md#L74-L81",
+          "version": "repo-lines-v1:sha256:fadcae1d4d531df8811490be078808655e6470ec2557dfe3d80d27ee5eddde5f:eyJzZWxlY3RlZExpbmVDb3VudCI6OCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNTE3YzU1OWNhNzlkODI2N2Q2Y2UxZjQ4N2Q0Y2U5NDNkZjVkZTc4Yjk0NGVlYjE2YTkyZGQ4Y2Q5M2UwZTQ1ZCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNTg5OWJkNjhlZTE5ZjM2YzQ0NDEyN2U1ZTc5YmEwMTFkMTAxYTlhZmJkZDEwNDcxZDU4ZTg1ZWY4MzA5ZGY5YyIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiYzNlZWQzMDI0NGUwZDE1ZTg4Y2Y3NWRlZjVjZWJkNWRjMjBjMzMwYmYyYmE0NDUyOTUxNThiOTU4ZjdlMWQ4MSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZjc2Y2FkNjQ1NTVhMjhjOTQyNDRhYmVmODVjNmQ1OGY3NmQxMDcyNTRiMWFlMGNhNGM2YmEwNTVkNDYzYWYxOSJ9"
+        },
+        {
+          "resource": "repo://haap/identity.py#L1-L44",
+          "version": "repo-lines-v1:sha256:528d830e7a2eb07f0852490226d25208bcb5f898303c165684d3afab5020a34e:eyJzZWxlY3RlZExpbmVDb3VudCI6NDQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjhiMDg0YTlmMzc4MTI0YjJiMWE1MTU2M2JmM2MyMjQ0NGViN2ZmMzM2OTIwMTdkYTI4YjIxMzZhZTU2OTg3ZWQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjQ0NzlhZjlmNmExNzFhZDA2ODRlNDM3MmQ3ZGIyMTUxMzQ5MDU1MzliZjYyNDMwNTMxMGY2NmJlMmE4Yzg4OGUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_cafdfca158024d5cbd66cfc352b74c40",
+      "statement": "HAAP has two trust modes: alliance, in which two agents become friends through a verified challenge-response handshake that requires the receiving owner's human approval and grants a permission matrix; and marketplace, in which a business publishes open bookable services and any agent with a valid Ed25519 signature may use them without prior friendship, subject to audit, rate limits and instant blocking.",
+      "evidence": [
+        {
+          "resource": "repo://README.md#L340-L343",
+          "version": "repo-lines-v1:sha256:7439d0267609a545d27c9d7b220f7634214eaf26764b16743591464ea23872a2:eyJzZWxlY3RlZExpbmVDb3VudCI6NCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMTBiNTFmNmI1YzIzYTRmMmU0OTkyYzA3ODYwYTkzYTFiMzE1NmEwZDlmMTBlZWQ0NjE0OWZjODJhZjlmNzNhOSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMjJlZDVjYTE2NTZlNzY1MWU0Y2YyOGVkMDk0YjY0ZmQzYzJiYTYxNjVjNzk4ZmJiNzJjOWE2MmUyNjM2ZjEzOCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNDgwOWI3ZTg1MDY3MmYzYzJkMDE4N2E3YjMyMTNiMTJmMzgyMzkzNzhmZDYxNDE2NmU3OTkwY2RiYjZkOGQxMCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNDdiNDczYmU4YjgwYjliMzljNmEyMDk3ODVjZTk0NDU2NzRlM2FkZTk4YmZmYTczNWNmOThlMzc4NGQyYzUzYSJ9"
+        },
+        {
+          "resource": "repo://docs/ARQUITECTURA.md#L113-L135",
+          "version": "repo-lines-v1:sha256:b7651c0befcdad62324f4754f91912aaee677e49c95f8976b4fce0343e431ea8:eyJzZWxlY3RlZExpbmVDb3VudCI6MjMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjhjODAxYTY1MjhhNzdkMmMwNmZhMTU2NzMzNTJmNDNiYzA3Nzk1MTliNWFjN2U2YmYxN2NjN2NjYzRlOTcwMGYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjRhYmU5MWIxMTFjMmI3ZGJjMGY3NzdkYmM1ZWFjNmU0MzUwNDMxNzIzYTM3ZmEwMTA0NmVjNWQ2YWI1OTgyMGEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImEyY2UyMDE0ZGQ3OWUzZmM3ZWFmYmYxZDI3NzJhZTkwYjZhNTI5NmY5MGQ3MjY3NTQzYTI5MzBjZTk0N2UxMjciLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjIzNmFkZjMxYTIxY2IzNDRjY2I1NDVlMDAyMDZlMzQ1MmFkYTNmMDZmZTA1YjdkNTc3N2ExMjZiZDlhMmU5YzMifQ"
+        },
+        {
+          "resource": "repo://docs/ARQUITECTURA.md#L225-L244",
+          "version": "repo-lines-v1:sha256:0ceb3ae0d8094938b906fd3c67eaf41eab6fe97ed721b97080f64b9c607d0ff3:eyJzZWxlY3RlZExpbmVDb3VudCI6MjAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQyZjFhNzg2NzM5ZjUyYmVmNTg3NmY5MDMyMjZiNWQ3ZGQ5OWU4NmJjM2NiMjc4NmM1MDkwODA4MWU3NWI5N2MiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImVhNDQ2ZTY1YzFlOTEyZjhkMmFlMWNkZjdkMTg5ZGUyMzFkYTVmMzFiNjA5ZjExZThlMTRlZGFlZTcxMmZkNWUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjFlNjJlNDc3YTM3YjE5ZGUyMjA3NzQ5Yjc1YmRjNDQwNDY0NTQ4OTU3ZDZmYWU4NTg0MTdjMDNiM2Q5ZmIwOWEifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_f6fa8375f16946c18fe91981e4476511",
+      "statement": "The HAAP messaging server (run via `haap serve`) exposes exactly three HTTP endpoints: POST /haap/messages as the entry point for signed envelopes, GET /.well-known/haap.json serving the public manifest without keys, and GET /health for liveness.",
+      "evidence": [
+        {
+          "resource": "repo://README.md#L65-L73",
+          "version": "repo-lines-v1:sha256:1f5fca1710b51a38f5cf47fa72a209a9deacf5b79f5be8f0b92cdb7109a9fe16:eyJzZWxlY3RlZExpbmVDb3VudCI6OSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNGZlY2FhZjRlZDIwZGJjNTkwODlkZTVkZTQ0N2Q1MGU3YjE3OTNlODlhMDY4ZWYxYjI4N2M1MGJlN2NiZTgyZiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiZWNjOTc4NTk5MTAxY2NkNjJjOTk5MTU3NDNmZmE5OTMwMTI2YzU1MTlhMmVlMTk1M2VjMmE4NmQ5MGUwYjk4OCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNDJkYjAzOGUzMmVkYzYwN2ExNWZlNDdmZjlmOTU5NmNkZmZjNjA4MDNmNWY3M2Q3YjVjZjhlYmY0Y2VmYTVhNiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNDQ2OGM0ZjM4ODFmMGQ2YjAyNzA2MjIxMGNmZGUwNTYwZmI4ZGI1MzE4ZGM5YTNkMzhlYWQwODdhZGY4OWZjNCJ9"
+        },
+        {
+          "resource": "repo://haap/server.py#L1-L12",
+          "version": "repo-lines-v1:sha256:9b9cf2bf15d73efaaf2b4a979d892682e5a2bcae82d3765f1167614a6be567ee:eyJzZWxlY3RlZExpbmVDb3VudCI6MTIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjhiMDg0YTlmMzc4MTI0YjJiMWE1MTU2M2JmM2MyMjQ0NGViN2ZmMzM2OTIwMTdkYTI4YjIxMzZhZTU2OTg3ZWQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImQwMjVjNjNkODg1OThjMWJlNTUyYWM5MGE5ZjRlMDdmZjBkOGUyNDIxMDcwOTY2NmRjNWYzM2U1OTA1ZDcwMDYiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImRlZDM1ZWEyNjBiZTZjMzUyOWIzODdiMTQ3NjcwZWYzMDBmYzVkZWM5YjIxZDNjNWQxNDIxNjdlOTRmNzBhYWMifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_b8203f4ec6e9413d93321d1d6cd6b1ef",
+      "statement": "demo_marketplace.py is the canonical working example of the marketplace trust mode: it boots two real agents over HTTP (a business publishing a marketplace_catalog with an on_task calendar backend, plus a personal agent) and completes the search-and-book flow end to end with zero human intervention.",
+      "evidence": [
+        {
+          "resource": "repo://README.md#L298-L304",
+          "version": "repo-lines-v1:sha256:f7be45e0dd133fb758d8639e02c7c6ee81e7363f1e7a4f2256747c32ae9200d9:eyJzZWxlY3RlZExpbmVDb3VudCI6NywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiM2ZhMmZiZjhjMzhmOTcxM2M0MTEyODZlODk3ZDU4NjdkY2ZlOGRkODczMmEwZDM4OWQ2Y2M0NTliMDE2NjU0MSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMWNkMzY4ZGUyNzUyYWQ4ZDcwYjgyZTExZjdiYjZhMzM5ZDc4ZDI4YjVhYjM3MWJmM2E1ZmFjY2MxMTQyNjNmMCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNjgzOTU5NTc0YWUxNTc0NmM0MDUxNWJlMzY3MWUzNzc5NzQ5MjQ3ZmQ5MWI4ODM2OWY0ZDcyYzMwODA4MWM0ZiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNWExYWVhZDFlNTkzMWY3NmZhNWNmMjA5ZGE0MTQxYmM4NmQyMjU1YWVlZTc5ODRkNTY0MDk0ZGQ4MTZkNzU5YyJ9"
+        },
+        {
+          "resource": "repo://demo_marketplace.py#L1-L13",
+          "version": "repo-lines-v1:sha256:915c9c0ac4d243e84df57fecb9d917cf9c69ec0f9b1d64b03e6fe216fbda5df7:eyJzZWxlY3RlZExpbmVDb3VudCI6MTMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjhiMDg0YTlmMzc4MTI0YjJiMWE1MTU2M2JmM2MyMjQ0NGViN2ZmMzM2OTIwMTdkYTI4YjIxMzZhZTU2OTg3ZWQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImEzMDNlY2RkNGE0ZDEwZjE5YzczZmQ0MmZkMTI0MzdmZDMzNTRhODI2ODE2MDVkYTUyNTVhOTdhMzkwNjhkYmIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjM5ZjFiZmEyMjNiOGU0OGIwMTRmNzY1MjIxZWMxNDM0Zjk3NWNiMjVmNGVjMzYzMjkwNjcxNzk4NWIxMDY0MzAifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_eeca7bf45e9647ddbe84192238908748",
+      "statement": "The registry code in this repository (haap/registry.py) is the reference implementation of the federated directory; the production public directory is the separate acoalex/haap-directory service, whose live instance the README points to at https://acoalex.com/haap-directory.",
+      "evidence": [
+        {
+          "resource": "repo://AGENTS.md#L9-L10",
+          "version": "repo-lines-v1:sha256:8b8ef765362f138a47c73fbf1e30947f47aaba10018cd90887a79e8321a4b527:eyJzZWxlY3RlZExpbmVDb3VudCI6MiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiZDU4Mzc5NmIwNTg0ODk4Y2Q5ODQxMWZjYTNmNjVjMGY4YmM4ZWUzNDJkNWQ4MmIwYzhmZWNhZGI3MTE2OThiZiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMTI1ZmM1YjJkMWE0YThlNDVkYzVmMmI1ZjI4ZjAwMDNiZmZhNDZkY2RiZmI4NGZhYjAwZTc1MWI3Mjg1NTcxOCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMzk4M2FjMjRlYzE4MGMwZDZjNGQ5NjVjMTc4YzVhYjQwNDVlMGY1MDQ1MjgxMDdhMTg5MzU5NTBlMDdiZjFkYyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNDQ3YzUzOWQyYjU5Y2MxMTk5OTg2ZGFjMGM3NWE5NDIxOGM1ZmUyODVlMjY2ZDQzMDM3OTU1YzE5ZmFjOGQ2MyJ9"
+        },
+        {
+          "resource": "repo://README.md#L115-L135",
+          "version": "repo-lines-v1:sha256:d661e0b1ffa322d06921d65784b56faf628cd04c624f9517a6815e9db537ec5d:eyJzZWxlY3RlZExpbmVDb3VudCI6MjEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImRjM2UxN2VkZDQ0ZjIyMWMwOTc4NzYyZDY3NjJmMmIyMDgwY2NhNWFmZDgwMDBhOWFmYmRhZWRiZGJjMDBlMWQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ3YzA2YzU2MWQ1YzMyNzM0MzY4NTI2OGE0NmIzMzkxZjM5OThlZWU4OTBkMmJlNTFmMGQyMWNjNGE1M2FlNmQiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImQ1MjRiZmNjNGYwM2E4ZTY2YjAwZThmM2Q4NmY0YzdjN2QyZWY1NjAxMjM2MmRhNDQ5MTE5ODk0NTQyMWZlNmIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjM1MjVmZmM1MWU3NWEyYzNmZWQ0MWI2Yzg0NjNiMGVmZDNlNmMyMjkwNDEyZjcwOGUwODUxZmY2OWQwODU4ZjcifQ"
+        },
+        {
+          "resource": "repo://docs/DIRECTORY_SERVICE_BRIEF.md#L22-L24",
+          "version": "repo-lines-v1:sha256:ecb54621a9e5f5a3ea83c7eb4c65cf03d16a410bc795a351b1ee78e7106cdbf5:eyJzZWxlY3RlZExpbmVDb3VudCI6MywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiN2MwYzljM2ZmNjZjZDU4MmM0MTYzMzVlOTQwYWYxNTlmZGRmOGE4ZDVjN2MzZmFkNjFiMzY5MWVmNjc5OWJlOCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNDk4YTFkOWVhYzVlNTZmODExMzEwZDAwMjBkYzI0OGY0ZjI1MjViZDc2MzQzMmQ2NGZjNzQ4NTc4ZWZlMzVhYSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiODg5MDBmNzgwNjNkMjRkNTU2MmMyNTQzODNlOTk3MTJlNzNlZjZmZDFlZTc3ZDVhZTg2MTU4MzYwMDllODViZiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMTFmNjc2M2FlNjQ0MDQzMTY0NWYwMGRhOWRjMGU5ZDZjNWQzOGM4NmUwMTEwNjg4NTUwMWY3ZjMzNWI5NzU4YiJ9"
+        }
+      ]
+    }
+  ],
+  "verification": {
+    "by": "openwiki/0.5.0",
+    "at": "2026-09-05T09:02:08.883Z"
+  }
+}

@@ -1,0 +1,222 @@
+{
+  "schemaVersion": 1,
+  "pageVersion": "sha256:4438b91c1b9dc941db7eeae6aafcbcbfc719537eb699248239ec5ac7f58290fe",
+  "claims": [
+    {
+      "id": "claim_d8a1a688a2264e628b01c29090cba2ce",
+      "statement": "The HAAP envelope is a signed JSON object with fields protocol_version, message_type, sender_fingerprint, recipient_fingerprint, timestamp (UTC epoch integer), nonce, payload (object) and signature; PROTOCOL_VERSION is \"1.0\" and envelope_from_bytes rejects any other protocol_version with ProtocolVersionError (wire code PROTOCOL_VERSION_UNSUPPORTED).",
+      "evidence": [
+        {
+          "resource": "repo://haap/__init__.py#L11-L12",
+          "version": "repo-lines-v1:sha256:5acb11e355565769ff5f2bbf8bfe34cc4f3feb99b38adf28f439010229253834:eyJzZWxlY3RlZExpbmVDb3VudCI6MiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMjdlOGZlYmI0OGFkYTQ0MTUzZWEyYWRkOTk2OWEyYzUwYTk4MzFhNzRkOTc1NWZkZDUzYzU0OWE4ODhiMWNjMiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNzFlNzYzMGM5Y2EzZWJkYTM4N2YwNzI4MGMxNzM3Y2Y3MzI2MmY4YjE4YWNmNDEyM2RhYjBhZjA0MzY1ZTgyZCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZjU2NTdiYTc3YjFmZDA1ZDcwYjdlMzNkOTBkNTYxNDNhYjBiZDg3YWJmNmMzZGMyZDkyMmMxYWY0OWYwOGVhOSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjEsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiOTZmZDQxYTlkNDIxMjUzNzI4NzUwZWQzYjYzODU3YmE0YWQyMzQ0YWM5Nzc2ZjZkOTZkYzE4MjA2YWU2MDVlMyJ9"
+        },
+        {
+          "resource": "repo://haap/envelope.py#L153-L187",
+          "version": "repo-lines-v1:sha256:47abbf5c4f4bf5bfc10f940a7554fbc4faa3b415185e8adb1f38687a3f77c4b8:eyJzZWxlY3RlZExpbmVDb3VudCI6MzUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijg3ZDkyMGQ1MDQxM2QxMjE0ZDA1Y2I2NDI5MmY1YjAwNjRiOTA4ZWY2MzQ0ZmU3MTMwOTM2Y2IzOTA4ZWZkZGIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjUwNmZlNGE4Zjk2NjEyZGE3ZTE1N2UwODAwMGZjNjY1MjBjYjlmMWI2NDBkMzNlYTI4ODcyOTc1M2NlYWMwNjEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjExNjA2NmFiODYwNzNhOWQ2NTAyZGRhZmE5ZTVhYzg5ODY5OGY3MTFhOWNmYTM5OTJiNmYyNmRkZjkxMTJiMWMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImYwZmJkODA5ZmVkZmVjMWI2N2FiMjI5ZTA5YWY0NGIyMWNiNzE1NDkyYTJiMjE4ZTM2Y2QyNTNhODc1YjRmYTMifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_8257065e53f44b4592963eb4db67ceb3",
+      "statement": "canonical_json() produces deterministic signature input: recursively sorted dict keys, compact separators, UTF-8 with ensure_ascii=False, only native JSON values (dict/list/str/int/bool/None); floats are forbidden anywhere in signed data and raise MalformedEnvelopeError, and _check_payload_jsonable enforces the same JSON-only/no-float rule recursively on payloads at signing time.",
+      "evidence": [
+        {
+          "resource": "repo://haap/envelope.py#L100-L116",
+          "version": "repo-lines-v1:sha256:d9081edc28d8e2f1f679d40f5f2fc9f01b82d4e94e7256152707dba2fb166044:eyJzZWxlY3RlZExpbmVDb3VudCI6MTcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjU2NjgzNTkyZWQ2MzMzNGMxYmE0NTZiZWM4YmExYzYwNmFmYmRkNTgxYTYzMjU5MDFiNDg2N2M2Zjc1OGUwZmIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImEyMzcxYzQxNzA2ZmNmMTQ2N2E0YjM5ZmRlZTgyNGNjOTUyYzBhYWYxMjVjZThmNjhkMzhiNTVjMTYwYjM3NjUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImJmOTZiNDNjYzE3M2E3YzNiNWZmZjM5MGM5YWYwMTY4ZWZjZWI4MjRkZGZkZjc5MTU3ODYzYWRiNTU3YmUyMGQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjIyOTZlNzU1ZWQ2MmY2OWViZGNiZmQ5YjFjOGEwOTFkYjIwM2E5MWIyMjVkYTMwY2ZmYTYwY2JmZDQwYTEzNjgifQ"
+        },
+        {
+          "resource": "repo://haap/envelope.py#L61-L97",
+          "version": "repo-lines-v1:sha256:717a351b62fb7300ec039c8bf6d9b976e8957715faf848a30790398965172861:eyJzZWxlY3RlZExpbmVDb3VudCI6MzcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjhiZjk2YjU5ODYyYjYyYjEyODNlMDExYzg0OGIxY2M1MGEwYjUxNWM2NDA5MDgxNjRkZjUwZjk3NmZjZDU2MDgiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImM3ODcyNGE1ZmY4MTEzNDc5N2ZkNWFkNGMyNjdmMDcwOWNhMmVmNmUwYTRlMTllYmM2MTMzMGJiOTAwZWZjOWIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjI3YjA0YjVkOTFlM2E4ZDNhMWIwMTdmOGI5N2YxODUwMGFhYzRiOWU0ODYzMjEyNmI5MGEyNzQzNTQwZmYyNWQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImQ0Mjk1YjJhOWMyMGFkZGZlMGY0ODM1Yjg4YWI1ZTBhMzEyNDc5ZjIxY2I3YmFmYmI2OWJkMGMwMzdhMTdlNGYifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_4b9863c7c00c476093e95849d330f090",
+      "statement": "The signature covers the canonical JSON of the entire envelope except the signature key itself (signing_payload drops only \"signature\"), binding sender, recipient, timestamp, nonce, protocol version, message type and payload against field substitution; sign_body validates message_type against MESSAGE_TYPES and payload JSON-ability, generates nonce as base64(secrets.token_bytes(16)) and timestamp from time.time() when omitted, then sets signature to base64 of the Ed25519 signature over signing_payload; envelope_to_bytes serializes the full envelope with canonical_json.",
+      "evidence": [
+        {
+          "resource": "repo://haap/envelope.py#L119-L150",
+          "version": "repo-lines-v1:sha256:956fbf93fc3943598d6c19513a9d14deff0bb3147c14755232c82d39b290bfb2:eyJzZWxlY3RlZExpbmVDb3VudCI6MzIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijg2YTA3ZmNjNTg5M2ZkNDI2NWViMDY0NTdjNWEyM2QzZDkxNGUyOWI3Y2FiODg5MGU0M2IzZDFmNzBhYjBmZDQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjE4YmQxODE0NjdhOTNhMzJlZjg1ZWE2NWExODgzYWUwYmI4YjBiYmIwNWM3YTk5NWI2ZWI0ZDA2MWNlZDNjNjAiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImIwYWIxMjdlZWY1ZjA5Nzc3YmU4YmVjNTk5ZmJhNzFjMGFiYWYyMTZiMjlhZjAyYTc0MmE4ODljMTM1NWExNDMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjIwOTQ5NmI3NGY1MzYwOTJmNTMyMzI5Yzg2MDFlYjczZmVlNzEzNDVmMDZiZTA1MzkzMGQwYzk5YzFlYWYyYmUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_a56854c903914f7fae46fa7ca382be4d",
+      "statement": "Timestamps are constrained to a ±300 s window (MAX_CLOCK_SKEW = 300); check_timestamp rejects messages outside now ± 300 s with ClockSkewError (wire code CLOCK_SKEW), and verify_envelope applies this check before public-key lookup and Ed25519 verification so stale messages are discarded without crypto work.",
+      "evidence": [
+        {
+          "resource": "repo://haap/envelope.py#L190-L197",
+          "version": "repo-lines-v1:sha256:2e104baf594a19e6e7129dbbfbf72c99240ed1c54de940407eb29c3d3a7303dd:eyJzZWxlY3RlZExpbmVDb3VudCI6OCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiYWQ0ODZiNDczOGY5OWU1ZTQ3MzcwNzU4NmQzMDA4ODVjZDFlMzU1ZjZiZjc3MmZkZTk2MmJkZjI4OTdlNGE4MSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMzQ1N2ZkZjc3MWIwYzQ3MTJiNzU3YzdkNzk0Y2I4MTZmMTliOTgxMzI1MDNmODQ2OWI0NmEzNzA3NjBlN2I3ZSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiYWVjMjNlMmMxMTdhNTljYzY3MTA3MGJkNzBjYTQ3NjU5YmQ3MThhMDU1MmQ0MmU1ZDU4OWY5ZDA1MGIyYTlkYiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZWRkZWI3MWVlODM2ZWRjZGZkOTYwZDBjNDYyMTY3MGYxMmFlMjZkM2U4NmU2NDgyNTYwYTYxODc0NjJjMjg4MSJ9"
+        },
+        {
+          "resource": "repo://haap/envelope.py#L240-L271",
+          "version": "repo-lines-v1:sha256:1543197e523fc7d85a2c4a30d0eb19acc251b40b00be0bdb27071c3823a3fd7a:eyJzZWxlY3RlZExpbmVDb3VudCI6MzIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjE3YTAzZmM4YmU5ZTAwOGNjMTgzNGMzNGNkNDFlYjRlMzAzNzQzZmU2YWFhNTI0NmI0ZjgxOGE3NDc1NTM5NzIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjFmYjFhZjk0M2U3MTJmMjRjZDg4YWFkY2RmN2M2ZGVlNDQ1MDJlOTc4NmE3MzRlZDJmYTk5MDdiZTQ3YTBkNzUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImM4Yjc0N2UzZTRlZGMxZTVkMjY3NWE3MWMyMzEwNjJhYjk4NGZkYjA4NDkxNzE4ODkyYmQyNTIwMGY0YTQyYTEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        },
+        {
+          "resource": "repo://haap/envelope.py#L42-L43",
+          "version": "repo-lines-v1:sha256:bae5dbe8df38a69846ac0ac6890a631e3b797f788a246572af3d02b30a526171:eyJzZWxlY3RlZExpbmVDb3VudCI6MiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMGZiMjE0MDc2MzE2MTlkMmEyNGU1MmU5MjdhZmI4MWU2MTlmODAxZmFhNjViODJhNDQzMThiM2I0YzhhY2U4NiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMDVkMGMwYWI3NDBlMzI0MGRkMzk3MjFjYjIwYTczMDViODIwYjUwMjZmMjk1ZDA1YTVmYjEwYmFjZDIwYmNlMCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNjg4OGM1YzdiODZkNzU5YWU1ZTMzNmZlYjVmYTYzZTY0ZjNmNjZmNTY1YjEwOTFmNjIwMDE5NzgyM2E0MWI5OCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMmVkNmNkYmZhNGEzNWEyY2EzOGYyOGNhOGQ1OWFkY2QxYmE1Y2QwMjQ4ZDBhZDM0MmU5M2I1NGZkN2UxZWI0YyJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_cad4286b26dd43d68f8445d314fa62a4",
+      "statement": "NonceManager provides anti-replay keyed on (sender_fingerprint, nonce) pairs: TTL 660 s (2 × MAX_CLOCK_SKEW + 60) with lazy pruning when the cache exceeds MAX_SEEN = 100,000 entries, guarded by a threading.Lock, and a duplicate pair raises ReplayError (wire code NONCE_REPLAY); replays inside the window hit NONCE_REPLAY while replays after 10 minutes fail CLOCK_SKEW, so the mechanism does not depend on the sender's clock.",
+      "evidence": [
+        {
+          "resource": "repo://haap/envelope.py#L200-L237",
+          "version": "repo-lines-v1:sha256:660c30fba61ec95068f33d3c54316a42363c08c6f13dc02d0561e317335a6ef2:eyJzZWxlY3RlZExpbmVDb3VudCI6MzgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQwZjQwYzEzMmMzZDQ4ZDFkMjMzNDVjNGQwODdmOWY5MzIzMTA1OWE2YzFjNjRiNzM2MWExM2U3NWNlZTAwZjQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjEzMmRkNWYxYzllYzBmZWRjOWViZDAzYWMwYWRiYmU4NjBiYmE0YjdjZTk4YmYyOTk5YjBlOTkyOWZkMTBlZTciLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjFhMjg5MWJkNmZhMzNmMGIzMjg3MTE4MGViYjgwM2JmZmYwNjA5NzQzZGYyMmVlZDZjMzJmMTg2OWE3YzJlMTgiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImVjODQzNTgzY2E5MGY1ZTcwMTQxZjZkNDVjMWFhNTgyNDQ3Zjc4MmI3NzJhMzBmOWFhN2QzOGE4ZDljNTM3MzEifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_90ee966b45df4d53991b51eabe39f868",
+      "statement": "verify_envelope runs the inbound checks in order: structure/version, ±300 s timestamp window, sender public-key lookup by fingerprint in trusted_pubkeys (missing key raises SignatureError, whose wire code BAD_SIGNATURE also covers unknown non-bootstrap senders), fingerprint-to-public-key consistency re-check, Ed25519 verification over signing_payload, and finally nonce marking through the supplied NonceManager so the nonce cache is only polluted by authenticated envelopes.",
+      "evidence": [
+        {
+          "resource": "repo://haap/envelope.py#L240-L271",
+          "version": "repo-lines-v1:sha256:1543197e523fc7d85a2c4a30d0eb19acc251b40b00be0bdb27071c3823a3fd7a:eyJzZWxlY3RlZExpbmVDb3VudCI6MzIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjE3YTAzZmM4YmU5ZTAwOGNjMTgzNGMzNGNkNDFlYjRlMzAzNzQzZmU2YWFhNTI0NmI0ZjgxOGE3NDc1NTM5NzIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjFmYjFhZjk0M2U3MTJmMjRjZDg4YWFkY2RmN2M2ZGVlNDQ1MDJlOTc4NmE3MzRlZDJmYTk5MDdiZTQ3YTBkNzUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImM4Yjc0N2UzZTRlZGMxZTVkMjY3NWE3MWMyMzEwNjJhYjk4NGZkYjA4NDkxNzE4ODkyYmQyNTIwMGY0YTQyYTEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_279457c6472a4d13beec184f51db9f9b",
+      "statement": "HAAPServer.handle_message is the single inbound door for HTTP and in-memory traffic: it re-validates the envelope via envelope_from_bytes(envelope_to_bytes(...)) (a float in a payload therefore surfaces as MALFORMED_ENVELOPE), resolves the sender key through _resolve_sender_pubkey which for bootstrap types (hello, challenge, friend_request, service_search, service_book, service_cancel, service_quote) accepts the payload-declared public key only after checking fingerprint == SHA-256(key), and converts every HAAPError from verification or handlers into a signed error envelope while auditing both accepted and rejected outcomes.",
+      "evidence": [
+        {
+          "resource": "repo://haap/server.py#L106-L129",
+          "version": "repo-lines-v1:sha256:c2339e000445b948a32457fe4789dd352c2a320fe04487e6facfee2c878f7518:eyJzZWxlY3RlZExpbmVDb3VudCI6MjQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjlhOTI0YWY4OWNkM2RjNjFkYjQ2ZDQ1YTZjYjBmY2MyMWQyZTA2ZWM1YjRiMTRhYzdlOThmOGRkNTcxOGVkOGIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjE1N2FjYTc4NDE1ZjRmMmE0ZjIwNzAwYTYyMDE5ZDZmOTM1MjIyMzA4YTJmOTA2ZGIwMGUxZDczM2JiMDRhNjQiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImJhZjc3YzYxMWRlYjRlOTAxMWVjYjZlOTZiMmE0ZWY5Zjg2OTJiZTE2MWFmYTk4ZDU3MGZlZTRlOTBlNTEyODYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjVmMmRlZmNiYTIyYmQ2NmVlMGE4MjNlMDcwMWYxMzE5Zjk3NjAwZDQ1NmFjNzdiMDJiYzBmYTUyMDk4MDg3MjUifQ"
+        },
+        {
+          "resource": "repo://haap/server.py#L131-L160",
+          "version": "repo-lines-v1:sha256:be05e4fb1055120deb04e264eb10134991bab4d0811e5df615593421f76d7633:eyJzZWxlY3RlZExpbmVDb3VudCI6MzAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjZkMGI0YTE3OGZlNmZjNGI2MzQ5N2U3MDdiNjZlZTUzODA0NWViODAyZGU0MTI1ZDIyNDRmMGNjYTRiZmQyNGIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjdhYzQwOTk2YmI3MzE2ZDI3ZmZkOTVjMzJmMzFiYjY1ZGM1Zjk4MDVkNDE4MGNmZWI0MzVkMDhjNDZjN2NkM2MiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImIxNjdjZmMwY2FkZmI1ZjVmZmI4ZTZiYmQ5MGNjZjhmOGRkNWYzOGZhZmJhYzUxMzgxMDRkNDIwMjkyYWE5MjUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImNmZWM0NzFjOWQ1NWRjNTBiMDlkMjk4MTViN2ZkNmI2OWIzZjU4NmEwYWQyNDY1M2EzY2E5NDc5MDg2MTE1NWQifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_e0532877082d4ac49f4058b421dc8826",
+      "statement": "MESSAGE_TYPES is the versioned protocol-1.0 allowlist with exactly: hello, hello_ack, challenge, verify, friend_request, friend_accept, capabilities, task_request, task_accept, task_result, task_progress, error, ping, service_search, service_quote, service_book, service_cancel (the service_* marketplace types are signed open-service requests that need no prior friendship); the allowlist is enforced both by sign_body (refuses unknown types) and by envelope_from_bytes (rejects unknown inbound types before any handler runs).",
+      "evidence": [
+        {
+          "resource": "repo://haap/envelope.py#L132-L133",
+          "version": "repo-lines-v1:sha256:87f0492bddfb5a514d7d60220d6c97b3eba06b0f7f08e533793044ae9755dcd3:eyJzZWxlY3RlZExpbmVDb3VudCI6MiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNDQ2NjM1NWRmMmI3NzE5MTg3MzRjM2RmYmE5ZTU0NDA1ODA0ZWU2OTg2ZWNiNzEwYmMzMDJjMTdmZDg0NmE3MiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiYjQ5NmUwZGQ2ODdiN2Y2ZDNmYjhhZmU5NDliNWI5MjBlOTU4NGZjYzdlMzY0NWRjZWRiNjY4Y2E0YjliNmM5ZCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiY2E4YTJhZThmOGY2N2VjNzAwNzlmZmQwMmFkOTYyNjg5MTgyNzNmNzcxM2FiMWUxMTU2MjBkNTQwMGEwM2VjMyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNTFlM2E1ODc2NmNkNzc2NDdjZmMwNDRmODVmNzM1MTkwMWI0MWRhN2IxMDAzYzRiNzliYzNmODFkNmJkNGFjZSJ9"
+        },
+        {
+          "resource": "repo://haap/envelope.py#L178-L180",
+          "version": "repo-lines-v1:sha256:86e802a7a760d2913313fbecb3893b05c1796a0646110af2579f28cc451fa6f4:eyJzZWxlY3RlZExpbmVDb3VudCI6MywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMmZjODExMGYwNWJkODhjOWQ2MTkwYWJjMjMzYzk5MWI2YmZkYzY1OWUwYWQzZTE3ZWM2ODIwNDA3MDI5OGMwNSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNzU2NDIxYzZiY2Q1MmUxYzNjNWQwNzc5ZTlmMmFmMzM1MmIzNzlkNGNiNjM1MTA0ZGVkMTNiNmE0MmZkMzIwZSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZDQxNTMwZWYzYThiODQxM2RmMjBhMWEyNjRlZjg4YTkzY2FjNzQ0ODFiNjM2NzU1YmEzOTZiNmMwM2MzYjg1ZiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiOTE1ZDUwMmVmNWFiNTg1NDI4ZDI2YzViNjYwZGU1OGM5MzhkZjUyNDU5MTQxM2EyNmQyMTVkZTZkOTM2ZDQwYSJ9"
+        },
+        {
+          "resource": "repo://haap/envelope.py#L44-L58",
+          "version": "repo-lines-v1:sha256:ff1b9644edf39a7dd8e4af53083d57bf6584b87f793ac2b6248369ede7eb560b:eyJzZWxlY3RlZExpbmVDb3VudCI6MTUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjcyMWU5ZGZlMzZlNmViYjEwN2Q3ZGVmYWQyYzhmM2E2OTU5MTZkNzI4ZDkwNzk3YWJhNzAzMjMyOTVmMGI1NGYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjJkZmViZWI1NDhjNWVmYzM0MjFkMmY5NDRiMTM4NzU5MjhiZDgyNmM5NjFmNWZlZmM1Zjc2MzhkOWU3N2E4MjEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjNmZGI0OGJmNTU0MWE3YzllMzBmYTkzM2I4OTMwMjlhZGY1OTlhNTdlZDlkY2Q4ZGY2OTMwMTNiZDliZDQ2MzYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImRkZjhmMDQ5NmQ1ZDkzY2FjMzIzMTVlYjEwYmIzZjJlNjFlN2UzZWI1MjQ0Zjk4MTA2ZGIxMThmZjEyMmMxYjkifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_ab55aa016c464f85a75a204e9d925583",
+      "statement": "The public manifest advertises the narrower MESSAGE_TYPES_PUBLIC list (hello, challenge, verify, friend_request, friend_accept, capabilities, task_request, task_accept, task_progress, task_result, ping, error), omitting hello_ack and the four service_* types; and the server dispatcher only implements handlers for receivable types, so a reply-only type such as hello_ack, verify, capabilities, task_accept or task_progress that reaches a server is answered with a signed error envelope carrying code HAAP_ERROR and detail \"unhandled type\".",
+      "evidence": [
+        {
+          "resource": "repo://haap/capabilities.py#L35-L39",
+          "version": "repo-lines-v1:sha256:0360db82fcfd8bc4c6524db495f4c1a24a9f71203400b25d58585d8d006acec9:eyJzZWxlY3RlZExpbmVDb3VudCI6NSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMDYwZDRlYWFkNDgwM2EwOTc3ZDViZWQyNzQxNDk1Y2YxMDkzZTQxNGNlZjg3YmU5NjAyZjc0NjFmYzY2ODU3NCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiZjk0MTZlMDlmNzhiYTMxNmMwMzI1NjgyMTNiODU1ZWU3NTZlNDE1NjVkOTE4ZjA5NTE5YzgxZmQ2MjBmNDA2MCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiYWEzZTllMDA1ODgwM2MxNTY3MGRiMDFjNjg4NDc4YjUxNWQ3ZTNjNmMyNTgwN2UyM2QwZjhjZjFhOGQwM2U5ZSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiY2IxYTk4MWNmMmYwNzdmYTgyZmJiOWE5ODRiZjIxZDA3YjI2NTIyMDE1ZmY1YWMwNzU2NzRkMzU3MzQ3Yjk3MCJ9"
+        },
+        {
+          "resource": "repo://haap/server.py#L148-L152",
+          "version": "repo-lines-v1:sha256:5cd0defb06335e3cd156df0b8f6b8b64fec32e339074d09e6947d97499127737:eyJzZWxlY3RlZExpbmVDb3VudCI6NSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNmYyNDVlMDMwNjg0NDUwNDI0NmFjNTAyMjg5NzI5YTNmZjJhMTNiMGJkZDcwOTM5ODQ1NGQwYTkxYzQyZjJhOSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiYTkzNzY1NzViNTA3ZDBkOTRhMzI2YWI2NzVhMTg3MmIyZmZhODUyNWZiYjViMjRkNTYwOGUxMjgxOTkzOTJlYyIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNGE4OWFkZTkyMmFhYjk3N2FhYTMxYmRjMTgxNDAzZWI2NTNhNDcxNGE2YTFkOGM5NzJlOTNhZWIzYjVkNTVhOCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNThhMWZmMjU0MWUwZTFkOWVjOGE3NDM5ZGY2YzFlNDUyYzliOTcyOTk3N2IyZjdjOWUzODZkYjhhMTZiOTc0OSJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_d5245abc08354a3d9e15aecfc155b4e2",
+      "statement": "Messages are size-capped for anti-flooding: MAX_PAYLOAD_BYTES = 1,000,000 and envelope_from_bytes rejects any message whose UTF-8 length exceeds MAX_PAYLOAD_BYTES + 4096 bytes (1 MB payload plus 4 KB envelope overhead) with MalformedEnvelopeError before JSON parsing.",
+      "evidence": [
+        {
+          "resource": "repo://haap/envelope.py#L153-L159",
+          "version": "repo-lines-v1:sha256:bfcd422bb6e84b516880f25babc361c50ff0a3b9c6fdc27a8d285277b0bc0043:eyJzZWxlY3RlZExpbmVDb3VudCI6NywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiODdkOTIwZDUwNDEzZDEyMTRkMDVjYjY0MjkyZjViMDA2NGI5MDhlZjYzNDRmZTcxMzA5MzZjYjM5MDhlZmRkYiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiYWI3NGEwOWQ5ZmYzYzkxMzIyNzYzMDFlNjMzZmRlMTFkMGQzNzJhZTczMzZjMzEyMzVjYzdmYWQxODNiODYzNSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMTE2MDY2YWI4NjA3M2E5ZDY1MDJkZGFmYTllNWFjODk4Njk4ZjcxMWE5Y2ZhMzk5MmI2ZjI2ZGRmOTExMmIxYyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMTFjMzQ2NTMxM2E2NzAwMjczYjZlOTlmY2EyMDE1NmJlZDQwZTU3NWM2MWE0Y2UyMmE0YTRhOTllN2E4ZjE3NyJ9"
+        },
+        {
+          "resource": "repo://haap/envelope.py#L58-L58",
+          "version": "repo-lines-v1:sha256:2dfebeb548c5efc3421d2f944b13875928bd826c961f5fefc5f7638d9e77a821:eyJzZWxlY3RlZExpbmVDb3VudCI6MSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMmRmZWJlYjU0OGM1ZWZjMzQyMWQyZjk0NGIxMzg3NTkyOGJkODI2Yzk2MWY1ZmVmYzVmNzYzOGQ5ZTc3YTgyMSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMmRmZWJlYjU0OGM1ZWZjMzQyMWQyZjk0NGIxMzg3NTkyOGJkODI2Yzk2MWY1ZmVmYzVmNzYzOGQ5ZTc3YTgyMSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMDM3ZjY0MjEyMDI2YzJkN2ZlM2FlYmViMWRmOTkwYzc1YTc0NjhkMThhYmYyZDUwOTIyYzI2MDc4OGMzNGYxNSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZGRmOGYwNDk2ZDVkOTNjYWMzMjMxNWViMTBiYjNmMmU2MWU3ZTNlYjUyNDRmOTgxMDZkYjExOGZmMTIyYzFiOSJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_6eaa550d3b4349129d92c6eaf8c8c821",
+      "statement": "Every rejection after envelope parsing is a signed error envelope produced by server._error_reply: addressed back to the original sender with payload {error_code, detail (truncated to 200 chars), in_reply_to_nonce echoing the rejected envelope's nonce}, so the sender can attribute each failure to its own envelope and third parties cannot forge rejections.",
+      "evidence": [
+        {
+          "resource": "repo://haap/server.py#L162-L167",
+          "version": "repo-lines-v1:sha256:c23ac6232abbf4250a5fc85d166be0ee8a14d2dc408d3b62d6a30e48a195c1be:eyJzZWxlY3RlZExpbmVDb3VudCI6NiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMDJmZWRkM2ZkYzgxMGY5ZGJlOTJhNmY2ZDhjMjU0MGMyZmM2MDlkYmViODAyMTNkNDgyZWYwMWEwMjc4NmYwOSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNmU4OWFjNDliNmQ4M2IyYzUzZTgzMTMxOThhYjRlMjc4Nzk2MzdhZGIyYzgwNTg0M2FiODYwOGIxYjZkN2FkYyIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNTEyMzM5ZDM2NjUzNWY0MTc1Mjk3YmUxOTg4ZTdhNWVlYmZmOTA0YzM2NmNjZTg5NTdhOWFhNGI1NTc2Y2E5YyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiYTdjMjViYTdlMDNkYWMzMTdhNjVjMTI2NzBhYzQ0M2EwOWMxYTU4Mjg4Njc2M2RhNjEwODhhM2NiN2NiMjYwZSJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_3315d043baa741809700fe90627c5388",
+      "statement": "The HTTP layer only returns HTTP 400 with a truncated error for faults before any cryptographic check (JSON that envelope_from_bytes cannot parse); a parsed envelope always gets HTTP 200 with the reply envelope (including signed error envelopes), and an empty reply returns HTTP 202, so envelope-level failures never masquerade as transport errors.",
+      "evidence": [
+        {
+          "resource": "repo://haap/server.py#L423-L457",
+          "version": "repo-lines-v1:sha256:42568d4e06ec3b52bd4f2a8bed5fb42dabbfbe12a6096194182fbcf8a0647297:eyJzZWxlY3RlZExpbmVDb3VudCI6MzUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjIxMDk5YmNiNmI0OWNjZjdlOWYyNDNkNTczOGNlMDM5NDkxMzliYTVmNWQ4MDNlY2NjY2YyYTc1OWM2MzAyNDEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMjNiYTA0ZDA0Njg1YzI3Zjc2ZDBkOTAwM2FmZjU2MzU1NDUwNGQxMDMyODE3YTU4ODRkZGMyMDNkZjQyNTciLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6Ijc2MGYzYzZjZjdmZDBmZDhmNzRiODc2M2UwMmEwMDY0MjM2NzZlMmVhNzBkZjE0ZTMzOGY0YmRiODJlZDM2ZWMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjcwMzJkOGU5M2I0NzQzYmQ2NTA0MzgxNTEwN2M4YjRiZGY1NzZmZTBjYmQ1YmEzMmY1ZjYxMTAyYjBjMGM2MDIifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_0cc0088ec0b549c983edee2333ae7d46",
+      "statement": "errors.py defines the stable on-wire code catalog: HAAP_ERROR, PROTOCOL_VERSION_UNSUPPORTED, BAD_SIGNATURE, UNKNOWN_SENDER, CLOCK_SKEW, NONCE_REPLAY, MALFORMED_ENVELOPE, CHALLENGE_REQUIRED, NOT_INITIALIZED, FRIEND_NOT_FOUND, FRIEND_BLOCKED, FRIEND_NOT_ACCEPTED, DUPLICATE_REQUEST, PERMISSION_DENIED, RATE_LIMITED (transient with retry_after), TRANSPORT_ERROR (transient with HTTP status), DISCOVERY_FAILED, TASK_ERROR, TASK_NOT_FOUND, TASK_STATE_INVALID, TASK_LIMIT_REACHED (transient with retry_after), UNEXPECTED_MESSAGE and FRIEND_REQUEST_DENIED; ERROR_MAP maps every code to its exception class and error_from_code instantiates the exception for a received code, degrading unknown codes to a generic HAAPError.",
+      "evidence": [
+        {
+          "resource": "repo://haap/errors.py#L11-L24",
+          "version": "repo-lines-v1:sha256:2368697cdd9d627ed042683dd5f2dc7955bcd9277099dce75721a8bee8142b95:eyJzZWxlY3RlZExpbmVDb3VudCI6MTQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjdkMjUxYjM3YTZhNDI2MzcyZjg1MjFjMzYwMWJjMTM0NjY4MzJkZDBjYjY2ZWJhZGRiYTY4MDQ0ODM4YTkzMjAiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjFhMDAyY2VjNzk4NjRlNTlmMDA4Nzg5ZGY1YWZhY2M3YTZkMzcxZmRkYTA5ZmE5YWZjZTQ5NWE4NjdjOTdkYmEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjM4YWU2MGEwOWE3ODRiNDdlYTA4NTMxNmJmZjkyYzY4MDExZGQ2NzBkODlmMjhkYWY1ZGE5YmI2YWU0MWJjNDIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjliOGRiY2IxZDM0ZjU3NmNmMWZjMzYxYTgyMGQ3NGI4MGRjZWEzNjkzYWVlN2UyYTE4ZGQyYThjZDkxMGE0MmQifQ"
+        },
+        {
+          "resource": "repo://haap/errors.py#L163-L171",
+          "version": "repo-lines-v1:sha256:237682054311bab7a1fcb3fdddf3a15b087363c97fc7e7ba88a052637768e15d:eyJzZWxlY3RlZExpbmVDb3VudCI6OSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNWJlN2VkYjc5ZjlmOWJlZDRmMzk0ZmM1OTMxNTZlYjMwYzZiNWM1NzFlMmZmZjhkM2IxYzc5MWE0ZGRlM2MyMiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNTk1Mzk1OTE4ZTAxNWM5YmJiNmM3NDRlNjA2MzdjNzEwMjlhNWVjYjc5ODU0MjNjNmZmZjgyODMzNTY1NzkyMSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMDlmOTMwODNjMTk3MTIxYjk4MjcwMGJhOGFmYWJkMTcyMmNmMWQzZTc0MDQ1MDllODBlZmEyNzI0N2Y2MmYwNyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjAsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSJ9"
+        },
+        {
+          "resource": "repo://haap/errors.py#L30-L160",
+          "version": "repo-lines-v1:sha256:7635c667b90d60f0e79f6f92aae6597e8c02b54ac5aad861712200e2b6566aef:eyJzZWxlY3RlZExpbmVDb3VudCI6MTMxLCJmaXJzdFNlbGVjdGVkTGluZUhhc2giOiIxZWFiZjdjNDQ0MzY0ZWRhZDllODY1YTg4Y2EyOTA5YzJjMTFkMDk3ZGZkMGJiMjgwZmViNThiOWRhYWUxZjA3IiwibGFzdFNlbGVjdGVkTGluZUhhc2giOiI0MTJjYTM0NWNjZjc1YmY5YzA4MDZiY2U2OTViZThkZTgwOGI3OTk4NDI1MWE3YTU0ZDIwMmNmNjEwMWRkNDUxIiwicHJlY2VkaW5nQ29udGV4dExpbmVDb3VudCI6MywicHJlY2VkaW5nQ29udGV4dEhhc2giOiJkOWUzODA5NGI5ZWYwYmEzNzg2YjgyZGYzNGFhYTQxNzE0OTY4Y2IzNzIyNGM1YmI3NDcyYTcwMGYxYmI5Zjg1IiwiZm9sbG93aW5nQ29udGV4dExpbmVDb3VudCI6MywiZm9sbG93aW5nQ29udGV4dEhhc2giOiI3NzljNjAxYTk4MWEyNDJkN2I0MmFlOTUyZjdjMGJiOTIzYzQ2YTA0OTA0MTg5NTFjNDA5M2I0NDU0NmQxMTA3In0"
+        }
+      ]
+    },
+    {
+      "id": "claim_9528ced840f74f55bde38465d51fa40c",
+      "statement": "The client treats any reply whose message_type is \"error\" as a rejection of its own envelope: HAAPClient._send and _raw_send audit the failure and raise error_from_code(error_code, detail), translating the received stable code back into a local exception.",
+      "evidence": [
+        {
+          "resource": "repo://haap/client.py#L164-L174",
+          "version": "repo-lines-v1:sha256:35536fcd13147b794071a1e310fe567aac600a30cfb45e3da5cb611ccb741f38:eyJzZWxlY3RlZExpbmVDb3VudCI6MTEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImI0ODc3NTRkZmQxODE1ZTc5YzMyMDhmZjcyYjVkODNkNDA1YmNhODljMjI4MTg2ODVkYThlNjliNDEyMmI1NjQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjdhYzQwOTk2YmI3MzE2ZDI3ZmZkOTVjMzJmMzFiYjY1ZGM1Zjk4MDVkNDE4MGNmZWI0MzVkMDhjNDZjN2NkM2MiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjI5MWExMGI1MjUzNGExMGNiYjNhNzFlNGE4YTJkOTBjYmYyYmEzY2NiYjAyYmJiNWZjNWIyYjVkMjAyZTQxMjkiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImY4MWE2YTNmNjViMDhkNGRkYzg4MDQyMjExZmQ2OGJhYzIxZDZkZTc1NjIzYTBkM2RjY2E1OWFhMjcxNGQyNmUifQ"
+        },
+        {
+          "resource": "repo://haap/client.py#L95-L117",
+          "version": "repo-lines-v1:sha256:6dc2dd18304970b40045ea0e1a30741244cf8b6e51cf43ecbc0252aa295df72c:eyJzZWxlY3RlZExpbmVDb3VudCI6MjMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImFkYzczZTY5YmY5ZTdjODM0Y2QwODIzZjAxNjZhYmEzMTk1MzRkOTJjYTU4NjA2N2Q1NzAyMmQ1NDY0MzlkYTAiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjdhYzQwOTk2YmI3MzE2ZDI3ZmZkOTVjMzJmMzFiYjY1ZGM1Zjk4MDVkNDE4MGNmZWI0MzVkMDhjNDZjN2NkM2MiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjQ0NmM4NmFhNjgxZGZmMTIyZDNlYjMwZGE1Y2FiYTMxZjhmOTVjNTYxNmEzNTViZDM3MTM0MDgxYzdlYjMyZTciLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImYxMTU0YWJhNDRiYWUzNWZmYzlhM2YyMTBlYzEwMTE3ZDhlZjlkMTYwNDhkNjI0OWM5YmI3YTg1ODJhYTVlZWIifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_80a28547b07b41cf87fff17cf3b98186",
+      "statement": "The envelope security guarantees are exercised end-to-end through the router in tests/test_server.py: tampered signature yields BAD_SIGNATURE, resending the identical envelope yields NONCE_REPLAY, a timestamp 4000 s in the past yields CLOCK_SKEW, a non-bootstrap message from an unknown sender yields BAD_SIGNATURE on the wire, and a bootstrap hello declaring a key whose SHA-256 does not match the claimed fingerprint yields BAD_SIGNATURE.",
+      "evidence": [
+        {
+          "resource": "repo://tests/test_server.py#L156-L210",
+          "version": "repo-lines-v1:sha256:e31612f56a9a342bb1f4a21c2840a7cc3629bea1d3da2ff0ec0400b628dae9c4:eyJzZWxlY3RlZExpbmVDb3VudCI6NTUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImQzZjMyNzc2ZWJlNjFiNTZhZTIwMTM4MWYxZGQ1YjM1OGE5NWY2YzYwZGE2M2Y3MTNkYmI0OGMzODllMmNmNTMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImQxOTY5NTFiM2I2YjcxMmYyODIzZWI1YWQ3ZWI4MWQ3Y2IxNGM3OGQ1YmIwYzUwMTg0MTZmODVjNmM5Y2ZkOWIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImU5ZDgyNTNlMWIzM2JhNTRkOTZjMDA3NDIyNWYwNjgyNzg5NzMyZTE5NmY3ZDlkYzIyNDA1ZGI3NmZhZTM4ZjkiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjU2MjA2ZGZjODRhZGYzOTg4YTBiOGY0NDc1NTI3NjJmMTNlOWU4MmMzMjhiZTg1MmQyNTIxZjU3ZTg3MmE0NzIifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_af8741ba59b94b92979aca0c9c76b385",
+      "statement": "The envelope invariants are non-relaxable protocol constraints: signature covers all fields except signature over deterministic canonical JSON; floats are forbidden anywhere in signed canonical JSON; the ±300 s timestamp window, per-sender nonce anti-replay with 660 s TTL, and the 1 MB payload cap are mandatory; and message_type dispatch is an allowlist that rejects unknown types at parse and sign time.",
+      "evidence": [
+        {
+          "resource": "repo://docs/ARQUITECTURA.md#L98-L104",
+          "version": "repo-lines-v1:sha256:22b8878e6e2f29fe27ac8577ebb59f5a1317dc926ed41b4838888fe964f8984d:eyJzZWxlY3RlZExpbmVDb3VudCI6NywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiOGY2NDBkOTQxMDRjY2YwZWIxMGZlNjFjNGYyMWIwNzc5YzhlOTBjZWU0OWFhZWI4NTYzNmE0OTFjNDA0ZjdiZCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMTI5NDM1ZWFhMmU3ZTA2MzY0YzZhZDdmMjQ4Yjk5ZmU1NTRmNTA1NTFhZDFmNTY3ZjczYTgwYjQwMGRmMzUwYiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiODgwOTE4YWM2NDMwNzA0MDMwMDQzMjc4YWJiMTY3MDAxYzY4MzQzZmM1YTNhZGY3ZjgyYjYxNjk1MjliODRhZiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNzI5ZmJiOGFjZWUzMmMxOWIyODNhMGE4ZWM5MjM1YmU0YmYyMmNjYTU0YmE2Nzk0MzYzNjE2NDRlMzY5N2I3MSJ9"
+        },
+        {
+          "resource": "repo://haap/envelope.py#L42-L58",
+          "version": "repo-lines-v1:sha256:fb8f72173ce3f15d11d6f18229f79ab64089be4d4f0f997b151f99ddfc78e67c:eyJzZWxlY3RlZExpbmVDb3VudCI6MTcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjBmYjIxNDA3NjMxNjE5ZDJhMjRlNTJlOTI3YWZiODFlNjE5ZjgwMWZhYTY1YjgyYTQ0MzE4YjNiNGM4YWNlODYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjJkZmViZWI1NDhjNWVmYzM0MjFkMmY5NDRiMTM4NzU5MjhiZDgyNmM5NjFmNWZlZmM1Zjc2MzhkOWU3N2E4MjEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjY4ODhjNWM3Yjg2ZDc1OWFlNWUzMzZmZWI1ZmE2M2U2NGYzZjY2ZjU2NWIxMDkxZjYyMDAxOTc4MjNhNDFiOTgiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImRkZjhmMDQ5NmQ1ZDkzY2FjMzIzMTVlYjEwYmIzZjJlNjFlN2UzZWI1MjQ0Zjk4MTA2ZGIxMThmZjEyMmMxYjkifQ"
+        }
+      ]
+    }
+  ],
+  "verification": {
+    "by": "openwiki/0.5.0",
+    "at": "2026-09-05T09:02:08.883Z"
+  }
+}

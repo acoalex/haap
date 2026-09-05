@@ -1,0 +1,348 @@
+{
+  "schemaVersion": 1,
+  "pageVersion": "sha256:86798000868bea8ee9b1ec24ea5c216ae0e0a04351f3f70755c7eba34fe29161",
+  "claims": [
+    {
+      "id": "claim_e192324a689e44d791b86a78237feaa0",
+      "statement": "The HAAP directory is a phone book, not a notary: agent identity lives in the agents' Ed25519 keys (fingerprint HF-<16 hex> derived from the key), and the directory only indexes signed manifests and verifies endpoint control; it is not an identity authority, so a compromised or malicious directory can hide or poison discovery results but cannot impersonate an agent, and clients should re-verify the agent's /.well-known/haap.json directly.",
+      "evidence": [
+        {
+          "resource": "repo://docs/ARQUITECTURA.md#L208-L219",
+          "version": "repo-lines-v1:sha256:7c8d9eaed30d39a89343ba5a7bcec2ffc16286a13aa3e05a1982a1f588e6e021:eyJzZWxlY3RlZExpbmVDb3VudCI6MTIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjNiY2NkZWJmZjA2YzhhNDcwNmYxNWJiYjFkZTMyODZkYzUyZmU1NjdiMzZlMjQ0NzdmMDVhMDI4ZWRjMDBiNDYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjYwNzQ0Y2FkM2Q2ODliNTQzZDQ2MWU3Mjk5YmUxYzQ0NTIzNmIyM2VkNmUxZmY3MDZmNjBiMDdjNDExOWUyZjIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImE3MjQ2N2NiMTM2NmQwMGMwMjAzOGNiNTU3ODI3ODY5ZmEzMDA0MzFjZjE0MDY3ZDM2NTBiOTMzNmViMmU1NzYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjMxYTdkNDViMzdmMTk5NzQ2Njk1NDY4OTI4MmFhNGI2NjFhYWEyYmQyYzE5MzgwYjg4MjZkN2YyOWNiYjk4MDUifQ"
+        },
+        {
+          "resource": "repo://haap/registry.py#L4-L6",
+          "version": "repo-lines-v1:sha256:7452a1e67d7814a4b61919f9cf576d4c75897b3808aa5047bc21306e27daf471:eyJzZWxlY3RlZExpbmVDb3VudCI6MywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMWJmN2Q2OTFmNjA4MmUwNzc5N2QyMjQzMGQxZWM0ZWYxMmJhZTY1MzMxNTRjZjZlOTBiNWRiNjllMWNlNjliZiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNzExM2YwYmU2ODVmZDc5NmMxY2JmNDJhM2I5M2U1Yzg2Mjc4OWI0NGIwZTllZjI5OWRhOTgzMjQ1Y2EwZmFiNyIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZjVjNWQzMzg0MGRmYzgxZTIyMDA3ZDdkNjJhNDczYzIwZGIxOTU3NTIwZjY2NzNhMjNhMGI1ZDMwNzU1ZTJhMiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNTA1NDIyYjY2MGYzZGJmODZiZjU2ODM0OWYyNTM3OWRmMzY3YjZjMjZhMjQyMTZhZmM4YWVkYTk4ZDlkNjlmMiJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_69db3dbb38e5463cac41ac3b3186e62f",
+      "statement": "haap/registry.py implements the directory as a reference in-memory service with zero runtime dependencies beyond the stdlib: RegistryStore keeps listed agents and pending challenges in dicts guarded by a single threading.RLock, RegistryServer wraps it in an http.server ThreadingHTTPServer, and every process restart starts with empty state; the entry TTL is configurable per store instance via RegistryStore(entry_ttl=...).",
+      "evidence": [
+        {
+          "resource": "repo://haap/registry.py#L170-L178",
+          "version": "repo-lines-v1:sha256:fcbc3992368915c3330f229ff67b23bee9439a9aa5e19c1e8825fe9fbde47daa:eyJzZWxlY3RlZExpbmVDb3VudCI6OSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiYTU4ZmVmZGJhOTAzZmZmYjdjZGE3ODU5M2Y3ZjUwMzkwYTgzNDA5YWJmMDNkNjk3NzI2MmMxYjIxNGM0YjI1MiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMGVlZjc0OTNkOTBlOGY3ZDE5ZDQzMTZlNTQ3ZTU5ZWVhZmFmNGVjMWNlNjhmMzRkNGViOGY4Mjk3NTM3MWNiYiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMWNiZTBjMDJmZjJiMTY5OWU1MzE3NWFiNGM5NTM0NzYzZWIwMWQxNDE5MmM2NjM2YThhOTJlMWUxZWQ1YzVjZCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZjI3NzAwNThmYzJjZmVhYWJiNjkxMDVjMGZhNTgwMzk5MGU2MmJhZGQxNGFjNTI4YjVjY2NjZDNlODJlMWZjYSJ9"
+        },
+        {
+          "resource": "repo://haap/registry.py#L249-L259",
+          "version": "repo-lines-v1:sha256:1c48453884ab4ee7a96e7fd3bec1614cc93c2e0e2e4dcdbe247d645551904e1d:eyJzZWxlY3RlZExpbmVDb3VudCI6MTEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImFhNWM4NjhkZDY4OTQwYjAwMTIxZDgwYWYzZDU0NzYwNDUwZmI2ZDRjNzllMmNiMWY5NDEzNWNjNjFhNWYyZmYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImNiOGM0OGQ2NzQ4NTI5NTc2OTQyYWU1ZWNiOWNlODYzZjM0YjgxZTdmY2RiN2IyYzk2MjBlZWY1YjM1ODE1YjgiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjcwMzJkOGU5M2I0NzQzYmQ2NTA0MzgxNTEwN2M4YjRiZGY1NzZmZTBjYmQ1YmEzMmY1ZjYxMTAyYjBjMGM2MDIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        },
+        {
+          "resource": "repo://haap/registry.py#L42-L49",
+          "version": "repo-lines-v1:sha256:7446f4c446d8c3215972ef7a3d2f643fcf655060e91f6815bfcc160356379a78:eyJzZWxlY3RlZExpbmVDb3VudCI6OCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiYzM1M2UzMmJiYWM1YzAxZDUxMzQyYzg4YjMxMGYwNWNhMWM4MDE4ZWJlMTBjYWUyZTRjNTYwZGZiODA1OTIyYSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiM2Q0ZWE3ZDllNWVhZDVkNjYxM2M5MGI2M2Q4ZWI4OWE2Y2Y0MDNhMzAyM2U3YzE2ZTE4ZGI3ZjE1MTFmYzc4ZiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZDZlMTZmNTcwOGRlYjVmZWMyZGNjNmZlODRjYTRmMTQ3ZmU4ZjI3MTVjMzk5OWU3ZjZkNDNiMGM2YjExZTExYyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMzdhYTk4NmM5ZmRkNzg2ZjUyZTBmMTdjNzgzNWE3OWM1OTllM2MxODQwNjdjZTYzNmI0Mzk5YTJmOGEzOWYxMCJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_0f6c78bdcd5d473ba278d23d22bd6a97",
+      "statement": "docs/DIRECTORY_SERVICE_BRIEF.md is an implementation brief, not implemented code in this repository: it scopes a separate production-grade HAAP Public Directory (haap/directory_service package and haap-dird CLI, SQLite-backed, /v1 routes, rate limits, audit, geo and pagination search) that must stay wire-compatible with registry.py and registry_client.py, which the brief says remain untouched with the unmodified tests/test_registry.py and tests/test_registry_client.py as the acceptance bar; the repo README points production operators to a separately operated directory (https://acoalex.com/haap-directory, github.com/acoalex/haap-directory).",
+      "evidence": [
+        {
+          "resource": "repo://README.md#L115-L134",
+          "version": "repo-lines-v1:sha256:8ec9e6c9850d3bd67fa74af2a11e5d65d829817a78c37a98c99a0ee0de7f1366:eyJzZWxlY3RlZExpbmVDb3VudCI6MjAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImRjM2UxN2VkZDQ0ZjIyMWMwOTc4NzYyZDY3NjJmMmIyMDgwY2NhNWFmZDgwMDBhOWFmYmRhZWRiZGJjMDBlMWQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImQ1NWExMWJmMzBkNGIxZTZmMTlmOTNjOWFkYTllNGU1YTJiNTQ3M2E5NmFmNWQwYjVlNDQ0NWYyMThlMWU3N2MiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImQ1MjRiZmNjNGYwM2E4ZTY2YjAwZThmM2Q4NmY0YzdjN2QyZWY1NjAxMjM2MmRhNDQ5MTE5ODk0NTQyMWZlNmIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImE0ZDIxODkwOTgxYTIwZDZhYjc2MzA1ZmYzYzM5Njc1NmNhY2JmMzgyNDRhOWU3YTAzYmVhYzQzZmFlNjlhNDQifQ"
+        },
+        {
+          "resource": "repo://docs/DIRECTORY_SERVICE_BRIEF.md#L175-L175",
+          "version": "repo-lines-v1:sha256:7a3bec0809d82374cee993fa2350cf3fea2db4749ab6e3cf5322a22cfafb5bb1:eyJzZWxlY3RlZExpbmVDb3VudCI6MSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiN2EzYmVjMDgwOWQ4MjM3NGNlZTk5M2ZhMjM1MGNmM2ZlYTJkYjQ3NDlhYjZlM2NmNTMyMmEyMmNmYWZiNWJiMSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiN2EzYmVjMDgwOWQ4MjM3NGNlZTk5M2ZhMjM1MGNmM2ZlYTJkYjQ3NDlhYjZlM2NmNTMyMmEyMmNmYWZiNWJiMSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNGVhZmE1ZTQyMzQzMTVkMzBkZWUyOGZlMzNmNGNiODkzN2E0YzNlZjk2ZTVlOGVmZTU5MjgxZTY4YTQxNDQ0NCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMDBjY2MwMjY0MjJmNjlmYmQ1NzJkMWVkMjBhNGNhODljMmFkNTcxNmJjN2RkYjdmYmFlZTRmMTJmMGI1YjY4MyJ9"
+        },
+        {
+          "resource": "repo://docs/DIRECTORY_SERVICE_BRIEF.md#L23-L23",
+          "version": "repo-lines-v1:sha256:0e0bd661bf3543be9623856f50ad4806f66b1fd5d82703d2cbcda284b29e41f3:eyJzZWxlY3RlZExpbmVDb3VudCI6MSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMGUwYmQ2NjFiZjM1NDNiZTk2MjM4NTZmNTBhZDQ4MDZmNjZiMWZkNWQ4MjcwM2QyY2JjZGEyODRiMjllNDFmMyIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMGUwYmQ2NjFiZjM1NDNiZTk2MjM4NTZmNTBhZDQ4MDZmNjZiMWZkNWQ4MjcwM2QyY2JjZGEyODRiMjllNDFmMyIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiYzQxZTk3YWQ3OTExM2M1ZmFiNTk3OGE1Y2MxOWJhNThjZWUyNGQ4ODljNWU3ZTkwMDExYzk0MzI0YzAyZjc2ZSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiN2E5ZTEzNjI3MzA3NjNjOGEwZmE3ZDQ2N2IzNDc0ZDdmOTI3MGQyZWFiYjIwYjRmNTZlNjUxYWNkN2M0Yzc0ZSJ9"
+        },
+        {
+          "resource": "repo://docs/DIRECTORY_SERVICE_BRIEF.md#L32-L41",
+          "version": "repo-lines-v1:sha256:7cd05eb47bed56e222cc6575a8517d5a15a126c94f59cd28121a310b8eff0988:eyJzZWxlY3RlZExpbmVDb3VudCI6MTAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImNkNTBmYTVjNDk3OGM5MGQ2ZWM4OWYyN2MwZjQyM2U1YzkxNjZkMTljNzAwMDBjYWY2Njg4NDg0NDJjMTk5OTgiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjdlNmUyMTE4MTNlNjc4ZmI0MzU1ODJiMzUxZWQzOWQ2MzNhMTBkYWVjNWU1YzU4OTBjMWE1OTA0YmFiNDRiNjUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImEzZDIyNGI3MmI0Y2U2NWUzMzRhYjllYmU2NmM2NzQxNWE1MTk3MmFjOWMwY2M1ZGMwNmMzY2RhODgwNGMyN2EiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjM0ZTgwZWYyMzI1N2YxYjljYjVkNGM5NDU0Y2QyZmQwYTdjMDNjMGNkZTdjNjBkYmJiNTljODlkMjhmYWI4ZGYifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_c3ab43e540e24e2f813698ec47ee6b77",
+      "statement": "Registry defaults are ENTRY_TTL_S = 24*3600 (an entry expires without a heartbeat), CHALLENGE_TTL_S = 60 (proof-of-endpoint window), and MAX_AGENTS = 10_000 (anti-flooding cap); tests exercise expiry by constructing RegistryStore with a 2-second entry_ttl instead of sleeping for the real TTL.",
+      "evidence": [
+        {
+          "resource": "repo://haap/registry.py#L35-L37",
+          "version": "repo-lines-v1:sha256:2d2f822f91acc270861d13fe60c7ab97fd67aba2906f02ed25a1176f7fbb6c98:eyJzZWxlY3RlZExpbmVDb3VudCI6MywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiY2ZiYmE4YzdhMGNiODkyYjRjNjc3YjI0NjA3N2Q0MDFhNzRkNTllYWFkYjI5ZDhiOTYyMmE3NzI5ODM2ODg0NiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiOTIwYzkxMTI4NzFhODQ2NjlkNmJlYTM0NDA4YWYxMWZjMDRlYTIxZTVlMjQwMDk1NjJjZGIzNGM5ZTNiOTg3ZSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiOTk0YTNmZTE3MTU2N2YyYzdkM2U0MTE1NGVkODllZDcxNGU0MTI0OTE2OTM0NWEyZWEyOGE1M2QxMTUxMDU5YyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiOGM5M2M0MGJlNjEyNDczNTU4N2E1ZjlkODI5ODNmNGNjYjNlNWNlODQxMjk1NGJiM2VmZmExMTA5OGQ5MTU5MyJ9"
+        },
+        {
+          "resource": "repo://tests/test_registry.py#L173-L189",
+          "version": "repo-lines-v1:sha256:0d696c44d9ffbf3650feb05e58f827b119eaaa1c2a9f89660924bf5fc2d4ad88:eyJzZWxlY3RlZExpbmVDb3VudCI6MTcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjgyYWNkYTNlZDE3ZTVjNmQ1MTI2ZDZkNzRhNzllN2U2ZGNhN2Y4N2MzNTAxMjlhNWI3ZjYwNWZiZjQxMDZiN2IiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImRjNjE1NDQ5Y2Y0NzM5NWY4MzAyZjFmNjcyMWZhZWZiY2M5MDg3ODFkNjNjYjA3NDVjZTk3M2JlZjhiNzBiNTAiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImU1MDg0ODNkODdkM2Q0MzZlM2NlNmYxYmU3YjA4MDFlYWRkNjQyNzgzZmU4Yzc1MDgxZjk3NTU3ODdlZDg2NGMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjYyMzE2MjY2YjJlZTFkZDk5N2YwZjZmYTkzODU3OWM0ZDcxNGExMDIxZDIxZGZkMGMyNzZiZjNmOWQ3NDUzODYifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_95634e7b357a4f3ca555a2865238cfdc",
+      "statement": "RegistryStore.submit_registration performs all server-side verification before issuing any challenge: manifest.agent.fingerprint must match ^HF-[0-9a-f]{16}$, the base64-decoded public key must hash (SHA-256, 16 hex chars) to that fingerprint, the manifest signature must verify with KeyPair.verify_with over canonical JSON, and manifest.agent.endpoint (trailing slashes stripped) must start with http:// or https://; any failure returns (False, message) surfaced as HTTP 400, and success only stores a pending challenge (nonce, issued time, verified key) keyed by fingerprint — the agent is not listed at this step.",
+      "evidence": [
+        {
+          "resource": "repo://haap/registry.py#L60-L88",
+          "version": "repo-lines-v1:sha256:f6b2880410c4801c23a6983ce31d2749220d857891ba7abba216e5c2f24ab164:eyJzZWxlY3RlZExpbmVDb3VudCI6MjksImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjE4ZTZlOTE4MTlmZDZhOGU5NDFjMGVjNDI3ZGNhMWYzMzVjMDQ0M2Y0ZGQyYjZmNzZkOWU5OTcwOWY3YzgyNTciLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijc1YmMzZGFlYThiNzE1N2IyZGQ0ZDFmODIwNDc3MmQzYTg0MzkxZDZmNTc5Y2VkZDcwYWE4YTA5MDIyMDJkZTYiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjMzZGZjNGQ2ZGYxZTJlZWU3YmMzNzZiNzdmZjNjYzczYjkxNDRiZGY1YjgyZTJiZTlhODkzNDQxZjZlNDExNDUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjFlZmFiNmVjNmFkNzBkZmJjOTcwMmMyNmU4OThmMTUxMzUwYWEzYmYwOTI4OTk0YzAxNjg0MDMwYTIzNjhlZTkifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_51c4057c7622453c9d8b5bc1dfbe7856",
+      "statement": "All manifest signatures in the directory ecosystem are computed and verified over exactly json.dumps(manifest, sort_keys=True, separators=(\",\", \":\"), ensure_ascii=False).encode(); the same canonical form is used by registry.py verification, by registry_client.build_registration when signing, and is mandated unchanged by the production brief.",
+      "evidence": [
+        {
+          "resource": "repo://docs/DIRECTORY_SERVICE_BRIEF.md#L184-L184",
+          "version": "repo-lines-v1:sha256:2d9b6838ed4a8610b0eaeb4bf373af293b797ea52c11b95278c74ec379504cb7:eyJzZWxlY3RlZExpbmVDb3VudCI6MSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMmQ5YjY4MzhlZDRhODYxMGIwZWFlYjRiZjM3M2FmMjkzYjc5N2VhNTJjMTFiOTUyNzhjNzRlYzM3OTUwNGNiNyIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMmQ5YjY4MzhlZDRhODYxMGIwZWFlYjRiZjM3M2FmMjkzYjc5N2VhNTJjMTFiOTUyNzhjNzRlYzM3OTUwNGNiNyIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNWZiMjdmY2FlNTIyYjVhYTQ1NGMzZTNiODBmODNhNTI0YjYyNTcxNmMwODEwNjdmNGVlN2M0OWEwOWRjNDc0NSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiYzc2MTk0N2M3YzQ1MjhjNDA0OWJiMmZlNjc5MzAyMzJhY2M2M2E3NzIxNDZlODg0Y2ZmNzZlOWU1NzkyOThmMiJ9"
+        },
+        {
+          "resource": "repo://haap/registry.py#L73-L77",
+          "version": "repo-lines-v1:sha256:0e1ee3108f6e94e82a0d502709eb81b33a4aa5c3e41ff4b7b5620c3b9436ec10:eyJzZWxlY3RlZExpbmVDb3VudCI6NSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNGVlODk5Nzk4YTFhNTgzNWY4YTY2YjQwZTgwYzQ5M2U4MTkyOTgzODllNmRjM2U1ODJlMDMwODI0YmYyNTkxNiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiODQ1MGI3YmM1MjFlMTU0YmFjM2E2YjIwNDg2ZTAxN2QzNzEzODljY2FmYWYxNmNkOWNlZTE2NzM0YzMxNzUxOSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZTkzZjFjNTcwNGRiYjFiNTdkNWU0MjlmNjc2YzM2ODZlYmM2NDlmMjg5MDhhYjdkMmM3MDQyOTZlZjljZDg5MyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZmVjNDEzYzAwMWRlNzZiNWEzZWNlNGFlNmNhMGMyZjZhNTc1MGQzYTI2YTg2YTc1MjllODJkNjJiYWFlYWJiMyJ9"
+        },
+        {
+          "resource": "repo://haap/registry_client.py#L60-L62",
+          "version": "repo-lines-v1:sha256:8158e3712578c59c7f5a6b57467a7f86a2d57d730933c58f53e660b73e5454ce:eyJzZWxlY3RlZExpbmVDb3VudCI6MywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiZGM1OTI5M2RhNTdiODM1ZmJhYTdkOThhMDViMDY5ODQwMzllYzVkMzNiMjg5YjdhN2FhODYzYWE4ZjRjNTBhNCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNTQyNzU3ZjNhM2UyZTIxY2YxMTM3YzJlYmM5MWZmMTZlNGZiNzc2ZmVjNDk3ZmUzOTBkZDE3YzdjNjk4NWI1YyIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNTYzOTczMjUzOGE0NTZmNmMwZjdjNjhlYTkzYzYzYjg1MjgyMDRkZDhmMzU2NzA2YWUwZjk4YjQ1NDIzNGRlMSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNDNmOWRjZTZkNzUwZWJhZmYyZjM0NjM4NjQ0NmZhZTJlYTk2OGMxMTk4ZTA2YzJmZDVhNTMwOTFjZjg2MDMzOCJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_64223ad662e142a38f589b40cd8d5cdc",
+      "statement": "A successful POST /register returns 200 with challenge_nonce plus registry_fingerprint and registry_signature, the latter being the RegistryServer's own generated KeyPair signing the nonce's ASCII bytes, so an agent could verify it reached the intended directory before completing; the reference registry_client checks only for challenge_nonce and does not verify the registry signature.",
+      "evidence": [
+        {
+          "resource": "repo://haap/registry.py#L173-L178",
+          "version": "repo-lines-v1:sha256:e2d338af7daadcbc70797ccae8fd362fcdbf8bf96b4a7480f9ef1b703e3390e0:eyJzZWxlY3RlZExpbmVDb3VudCI6NiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMTUzYzc0NzYyYjY4NjdkZjdkNzZmZTZjMDI4ZGI4MjEyMWVlZTU4YWQ2MDczYmE5YzZiMjE1MGM4YWNmMmRjNSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMGVlZjc0OTNkOTBlOGY3ZDE5ZDQzMTZlNTQ3ZTU5ZWVhZmFmNGVjMWNlNjhmMzRkNGViOGY4Mjk3NTM3MWNiYiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiYTlkMzA0NzFlYmVjMDkwNjA2YjFjMzc4NWZmMDA3OGU2OTNhYTZjNGFkZjM3YmExNjk0ODBjYzVhNGQxMWQ1YSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZjI3NzAwNThmYzJjZmVhYWJiNjkxMDVjMGZhNTgwMzk5MGU2MmJhZGQxNGFjNTI4YjVjY2NjZDNlODJlMWZjYSJ9"
+        },
+        {
+          "resource": "repo://haap/registry.py#L221-L233",
+          "version": "repo-lines-v1:sha256:ccdc70bc9e515f39c84cfafe57e9596572eab606636938a489fe2b17eaa1aa27:eyJzZWxlY3RlZExpbmVDb3VudCI6MTMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjhlNTM2MmI0MTE0YzcwN2I1MjAxZjE2ZmI1NzA2NTdmYmUzYTA4YzI3ODJiMzM4YWJmNWIzZGQxMmZlMDA0OTEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImM1MzI5MDEyMmQ3MGM3MzRlNzQ4YWFhNjgwNjUxYThjZDA0ZGU1MDI4MjFkZGUzZDlhNDNhNmIzMjJmZTU0ODciLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjIzYzk5ZDQ4MTE0NjY1YTExYTEwMDhiZjY3MDA0MmI5YTQ5ZDM0OGY3Yzc4YzFmYzQ1OTZjM2E1YmUyNjhhMDgiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6Ijg2ZWI5YTJlOWNkMWJlYjI2MWEzNmNhOWRlNjBhMmM1YjYxZmQ5ZDBjNjM0MDdjMGNiN2QwNDZlMTk0MmI4YzIifQ"
+        },
+        {
+          "resource": "repo://haap/registry_client.py#L80-L86",
+          "version": "repo-lines-v1:sha256:4042b634811b84329cd8234de00d004282782f6eff792a68c28836842701276d:eyJzZWxlY3RlZExpbmVDb3VudCI6NywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMzM5NzBiMDkxM2U2NzI3OTY5NGZhN2U5OTBhYzhlYjM4NTBhNzcyYzc0MjAyNzNiMTBlZWMyMzgzYWFhNzlmMyIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiZGJlZDA0ZjQ0YWZkNWY3NzYwOGE0NTFmYzgzNDRkM2MxMjczNjUyOGM1YmZhMGFmYmNkZTYxYjdmMzdkNjQ4ZSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiYjNkMWJmYjBhMDlhOTZmYjI4NDA1ZGJhMzYwNzc0ODA0YjczN2Q4MGY4MmJkMDhmNzRmNjA2NThmZWVhMmU0YSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMmRmMDUwNzkyYjExNjg3MjAzZmRhYzA5M2ZlZjM3MjUxNDNjN2MzNGU0MmYwMmUwOWU2MGFhNTVhMDA5NjI4YSJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_a236d8165ba045969e362a4b451fdf9d",
+      "statement": "RegistryStore.complete_registration is single-use and expiry-checked: it pops the pending challenge before validating, so any completion attempt for a fingerprint consumes its challenge and a failed or expired completion forces the agent to restart at POST /register; it then rejects on challenge age above CHALLENGE_TTL_S, on a caller-supplied public key differing from the submit-verified key (when supplied), or on an endpoint proof that fails verification, and on success writes the record {manifest, registered_at, last_seen, endpoint_proof (first 64 chars), endpoint_nonce} and lists the agent.",
+      "evidence": [
+        {
+          "resource": "repo://haap/registry.py#L90-L117",
+          "version": "repo-lines-v1:sha256:386abafa79f57682d34a7f7235cad003a5a40ea7345986697b0ead5b64b316f8:eyJzZWxlY3RlZExpbmVDb3VudCI6MjgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjEzNTk3MTIyNDlkMmU3OWYzNDVkN2EyYTE4MjNmYzNjYjRmNjI0MDVjMTY4ZGM2OGQ4NTJiMTA3MGYzM2M0MGMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjMwN2I2MWY3NmY2ZjZjNDI4M2JjZDRhYTFjMWQ1NDI4YTNiZWJlZjliODFlM2QwOWZjNzJmNGU4Y2UzNGU5NTUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjI2M2EyZDE4OGIyNGJlMzQ5ZTY2NmExOTc1OTYwYzRmMGFlOWY2NzA4ODc1NDdhMmRhYmQ4MmJhOTlmZWY5NDIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImI4ZjdkMGQ4NDMzNGMxZjcyNGFlODcwNGU5ZmE0NzA0ZTVmNmUyZDM3NTkyMzJlZTYyNzI5NThjZTIwYjE4MWEifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_71929b1f6f5b4810be17ba47c583c052",
+      "statement": "Proof-of-endpoint binding is enforced against the key retained in the pending challenge at submit time: verify_endpoint_proof checks KeyPair.verify_with(raw_pub, nonce.encode(\"ascii\"), proof) over the stored key, and the HTTP /register/complete handler never forwards the public_key_b64 the client also sends, so the store-level key-equality check only applies to direct store callers; a proof signed by a different key leaves the agent unlisted, pinned by test_failed_endpoint_proof_not_listed.",
+      "evidence": [
+        {
+          "resource": "repo://haap/registry.py#L104-L108",
+          "version": "repo-lines-v1:sha256:8e339f3592e9bffbbacb1c4f781984b02d376c8327670f9d4e8fb1722d5bdaf0:eyJzZWxlY3RlZExpbmVDb3VudCI6NSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNWQ1Mzk3ZDRmYmE4ODBlOGU5ZGJiOTBkNDVhMmEwNTgzY2IwM2RlYzY2ZTY3Yzc5NDAyM2I2NDkyNzEwOGQyNyIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNjNkMmY5NzFhZDIwMWM0NGQ5MTA5YzY4OWQxYWUxMjM4ZDE5MDE5Y2RiZDM4YTBiZThlYjNmZTlhMTAwNTQ5MCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZDIzZGJhNDQ3YjE3YmE5MjBkMzE1NDZlMGYxNmNhYTU1ODgyNDU5ZjljZDk2ZTIzZTY0MzA1YTJiODZmOGU0MSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNTUyNTFmMWM5NWJkNzE2NzkxOTA2NDQ0MjU4Nzk1OTBkZDcyMmIxYTdlYzgwZmU5MTEyZDIxNjk0NmM5NjM2OSJ9"
+        },
+        {
+          "resource": "repo://haap/registry.py#L119-L127",
+          "version": "repo-lines-v1:sha256:bfff659270db811d8e66ae32538778db90012f566fb5dc622c84ec67b83d59f1:eyJzZWxlY3RlZExpbmVDb3VudCI6OSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiN2RkNmZhNjkxMTEzNzkzNTJkNmY2MjNlMmI0NDIyN2I1OTg2YjZiOTE4Nzc1ODA5YmI3NzI1ZTVmYzMyZTM4NyIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiOWYxMWVhMTFlZjAxZTJlOTY5ZTVmNGM2MjcyZjNkYjY2ZGU1ZjhlNTRkMWNhYWE0YWZlZjJkMjBiYmEyZWYyNiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZDdmNmFlNDc1NzUwMGZkNDg3OWE0OGZlMjU1NzRhYzZkZmYxODFlZjMyYjhhMTAwZjAyYTMxNmVkYWY2NjdhNCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMThmNDRiYmQ2YTAyZDk3NTZiODkwMWQ0YTNiZmY3YWY3OWEwOWU2OTgxYWRmMzlmODI3MTFlZjhhZDUwNjAxNyJ9"
+        },
+        {
+          "resource": "repo://haap/registry.py#L234-L240",
+          "version": "repo-lines-v1:sha256:723a3a00f6b01784b3a02bda4dad26e41b2b9c565607407633a708089a91cb5b:eyJzZWxlY3RlZExpbmVDb3VudCI6NywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNWMxY2ZkOWUwMGIyYTIwYjNhZWY2OWU0YjJlY2RlOGZiZjZhNDkwM2FhOTZkYThlYjE2MGUxNTE2MzIzODFkMyIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiODZmNzRjNjJhNWI5NTkwNjg5ZGQ0NmU5MWMyZGJhMzExZTgyY2UyN2U0ZmJkMTVmOWI3YWVlMDIyYTY2OWY0YSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZTdjNzlmYTdlOWIxN2EyN2I2NmY5YTRlMDEzNWM4MmUyMThhYzUyOGYxMTg4OTUxOTJhYjliNDBiYjI4N2U1MSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiYjNjODQ0M2NmYzNiNDY5NDU3YjRmY2MxNGZmZjJkZTIyZmIwMjJlYzEyZGFkZmFhMmJmOGZhNTNmNGUxNTM0OSJ9"
+        },
+        {
+          "resource": "repo://tests/test_registry.py#L130-L151",
+          "version": "repo-lines-v1:sha256:4539a50b2e29c7f48aacb8d14549d210b59a7834b0758ed82371e20d9131f6dc:eyJzZWxlY3RlZExpbmVDb3VudCI6MjIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjIwZWZkYWNhZjUyM2JlOGU4NGJlMDQ3NzJlMjdkOWYwZTVhNmVhZDQxYzE3YzI4ZjY0ZThjMDRjNjk1NmVkY2UiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjJmZDQ4MGY4NTFiYjczNzMyZGI3MmU2MjAyNGY2NzgxMjM2YWQxNmI3ZDdiOGE3NDU4ZmYzMjU2MzNhYzRmODUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImE2YTYxOTk0MzAxZjNjYTVmZGVhYmZkNTBjOTdkMTBhNDg4YTA1YzA2YmY5NDA3NTZmNGQ4YmViNzZmMDhhNjgiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImRjMjdhMmFlMzZjMTkyMjNkY2UxOTQwOGU5MDAzMDM5ZjczYjZkZTYzODc2NWUzNDJkMTUxMDI2NjAxZTRhYTEifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_89be5eeaf9d343d0a27a16d9b9844caa",
+      "statement": "Re-registering an already-listed fingerprint is an update, not a duplicate: complete_registration overwrites self._agents[fingerprint] with a fresh record (registered_at and last_seen refreshed), so RegistryStore.count() stays 1 after repeated full registrations of one agent (test_duplicate_registration_updates).",
+      "evidence": [
+        {
+          "resource": "repo://haap/registry.py#L109-L117",
+          "version": "repo-lines-v1:sha256:a9a8f2412575711c0e244b37bed0ba3266a1dcf29ed7ca4d26c3dc51e556284c:eyJzZWxlY3RlZExpbmVDb3VudCI6OSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiYmJhZmZhNTU5MWVhMzNiMTViM2Y3N2UyYmMxNWJhNGM1MTQ3Mjk2YjBjZGFlNzAzNWE2NmU3ZmUyNjZhZTVmNiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMzA3YjYxZjc2ZjZmNmM0MjgzYmNkNGFhMWMxZDU0MjhhM2JlYmVmOWI4MWUzZDA5ZmM3MmY0ZThjZTM0ZTk1NSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMGVmOWQ1NzY3ZTAwYWIwZDMwZDgyM2FhYWIwN2EwODdkNjkyODJhMmNiOTgxNmI2MzE2MTk2YmY1ZTlkYjkyZiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiYjhmN2QwZDg0MzM0YzFmNzI0YWU4NzA0ZTlmYTQ3MDRlNWY2ZTJkMzc1OTIzMmVlNjI3Mjk1OGNlMjBiMTgxYSJ9"
+        },
+        {
+          "resource": "repo://tests/test_registry.py#L154-L170",
+          "version": "repo-lines-v1:sha256:ac344a11f9839f96d1bb7b9d98258c5871b0cbc3444f6bf35b910fced2912cd1:eyJzZWxlY3RlZExpbmVDb3VudCI6MTcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImMxZDQ3N2FjZjRkNzMyZWZiYTVhZTYxMDZkYzYzZTc0OThhNDc0ODAyYmVjZWU0YzRlMDQ0M2ExZmM5OGYwNmUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjY0MjJlOGFlNmI4Y2E3ZDNjNjNlOTQ2YjQxMGFhZmVlMjI0ODU3ZTU2ZDcyYTJiMWEzMjA4OWE5MWM0NWIzZDgiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjM0ODFiM2VlNmYxMmYyYTRjYmU5ZDZlOGJmY2UyZmNmYzIwNWJkNGQ5YTZmYWM2NThhMTcyNDFhYWU0ZDk4YTkiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjEyNzRkYWQ1OTUxMzQ3ZTdkYmIxZjQxYjE1ZWE1ZmQxMTU2NzA2ZjkwMGUyYjJkMTg0ZDViM2NhYWRlYTMwMTYifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_1b4ec0bf49094bfba9388b90f032ec6f",
+      "statement": "Heartbeat in the reference implementation is an unauthenticated liveness renewal: heartbeat(fingerprint) refreshes last_seen only for a currently live record and returns a bool, and HTTP POST /heartbeat {fingerprint} answers 200 {status: ok} or 404 {status: unknown}; no timestamp or signature is checked at this layer, whereas the signed heartbeat contract (signature over heartbeat:{fingerprint}:{timestamp} within a ±300 s window) belongs to the production service specified in the brief.",
+      "evidence": [
+        {
+          "resource": "repo://docs/DIRECTORY_SERVICE_BRIEF.md#L120-L129",
+          "version": "repo-lines-v1:sha256:447ac07f8b16ef92f3364f96133f12c27bd495ef916e3f793d18e0483101c3d3:eyJzZWxlY3RlZExpbmVDb3VudCI6MTAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjljN2VlOTU4NTE2NDExOTVhNTE3YWQ3NzEzYTdiOGYyMDc4OTM2ODhlNGMxZjdkZTllZDYzZGM4ODc3NGM3ZTQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImJmN2M0ODUyNWY4OTVjODgxMjk0ZDQ5YzEwZjIyMWQ0NDlkOGFkYjljZTY0ZWE5MDUzZTRmZWYyOWFkZGUxNjYiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjE0Nzk1NTVjZWQxZDU2NDFjOTg3Y2NjMDk0MmI1OGVkMWRlZGIxOTFhYzBmZGMyZDJlZmZiYTczNTZkZTk5MmUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImNhZjBiM2JlMzc4ZTQ1MzlhMGRiZTE2ODI3OTY2OGFiZmVlMTllZGI0Y2MwMmQ1OGMzY2ZiYzcxMjQ0YjM5ZTMifQ"
+        },
+        {
+          "resource": "repo://haap/registry.py#L129-L135",
+          "version": "repo-lines-v1:sha256:e3d73f276041cea3f4bae4402bfff6fff57b48248455e27ad4dc6b92554bff89:eyJzZWxlY3RlZExpbmVDb3VudCI6NywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNTZlMGYyNTM4NGU5ZmZmMjM5OGI2NDg4MjQ2MGM5ZmFiNGJkZGFjZmUzZDExNWE3Y2VlODllOGMwMWE0MjFiMyIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiOWYxMWVhMTFlZjAxZTJlOTY5ZTVmNGM2MjcyZjNkYjY2ZGU1ZjhlNTRkMWNhYWE0YWZlZjJkMjBiYmEyZWYyNiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiODBkZWUzNTJkZTUzNDk0NmM3ZDk5OTQ4MDcxMmI3OTM4NTlhNWI1MGZlOTJhMTQxM2FjYjRlNjBlNTQ4YThhOSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNjA0OTU0ZmM1ZTc4NDRiMTVkMWU2MTFlNGY1NjVhOTc0ZGUxNTEyNmQzNjgyOTJkYTVkMzY1MWNmNDBjZmZkNCJ9"
+        },
+        {
+          "resource": "repo://haap/registry.py#L241-L244",
+          "version": "repo-lines-v1:sha256:ec4a98805786b887180a065e31cbaf2bd313d95123f710619fa680d4da7d2961:eyJzZWxlY3RlZExpbmVDb3VudCI6NCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiZGY0OTY3MmYxNmY4NWYyZmZhODc3MjNkMWRkZWRhMTNjYTUzMTc0ZDYyZDk4Yjg3ZGMzOTk0MzYxNTcwN2FlNSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiZmRiYmNjZTc2NDM1NzcwNDgzMjdjZjRiZWFlYjc4YzI5YTMyZjQxMjE1OGNmZWM3YzViM2I5ODRkMjMwZDczYSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiYjFkY2MyYzFiNjQ1MWE1Y2MzNzI0NWU1OTI2YmU0ODQ2MDg2Nzg4MzBlMmFmNDU0MDdkYWYwOWVmYmY3OTNhOSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMTMyOGM4ZGEyZmZhMTRjMWVlNGU0MWVmYzQ2ZmFkNmRiM2IyMzdhMmQ5OGJiMGU4NDk5MDE1YjFmYmVkNmU2YyJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_3b0affbd82da4324863a68cab8908d75",
+      "statement": "Entry expiry in RegistryStore is lazy and logical: a record is alive iff now - last_seen <= entry_ttl, and get returns None, heartbeat refuses, and search/count skip records past that threshold, but no code path removes records from the _agents dict (there is no physical pruning), so reads filter rather than reclaim memory.",
+      "evidence": [
+        {
+          "resource": "repo://haap/registry.py#L138-L143",
+          "version": "repo-lines-v1:sha256:e2c403428484bb0219ed66304e640c27884cd68fcb7dd19efe40c0f920b28744:eyJzZWxlY3RlZExpbmVDb3VudCI6NiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiN2Q5ZjQ2NWZlNTY3MDZkYmYyYzhiNjBhNWE0OWVmZGUyODk1NDY3NGExOTZiZWE2YTI4YTc5ODE2ZWE5NzVhNiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNDIwNzgzOTJmZmU5MzUxM2E0Y2VjMDYyNDY4NmE5NzIzZjgzODFiMzhhM2M2MGZhZDQ2ZjNiMTBhNzY2NWU3ZSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZmJmM2IwOGQ3OGY4MmEzMmEzODliNzQwNzE5YTIxMzVlMjIzNGU1MzE0YzFkOTFlMjJhNmZlMjUwOWRkMmIyMSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiYmUzODMxZDQ3Y2E2YjkzYzg5ZTVjNzdiMTg5NDI5NWY5MGNkZjJhZWRiNDdiNjdhZTQ0MDgzN2QxZDgwZDA3YyJ9"
+        },
+        {
+          "resource": "repo://haap/registry.py#L145-L167",
+          "version": "repo-lines-v1:sha256:78b078c70047d682ccf60335ab8528013a8f4842acb1d2aacc02516097e72bf1:eyJzZWxlY3RlZExpbmVDb3VudCI6MjMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjFhMmNmYjc5NjYxZjE5MDgxNzhiMDRiNWJmMDBiODYzMjMxODFlOWEyN2RjMWJkZjU4NDFlMzU3ZDA5NTE5MTUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImIyOTJlOWY0NzhjZDVhMmY4M2MxYzYwNDAxMzNkY2UzYjI3YzBjZjNkMDk3YjgwNjdmYTQwNmQ0OGIzNWUyZjAiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjJjYjcyY2Q1NzViNjQyOGE1ODIxNGEwNjI0NzY5NWZmMGEyZWNhYzMwMGU0ZDQ2YWFkODE2NjE2MzdkNDVjNzUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjJkZGE0YmViMWQwNzA2MjY2MDIxNDVlYzU2OGY5ZWFhNzU4Y2ExMTFiZDk4NDkyZjE4MTdhN2IxNTE3ZDljNGMifQ"
+        },
+        {
+          "resource": "repo://haap/registry.py#L56-L57",
+          "version": "repo-lines-v1:sha256:66ae8cff2d859a06f055fe493a2df65a9a60fefaf205180854afbe604609197f:eyJzZWxlY3RlZExpbmVDb3VudCI6MiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNGJlMWJkZTM4MGQ5Mjg1MTkxYTZkOGYwMzI3MjQ4NzRlNjUzZjc5MDI4MTUxN2I5MGUzZDJkYjAwYjQxYjRmZCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNDIzNmFiODU1NGUxOTdjYzc5ZmRjYjFkMjkyNjFhZGJlZDJlYjNjODY2YTdiY2U3YTA1ZTY2NjI2M2E4Y2U3NSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiYmI2OWJmMjBjMjJiZGRlOTViMWU0MjQ0ZjI5MDA3Y2IzMzgzNmZjMjgzNjNlZjdkMTAzMDc3ODYxNGRmMWQ0YyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiYmRmNzlmNGZlZjIzZjk4YWUyNWU1MzE0N2NiMWYyMGVjODhiZjUyZTBmYzE1ODE3M2RjYTkwZDcyYWVjMzZmNSJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_1e82a0781c7c4271b5a15d0ac447d7d9",
+      "statement": "The MAX_AGENTS cap is enforced only inside submit_registration and only for fingerprints not already in the dict (len(_agents) >= MAX_AGENTS and fp not in _agents); because expired records are never removed, the comparison counts every distinct fingerprint that ever completed a registration in this process, and re-registration of any previously registered fingerprint is always admitted via the update path.",
+      "evidence": [
+        {
+          "resource": "repo://haap/registry.py#L83-L85",
+          "version": "repo-lines-v1:sha256:dd8948cbc36a0060c2e35044f8101e586c6aef216cba41e5fcd440ec69d7d163:eyJzZWxlY3RlZExpbmVDb3VudCI6MywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiYzk4ZTIzMmMxNDkzMmExODhjZWIwY2QwZDc5ODBhODRmNTU0NWUwMzhiYWI1Y2M3YjM0OTViZjUxZWNhYmNmNCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiYTEzYzRmYjdlOWI2MTIxMzNkNjAzZjI2OGNmMjMwZTVhMzYzM2MyN2QwZjU3ZTY5MGRjNjQ0MGU0ZDFiZWVlNyIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNjY1NjRjMzkyNWEyODYyYTU5MDhkYzYwYWI1ZWFhN2RkMGIzMzMyYzQ5ZTBlOWQ1OTdlNjcwNWZhZDQ3NjRlNCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMWE3ZDMzODhmMmJhY2JjMWE5NTVjMTg4NzEyMzA5NGVmZTA3N2RiNzY4MzU1MjRiMzI5ZDdmMjE1ZWI1NmJjOSJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_e26eb444e26a4779bd89feb465bc4b74",
+      "statement": "The HTTP surface of RegistryServer: GET /health returns 200 {status: ok, agents: <alive count>}; GET /search?capability=X&q=Y returns 200 {results: [...]}; GET /agents/{HF-<16 hex>} returns 200 with the stored manifest or 404 {error: not registered or expired}; other GET paths return 404 {error: not found}; POST bodies are parsed as JSON from the Content-Length header and non-JSON input yields 400 {error: invalid JSON}.",
+      "evidence": [
+        {
+          "resource": "repo://haap/registry.py#L187-L193",
+          "version": "repo-lines-v1:sha256:101f6a772a490103c060148bff6b244d61bb8f9f9f6fd0f6dfd041c3ee8aabb1:eyJzZWxlY3RlZExpbmVDb3VudCI6NywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNzI2MDQxZTRmMjEwMDJkZDk0NWM0YTQwN2ZhNWRiOThkZTM1MTY1ODc3NTQ4NjUxZTBkNjYzODYxODVkYTdlMiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNDI0YzFkZDYxZGYzNjM5YmVkN2RjNDE4YmNhYTliYjVhNTcyNzQ5MmJjZTY3MTgxODFkZmUwMjgyYTUyNTJiYiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiYTJjMDVmNTEyNjg2NWMyODMyYWRiZjRkNGRkMTg0NmRlMGJiNmY0MDU2ZTg2NjAxYWM5OTZlZTBjNjZhYjgzMiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMzAzZTgwYWE2YjM1ODBkNzhlNWVjN2JlYzBlNDI5N2ZmOWJmNTk5NWFhODZkNzM1MjdlYWY5NjI0ZWYzYjQwZSJ9"
+        },
+        {
+          "resource": "repo://haap/registry.py#L195-L212",
+          "version": "repo-lines-v1:sha256:17d80320e5b4b49a40f20a0d35d9f8ce09eb0f69e38fc5b6087c11fb438bbbb9:eyJzZWxlY3RlZExpbmVDb3VudCI6MTgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjdjNTI2ZTM4Njk5Yzc4OWFkNmIxZjMzZDMxYmE1MzI0ZDdlNDE5ZjhkNjg0MTgwODI1YWMyNDk3YWJmZWNjOGMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImFhMmZmY2M2ODlmMWZlYTQwNzM0ZTVkZDliYWIxZjYxNzRjM2ZiZTRhYzg1NGQ5Mzg1M2RiY2E1NDFiMzJhNjAiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjFjMmNlNDY1Y2M1NDBiN2FlM2ZjNzBlY2FjYWVmNzQyY2ZjYWNiZmJlYzgxOTAzZjhkZmVmMjc2MjQ3YmRmNzEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjI0ZjExMjY1YWNmMTIxYWFiMWViNzlhZDIzNTdiMjg1YjExMzEyNjEyNTNkZGJjM2EwYmIxNjNmMjRiMmNhZWQifQ"
+        },
+        {
+          "resource": "repo://haap/registry.py#L214-L220",
+          "version": "repo-lines-v1:sha256:f1a85e307f21c7f89f462809513f9a1493d91328949aec0f5feb0abbe8be9159:eyJzZWxlY3RlZExpbmVDb3VudCI6NywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMTE0NTBkMmZiNzg1NzgxMTc1MDE1YTgyYjA5MjU3ZDgxZmQ0ODJkOWFiOTUxOGVmZTVlODQ1ZmIyYTViYzhkNCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiYjczNjE1ODRjNmM4NDMyOWU1NWZiYTY2MzgyZjA1NjQxOGFhNDRiNTkzOGRhMDJhZGRiYmYwZDhmZjJhN2UzYyIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZjA0OTBjODkwMDRlZmNhMDQ2Mzc3OTY4N2Q2YmUzM2RkZDdmYmU0ZTE4YmIwZDVkMjk4NWIzM2YyODg3N2FlOSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNWM3MDg3MGJiYTQ4M2I2NDE5ZDFhMDczZWVkOGIwNzU3MGI4ZmZhNjVmODI4MDAxZWU0YTMzYWU0MThhN2FkZSJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_40ee9505479a40a1becf063e730cc26b",
+      "statement": "Search semantics of RegistryStore.search: capability is a case-insensitive substring match against agent.speciality plus every manifest tools[] name and skills[].name, and q is a case-insensitive substring over the JSON of the whole manifest; results are the stored manifests themselves (never server records with proofs or timestamps), returned in the {results: [...]} envelope.",
+      "evidence": [
+        {
+          "resource": "repo://haap/registry.py#L145-L163",
+          "version": "repo-lines-v1:sha256:389eb64057473bdd29cf587ce1b83c4d8db31a85e4ccaca2035fa1a046375194:eyJzZWxlY3RlZExpbmVDb3VudCI6MTksImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjFhMmNmYjc5NjYxZjE5MDgxNzhiMDRiNWJmMDBiODYzMjMxODFlOWEyN2RjMWJkZjU4NDFlMzU3ZDA5NTE5MTUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjM2MGM0M2NhOTYzZTJlNzk2ZjUyMjU1OTc4ODI2YmNhNDczNmNhZTc4MDM4YTkzNGQzZDEwM2VjZDAzY2QxZWEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjJjYjcyY2Q1NzViNjQyOGE1ODIxNGEwNjI0NzY5NWZmMGEyZWNhYzMwMGU0ZDQ2YWFkODE2NjE2MzdkNDVjNzUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjViYWMxYjY5MjQzNzNlN2JlMjU1MmI0MTJmYTY0MTkzNTE4ZWRkMGI0Zjg1ZDBlMjJlMzZiOTZmNjBkODYxNmMifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_37018183ddd74f38beb93a47feda884a",
+      "statement": "RegistryServer identity and serving mechanics: each server generates its own Ed25519 signing KeyPair when none is injected and derives its fingerprint from it; start(host='0.0.0.0', port=8444) binds a stdlib ThreadingHTTPServer whose serve_forever runs on a daemon thread with daemon request threads, returns the HTTP server object (port 0 gives an ephemeral port used by tests), and stop() shuts it down.",
+      "evidence": [
+        {
+          "resource": "repo://haap/registry.py#L173-L178",
+          "version": "repo-lines-v1:sha256:e2d338af7daadcbc70797ccae8fd362fcdbf8bf96b4a7480f9ef1b703e3390e0:eyJzZWxlY3RlZExpbmVDb3VudCI6NiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMTUzYzc0NzYyYjY4NjdkZjdkNzZmZTZjMDI4ZGI4MjEyMWVlZTU4YWQ2MDczYmE5YzZiMjE1MGM4YWNmMmRjNSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMGVlZjc0OTNkOTBlOGY3ZDE5ZDQzMTZlNTQ3ZTU5ZWVhZmFmNGVjMWNlNjhmMzRkNGViOGY4Mjk3NTM3MWNiYiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiYTlkMzA0NzFlYmVjMDkwNjA2YjFjMzc4NWZmMDA3OGU2OTNhYTZjNGFkZjM3YmExNjk0ODBjYzVhNGQxMWQ1YSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZjI3NzAwNThmYzJjZmVhYWJiNjkxMDVjMGZhNTgwMzk5MGU2MmJhZGQxNGFjNTI4YjVjY2NjZDNlODJlMWZjYSJ9"
+        },
+        {
+          "resource": "repo://haap/registry.py#L249-L259",
+          "version": "repo-lines-v1:sha256:1c48453884ab4ee7a96e7fd3bec1614cc93c2e0e2e4dcdbe247d645551904e1d:eyJzZWxlY3RlZExpbmVDb3VudCI6MTEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImFhNWM4NjhkZDY4OTQwYjAwMTIxZDgwYWYzZDU0NzYwNDUwZmI2ZDRjNzllMmNiMWY5NDEzNWNjNjFhNWYyZmYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImNiOGM0OGQ2NzQ4NTI5NTc2OTQyYWU1ZWNiOWNlODYzZjM0YjgxZTdmY2RiN2IyYzk2MjBlZWY1YjM1ODE1YjgiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjcwMzJkOGU5M2I0NzQzYmQ2NTA0MzgxNTEwN2M4YjRiZGY1NzZmZTBjYmQ1YmEzMmY1ZjYxMTAyYjBjMGM2MDIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_f1054d224f5f46dc83ec53ea56bbdaa1",
+      "statement": "registry_client.register drives the full two-round-trip flow: build_registration returns (manifest, public_key_b64, manifest_signature) built from capabilities.public_manifest and a canonical-JSON signature; register POSTs those to /register, raises DiscoveryError (code DISCOVERY_FAILED) if no challenge_nonce comes back, signs the nonce's ASCII bytes with the agent's private key, POSTs /register/complete with {fingerprint, manifest, endpoint_proof, public_key_b64}, and returns the response only when it carries status == \"registered\"; network failures raise DiscoveryError for an unreachable directory.",
+      "evidence": [
+        {
+          "resource": "repo://haap/errors.py#L106-L109",
+          "version": "repo-lines-v1:sha256:d9c4cfff302cb9cd50827df4158ac0b07f35c1f2ef38e2fc1e8a7c76f9db3958:eyJzZWxlY3RlZExpbmVDb3VudCI6NCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNmI1NmQyMGIxNTlmYTI4NmFlY2RjODg2MWQ2NGJjMDgxMzczMzk1YzZhYTFiYzE2YjU1NjI4ZDFiZjdlZDczYiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiYzI4ZDNjNzQ2YWI2ODEzYmFjMjRjMjY1NzczMzEzNDYwNmQzYWU2NmY3YjQzYmZjMGU2MTQwMjJmZTM5ZDlkNyIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNTg1MDRlNGQ2NTBiZTU3ZTQ4ZWE0YWJiYmFhZDdkZTZkZDk3NjBmZjlmOTczYTZiOGUzYjQ3ZmRkMjBlMDlkNiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiYjY0MTg2NDA4MTBkMmMwN2Y1YzFlOGYyYTczNWRiZWNmM2YxZWVhNGE1ZTAyYmNhMjc4ZWE5MDUxYWZiMDM4YyJ9"
+        },
+        {
+          "resource": "repo://haap/registry_client.py#L28-L49",
+          "version": "repo-lines-v1:sha256:f3ab300b37a5a2fcdaf5c9d1a7e6278731e64cee5c78d3ac9d0075cf8d44c7f5:eyJzZWxlY3RlZExpbmVDb3VudCI6MjIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImVkNzk1MjU5OTE2OTViZTBiNTExNmVlN2IzY2M1OWI3OTVlYjMwZWU4OTM1ODVkNzc0NzJhYmQ3MzMwNGU3ZWQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImRiZDBhMmJkMzFmZjQ2MGNkOGQzYWE3ODg4YWMxODVkNjMyMDJhODg2NmUyZTEzNGQzNDlmNzIwNWJlMWYxYzEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImE3ODA3MjcxOTk0MzcwOWZkMmU4YzczNTQzNzFkNDkwMDYyNTJhNDgwMzUzNzE5OTgwOTcyNmIxYTZjOGIwNzkiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjE5MmIyYTc2NzZhNWI3N2NmZTBlODA3ZThjNGRmMWI2YTYzMGI4MzljMzQ2OWRjNTUxZjhlZTY2NDk1YTQ4MDgifQ"
+        },
+        {
+          "resource": "repo://haap/registry_client.py#L52-L89",
+          "version": "repo-lines-v1:sha256:a76da6f5a63f0a6a91cf404c177542ee74b6b1530b35dcc1d275c93dcb756b7d:eyJzZWxlY3RlZExpbmVDb3VudCI6MzgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjU4YjY3NDZkYTExNzhkZGI1Mjc4MDVmYzEwNmMwNWE3NzA5ZjQwMTZhNzZlNzdlZWIxMGUwM2RkMGNkODA2NjgiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjkzMWQxNzZlOTFjYmYwZWFjODlmMjZhNWMyZWM4NGJhMzY4NTgzNTk1YTU2NDUzZGE5M2UwZmM3ZWEwZjI5ZTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImQ0YTU3MzA3ZWQyMTZmYTE0NGU5NWI5MWQ2ZTA4OTUzZjBkM2JkZTY0ZGFiZWM3OTYxYjg2YTEyNTk3Nzg0MmEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6Ijg5ODdkZGMyMTljOWRmNzJlM2Y4YmQ3YThlMDgzOTMzNmVkMjNhYzViZDRlNzNkMmEzZGJkYjhlOWE1NmZiNWIifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_d1a9a5eb325744d3b89f405a7f9ac857",
+      "statement": "registry_client.search returns the parsed results list of manifests from GET /search and heartbeat returns True exactly when the server answered {status: ok} for POST /heartbeat {fingerprint}; the shared _request helper parses 4xx JSON bodies instead of raising so protocol rejections surface as parsed responses rather than exceptions.",
+      "evidence": [
+        {
+          "resource": "repo://haap/registry_client.py#L28-L49",
+          "version": "repo-lines-v1:sha256:f3ab300b37a5a2fcdaf5c9d1a7e6278731e64cee5c78d3ac9d0075cf8d44c7f5:eyJzZWxlY3RlZExpbmVDb3VudCI6MjIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImVkNzk1MjU5OTE2OTViZTBiNTExNmVlN2IzY2M1OWI3OTVlYjMwZWU4OTM1ODVkNzc0NzJhYmQ3MzMwNGU3ZWQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImRiZDBhMmJkMzFmZjQ2MGNkOGQzYWE3ODg4YWMxODVkNjMyMDJhODg2NmUyZTEzNGQzNDlmNzIwNWJlMWYxYzEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImE3ODA3MjcxOTk0MzcwOWZkMmU4YzczNTQzNzFkNDkwMDYyNTJhNDgwMzUzNzE5OTgwOTcyNmIxYTZjOGIwNzkiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjE5MmIyYTc2NzZhNWI3N2NmZTBlODA3ZThjNGRmMWI2YTYzMGI4MzljMzQ2OWRjNTUxZjhlZTY2NDk1YTQ4MDgifQ"
+        },
+        {
+          "resource": "repo://haap/registry_client.py#L92-L102",
+          "version": "repo-lines-v1:sha256:9861b8eb26b34a21bae3fbe47442e8c734f35267fe8182db249daf9b526d37ae:eyJzZWxlY3RlZExpbmVDb3VudCI6MTEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjE1Y2Q4ZDU1YjE1NWEzZTZhZjVjN2ZjZDYxMTQwYjNhZDQ1NTk0MDdiMTNlMmVkODEwN2UxMjg3NGU2ZWIxYjIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjRiZDA2NDdhYzk0NzE1NWY1MWI4Zjk2YTJjNDBlZjMzZTBlYmM1ZDViODE4ZTNhZjBjNWVmZGQ0YzcxMGRjZjUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImYwM2ZlODczMTllMGFjMzRlZjAwNGRlMjg0ODYyNjVmNzliZTJmNDM3NzY5OWZmMjBhNzkxMjhhMTIzMzgwNmEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImI4MTYzMGZkZWE5ZTUwZDRhYWY5MmZmNWU5ZTNhYWZiNDVjZWY5MzI3NzZmZjhjMTU4ZmFhNDkzYTY5ODhkNjgifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_c141670916e443b192fe5d9ec1e095e9",
+      "statement": "HeartbeatLoop is the agent-side keep-alive daemon: start() spawns a daemon thread that posts a heartbeat every interval_s (default DEFAULT_HEARTBEAT_S = 6*3600, well below the 24 h entry TTL so an entry cannot expire between beats), records the last outcome on last_ok (False on DiscoveryError), and stop() sets a threading.Event to end the loop.",
+      "evidence": [
+        {
+          "resource": "repo://haap/registry_client.py#L105-L130",
+          "version": "repo-lines-v1:sha256:6629642fb3c856681eb56fc398fe8b21466eff7f53eb78c364303fd42705b181:eyJzZWxlY3RlZExpbmVDb3VudCI6MjYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImU5YjJhOGFlYjFlMzhhZTEwNjNmNDk0NjgyMDlkZWU1ZTU1N2EzNTRiNjIxNjk2MTFmZGNhYjU0YWVkZjliODUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjI1Y2QyZTVkMDVlNTA3N2IwM2U4NDk3MTdmYTJjYmMzYzBjOWI0NGZiNzI5NTk5ODZiMDNjOGNmYmM0NmI5NjMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImRlYTUyOWU2OGRmMGYzN2Q0NjU4MDM5Mzc5NjQ4NmY3YzliNGVjNjQ4ZmNjYWZhZGExYTkzZDUyNzgwMDdhYjEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        },
+        {
+          "resource": "repo://haap/registry_client.py#L25-L25",
+          "version": "repo-lines-v1:sha256:24249ad7d3a08ebeeb333fc500e4b2ba5219f142d7fec01eace25d769621d677:eyJzZWxlY3RlZExpbmVDb3VudCI6MSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMjQyNDlhZDdkM2EwOGViZWViMzMzZmM1MDBlNGIyYmE1MjE5ZjE0MmQ3ZmVjMDFlYWNlMjVkNzY5NjIxZDY3NyIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMjQyNDlhZDdkM2EwOGViZWViMzMzZmM1MDBlNGIyYmE1MjE5ZjE0MmQ3ZmVjMDFlYWNlMjVkNzY5NjIxZDY3NyIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZWJlNDFkNzI3MWQwNjMxMmYxZGVlYTA2ZTVjZWE0MTRlNDgyNGNjZWJjMDdmZTNjY2U4OGRlYTA4Y2Y3OTJjNCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNTgxMzQ0ODg0MmE4ZWNmZWNmNjYwMjRiZTJjNjBkYmU1YWE5MzkzY2I4NGZhZjM4OTM5ZDU1OTIzNjgwMWEwNCJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_e3482a45770b4b1f8544d3f253c25838",
+      "statement": "CLI wiring for the registry family in cli.py: haap registry serve constructs a plain in-memory RegistryServer and blocks until Ctrl+C then stops cleanly (default host 0.0.0.0, port 8444); registry register loads the local IdentityStore identity and requires a declared endpoint (HAAPError otherwise) before calling registry_client.register with the speciality; registry search calls registry_client.search and prints fingerprint, speciality, name and endpoint per match; errors funnel into main's HAAPError-to-exit-code-2 contract.",
+      "evidence": [
+        {
+          "resource": "repo://haap/cli.py#L191-L229",
+          "version": "repo-lines-v1:sha256:101d1940f0ecab47759dafaf0bda2e436e1f178496837f3701f4ded46ad32b4b:eyJzZWxlY3RlZExpbmVDb3VudCI6MzksImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjZmZGM3MGJjZjc3OTgxNzYxNWQ3ODFjODA0NjNlY2I1NjI1YzBiNWI3ODUwNjBlNzBkM2I2YzAzOTkwOTA1ZGMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImM3NWVmYTBmMDQxYTc3MmMxMThiZWM0NDllNWUzNzExMTc5NTMwMGNkZmZhNTA3OTU1YzE4YTNlMjk4ZDU1YjAiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjQ4NDJkMzE2YWMwYmViNWJlNTAwOTVjODA1NjIxZDQyOTA3YjBkYTg1YTQzNTkxMmRjMTFiOTAxYjgxMTZmZGMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImY4NDFjZjU1ZmQwZTFhNjUwNzg0MDljNGJmYTBhMDc1MjU2NzIxYmY3MTQ1MjA4ODY1YWRlNDc2NmY0ZDUxOTAifQ"
+        },
+        {
+          "resource": "repo://haap/cli.py#L284-L293",
+          "version": "repo-lines-v1:sha256:77ffac95f281f22345d1fe904ef3b2ab147eaac31d77efab2b01bd322c4334f5:eyJzZWxlY3RlZExpbmVDb3VudCI6MTAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjE0Mjk4MzM5MjBjZmNiMTRhNjFiZTNlZDJjYTY3ZmY2ZGIwOTI4NDA4ZTQ3YzZiMTFmYTY4ZDNkNjE0NjlkY2EiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ4YjhlNzZkYjYzZGNmMjlhODg4YmEyNmNkNTg1MzNmY2NlMTkyNWUxMzUxNzZlYTlhNzZlMjY0YTI5MGFjODEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjA3ODY3NDBkZDlkOTcwNTM5ZWVhNTIzYTU2MGFmMmY1ZTQ0ZmY3YjJlYjdhN2M2MzQ1Zjk0M2I0YWU0NzU0OTEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjlkNTU2NGFmMWNjMTQyN2VkNTU1OGM0MDRhMDliN2I1ODI2MTk5NjkwZjgzOTcyZWY5MTFmNDJkZDVjYmQ1Y2MifQ"
+        },
+        {
+          "resource": "repo://haap/cli.py#L303-L313",
+          "version": "repo-lines-v1:sha256:fc7090e241c2b6e641bfa7496fad720ea81b47b7c9bd5f986d7ef1ecfc595f9c:eyJzZWxlY3RlZExpbmVDb3VudCI6MTEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjI2OWFkZTE1ZTc0NDY1ZDczODAyYjg2ZWI0MjViYTk4OTA4MzgzOTdhMjdjNTNiNDUyMmUzZTVkNDRmNmQxYjUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImQ1ZWQyNjMxOTNjMDY0NGM3ZTYwYmEzOGZlZjU2ZmRhZTNiOWZkNmE0MTdlZTM1NGM0YjRjMTY5NGNiMTBlZWEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6Ijg1MmRkZjY1YmFkMDdiNjhiMDA2ODM2OTUzOGVjZDI3NDVjZjRmZjZkZTY5MWM5ZjliOGEyNzUyZTU3Njg2Y2QiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjNkNDEzNDBjYzIzOWExNTljZTliNjAyMmU5ZjYzMjI4MzJlMmVhZDc2Y2FlOWU0NzU0ZDIxMGViOGZiNmQ1ZTgifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_e8bfbdac3d4e4a06a81b2ce3ba501ebb",
+      "statement": "The reference directory behavior is pinned end to end over real HTTP (tests boot RegistryServer on 127.0.0.1 with port 0): tests/test_registry.py covers full proof-of-endpoint registration followed by search and profile fetch, bad-signature and fingerprint/key-mismatch rejection, wrong-key proof leaving the agent unlisted, duplicate registration updating in place, heartbeat renewal with expiry at a 2 s TTL, and capability/free-text search; tests/test_registry_client.py exercises the unmodified registry_client register/search/heartbeat against a live directory.",
+      "evidence": [
+        {
+          "resource": "repo://tests/test_registry.py#L130-L151",
+          "version": "repo-lines-v1:sha256:4539a50b2e29c7f48aacb8d14549d210b59a7834b0758ed82371e20d9131f6dc:eyJzZWxlY3RlZExpbmVDb3VudCI6MjIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjIwZWZkYWNhZjUyM2JlOGU4NGJlMDQ3NzJlMjdkOWYwZTVhNmVhZDQxYzE3YzI4ZjY0ZThjMDRjNjk1NmVkY2UiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjJmZDQ4MGY4NTFiYjczNzMyZGI3MmU2MjAyNGY2NzgxMjM2YWQxNmI3ZDdiOGE3NDU4ZmYzMjU2MzNhYzRmODUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImE2YTYxOTk0MzAxZjNjYTVmZGVhYmZkNTBjOTdkMTBhNDg4YTA1YzA2YmY5NDA3NTZmNGQ4YmViNzZmMDhhNjgiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImRjMjdhMmFlMzZjMTkyMjNkY2UxOTQwOGU5MDAzMDM5ZjczYjZkZTYzODc2NWUzNDJkMTUxMDI2NjAxZTRhYTEifQ"
+        },
+        {
+          "resource": "repo://tests/test_registry.py#L173-L210",
+          "version": "repo-lines-v1:sha256:1d9db0fa181c68ef09fa911a2bde7fe8d4ebdfff5a6a4a1c9d3da65db3b215d2:eyJzZWxlY3RlZExpbmVDb3VudCI6MzgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjgyYWNkYTNlZDE3ZTVjNmQ1MTI2ZDZkNzRhNzllN2U2ZGNhN2Y4N2MzNTAxMjlhNWI3ZjYwNWZiZjQxMDZiN2IiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjcxM2Y4NGI1ZWI2MTAzYjQ4NzIwNDQxNTVmNmFmMzI3Nzk1MDk1M2YyYTUxZDk0ZjQyYzE2M2I3MjdlMzJiZjgiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImU1MDg0ODNkODdkM2Q0MzZlM2NlNmYxYmU3YjA4MDFlYWRkNjQyNzgzZmU4Yzc1MDgxZjk3NTU3ODdlZDg2NGMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        },
+        {
+          "resource": "repo://tests/test_registry.py#L44-L50",
+          "version": "repo-lines-v1:sha256:24bb76d27042dc0834c6e97c168defe71f4022329a702b520f4b7e686fa14060:eyJzZWxlY3RlZExpbmVDb3VudCI6NywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiM2ZiNjE1NWRjZWM1MGUwNDQ3NjJmYTYyZTZhZTY2NjE0NWYwM2ZiMTQ0Y2UwYjAzZGJkZjQ4NjJiNDI1Y2FjZCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiODAxYjdjZWIxYzk0MTA4NTA4NGRiZTRkMDJlNmJkYmUxZWUzM2ZiM2ZhN2NlYjkxYTFlOTA0OWM2Y2MzNWU1YyIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiYTY1YzQ3MWMxN2FjODU5ZjM5YmZmNWRiY2ZhM2ZmOTQyNzZmZWIyMzZkMTQxZTU1ZjFhMzY4YTFjMTVhMTdkOCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZWM2YjRhYzM4YWZlNTI2OWE3NWExYTQzZTM4NTU1MzIwODk0MjBlMTVhYjk3MWE1MTNhYzYzOWUxNThhYTZkMCJ9"
+        },
+        {
+          "resource": "repo://tests/test_registry.py#L71-L101",
+          "version": "repo-lines-v1:sha256:ae7bcc803a6fba2646ed903a4685abdf120e659459a423ebfa3b54ea375ef23b:eyJzZWxlY3RlZExpbmVDb3VudCI6MzEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImRjMzgyMGVhN2Y3ZjRiZTI4NGE5YjdiODI4MWViOGE2MmMwNDQ2YjNmMjljNGQyMzljNjc0NGRhYzUxMWE4ZmQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImVlYTJlMjc5MjY3MzlmYWJhNjVhYTk1NDk1ZjVkMjY1NjgyMTBhZWRhMTdiMzUyOWYwNWE3MmQ4OTVmYzU0ZGEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImZhYmM5ZjFjMDYyNGQ4NmU3OGRhNzI2ODVmNjAzNzRkNDQ5OGM3YTJhNWM5MmY4MDFmZWFmODAwZWFkOTMyNjciLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImZiNDM2YzhiZGYxZGQxZDc4MWYyYjE3YWI5ODViZTExODNlYzBhZmM4OGUyOGVlZDBkYmFmNGE0NDRlOGVjODUifQ"
+        },
+        {
+          "resource": "repo://tests/test_registry_client.py#L25-L48",
+          "version": "repo-lines-v1:sha256:ce2d3be205bb9517282f450fe3e7e0afa4103bf650ba5cd55d6cfddee382090a:eyJzZWxlY3RlZExpbmVDb3VudCI6MjQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjI0MGFmNTRhZWI0NTNiZGMyZWM5Y2YyOWE5OWQ4NmI5ZjhiYWViZjA5MzkxNjBiOWQ2M2ZiZTEyMmMzOTg1MTkiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjcwOTAxNDIyOTJhZThkZDc4NzY3N2YwMTQzZGJiNmM0Mzg0ZWJiMWFjNmY1NzUwYzU5ZjMwZWJiYThiYzg3YTUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjQyYjI5ODhhNDAwNDRlYTVmZGRhYWI5MGFkOTUzNjQ4ODRmNDhiZmE5MjllOTNmMWQ4ZWY5NGNmNjZmYmQ4OTQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    }
+  ],
+  "verification": {
+    "by": "openwiki/0.5.0",
+    "at": "2026-09-05T09:02:08.883Z"
+  }
+}

@@ -1,0 +1,242 @@
+{
+  "schemaVersion": 1,
+  "pageVersion": "sha256:ad6118a58d4228ac0213e77ed54a4c1f5c2901802a2ba21aba973640cb8f4f3a",
+  "claims": [
+    {
+      "id": "claim_147fe2ae0edd430b82eb66f016c065e8",
+      "statement": "HAAPServer is the inbound runtime of one HAAP agent built only on the Python stdlib http.server: it exposes exactly three HTTP routes — POST /haap/messages (signed-envelope intake), GET /.well-known/haap.json (public manifest) and GET /health (liveness) — answers any other path with 404 JSON on both verbs, and silences the default per-request access logging so the audit log is the operational signal.",
+      "evidence": [
+        {
+          "resource": "repo://haap/server.py#L1-L8",
+          "version": "repo-lines-v1:sha256:bac8d7dff8d14e67ae302501cbfcb832383ff969bae8c105206a3d7ae3f1dd71:eyJzZWxlY3RlZExpbmVDb3VudCI6OCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiOGIwODRhOWYzNzgxMjRiMmIxYTUxNTYzYmYzYzIyNDQ0ZWI3ZmYzMzY5MjAxN2RhMjhiMjEzNmFlNTY5ODdlZCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiYWVhOWIxNjQ5MmFlMGJjOWZjMzQxZTgzOWFjZDU0YWNkZGIzZTQ5YTg5ZTlhNGVjNjE5NGNmZDViODNjZjVhNiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjAsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZWJlN2Q5OTRlYjQ2YTliYmJhZWE3Yzg2YWIwNDNiZjU1ODYwYjAwY2RlMDg4NGI3MTYxYjM2OGIzMWUzNTFjZSJ9"
+        },
+        {
+          "resource": "repo://haap/server.py#L423-L457",
+          "version": "repo-lines-v1:sha256:42568d4e06ec3b52bd4f2a8bed5fb42dabbfbe12a6096194182fbcf8a0647297:eyJzZWxlY3RlZExpbmVDb3VudCI6MzUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjIxMDk5YmNiNmI0OWNjZjdlOWYyNDNkNTczOGNlMDM5NDkxMzliYTVmNWQ4MDNlY2NjY2YyYTc1OWM2MzAyNDEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMjNiYTA0ZDA0Njg1YzI3Zjc2ZDBkOTAwM2FmZjU2MzU1NDUwNGQxMDMyODE3YTU4ODRkZGMyMDNkZjQyNTciLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6Ijc2MGYzYzZjZjdmZDBmZDhmNzRiODc2M2UwMmEwMDY0MjM2NzZlMmVhNzBkZjE0ZTMzOGY0YmRiODJlZDM2ZWMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjcwMzJkOGU5M2I0NzQzYmQ2NTA0MzgxNTEwN2M4YjRiZGY1NzZmZTBjYmQ1YmEzMmY1ZjYxMTAyYjBjMGM2MDIifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_0d5357e6536e4055b3c32385a54ebdf2",
+      "statement": "Every collaborator of HAAPServer is injectable and defaults to an in-memory store: audit = AuditLog(memory=True), permissions = PermissionMatrix(audit=self.audit), rate_limiter = RateLimiter(), tasks = TaskRegistry(memory=True), policy = RequestPolicy over the directory's own path (policy.json loaded once at construction), notifier = ConsoleNotifier(); file-backed persistence only happens when the embedder supplies it, and speciality, marketplace_catalog, marketplace_policy, on_friend_request, on_task, skills_dirs and extra_tools are plain constructor arguments consumed by the manifest and the marketplace/task handlers.",
+      "evidence": [
+        {
+          "resource": "repo://haap/cli.py#L170-L175",
+          "version": "repo-lines-v1:sha256:922e54110fe7a80cd1153d199773eb3a927d2e9a1248102c83184f3a66237ff0:eyJzZWxlY3RlZExpbmVDb3VudCI6NiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNjlhYjMyYTYzNGU4ZGQ2NDJiZjkzMGM3ZTdiODZjNTYwYzA1NWFlMGFiOWFiNDNkNDRkN2NjMTJiZDA5ZGY3ZCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiN2E3NWU1ZDY5OTE1Y2RlYzFhMDgzYTM4MGQxMTA1ZmM0MTQxZjBjYzNlMWI5OGZhNjg0NzkyOTFlMTM1YWQ1ZCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMDdhZjVlMmY2MWI2N2IwZGI4ODQ3MjQ2N2U2YzAwNzFjNDlmZDQwMmI0Njc1Yjk3OGIxNzExZTBhYWU1NjI0YyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMGNiYWVmYzBlZDQzM2U1YWIwNWNhMjZhYTc4Mzc4YWIwZTNmZGYwODc1ZjVmZGE5YjBmYmJkZTRjMjMxZTgwMCJ9"
+        },
+        {
+          "resource": "repo://haap/server.py#L50-L83",
+          "version": "repo-lines-v1:sha256:ad37d2dfc741bb0b9a110a2aeea7acdb32ce4c06ddfd6a7a44de673f7f270e55:eyJzZWxlY3RlZExpbmVDb3VudCI6MzQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjE4OTBiMDA0ZDU0ZmIzNzI5MTM4MzY1M2IyM2VkMmNhNWUzZTI3MGJmMjI3ZTAwNTEwOThkZTg5NTYxOWNlMmYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjBlZWY3NDkzZDkwZThmN2QxOWQ0MzE2ZTU0N2U1OWVlYWZhZjRlYzFjZTY4ZjM0ZDRlYjhmODI5NzUzNzFjYmIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImQ5NTcyNDljNzhiMGNlZjEyZjE3Y2I2MjdlYzM3OGU4M2IyMTBhNGI0MTU4NzZjNzc4MTFhODAzZWQ5OGIwOTIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImEzYmUxZjUyNjk5NjZmNzE2MzE5NTYyMTY2OTg0NDZjZWJjNTFhY2I3MmQwYzRjN2Q4M2EwOWVmM2FmNGIzMjAifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_f0d75af5c55d446d81a0a82a7f157547",
+      "statement": "Sender public-key resolution in handle_message prefers the sender's key from the local Directory (whose public_keys() includes pending and blocked records so known-but-blocked senders are still verified before rejection); for the BOOTSTRAP_TYPES set (hello, challenge, friend_request, service_search, service_book, service_cancel, service_quote) an unknown sender's payload public_key_b64 is used only after enforcing fingerprint == SHA-256(declared key), and any sender with neither a directory key nor a valid bootstrap key raises SignatureError, which travels on the wire as BAD_SIGNATURE.",
+      "evidence": [
+        {
+          "resource": "repo://haap/directory.py#L168-L176",
+          "version": "repo-lines-v1:sha256:f37bf8ea329ef6418b801f40d5a8378045654969941eb57448bcf2474d68d469:eyJzZWxlY3RlZExpbmVDb3VudCI6OSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMjhlZTYzZmQwYmI4N2NmNjk5Zjk3Mjc5YjAzOGRjMTY4YmU2MGVlODdmMjZmMjg2ODUzMzIzZWRhZWVhMzg5NiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiZTZiMDQ0OTE0Njk3MjJlODM2M2E5NGU0MDQ0NTM4ZTAxM2EyYTIxN2UzNmIxZTU2OGJhNjBhY2I3YjRjOGYyZSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNDE0Y2U3OTQ4ZTkzYmE3ZjllZWM3YzA0MDUwZTViYmNiNjhlNGQwNTBiZWQ4YjQ3MTgxYjhkNThiZDFiZDJlMyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNTlhN2M0YjVkMDBhOGVhMzg5MWNmMjIxMzY0YjY5MTgwNjc3ZTcxMTVhODgyYzlhZWQ1MGM3YWJmODJmYjY2YiJ9"
+        },
+        {
+          "resource": "repo://haap/server.py#L103-L129",
+          "version": "repo-lines-v1:sha256:4843543ab98942d5599c5bb526959d134b03cbafef44ffd14b0d0e1dc0e38315:eyJzZWxlY3RlZExpbmVDb3VudCI6MjcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjA0MTYwN2NlMmU0YmI3OGZjODJlZDgwZjgyNDU0NTA3ZWU1YWI5ZGY5NzBhNjEwOWRiNDMxYzI3NGY4MTUwMWMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjE1N2FjYTc4NDE1ZjRmMmE0ZjIwNzAwYTYyMDE5ZDZmOTM1MjIyMzA4YTJmOTA2ZGIwMGUxZDczM2JiMDRhNjQiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImRiNjA1NzIxZjU3ZGRmN2JjMWNlZGI4ZTkzMTFlMmRhNWNlMmU2MzUzNDdmYzU1ZGIwMDM0Y2I1YjRmMTRiOTIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjVmMmRlZmNiYTIyYmQ2NmVlMGE4MjNlMDcwMWYxMzE5Zjk3NjAwZDQ1NmFjNzdiMDJiYzBmYTUyMDk4MDg3MjUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_9c56acb154244828bf9f65bcf5ee2403",
+      "statement": "handle_message(envelope) is the single inbound routing door shared by HTTP and in-process traffic: it re-validates structure through the canonical round-trip envelope_from_bytes(envelope_to_bytes(envelope)), resolves the sender key, runs env_mod.verify_envelope with the per-server NonceManager (timestamp window, Ed25519 signature, nonce anti-replay), then dispatches; tests and embeddings deliver envelopes straight into it via MemoryTransport.",
+      "evidence": [
+        {
+          "resource": "repo://haap/server.py#L131-L160",
+          "version": "repo-lines-v1:sha256:be05e4fb1055120deb04e264eb10134991bab4d0811e5df615593421f76d7633:eyJzZWxlY3RlZExpbmVDb3VudCI6MzAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjZkMGI0YTE3OGZlNmZjNGI2MzQ5N2U3MDdiNjZlZTUzODA0NWViODAyZGU0MTI1ZDIyNDRmMGNjYTRiZmQyNGIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjdhYzQwOTk2YmI3MzE2ZDI3ZmZkOTVjMzJmMzFiYjY1ZGM1Zjk4MDVkNDE4MGNmZWI0MzVkMDhjNDZjN2NkM2MiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImIxNjdjZmMwY2FkZmI1ZjVmZmI4ZTZiYmQ5MGNjZjhmOGRkNWYzOGZhZmJhYzUxMzgxMDRkNDIwMjkyYWE5MjUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImNmZWM0NzFjOWQ1NWRjNTBiMDlkMjk4MTViN2ZkNmI2OWIzZjU4NmEwYWQyNDY1M2EzY2E5NDc5MDg2MTE1NWQifQ"
+        },
+        {
+          "resource": "repo://tests/test_client.py#L21-L35",
+          "version": "repo-lines-v1:sha256:15f938a3dff69ccee09f680448450c4e347f5806c77a434ae3f275e0c0e64d00:eyJzZWxlY3RlZExpbmVDb3VudCI6MTUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjNmYjYxNTVkY2VjNTBlMDQ0NzYyZmE2MmU2YWU2NjYxNDVmMDNmYjE0NGNlMGIwM2RiZGY0ODYyYjQyNWNhY2QiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImEzNmM5OTlkNjYzODgyOGM1NmU3YmIwMWIxMzNhMWI1MzI5Zjg4YTEyOTBiNzlkZWNiNmUxODlhNWQwYzdkN2UiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjY4YTQyNGRhYjRmMDNjMzAzYjliYTkzYmZiNjJhMTkyYWNmZGE5ODY4YTdiOGY1YzExYWIxODI0NGVjN2Y3MGMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjcwNDM4NmMzMjJhM2VkMzM0MzU2NDBkMDhiNmIyYTk5ZjNhYTkzNDg5ODcwNWVlMWIyMjVlMmViNmY2ZjNhYjIifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_f748920a786147a7a8f6befab27fd7f7",
+      "statement": "Handler registration is a naming convention, not a routing table: message type mtype dispatches to getattr(self, '_on_' + mtype), and any type without a matching method — in v1 hello_ack, verify, capabilities, task_accept, task_progress and error, which the server only sends or should never receive — is answered with a signed error envelope whose code is the generic HAAP_ERROR and whose detail is 'unhandled type: <mtype>'.",
+      "evidence": [
+        {
+          "resource": "repo://haap/envelope.py#L44-L53",
+          "version": "repo-lines-v1:sha256:36a1e37141f7ad66de59c534b41bd71d9634cef488880500d98f2a1bfcec1558:eyJzZWxlY3RlZExpbmVDb3VudCI6MTAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjcyMWU5ZGZlMzZlNmViYjEwN2Q3ZGVmYWQyYzhmM2E2OTU5MTZkNzI4ZDkwNzk3YWJhNzAzMjMyOTVmMGI1NGYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijg1ODBiNzY1MThkYWU5NzlmYWViZDAyMzY3YTI5MjkyYTUwZDk3NjA5MjI1MWEzOGE2Y2UzMDg4MGJhNDI4MjUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjNmZGI0OGJmNTU0MWE3YzllMzBmYTkzM2I4OTMwMjlhZGY1OTlhNTdlZDlkY2Q4ZGY2OTMwMTNiZDliZDQ2MzYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImJiODEzY2ZlNDBkNTMyY2NhZjkzYWExZTczMmQ1ODc1NWUxYWJlNjM2OTcyZDZlZjQyY2MwMWUyNTM3NTMyZTkifQ"
+        },
+        {
+          "resource": "repo://haap/server.py#L148-L152",
+          "version": "repo-lines-v1:sha256:5cd0defb06335e3cd156df0b8f6b8b64fec32e339074d09e6947d97499127737:eyJzZWxlY3RlZExpbmVDb3VudCI6NSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNmYyNDVlMDMwNjg0NDUwNDI0NmFjNTAyMjg5NzI5YTNmZjJhMTNiMGJkZDcwOTM5ODQ1NGQwYTkxYzQyZjJhOSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiYTkzNzY1NzViNTA3ZDBkOTRhMzI2YWI2NzVhMTg3MmIyZmZhODUyNWZiYjViMjRkNTYwOGUxMjgxOTkzOTJlYyIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNGE4OWFkZTkyMmFhYjk3N2FhYTMxYmRjMTgxNDAzZWI2NTNhNDcxNGE2YTFkOGM5NzJlOTNhZWIzYjVkNTVhOCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNThhMWZmMjU0MWUwZTFkOWVjOGE3NDM5ZGY2YzFlNDUyYzliOTcyOTk3N2IyZjdjOWUzODZkYjhhMTZiOTc0OSJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_493503e83ebe45b88869ca09914a7bbf",
+      "statement": "Every post-parse rejection is itself a signed error envelope built by _error_reply: it is signed by the local identity, addressed back to the original sender, and its payload carries error_code (the stable exception code), detail truncated to 200 characters, and in_reply_to_nonce echoing the nonce of the rejected envelope so a client with several in-flight requests can tell which one failed.",
+      "evidence": [
+        {
+          "resource": "repo://haap/server.py#L162-L167",
+          "version": "repo-lines-v1:sha256:c23ac6232abbf4250a5fc85d166be0ee8a14d2dc408d3b62d6a30e48a195c1be:eyJzZWxlY3RlZExpbmVDb3VudCI6NiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMDJmZWRkM2ZkYzgxMGY5ZGJlOTJhNmY2ZDhjMjU0MGMyZmM2MDlkYmViODAyMTNkNDgyZWYwMWEwMjc4NmYwOSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNmU4OWFjNDliNmQ4M2IyYzUzZTgzMTMxOThhYjRlMjc4Nzk2MzdhZGIyYzgwNTg0M2FiODYwOGIxYjZkN2FkYyIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNTEyMzM5ZDM2NjUzNWY0MTc1Mjk3YmUxOTg4ZTdhNWVlYmZmOTA0YzM2NmNjZTg5NTdhOWFhNGI1NTc2Y2E5YyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiYTdjMjViYTdlMDNkYWMzMTdhNjVjMTI2NzBhYzQ0M2EwOWMxYTU4Mjg4Njc2M2RhNjEwODhhM2NiN2NiMjYwZSJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_8c4952c13fd649b38cde04976a18658f",
+      "statement": "Router-level audit semantics: verification failures are logged as message.rejected with result error plus the exception class and a 120-character excerpt; a HAAPError raised inside a typed handler is logged as message.<type> with result error; a normal handler return is logged as message.<type> with result ok even when the reply dict is empty; the unhandled-type dispatch miss returns its signed error envelope without writing any audit event, and handlers that return an inline error envelope as a normal reply (friend-request deny, marketplace TASK_ERROR) still receive a router-level ok entry while their own finer-grained events record the real outcome.",
+      "evidence": [
+        {
+          "resource": "repo://haap/server.py#L144-L160",
+          "version": "repo-lines-v1:sha256:9b08f3d675b6865ffe2a31713207e58d88b4297eb819d9f91de949f2b89ca510:eyJzZWxlY3RlZExpbmVDb3VudCI6MTcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjYzODJlZjMzZTY4NmE4YmYwZTUyYmU3MDBhZTBmZmNlMjZlYzQxZmU1MDNlNjIzNjJkMjRjNjE3YTMxMTcyYTEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjdhYzQwOTk2YmI3MzE2ZDI3ZmZkOTVjMzJmMzFiYjY1ZGM1Zjk4MDVkNDE4MGNmZWI0MzVkMDhjNDZjN2NkM2MiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjA5OTgyYzI3ZjdmZTA0ODQxMjE5YjExODM0ZTljODU5N2MxMjVkZGIyYWY2NmNlMjU3YzUxYjNmNjQ3NGM1MmEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImNmZWM0NzFjOWQ1NWRjNTBiMDlkMjk4MTViN2ZkNmI2OWIzZjU4NmEwYWQyNDY1M2EzY2E5NDc5MDg2MTE1NWQifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_56fa106153c747488be6c05ce30d6ee7",
+      "statement": "The server side of the friendship handshake: _on_hello stores a fresh random 32-byte challenge per sender (timestamped) in the in-memory _pending_challenges table and replies hello_ack carrying the challenge and protocol version; _on_challenge pops it, enforces a 120-second expiry and an exact challenge match, verifies the sender's Ed25519 signature over the ASCII challenge against its declared or directory public key (SignatureError otherwise), and only then registers the sender via Directory.register_known — which never changes an existing relationship's status — before replying verify with verified True.",
+      "evidence": [
+        {
+          "resource": "repo://haap/server.py#L170-L211",
+          "version": "repo-lines-v1:sha256:ef121eb1b108f25fbfb52a0cedfbdb18de1343e65d5e89a439388c9c3c3d168c:eyJzZWxlY3RlZExpbmVDb3VudCI6NDIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjlkZWIzYzRjOTY2MzYxZmU5NGQzNmFjZWQzMjU1YjA1ZTNiY2ZjODU4ZmRmZWUwY2UzNDBiZmE2MGEwOWI3YmUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjkyMDFkZWNiYTcwOWEyOTU5MDNhY2RlYzRhZmNhOTNmZjNiMTk1ZGM1MDVjNzliOTM4NDllMDY3ZDliN2I5ZGQiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6Ijg2OGZiY2ZkOGVjYmJjNmU1YWExM2U1MjQ4ZmY2NDMyZDc1NDVhYjM2MDIyZDhkM2FjNjhiODVjMmQ1ZWEzODYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImEzMGMzNGNlNDAwMGY3MTM5NDQwYTg4YWVmNWQwMmJhMGU0ODQ1YTMxYzlkYzUwYjlhOTUzMGRhMzE5NzM1ODYifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_5a9b6734d8e84275afb6be8e656e3d0d",
+      "statement": "_on_friend_request records the sender as pending_in with declared capabilities and then applies RequestPolicy.evaluate with three outcomes: deny removes the record and replies a signed error envelope coded FRIEND_REQUEST_DENIED; auto approves via Directory.approve using the resolved role template's permissions and rate limits and replies friend_accept carrying the server endpoint, the granted matrix and the granted role; queue (the default) keeps pending_in, notifies the human owner through the policy Notifier with the build_request decision card, and replies a friend_request acknowledgement declaring pending_human True with the suggested role.",
+      "evidence": [
+        {
+          "resource": "repo://haap/policy.py#L81-L128",
+          "version": "repo-lines-v1:sha256:7a888b4e9806997ca207a1fe8417d9cd9025a79382e243c9ddb3144259465a3d:eyJzZWxlY3RlZExpbmVDb3VudCI6NDgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjJlOTU4NTdhODliMGE0NjkzNzBlNWRiNWI4NjhlOGIwNjlhNDY0MGZiYjljZDM1NmE5ZDZhMzgwNTRlOWUyYjciLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjU0NzgzOTcxMDc5Zjc1Y2RiNGEwMzA0ODQxZDE5YmIxMTMyYTkxODU4MDRkZjc1OWQwODRiMjBiM2M3YWQ5ZWQiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImViYzI5NzcwMzM2ZWEzYWI1NWEwMzE3ZDY3OTM2OTk2ZmY4M2RjODYyNGQwYmQ0MmFlMTE0M2ZkOWNkOWZjNzciLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjliOGRiY2IxZDM0ZjU3NmNmMWZjMzYxYTgyMGQ3NGI4MGRjZWEzNjkzYWVlN2UyYTE4ZGQyYThjZDkxMGE0MmQifQ"
+        },
+        {
+          "resource": "repo://haap/server.py#L213-L272",
+          "version": "repo-lines-v1:sha256:12c4c3a5d1817b629280144ba261141df70433c242b6ad94526240a8219d65f7:eyJzZWxlY3RlZExpbmVDb3VudCI6NjAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjE0MDNlNmE1MGEyMzk3YjA0YWVkYTM4OTIxNmY3YmNjYmZjOTc0YzQ0ZGQwYzE0NGY0OWUyNmE2NGZhZmY4MmMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjFjZDI4MTQ5YzljOTk3OGEyYTU5ZTQyMjNkZDZiMTFhYzlkNDcwMzE5YjA2YTQwNjA0MjhmNDBiYTI3NDdjNTQiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImZmMDk2N2Y4NjBkYjk5NTA4ZmY5N2U1ZDcyMDllMTg2YTJmNTE0ZTg0ZGIxYWE1ZmVjZjVmYWJkYmJhODYyNzEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjU1NWQzYzBkMGIwMDY0ZmQ5YzIzZjVjMzhkMDU0MTAyNDdjYjYwNTQ2Y2MzNTJkMDhjMDQ3MzhjMWQyZWY0ZWQifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_b1248b6b615143878b9ee9d27e03bb42",
+      "statement": "_on_friend_accept consolidates the outbound friendship by calling Directory.mark_outbound_accepted (pending_out to accepted, idempotent when both sides initiated at once), merging the endpoint declared in the payload, and replies with a signed ping envelope.",
+      "evidence": [
+        {
+          "resource": "repo://haap/server.py#L274-L280",
+          "version": "repo-lines-v1:sha256:1b4646f05aedbc74be2afc4cb20cf4316a2bbe616b40c35a065ef361175dca0f:eyJzZWxlY3RlZExpbmVDb3VudCI6NywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiZTJhMzIwN2ZhZmZlM2JhMTdkYjI3YjljNDU2Y2YzMGNmY2U1YTlhZjUzOTQ5ZDQ4MTAyNzQ4ZGRkMjhjNDJmYSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNTA2MjU3MWViZGFmZTYyMTY5ZjE2MWVhZDljNzkxZWU5YmUwNDEyY2NmOTAzNGVjZWZmZGZlZDZlMWJjNTg0ZSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiY2EwZWI2NDI3MDAxYzU5YjhhNmUyMWU2YTdiOTAyMzNmZTUzMjVkNzU4MWI1ZGY3MmU4NzM4OWE1OThjNWJmZSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZTk0MmY4MDdhODJhZDVjYjc5Nzg3MjI1MWQ0MmFjNGJkZTI3ZTEzZjE3YjhhNzQ2NTZmNjU5NTVmOTFlNmY0ZSJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_fc8c8977a5b44f43b4bc550a3b0a28af",
+      "statement": "Inbound authorization in _on_task_request is strictly ordered: an accepted friendship is required via Directory.require(sender, statuses=('accepted',)) else FRIEND_NOT_FOUND; the payload action (default task:submit) and resource must pass the friend record's has_permission plus PermissionMatrix.check with glob scope matching else PERMISSION_DENIED; RateLimiter.check then consumes one per-action and one per-friend-global token else RATE_LIMITED; only after all three pass is a server-role task created in the registry and the on_task executor invoked, so denied requests never reach the executor.",
+      "evidence": [
+        {
+          "resource": "repo://haap/server.py#L283-L295",
+          "version": "repo-lines-v1:sha256:b742568e7ccdbc54c40b28b3e3d5d8d5e6940a06ec490871c7617bd241743d7f:eyJzZWxlY3RlZExpbmVDb3VudCI6MTMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjMxNjQ2NTk2NTg2MmZhM2IwYzA3ZWNlYzgyMzg1Y2RjOTBjNDk5OWM2YWFlNTFkNzc0NzRiNjMwYmIxYzNkZTMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjRlN2Y3NDI1ZDIwODZlOTU1YjhkNjE2NDYwYzQ0NjQ4ZTZjMDYxZDY1NjE4NTk2YmNhN2RhZGNiNWU0MDUxMzMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImQ0MWM4ZmI1MTJkMzZiMDVhOThiYjllODgwZGMzZWUxNjBhZTIxMzUyNjhlYzdmNmRkZGJjMzliYmQzNmE1ZDciLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImVmMWMyMWQ4ZjkyNjQyZjhkYjFiOGQ3NGRjZGQyNTVhODM1M2Y3NGU0YTAzM2ZkYmQ0N2E4MzVhNTU4NmQ4NDYifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_53921e20efb5405f8fb0ec9e281b5c9b",
+      "statement": "The task executor contract in _on_task_request routes on the on_task callback result: a dict return completes the registry task submitted to accepted to completed and replies task_result with state completed and that dict as detail; an exception marks the task failed and replies task_result with state failed; an absent callback or a None return walks the task to accepted then working and replies task_accept with the assigned task_id, leaving the eventual outcome to a later task_result envelope that _on_task_result applies to the registry and acknowledges by returning {} (HTTP 202).",
+      "evidence": [
+        {
+          "resource": "repo://haap/server.py#L297-L325",
+          "version": "repo-lines-v1:sha256:5da9c1f577c813dc5b919416bb9cef888e7fbebf441bc51535e7e4f2cd6c83c1:eyJzZWxlY3RlZExpbmVDb3VudCI6MjksImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjVhMWY4NzBkN2EyNGEzNDcwNDI0OTNkMmViM2NjYTlmZjU5YmZjOGExOTRiOGExNzM4MWU1NzVhZjQ0YzdlNDMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjhmMjhlMTA2Y2I3M2E4NDJmZjhlMDg4MzA4MzdkNTIwZjk1NWI0YzA5NGE5NzBkMGU2M2Y0MDUyNWMxOGZjMjUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjRhMGM2Mjc0MDEzMTAyNDMyZmRmZjU2ZDcxOWYyNWE1OTIyZTUwNjE0N2E1YTM0NjQ5ZTM1MzJkOTIzMzQ4MjkiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImZiZjY4ZmE3MTIwY2Q5NGQ0NmUyZTMxODM4OWY2ZTk5NjFjM2M4YmEwZDg3ZDBiNDI4MzA0MWZlNzE2OTdkMGEifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_58a784433d1b4c108d8b84fdbe708f86",
+      "statement": "Marketplace (open-services) handlers require no friendship: _check_marketplace_sender rejects blocked fingerprints with PERMISSION_DENIED and enforces dedicated stricter token buckets (marketplace capacity 10 refill 0.05 per second, global capacity 20 refill 0.1 per second); service_search replies service_quote with substring-matched catalog entries plus the business marketplace_policy; service_book refuses with PERMISSION_DENIED unless marketplace_policy auto_accept is True and, when on_task is set, books through the task pipeline replying task_result completed with task_id MKT-epoch, or a signed error envelope coded TASK_ERROR when the executor raises; service_cancel acknowledges with a completed task_result; an inbound service_quote at a business is refused as unexpected.",
+      "evidence": [
+        {
+          "resource": "repo://haap/server.py#L337-L420",
+          "version": "repo-lines-v1:sha256:d1bb46552f63a898bb3be9af7357f7864ed289834f4689c260f0153c2ccddaf3:eyJzZWxlY3RlZExpbmVDb3VudCI6ODQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjJiNzVlYzE0ODgyMGIzNmYyOGNlOTJkYTUzMTFiNWU2NGNhNTY0ZTBkMTQ1NjVkMzQyODY2YmFiYmFiZmY1M2UiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjZiMjFjNjNiMWQ3YzM5NGZmYjhkN2EwNDI4NjIxMzRkZjI1ZmJjOWY0MmI3OGJlYzgyZmY0ZmE4Yzk1NmIzYjAiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImU2Mzk3NDg3OTI5MTVlZTcwNWUxYmRiYWIzOWRjOTNmZjU2ZDRlYTIwNmYxOTFhNDk2YzhhOGFiNmRkMzA5MTMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImJiZGQyODY0ZjE3NWQyZjcwODljY2JhYWE4ZDk4ZDlhOWUwZmIwODVmMGRjMzFmZWMwYTc2YjQ0NjM4ZDA2ZTIifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_584ec6ff1fde48c3943a3d723b4cac25",
+      "statement": "The HTTP status mapping is a stable contract: a POST /haap/messages body that fails structural envelope parsing before any cryptographic check returns HTTP 400 with a truncated JSON error; a parsed envelope whose handler returns a dict — including every signed error envelope — returns HTTP 200 with that envelope JSON; a handler returning {} maps to HTTP 202 with {'status': 'accepted'}; GET /health and GET /.well-known/haap.json return 200, and any other path returns 404.",
+      "evidence": [
+        {
+          "resource": "repo://haap/server.py#L426-L457",
+          "version": "repo-lines-v1:sha256:a05887417cd446edf682eea30cd0a8177f26c4f46e4f05ccc9349c00449b56f5:eyJzZWxlY3RlZExpbmVDb3VudCI6MzIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjZhN2JlYTliM2Y1ZTZjN2NhMzAyN2I0MTc4YzAwMTU0NjgwMGRlMjI2MjJjY2Y4Njg3MzMwNDYyYWNmZjA5ZGUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMjNiYTA0ZDA0Njg1YzI3Zjc2ZDBkOTAwM2FmZjU2MzU1NDUwNGQxMDMyODE3YTU4ODRkZGMyMDNkZjQyNTciLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjRmNzhlODBjYWE2M2U2MjZlZWNhNTAzZTQ0NzVlMDQ4MDBkMjkyNWNmM2E0M2I3ODZiMjE0NDU3MzQwMDMyOTQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjcwMzJkOGU5M2I0NzQzYmQ2NTA0MzgxNTEwN2M4YjRiZGY1NzZmZTBjYmQ1YmEzMmY1ZjYxMTAyYjBjMGM2MDIifQ"
+        },
+        {
+          "resource": "repo://tests/test_server.py#L224-L247",
+          "version": "repo-lines-v1:sha256:fcdbd831d9beca26994bde3d9ebe9b7e3055ba932c71588e372090dab7bef07c:eyJzZWxlY3RlZExpbmVDb3VudCI6MjQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjI0NGVjNWU1OGM3NTYwOTcyY2FkMmZhZTViMzE3NmQ5MTVjZDU1MzRmNzY4ZDQxNWZjMDgzYzAyZmU4ZjE0ZjUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImI4OTc3Yjk2MWJmMjg0ZTcwMmExNGFkMDBmZTE1OWZjOWVlNTA2OGYyMGYxMzNhZGM0MTRjNzIzM2E2ODJhY2UiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImRiNTJhNmY5ZDllYjM5YjEzY2UyNTkzMzMzZWU0NDQxN2JlMGIzMTc0NDEzYjMyMmQwYjNmZDdmMWRiNDUwYzMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_5bfac33caf4d450297e7d9c0071e8725",
+      "statement": "well_known_manifest() generates the document served at GET /.well-known/haap.json live on every request by calling capabilities.public_manifest with the local identity and the server's construction arguments speciality, skills_dirs and extra_tools — format haap-public-manifest-v1 with agent fingerprint/name/speciality/endpoint, public message types, scanned skills and tools, and never any key material; there is no on-disk copy being served and no caching.",
+      "evidence": [
+        {
+          "resource": "repo://haap/capabilities.py#L113-L136",
+          "version": "repo-lines-v1:sha256:5f48953782252374a0214e357781ce8c86e8b1bd233e55c7c2d41660bde46936:eyJzZWxlY3RlZExpbmVDb3VudCI6MjQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImViMzliMDVkZGI5NzAyZjcxNmQ4YmU0N2UxZTVmMWFhMGNlNWJlMGNkMDhiM2VhMDMxNjNlMWM0NzMyMzdmOWYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ4OTNmNDBlMzc4MWViODk2YzgyZDA0NmEwODA2N2ExMWUzNWNkZjJmMWRmYWYyNmZlYTkwYjhkYjY2NzY0MTMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjVlNjM4NDlhOGQ3NzY5NWJlZGQ3NDM4NzA1NjM3Mjg3NjA5MmUzYzg0M2U0M2I1YTA3Yjk0ZjUxZWE1NGI1MzgiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImJiMDliMGYxYjkwZjUyODJlODIzNmFhODA4ZGQ4YmJlZDAyMTc0YWQwNjA3MTY1OTNlMWNhNWU5YjFjMDU0MGUifQ"
+        },
+        {
+          "resource": "repo://haap/server.py#L96-L100",
+          "version": "repo-lines-v1:sha256:222605b37ca5a556ea561e02debad48c971218c4553403a918f12485ad9028e9:eyJzZWxlY3RlZExpbmVDb3VudCI6NSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNTk4NTVlMTkxYjdiYWQ2NmM0MjA4MDJmZDkzYTg1MWIwYzQ2ZDVkMzQ0Njg4OWIyNWM3YzA5Y2Y5ZjI5MzVjYiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMzRlMzQxNTc1NGU4ZGRkNWEwZGZlODE4ZTdhMDg2NWFhNGUwYjA1M2NjNDNiMTJhZTc2MDgwODM0NDU4ODcyNSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZDliZjQzYTIwYjBiYjAwOTVjODMwYmRhZTk1M2EwMGZjOGRhMWU1MGM0MDYxZmUyOTQ1MDc1ZjQ3YTBkMjczNiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiYmMxN2M1NGY3MDVmZTQ2NTM1Y2NhZDQxMDIxYTE3YzZiYjQzYjU5ZTI1NmVhMDY3NzBiMzdlM2E2OTE2MGM1YiJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_9e4161c1cce24435b448ebf51b27e119",
+      "statement": "HAAPServer state splits between persistent stores (directory, tasks, audit — whichever backing was constructed) and per-process memory: the NonceManager and the _pending_challenges challenge table, both guarded so handler mutations are thread-safe, reset on restart by design; start() runs serve_forever on a ThreadingHTTPServer with daemon_threads in a background thread and returns the bound server (port 0 works for tests), stop() shuts it down, and the built-in server is plain HTTP rather than HTTPS.",
+      "evidence": [
+        {
+          "resource": "repo://haap/server.py#L461-L472",
+          "version": "repo-lines-v1:sha256:961b2b030f6dabb1881d3da6ceb3dc08839737fb145202d21c99964030ca81be:eyJzZWxlY3RlZExpbmVDb3VudCI6MTIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijg4ZDlkNTA5MWMyNjBlYzVhYTY2ZmFlZDAxZTY5OGFiY2ViMDIxOTg4M2IwODZiN2I3YTJhZDEzODAzNWE4MmIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImNiOGM0OGQ2NzQ4NTI5NTc2OTQyYWU1ZWNiOWNlODYzZjM0YjgxZTdmY2RiN2IyYzk2MjBlZWY1YjM1ODE1YjgiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjcwMzJkOGU5M2I0NzQzYmQ2NTA0MzgxNTEwN2M4YjRiZGY1NzZmZTBjYmQ1YmEzMmY1ZjYxMTAyYjBjMGM2MDIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        },
+        {
+          "resource": "repo://haap/server.py#L80-L84",
+          "version": "repo-lines-v1:sha256:71e8ccb670a7a1024afb131708a1731266f381ce2008de749dc4288a800ac79a:eyJzZWxlY3RlZExpbmVDb3VudCI6NSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiYzg0OGJmNGQ5YzlkNjUzMjFlNTg0YTBmMzBhMTUxMDg1MDNmNTBlM2Q4NzhkZTdjZTVmNTVjYmM3Y2NkY2Q5NyIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMDFiYTQ3MTljODBiNmZlOTExYjA5MWE3YzA1MTI0YjY0ZWVlY2U5NjRlMDljMDU4ZWY4Zjk4MDVkYWNhNTQ2YiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMGQ5MThjNWVmMGRjN2JlNzVhMjcwNzdjY2RiYmM5Y2UyMDFhMDI5NWVkZWE1YTczODg0MGJhZDE3MmIxZjgyYyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiOTg4OTMzNTJmMmU0NDZhNDExZGJiNDc2MWEyODU0ZjY4NzVkOTM5MTU1YzQ0MDI5YjgxNmYwN2YwN2Q3YzM1MyJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_1d6b384e8d164047b2ce28f8e4c74fbb",
+      "statement": "haap serve (cmd_serve) loads the Identity and Directory from the agent data directory, constructs HAAPServer with a file-backed AuditLog and the --speciality argument, and binds --host 0.0.0.0 --port 8443 by default, printing the three endpoints and sleeping until Ctrl+C calls server.stop(); it wires no on_task executor, marketplace catalog or auto_accept policy, custom notifier or policy, so with defaults inbound task_requests are answered with task_accept and left working, friend requests queue to the ConsoleNotifier according to policy.json, open-services handlers answer with an empty catalog, and no skills or tools are advertised.",
+      "evidence": [
+        {
+          "resource": "repo://haap/cli.py#L169-L187",
+          "version": "repo-lines-v1:sha256:ee0499a9705f633bb54bc4b933c7bef16df72254b641219747587d6fa5ae7ca6:eyJzZWxlY3RlZExpbmVDb3VudCI6MTksImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImMzZTRiOTMyOWJhNDc5MGVkMGIzZmI5OWFiNTcxNTk4ZmUzYmY0OWUzOWZmZTA5OTQ3YjZlMzNjMzkxMmYyNDEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjE2MjMzYjNmZmVhMzJhMjNkZjUzMDY1MzQzNDhmMmRlZTc3NmE1YTZmNzRmYjUzMzE3NWRkYzUzOWE4ZmU0NjQiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImE5ZTI1M2E3ODE0YTY1NDdhNTBlNTRkNmQ5MjM3NmY5ZmVlZDNhMDFkZTA4NDM5MDg0MjAzMmIwNjRiNThjOTEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjQ4NDJkMzE2YWMwYmViNWJlNTAwOTVjODA1NjIxZDQyOTA3YjBkYTg1YTQzNTkxMmRjMTFiOTAxYjgxMTZmZGMifQ"
+        },
+        {
+          "resource": "repo://haap/cli.py#L278-L282",
+          "version": "repo-lines-v1:sha256:3b8f9a758d36a3695fe3b0327162d568f160335c8b61d5953e4e03fd6ef69cd9:eyJzZWxlY3RlZExpbmVDb3VudCI6NSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiOWZlMThlNzNhNWQyODBhNmNmMWFmM2Y1MmEyNDVkZTlkNmZlMzM0NzMzYjJiMzllMGFlMDkyNmFjMGM5ZTUxZCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNDE3ZDY2MWMzOTVjZmM2YTVlZjI0NDgxNjk0OWMxYTdlZjMwMGRlMzI1YjAwMjc5ZDAwNzg0NGExYTcyZmM4YyIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNGViMDQzNWNmMGZlMTUyZGUwZTBlNjRjZGYyNjU3NTRlNWQ2ZDQ2ZDE4MmY0NGFjYTM1ZTNmZGJiMzIzZWI2NCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZDZkOTkwNjYwNzViNmU4YWMzZWQ4YTEwMmFiN2Y3MmRjMGVjZmFmZDljYzFmMDUxNmI4ZjNkODM2NWVkZDYxNSJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_ea60ed18da674a738f566477d35a0f21",
+      "statement": "The router is tested in-process in tests/test_server.py via a two_agents fixture calling handle_message directly: the full handshake to friendship, task acceptance with a granted permission, the FRIEND_NOT_FOUND / PERMISSION_DENIED / RATE_LIMITED rejections, BAD_SIGNATURE for tampered, unknown-sender and fake-bootstrap-key envelopes, NONCE_REPLAY and CLOCK_SKEW, and a well-known manifest asserting no 'private' text; test_http_layer_end_to_end additionally runs the real ThreadingHTTPServer on an ephemeral port for /health plus a hello exchange over HTTP, and tests/test_client.py wires MemoryTransport delivering into server_b.handle_message.",
+      "evidence": [
+        {
+          "resource": "repo://tests/test_client.py#L21-L35",
+          "version": "repo-lines-v1:sha256:15f938a3dff69ccee09f680448450c4e347f5806c77a434ae3f275e0c0e64d00:eyJzZWxlY3RlZExpbmVDb3VudCI6MTUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjNmYjYxNTVkY2VjNTBlMDQ0NzYyZmE2MmU2YWU2NjYxNDVmMDNmYjE0NGNlMGIwM2RiZGY0ODYyYjQyNWNhY2QiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImEzNmM5OTlkNjYzODgyOGM1NmU3YmIwMWIxMzNhMWI1MzI5Zjg4YTEyOTBiNzlkZWNiNmUxODlhNWQwYzdkN2UiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjY4YTQyNGRhYjRmMDNjMzAzYjliYTkzYmZiNjJhMTkyYWNmZGE5ODY4YTdiOGY1YzExYWIxODI0NGVjN2Y3MGMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjcwNDM4NmMzMjJhM2VkMzM0MzU2NDBkMDhiNmIyYTk5ZjNhYTkzNDg5ODcwNWVlMWIyMjVlMmViNmY2ZjNhYjIifQ"
+        },
+        {
+          "resource": "repo://tests/test_server.py#L214-L247",
+          "version": "repo-lines-v1:sha256:0c21f7258773e89ae439fb2ec298366225ba532d27e54cd4f39dd4e2bb9f065e:eyJzZWxlY3RlZExpbmVDb3VudCI6MzQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImE2YzBiMThkMGQ0NmQyNjQ1YTYzY2JlODRhYzY0NGMwZjQxYjBjZTI4ODNiZjYxODMyM2YxNzczODY5NzJjNDkiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImI4OTc3Yjk2MWJmMjg0ZTcwMmExNGFkMDBmZTE1OWZjOWVlNTA2OGYyMGYxMzNhZGM0MTRjNzIzM2E2ODJhY2UiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjU2MjA2ZGZjODRhZGYzOTg4YTBiOGY0NDc1NTI3NjJmMTNlOWU4MmMzMjhiZTg1MmQyNTIxZjU3ZTg3MmE0NzIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        },
+        {
+          "resource": "repo://tests/test_server.py#L26-L36",
+          "version": "repo-lines-v1:sha256:3ec9b6047cdf31f98dd15bfde84ac4fb239958aa0ba525fd40f334c5bc361c1e:eyJzZWxlY3RlZExpbmVDb3VudCI6MTEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjNmYjYxNTVkY2VjNTBlMDQ0NzYyZmE2MmU2YWU2NjYxNDVmMDNmYjE0NGNlMGIwM2RiZGY0ODYyYjQyNWNhY2QiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjJhM2U5NzdmZGFjNGNhNDk1OTZjZDQ2YmM3MTYwYWUzMDM5YjYyMTI1MTE4NDQ5ZWM3MGMyZTM3NDI2NWY3NGUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjJjYzg5MjRjZjhiZDY5YzNkMzM2ZTY2NTU4Njg5ZDg3OWY0Nzg0MTc0MzhkNzVkY2Y4YmRhMTFlMGQ2ZDYxZTkiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImZhZmQwZGY2ODU2OGMyZmM5NzYxNjRlZjkwNmRmYjYxODc5MjU5YWZmMDZlZWFiMTFmODIwMzM0MWE2YjE5ZWEifQ"
+        },
+        {
+          "resource": "repo://tests/test_server.py#L43-L211",
+          "version": "repo-lines-v1:sha256:1880be646a9e01d3e94671636cd9b3e9acd302c849bf3ff2cc4117190784364f:eyJzZWxlY3RlZExpbmVDb3VudCI6MTY5LCJmaXJzdFNlbGVjdGVkTGluZUhhc2giOiIzMGVlNGIwODgxNjhhOGI0NTE0MDY3NDUwZDJkM2U0MmMwOTFjYjBiMGNhNGFlMTgyNGNmNzk1M2NiNjMxNWNhIiwibGFzdFNlbGVjdGVkTGluZUhhc2giOiIwMWJhNDcxOWM4MGI2ZmU5MTFiMDkxYTdjMDUxMjRiNjRlZWVjZTk2NGUwOWMwNThlZjhmOTgwNWRhY2E1NDZiIiwicHJlY2VkaW5nQ29udGV4dExpbmVDb3VudCI6MywicHJlY2VkaW5nQ29udGV4dEhhc2giOiI2NzQwN2RmOTg5NjhhOTU5ODdhYzUzMWZiZjM0YjI4MzZjNTk3M2JmYjAwYzM2NTAyMTVmZjg2MjA1YTRmYTNkIiwiZm9sbG93aW5nQ29udGV4dExpbmVDb3VudCI6MywiZm9sbG93aW5nQ29udGV4dEhhc2giOiI4ZTU5MTlmOTJjNTEwYWRkMDJhOGNiZTkzMGU4NmU5N2U5NzNhNDViYTAxNWNjNzIzODc2MmE3MmY3MGVhYzRmIn0"
+        }
+      ]
+    }
+  ],
+  "verification": {
+    "by": "openwiki/0.5.0",
+    "at": "2026-09-05T09:02:08.883Z"
+  }
+}

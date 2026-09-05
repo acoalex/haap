@@ -1,0 +1,226 @@
+{
+  "schemaVersion": 1,
+  "pageVersion": "sha256:e379bc84c8f64e8765169196573ff8fe1ea1019a275614a1cc0123b429db6567",
+  "claims": [
+    {
+      "id": "claim_c756aef36a3e47aba4ccb0b9d2e48826",
+      "statement": "The per-friend authorization record is FriendRecord.permissions, an action-keyed map of {action: {\"allow\": bool, \"scopes\": [...]}} serialized per friend in the local Directory, and it states what that friend may do against the record-owning agent; FriendRecord exposes only conveniences (has_permission checks the allow flag, permission_scopes returns the list) while PermissionMatrix deliberately holds no permission state and evaluates whichever friend matrix dict it is handed, so one evaluator serves both server and client.",
+      "evidence": [
+        {
+          "resource": "repo://haap/directory.py#L58-L86",
+          "version": "repo-lines-v1:sha256:3cbb4038be135be06575a5550e99d0ae2e4564425da4528c312be172f81a1878:eyJzZWxlY3RlZExpbmVDb3VudCI6MjksImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImI2ZmJhZTBiOTFkNDRmYzBkNDlmNWRlNjkxZGE2ZmM0MzFmMjYwMTM0YmY3MzFlMGUyMWY3NjQ4MDk0MzM0Y2IiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjU1MTRjNDI1MWQ4YTk1MzhmYzA4ZTVjYTg4ZTJiYWY3NjYwYzhkNjRkMzliNTE0NzIxYTAxZmM4YWNhYzRiOGUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjA3NDdlNzE4MTE3YmUwMmZlN2MyNDhlM2JmNWU5YTA4ZDc0ZmE2MDUzNjBiMGQ4ZmY2NmViODFkYmY0ZjMxNGIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjZjOGM3NDZlNWQzMTBhZjM1YjViNjA0NTExY2Y1NzNkODhkM2JiNTEwYmVjZjIwNzEzYjNlMzc2OWJlMGMwNGUifQ"
+        },
+        {
+          "resource": "repo://haap/permissions.py#L42-L51",
+          "version": "repo-lines-v1:sha256:c19e2e52b5ce288995c0922c2e4f12bb4618075dd14b2af90708de179c7453a3:eyJzZWxlY3RlZExpbmVDb3VudCI6MTAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjgwYzFlZDY4YzNkNjgxZjRlZmViZGRkNTYxMzhlODgzZjhkYmJiZjEwNTlhM2U2MGEwNmFjNmZhYTkwNjNiODQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjhkY2RlNzZmYzUzMDQxM2M4NmM0ODZlOTUzNWJkNTcwZDE1ZWUwNDJjMjY2ZjE5ZjUyYWQzZDkwOGNjNjUyMDYiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjQxNTM3NDg5OTQ3Y2E0ZDY4YTllM2I2ZTlhOGI4M2NlNjBhN2RiODViOWRkMGIyZDk3NmRmMmFiZmE5NzQ2NjMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImJkMjljYTA3Y2E0OTdiNmY2ZjVkZGQ0OTYxNjI4ZjFmMzcxYzBlNDZjNDdlOTJiODIxNGE3NjZlYThlYTdjODIifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_05073c84b2dd406ea2961d03c1e9e9b3",
+      "statement": "The shared action vocabulary is chat:converse (friend may open conversational exchanges/pings), read:schedule and read:calendar (query the agent's schedule/calendar), file:read and file:write (read/write files, scopes are path globs), exec:terminal (request command execution, scopes are allowed command prefixes such as \"haap \"), task:delegate (inbound: friend may delegate tasks to me, which I execute) and task:submit (outbound local guard: I may delegate tasks to this friend; the friend's server in turn requires me to hold task:delegate in its matrix); the split is encoded in INBOUND_ACTIONS vs OUTBOUND_ACTIONS constants, and path_scopes()/command_scopes() are the convenience builders for file and exec scope lists.",
+      "evidence": [
+        {
+          "resource": "repo://haap/permissions.py#L1-L26",
+          "version": "repo-lines-v1:sha256:081c914f03db77367cb5172ce3a7259824d0c21ea597e25fdaca44dade28a981:eyJzZWxlY3RlZExpbmVDb3VudCI6MjYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjhiMDg0YTlmMzc4MTI0YjJiMWE1MTU2M2JmM2MyMjQ0NGViN2ZmMzM2OTIwMTdkYTI4YjIxMzZhZTU2OTg3ZWQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImEzMDNlY2RkNGE0ZDEwZjE5YzczZmQ0MmZkMTI0MzdmZDMzNTRhODI2ODE2MDVkYTUyNTVhOTdhMzkwNjhkYmIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjU1YjZlODcwNmI0MzA0N2YyYTZkYjY3ZjEzMjYzODU5NTYwNGU2N2YzNjk2Njg3NmNlMDE1OGYwMDUzZTZiZDEifQ"
+        },
+        {
+          "resource": "repo://haap/permissions.py#L103-L109",
+          "version": "repo-lines-v1:sha256:402d94bf3e9cbe5c83bff3d96b00e6bca0feb397dc86ad39aefeb2db4f3ef316:eyJzZWxlY3RlZExpbmVDb3VudCI6NywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiOWU3YjQ4ZjU5NmNmMTUwMWRhYmZhZjgxYmM1MDY2MTc4Zjk1MzFjMzI3Mjc5MDBjMjY4NWIzNDBlYjgwNjE1ZCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiZjNmMmMzZGI5MzUzZDczMTJhZGYxZDRjZmUwNWU0NjRmNmQyMjgwODhjYzY0Yzc5YmQwMjgzNDA5NWQ1NjU2ZiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiYTc2ZTU5YWY1ZGM2NTMyMTAwMzBhYjNmYTZjMTFjZjlhZTk3Yjg4ZDMxN2YwYWZjMzY3MDlhYWJlMDNhZTA5ZiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjAsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSJ9"
+        },
+        {
+          "resource": "repo://haap/permissions.py#L34-L39",
+          "version": "repo-lines-v1:sha256:ba1e30a7048ed8fdef0439f88f4f829d8739d3316a9cc3bdbdf514e1d7899e9c:eyJzZWxlY3RlZExpbmVDb3VudCI6NiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMGQ1N2ZjZDZiYTczODQ1MDA5MjZiODgzMTgyM2RiMTc0YzkzY2UyYTRkMmY0YWY2NjMyMzkxNDZmZDc1YmNlNyIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMmQ0NzlhNDJmNWRmMjJhZjBjNDE1YWFjMTljM2NmZDdiZjNjZTJkNDY4NzIzMmVjNTJjZDEwYzViYzQ3ZWUyZCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNjhlYTY5MDkzMjAwZmFiYzYwNzYwYzgwNDZhYjc2YjI4M2VjODAxOGFmYzgxMTU0YjJlN2U1ZTIzM2EyNjExOSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiOTRjYzZmNjllZDI4MDc0ODc4M2RhYWJlNjVhYmYwYzczMDQyZjY0ZjU1MTBkNDliZTRmNTZiYWI3ZWEyZTA1MiJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_8c7a723e2835429fae2e566219413f71",
+      "statement": "PermissionMatrix.check() is deny-by-default: it returns False for a non-dict matrix, a missing action entry, or an entry whose allow flag is falsy, and only then tests the request resource against the entry's scopes; granting an action means writing {\"allow\": True, \"scopes\": [...]} into the matrix, so a brand-new action is denied for every existing friend until a role or an explicit grant lists it.",
+      "evidence": [
+        {
+          "resource": "repo://haap/permissions.py#L54-L66",
+          "version": "repo-lines-v1:sha256:7859bad79740f751ce31ecd6909572c3c8d4372c7dbdaf0438db8f5884157bad:eyJzZWxlY3RlZExpbmVDb3VudCI6MTMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ4YmNjNGYwZTAwNzNhZjc4Nzk5NDZkNDM3MmYwNDU3ZWRmMDZiYmI0OGIyYmJjNzY4N2I5OTk3YjNmN2FmYzEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImNiNDE1M2U3OGEwZjVjMmQ5Y2YzNDRmZWVjMzA5YTU4NjE4YjAxOTI3N2ExYTAxZTJlZTliZDhmYmEyOWY3MDciLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjkyYjViZmEyOGY0MjNmNmZlYmEwYjU2MjM3M2Q0MGEzMzY3Mzc5NWRkZjI2YWExMzYyMDFiMTVmMzZhNmZlZTAiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjFkZGJmZDdkOThkNGI1NWNkMjIyOGM5NjgwZWQwNGJiMmU0ZTZmYWZjNjEzOTRkNGNkYmMyYjNmZDA2MTRiNDgifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_ad5a194eb38f4c0d8e4e6e25dc64eb91",
+      "statement": "Scope matching in scope_allows() is fnmatch globbing over the request resource: an empty resource (used by actions without one, e.g. chat:converse) always passes once the action is granted, an empty scope list or a scope list containing \"*\" allows any resource, and otherwise the resource must fnmatch at least one granted pattern.",
+      "evidence": [
+        {
+          "resource": "repo://haap/permissions.py#L68-L78",
+          "version": "repo-lines-v1:sha256:1fec1f52f1b88a64eba0e04ea436a3e6fa0ab285a76cbbcb33ea7788eef4aa76:eyJzZWxlY3RlZExpbmVDb3VudCI6MTEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijg3ZTliOWE5ZDdiODVjYzhkOGJlMGUyZDA3ZDA4ZTA4NjdlMDVmZDFlMzgyZTVkNmUxMjhlZTNlMzUxZWE0MDgiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjI5MTk5YTBiNmMyOWQwZGE0MzU4M2ZlNmQ1ZmI4YjAwZGQzMWI2ZjlmMWE3NmE5NDk5NTc2MzAwOTlhYjg5ZDUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6Ijk3MTVlZDhjODFhMWVlMjFhYTNiNjQzZDU0MTM5ZGUwMGViMzFiYjVjYTlmNzhiY2FmODU1MzliMGMxMzQ3OGUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjZmMzQ1ZDU2YjkyNjI4OTYyNDI0ZjAyN2M1NjA2OWU3N2M5MzU3NTJjYTJhYjA4YTZiZjkxNGYwYWZkYmRiNDQifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_fa6cc967550d43a19dc68f11ded62967",
+      "statement": "PermissionMatrix.grant() and revoke() are the audited edit operations on a friend matrix: grant stores allow=True with stringified scopes, revoke deletes the action entry (so the action is denied again, including for unlisted scopes), both run under a reentrant lock and emit permission.grant / permission.revoke events when an AuditLog is attached.",
+      "evidence": [
+        {
+          "resource": "repo://haap/permissions.py#L80-L100",
+          "version": "repo-lines-v1:sha256:0d882fde59c6be301b816753cf09536de0229bc27c1859ca1dfa4323492e22d2:eyJzZWxlY3RlZExpbmVDb3VudCI6MjEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjBjZDE2NjdiN2Y5MGMyMDgxZTdlNTFlMDljMDkxZDgzODhhYTRhY2NlMzM3ZGE0ZmRkNTJlN2U1ZmI3NmNjMTciLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjZlMWEwMzUwZjk4MjFlOTIzM2QwMjZlZTU5ODJkNzQ2MWRjYWE4Yjg1ZjRmNjViMTc5YzJiZmQ5YzJlMTgzOWYiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImU2ODFjZmNiMmViOGYyMGIyMjAyNjNiNTM1MDBjYjRlOTY1MTc2OGE0MDhiMzliM2I1NzZlNzE5NzI1MDcxZmMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjM3YmZmNWEzNTM5MzM1ODViMDE2NWQ3ZmYyZTZlZThkYzg2ODkzMGQxZmQxMzkzNTUwY2Y4YzliOTExMmYwZGEifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_8b89c1c501664d18aa435c5ce443d078",
+      "statement": "The inbound enforcement point is HAAPServer._on_task_request: after requiring the sender be an accepted friend it resolves the matrix key from the payload action (default \"task:submit\") plus resource and rejects with PermissionDeniedError when has_permission or PermissionMatrix.check fails, then consults the rate limiter for that (friend, action) before creating the task and invoking the executor, so a denied or throttled request never reaches the task executor.",
+      "evidence": [
+        {
+          "resource": "repo://haap/server.py#L283-L296",
+          "version": "repo-lines-v1:sha256:d0fbb878a2ba1bf55ad1d436bdb25cbc8d490f01a3b14f3b7bece03196c91482:eyJzZWxlY3RlZExpbmVDb3VudCI6MTQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjMxNjQ2NTk2NTg2MmZhM2IwYzA3ZWNlYzgyMzg1Y2RjOTBjNDk5OWM2YWFlNTFkNzc0NzRiNjMwYmIxYzNkZTMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjEzZTNiNTJmNWEzMzAyNDc1NDc5NDE0OWE0YjQ0M2Q5MDJjZmVkNTFhMzI0M2IxYWQ4YjQwZDYzZDY0ZThmZDYiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImQ0MWM4ZmI1MTJkMzZiMDVhOThiYjllODgwZGMzZWUxNjBhZTIxMzUyNjhlYzdmNmRkZGJjMzliYmQzNmE1ZDciLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjBiOWQ0NmZmMWIwODFkYmUxNGExMDY0OWU5Y2JiMmYyOGI4MmEwZmVmM2UzNjhhMjRjZjU4OThiZmYzNTU5YWQifQ"
+        },
+        {
+          "resource": "repo://tests/test_server.py#L126-L135",
+          "version": "repo-lines-v1:sha256:eab67efe0ae10bbdbf39a5b0e2145aad0b13379e3a499bbf25cbbb0b4c97bd98:eyJzZWxlY3RlZExpbmVDb3VudCI6MTAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjNjNDEwMDFiMDQ2MmQyNzg1ZjNhNDQ1Njc3MDkwMGM5Nzk3MGE4ZWZmYWVmYjk3ZTlkOGQzNGZkNzg5YTNkMGUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImYyMjhmNTk1MTA0NDA3ZjBjYWE0MWZmNWJkOWJlM2YzZmNmMDEzYTc3MzkzMDJiMmYyMzMxYzU5MTYxYzIyYzUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjI2OGQ4ZWExMWY0YWZiZjM1YTJmZjA4ZjFhM2Q2YmFlODA4YmZjOTAyNjNjZjYwNmVhOGMyOGRmZGU5ODhmYTMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImVkZTIzMmZjZTA1ODZmNzIyNDg0ZDc2YjQxNzQ0MDVkNWNlM2ZlODIxMjNhOGQ4NmVlMDA1YjYxZjBjZjQ3NmEifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_1234725a55a74bb081cc0eb4ec4a5c54",
+      "statement": "Before any task_request leaves the machine, HAAPClient._send runs the mirror-image outbound guard: it requires the friend be accepted and re-checks its own local record of the friend through the same has_permission plus PermissionMatrix.check pair with the payload action (default \"task:submit\") and resource, raising PermissionDeniedError locally on failure; a peer granted task:submit with \"*\" scopes does not help if the delegator's own matrix for that peer is empty.",
+      "evidence": [
+        {
+          "resource": "repo://haap/client.py#L95-L107",
+          "version": "repo-lines-v1:sha256:996757b070cf65ce0937ccd943934662947743fee7cb97101d4c3567e6b12c25:eyJzZWxlY3RlZExpbmVDb3VudCI6MTMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImFkYzczZTY5YmY5ZTdjODM0Y2QwODIzZjAxNjZhYmEzMTk1MzRkOTJjYTU4NjA2N2Q1NzAyMmQ1NDY0MzlkYTAiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImZiZDFkODg5MDY5OGQxNDc2Mzc4M2JiMDJiZTRjZmM4NTcwZjM4NzUzZDNiYjQ5MTJkNTY2MDI4ZjA5OTA5MTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjQ0NmM4NmFhNjgxZGZmMTIyZDNlYjMwZGE1Y2FiYTMxZjhmOTVjNTYxNmEzNTViZDM3MTM0MDgxYzdlYjMyZTciLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjlhYTVjY2U1ZWM1OGMxMDI1NGM0NjhhNjlhZDZiZDZhMDU0ZTY1Y2IxNmUzZGI4ZjZlYmZjMzA2ZGIxNjNjY2QifQ"
+        },
+        {
+          "resource": "repo://tests/test_client.py#L91-L107",
+          "version": "repo-lines-v1:sha256:ea3eb475fe5c6b318f1df4572f264af4dba9fb01ad24e0cc1ffcf8c97708d983:eyJzZWxlY3RlZExpbmVDb3VudCI6MTcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjY5N2QwNzJlOGFjM2JhMmY1MjI2ZmZkN2M5OWIzM2I0MDIxMDRiZDdmN2JlOTlmYzcyYTM4YmQ2MzllZjQzOGMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImZhNWU2M2Y2MWEzNTA3MjhjNmE3NjAyYzY0NDU3OWU1MDlhNWMwMjY3MGNiY2NjM2FjNzJiOWEyOWRjYmU1MDEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjkxZmYwNzBhMTgyYzE5NGQ5ZmRmMmIyOGI3MDQzMjU1MmViOTU0NTYyOTgxODgwNjkxYjNlNDFhMDRhZGY2ZjAiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjY4OTQ5YWYwMTQ0MTY3NzhhZmVkOGM1ZGVkMDE2N2UxNDFhNTk4MTQ5NGRlMTBjM2EyYWQ4YTc5NzI2ZDM4NjMifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_d1a04755e8b44484b981cd8f53146981",
+      "statement": "At friendship start, add_pending_out encodes deny-by-default in the parameter semantics: permissions=None installs the conservative DEFAULT_GRANT_TEMPLATE (chat:converse, task:delegate and task:submit with empty scopes — never file/exec), while an explicit permissions={} means deny-everything; DEFAULT_PERMISSIONS = {} in directory.py is the documented empty matrix.",
+      "evidence": [
+        {
+          "resource": "repo://haap/directory.py#L222-L247",
+          "version": "repo-lines-v1:sha256:dfc543fe0d265d9f81886ffb9bdf3d8b8191f56362149c67cce3defc1ef6c898:eyJzZWxlY3RlZExpbmVDb3VudCI6MjYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijc5OTA5NDk4NWE3MjVhODUxNzM1YzkwNjNiNWEwZjZhOGU1ZWY5YzI3YjJhYzc5M2M4M2ZmNGU4NWE4MjE0OWEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImYwMWZkMDc2NmFiMmU5YWZlNGE3Njc0ZGM4MGE2MGZiYWQwOWRhYTY3NzIwMzg5OTY5NGE5MjNjNWI2ZWFlZDgiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImE4YmVhMGJjMWI3NWM0MTM4NTRjYTYyNTJiNWU3YTI2YTkxNzcwMzhjMmY0YjA3YzU4YmM3YjE1YmJkNjlkYWEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjM3ZTM2MWEzMGM2MjRkZTRiM2EzNWEzNTNiNmI1MWI2YTAwNmFmZDVjM2YyZWJjM2Y1ODdlMmI2ZDM4ZDBmOWEifQ"
+        },
+        {
+          "resource": "repo://haap/directory.py#L34-L43",
+          "version": "repo-lines-v1:sha256:9f678004cbe08673f034f85be6bceec734e2c1165ec6b2db61fb498507483ee8:eyJzZWxlY3RlZExpbmVDb3VudCI6MTAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImU3NWFmODUyNjI1NjNkMjAxMjgzZDQ0OWMyNWUyNTEzZmY0ZWJiNjhjODg0ODk0ZmQ4ODFlNzhjZWU1OWY1YjEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjhjOWM3ZThmZDFhYTViYmI0NTQ4NDUyOWFhOGFmYjQ1MWE1ZWJiOWNlMTVlNTRmYmM3ZjM2ODQ0ZTUxYzczY2QiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6Ijc5NjFjYmVhNzEzODY1ZTAxNDc5N2JmNDQ2ZDQ2ODVkZGZjNGYxMWM0Njc0ZGZiN2NhNDg0MzNhNzEzYTI0OTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_c13866ee79204201a52ee9fa4da61387",
+      "statement": "Directory.approve() is the human decision on a pending_in record: it flips status to accepted and stamps the whole granted matrix plus optional rate limits, falling back to DEFAULT_GRANT_TEMPLATE for any falsy grant (None or an empty dict, due to the grant or DEFAULT_GRANT_TEMPLATE truthiness test); Directory.block() is the revocation kill switch that forces status=blocked and clears permissions to {} so the blocked fingerprint retains no grant.",
+      "evidence": [
+        {
+          "resource": "repo://haap/directory.py#L273-L310",
+          "version": "repo-lines-v1:sha256:c4142b50194d19b11fc77a7d88291c7f9f67c63bdd3dba100dff5dbef4af1b5c:eyJzZWxlY3RlZExpbmVDb3VudCI6MzgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjJmNjRjOTkyNTQ4MjRkOGUzOTc1YzFmMTMxMmI3MTNiM2Y1OGMzN2MzMzM5YjUxZTNkMDYwYjg5ZTBhNzYxNDAiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImYwMWZkMDc2NmFiMmU5YWZlNGE3Njc0ZGM4MGE2MGZiYWQwOWRhYTY3NzIwMzg5OTY5NGE5MjNjNWI2ZWFlZDgiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImE4YmVhMGJjMWI3NWM0MTM4NTRjYTYyNTJiNWU3YTI2YTkxNzcwMzhjMmY0YjA3YzU4YmM3YjE1YmJkNjlkYWEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_f2f3bdd4d9ae4ff6a123347cfc54a7c4",
+      "statement": "roles.py defines five built-in named roles — guest, client, partner, family, admin — each bundling a permission matrix, a rate-limits map and an optional ttl_days field (all built-ins ship None) so a human owner approves a friend_request with one word; a role's matrix states what the approved agent may do against the grantor and is mirrored as the outbound guard on the grantee side.",
+      "evidence": [
+        {
+          "resource": "repo://haap/roles.py#L1-L19",
+          "version": "repo-lines-v1:sha256:3c3e273a6d5268d8224269e57298fd72e6dd7a56e4a80b83fa5619f9b7ced0a6:eyJzZWxlY3RlZExpbmVDb3VudCI6MTksImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjhiMDg0YTlmMzc4MTI0YjJiMWE1MTU2M2JmM2MyMjQ0NGViN2ZmMzM2OTIwMTdkYTI4YjIxMzZhZTU2OTg3ZWQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImEzMDNlY2RkNGE0ZDEwZjE5YzczZmQ0MmZkMTI0MzdmZDMzNTRhODI2ODE2MDVkYTUyNTVhOTdhMzkwNjhkYmIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjU1YjZlODcwNmI0MzA0N2YyYTZkYjY3ZjEzMjYzODU5NTYwNGU2N2YzNjk2Njg3NmNlMDE1OGYwMDUzZTZiZDEifQ"
+        },
+        {
+          "resource": "repo://haap/roles.py#L30-L91",
+          "version": "repo-lines-v1:sha256:b5a5f0627c68402c82669caf4c80ae4d23419220538dd5861b9331a62c5b2f41:eyJzZWxlY3RlZExpbmVDb3VudCI6NjIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjI1YzczMjkxYTZlYjBmNWIxMGIwYmViZDNkZDFjY2M1YzMzZmUwZTMzYWIzMTVjOTEwMThlZTJiYjU3YTI4MzgiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6Ijc2MGFkMjk5YzE4MTA0NTk2MjMxYTYzMzNiOWRmMzQzODY5MDkzMGY1MDhkMGE0NzcyZjg1NDdjZWVhZTA4MmEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6Ijc3ZDVjMDBmZTIxN2E1MTlkNDQyMDExM2VkNWFiOWI1ZDJlMmRmNTkyNWY2NjU2NjM2ZjEwZGExM2U5NmQwYTMifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_b51750c26b1c489a809a438ddeb8f34c",
+      "statement": "Role entitlements escalate on the ladder guest < client < partner < family < admin: guest holds only chat:converse (no task:delegate, pinned by tests), client adds task:delegate/task:submit scoped to booking:* and service:*, partner adds read:schedule and read:calendar and widens task scopes to \"*\", family carries the same matrix as partner, and admin is the only role granting file:read and file:write with \"*\" scopes plus exec:terminal scoped to \"haap *\".",
+      "evidence": [
+        {
+          "resource": "repo://haap/roles.py#L30-L91",
+          "version": "repo-lines-v1:sha256:b5a5f0627c68402c82669caf4c80ae4d23419220538dd5861b9331a62c5b2f41:eyJzZWxlY3RlZExpbmVDb3VudCI6NjIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjI1YzczMjkxYTZlYjBmNWIxMGIwYmViZDNkZDFjY2M1YzMzZmUwZTMzYWIzMTVjOTEwMThlZTJiYjU3YTI4MzgiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6Ijc2MGFkMjk5YzE4MTA0NTk2MjMxYTYzMzNiOWRmMzQzODY5MDkzMGY1MDhkMGE0NzcyZjg1NDdjZWVhZTA4MmEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6Ijc3ZDVjMDBmZTIxN2E1MTlkNDQyMDExM2VkNWFiOWI1ZDJlMmRmNTkyNWY2NjU2NjM2ZjEwZGExM2U5NmQwYTMifQ"
+        },
+        {
+          "resource": "repo://tests/test_policy.py#L35-L41",
+          "version": "repo-lines-v1:sha256:3701643c4d1174d4815ab122371cc98d753840c11d69d56151b05767c377183f:eyJzZWxlY3RlZExpbmVDb3VudCI6NywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMzNjNmNlYWQwZGNkOWYzZDYxYzQ2NzdkMzA3MTNiOGIwNDYyOGMzNTgyMWNiMWQ2Y2UwZDk0OGI1YWNiNGI3YSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMjJmMTYyODBlMWQxODIxMjA2MDBmYWFmZDFiYWFlNmE4OWI5NDgxNDgxOTg3NWMwYzY1NWVhYzNhOGU2NGIxMCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZjMzMDNhMjFlMTIzNzliMjY5OThiZmJhZDc2NTNhZTEzOWQxNGJjNWYxZjVmMjJlMDRkYjg0YTEyMjA5ZmMzOSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiM2Y3MjEyYTM5MGM3ZTEyNDU1MTgyMTEwMzkxNzg1NWE4ZjkyMWQ1NTQxOGU4OWQxMTQzNDEwMzA5MDQ1ZmFhNiJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_9b112d03d34a4f57b753fd623021bfee",
+      "statement": "Role rate-limit bundles escalate the per-friend global bucket from guest (capacity 10, refill 0.05/s) through client (20, 0.1/s) and partner (60, 0.5/s) to family (120, 1.0/s) and admin (240, 2.0/s), with client additionally capping task_request at 5 tokens refilling 0.05/s; approving a friend with a role stores the role's permissions and rate limits into the friend record together.",
+      "evidence": [
+        {
+          "resource": "repo://haap/roles.py#L36-L89",
+          "version": "repo-lines-v1:sha256:b355741cf3ffd37bd13493d8f6f5eab6b545c9d05ce698ce14f625cc3243c911:eyJzZWxlY3RlZExpbmVDb3VudCI6NTQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImY4YTg5ZWUzZTU1Mjg5N2M2ZjUxODFjYzYxZGI2M2E3NTdiMjhhYjg4MjcwZGVjZGVjODE5MTJjZWQ3ZWExOGIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImE2ZDM1YzhmZjlhNDJhYjNkMGVkZTUwNjNlNjFkYzIxMGFkYjFjNzIzZTViNjU2ODJjZWIxNTMzZjJiNmVhZTciLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjYzODg0NDRjZGUxMzEyZDdiM2FjZDc4N2RjYjY3MjJjYjAwMWI1NDcyYzhiNTI5NTI0ZDZjZTk3YTgyY2U0MDMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjY3NmE1NDRjYzAyM2VkNDA1ZTNiOThiOGEzNTQwOTBmYWQxNmU5ZTE4ZDVlZTlmN2JhNmMzZTcwMDUzMDA5ZDEifQ"
+        },
+        {
+          "resource": "repo://tests/test_policy.py#L192-L206",
+          "version": "repo-lines-v1:sha256:ddf67eb8c682280c64212f459abed2dc89ee4b563d49d696fd155d7569e0e070:eyJzZWxlY3RlZExpbmVDb3VudCI6MTUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjNmODVmMzc4ZmU4MTkyMjkwYjYyYjk5Y2JhMjc5M2M3NzliN2NlNDAyNjM4YjI1YmU0Yzc4NDc0NDY0ZDkzZjUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ4NWExNGUxMGJmOWVjZTVmNzBhM2EyNjgzZTVjZDFiNDRlMDFjYjY3YTIzN2NhYWUwMTk3ZTQ2OTRlZjMxNTYiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjgyNjdhODFhZDY5ZmQxNTNkYjNmZjIyY2QwYTUyYzM3NTA3ODBkOTkwMjU5MTlmODk1ZjVlYTkxNjliMDBiNTEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_d158820f91a244a9b5f65886f5baad6d",
+      "statement": "load_roles() deep-copies the built-ins and then applies $HAAP_DIR/roles.json: a user role may name an extends base (a built-in or an earlier user role in file order) whose spec is shallow-merged at the top level with the user's keys minus extends, so whole dictionaries such as permissions or rate_limits are replaced wholesale rather than merged action-by-action; unknown extends names resolve to an empty base, invalid entries are skipped, and missing, unreadable, non-dict or JSON-corrupt roles.json returns the built-ins so a bad roles file never breaks an approval.",
+      "evidence": [
+        {
+          "resource": "repo://haap/roles.py#L94-L121",
+          "version": "repo-lines-v1:sha256:2c1d512d4a06d95b88ee2eb442044d74b9d9b962f3ad5d4a47f8cf6b7986fe1d:eyJzZWxlY3RlZExpbmVDb3VudCI6MjgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijk3ZTAxYTRiZWM4ZjFlYzUwYzI3ZTcwYjIyMDE1MjEzODcyODdkMGFhZDUxMDk2MjBkMTY5MDFhN2Y3YTFjYjciLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImFjNDk0OTcwODE4NzAxMDgxZjkyMzYxMmY4ZDY3MGJkOGVmNDI1MDA4MTRmYjBkOTMyNDQzNmNjYWI1M2NhZmQiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjA5ZjkzMDgzYzE5NzEyMWI5ODI3MDBiYThhZmFiZDE3MjJjZjFkM2U3NDA0NTA5ZTgwZWZhMjcyNDdmNjJmMDciLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjM1M2JiNzFhMTcwNDkxYTZhMWViMTEyYzVjMjQxMmRkZDA0N2Q3YTUxNmY2MTk3MDY2MjE2Njk5NDBhYmU1YzQifQ"
+        },
+        {
+          "resource": "repo://tests/test_policy.py#L44-L55",
+          "version": "repo-lines-v1:sha256:52ecee093ba7312ac145dd839ea9d5fd91c4db724f05d4bf13cb10197bf1f814:eyJzZWxlY3RlZExpbmVDb3VudCI6MTIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImE3ODM4Yjk4MDk4M2IyYjc2ODE4ZTE4ZGQ5OTRlOThmMzkyM2ViYmRlNzQ3NmRkZjI5NGY2MTAzNjk5YWNjNjAiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjY3OTFiY2U3Y2FkYjNiNWM5MGE3NzkyMWY4MDliNDA5ZDYzZTkzMzVkYTIwN2I2MTY0MmQ5MzI3ZWM0NmNmZmQiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjI4YWFhNTI0YWQxMzZkYTJjODRiNTZiOGZkYTQ2NDZjNzJiOTA5NzNhOTg1YTFlYmY4N2RkOWVhZWVhYWUxY2YiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6Ijk2ZGRjNzEzZDIyOWZkZGFjYmJmNmFlYzFiOGE3YjBmODZkYWVkNzZmNjdhZjUwZDZiOWQ5YjlmMTc0MmFhYTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_188f9cdd8f0b4a9bbf0c2fe4dcbe07a0",
+      "statement": "resolve_role(name, directory) re-reads roles.json on every call — so roles.json edits take effect at the next approval without restarting — returning (name, spec) and raising ValueError listing the known roles for an unknown name; role_summary() renders the one-line-per-role listing behind the CLI command listing available roles.",
+      "evidence": [
+        {
+          "resource": "repo://haap/roles.py#L124-L139",
+          "version": "repo-lines-v1:sha256:c41fcb2a44e5e4b168ecea928247040e6af9d4af98166303f2838cabbaaf5030:eyJzZWxlY3RlZExpbmVDb3VudCI6MTYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijk5YjAwMjQyZmYyODY4ODJiNjQ0OGRiNDlhY2NjNDQ4NDgzMTUwN2Y4N2M5N2U3ZmEyYjRiMTQ5YjgxNDY3NDkiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjEzZTdiYjMxNTZkZjFmNzcyOGY0NTMxOTM0NDlhYTc0NmQ3MWE1NDEzYTQ0M2FjZGVkMTZkYzcwNTI2Nzg0ODEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6Ijc2ZDYwZGRiYTJkNGI0ZGU0NzNhMjU4Yzk3YzRlY2JlMGQ5YTljZDdhYjNkODQzMWVhYTM1ODQ1NjAwNDllMzEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        },
+        {
+          "resource": "repo://tests/test_policy.py#L58-L60",
+          "version": "repo-lines-v1:sha256:778358a038268c1dac626952dc41ec92a6da2c0d1b9974b9b7ddfa2ab814287a:eyJzZWxlY3RlZExpbmVDb3VudCI6MywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiOWIwMmNhODZkODNlYmNiZjE2Y2U4ZTE1MjcyZDg1YmNkNzU2OTI5ZDNlNjZiNzY2NDI2NTJhMjk5Y2VhMDYwNCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiYWMyNTIzZjI4NmEwNzE2ZjhhODA4MmQyZTY0YzBiYmU1OTkwZGRlYzI3MTMxMzE0NWJmNDk0Mjg3MjhlOTE4OCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNGMzMDdjNmE1YmQ5ZGU4ZjgxOWViMzUxYmQ0NTcwMGU0NDZjZjI5NTE4NDc3YmFmNjgzZjVkNWM5NjhjYjM3ZSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiYWMyYzYzMTVjMzM2MGU5MzRhNGI3MmViNjkxNDQ4N2UxMjU2NjUzYTk0NWViZGJlNWVkN2JjNzRmMjMyZDE1ZiJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_54d6eecf3f7d4fdcbcc974bf88673399",
+      "statement": "The friend-request policy engine caps every auto-approval on the ladder guest < client < partner < family < admin via max_role (default partner): a rule naming admin is downgraded when the cap is lower, an explicitly requested role is likewise reduced to the cap, and any unknown or custom role auto-approves capped at client; human approvals through the CLI approve path are not capped because queueing exists precisely for a human override.",
+      "evidence": [
+        {
+          "resource": "repo://haap/cli.py#L105-L118",
+          "version": "repo-lines-v1:sha256:6045528f9672a1bb0bdf8a8eebc35e36dd6f995169e9a5b4100afa5790d1823f:eyJzZWxlY3RlZExpbmVDb3VudCI6MTQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImM5NGVlMTVhNmFkNmUyZTY3N2ZhMWNmNjg0MzJmMmE1ZDAzNmJkMDViOWQyMzFjMWZmMWQ5ZjFjMjE4MzRhNzgiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjVhMTY4MDljMDc1ZGIzMDllMDliYmM5YWI3ZWZlZTY5ZWZiNWY0MTliZDRkODkzMGQwMzgwNjYwMmRkMDJmZDQiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImIzYzU2ZGNjNGFiMmQ0ZjUxYThhOTYyMDA0OTI1NjI3ZWUzZDI5MWUxM2Y0MTQzOTZkMjQ0OWUxMDFmMmQ5MDMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjIwMWYxYWRkODA0MjY5NzE2YTk1M2MxMzA1NTBkYzE4ZDE5OWQ2NWFmZjJlNmIwZjY0YWU1ZDg5NzEwMTVjMjMifQ"
+        },
+        {
+          "resource": "repo://haap/policy.py#L118-L128",
+          "version": "repo-lines-v1:sha256:2159fe7742d5654c2843f4566c2a9bbc5aa85600637c84f70495c1028f9daf0a:eyJzZWxlY3RlZExpbmVDb3VudCI6MTEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjkxOTU5YzczZGUxMzkxZjM5MGYxMjBkZGFlMDkzMzA2M2E5ZmQ1NzZhNmFkYTBmODgwYmJiN2U1YWYyMGY0MTciLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjU0NzgzOTcxMDc5Zjc1Y2RiNGEwMzA0ODQxZDE5YmIxMTMyYTkxODU4MDRkZjc1OWQwODRiMjBiM2M3YWQ5ZWQiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjcxNzVkZGY1NDI2NWEwYzhiYzdlMzExZjgyODRmYzljMDkwNGU4NGMzYmZhOTlmZTQxOGMwYWFlZWVlYjA4MDQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjliOGRiY2IxZDM0ZjU3NmNmMWZjMzYxYTgyMGQ3NGI4MGRjZWEzNjkzYWVlN2UyYTE4ZGQyYThjZDkxMGE0MmQifQ"
+        },
+        {
+          "resource": "repo://tests/test_policy.py#L80-L91",
+          "version": "repo-lines-v1:sha256:4831e155e20207d8fe9b2ce5e3f439da6056532e3710f68964f0502c8dafaaad:eyJzZWxlY3RlZExpbmVDb3VudCI6MTIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijk3MDRmY2E5NTFiZmMwMDI4NGRlZmEzYTBmMmRhZDRhN2U5ZmJiNGIxYzBmMjRmNzFkNjk4ODg2ZDRmZjk1ZDQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjUyNzdiNTgxZDlhZmFiMGU0ODRjOGU5NDc5MDE4YzIyNWFiMjAzNTBmMGQ0YmY3YjQxZjNmNDg0NGJhYjM5OTkiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjEzYmYwNDIyMTZkYmQ5MGFkNGU3ODc4NjlkMjA5M2RhNzNiZWFmZDFjMDA3ODA2YTUwOGI4NzViZDUwOWU5MzEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjI1OGE2Mzc3ZjU4Mjc5NzIyZTVhYjUwYjc4MWI4NjBlOWYyNmU2NDhlMjdkNmYxOWRlMzljNzEyYjQ0ZDlhOTEifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_33f01dd9e90342eb9c10fc1215a0b206",
+      "statement": "An auto-approved friend_request resolves the capped role spec and calls directory.approve with exactly spec permissions and rate limits, and the reply friend_accept carries granted (the actual matrix just installed, e.g. client has task:submit but no file:write) plus granted_role, so the requester is told precisely what it received — the transparent counter-offer rather than ambiguous silence.",
+      "evidence": [
+        {
+          "resource": "repo://haap/server.py#L242-L257",
+          "version": "repo-lines-v1:sha256:b67ba89ccb3d19079e669b97500a943cc461a784e2db3ad913bb5a3edfbffce9:eyJzZWxlY3RlZExpbmVDb3VudCI6MTYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjNhYWU3ZWZkODc0NDZlMDI5NjRlNjhkYjkxZTYzMDUzZTgzZmFkNDBkMmE1MGZkZTYxMDYyZjYxZDEwZGI1NjciLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImFmMjFjMWQwNGNhMjFlNzg3OTQ2ODhkOGRiMjBmZTBlNjljMTUzMDdmNDMwMmE1YjVjYjRlMzIyODUxYzY1MDMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjBkYzAyZWU3ODVmMWM5YzNlODU1YmMyYzVmYTdlZjk4NjJmNzhmNjA3YjI5ZmM4ZGZkMzEzODg3NmQ3NGQwNWYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjIzNWNjOGJmYzQ5OTJjZTA3ZWI0OThlYmE0ZWIyMzBjNGY1NmQ5YmJhNzgzNTJkZmZkMjM3ZTM2NTBhMGYxYTMifQ"
+        },
+        {
+          "resource": "repo://tests/test_policy.py#L132-L160",
+          "version": "repo-lines-v1:sha256:e9ab379c97391d9eace5051d2de0f5cdb3f4a1624960a99630f1647ad1878e8e:eyJzZWxlY3RlZExpbmVDb3VudCI6MjksImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjNlNmZjNGJjY2Q5MGRmNmNlOTNlMDEzYTY1MDFhOWZkMDZhZWI2N2Q4ZDZhNDE4ZTE4ZTgyMWMyM2I0ZGIyYjEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjNjMDRhMWMwMGJjZGYwM2I2NWJjMmY4OGI0MjBmODQ4OGYyMWI5YzgwYmNkYmU0N2I1ZGZjNzMwZTdlMTEyZDIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjUzYTU2MWFiMTA1MTNiZjc2ZDE1MDU1MDgxZjZjZDdjMmJkMDI5OTkwZjlhZjA1NjI0ZmNkYTFhYjk2M2UyMDIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImQ0Yzc0MzU0ZDRjYWIwYzk5YzYxMzg1MTk0NWMyNzY3NjU1NDAyOTI3NTczNzk1MzcwNGY5MzU4MzEwNzZmZDIifQ"
+        }
+      ]
+    }
+  ],
+  "verification": {
+    "by": "openwiki/0.5.0",
+    "at": "2026-09-05T09:02:08.883Z"
+  }
+}

@@ -1,0 +1,198 @@
+{
+  "schemaVersion": 1,
+  "pageVersion": "sha256:ba1fc452de92e34c39a4a5ac6760281f95c9044422aef8e59d58c81b03ae1bfe",
+  "claims": [
+    {
+      "id": "claim_d0826f91f6f544fcb09ab1060dd2d710",
+      "statement": "haap/capabilities.py is the single manifest authority and defines two deliberately different key-free JSON documents: the owner-facing full manifest built by build_manifest (format haap-capability-manifest-v1, carrying agent public claims, haap_version, speciality, MESSAGE_TYPES_PUBLIC, scanned skills, sorted tools and generated_at) and the discovery-facing public manifest built by public_manifest (format haap-public-manifest-v1, with protocol_version and a flat agent block of fingerprint, name, speciality and a single endpoint URL). Both are key-free by construction because they are derived from Identity.public_claims(), the only identity projection that excludes key material.",
+      "evidence": [
+        {
+          "resource": "repo://haap/capabilities.py#L1-L13",
+          "version": "repo-lines-v1:sha256:eb621eb33344811d79251af4e4f777223cb374ca604e4ca6c1e8153aeb6fa64a:eyJzZWxlY3RlZExpbmVDb3VudCI6MTMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjhiMDg0YTlmMzc4MTI0YjJiMWE1MTU2M2JmM2MyMjQ0NGViN2ZmMzM2OTIwMTdkYTI4YjIxMzZhZTU2OTg3ZWQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImEzMDNlY2RkNGE0ZDEwZjE5YzczZmQ0MmZkMTI0MzdmZDMzNTRhODI2ODE2MDVkYTUyNTVhOTdhMzkwNjhkYmIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjU1YjZlODcwNmI0MzA0N2YyYTZkYjY3ZjEzMjYzODU5NTYwNGU2N2YzNjk2Njg3NmNlMDE1OGYwMDUzZTZiZDEifQ"
+        },
+        {
+          "resource": "repo://haap/capabilities.py#L92-L136",
+          "version": "repo-lines-v1:sha256:e2cbbb9acac9a99b663436d1fa90b570599767523368ee9d46c61bade69b1229:eyJzZWxlY3RlZExpbmVDb3VudCI6NDUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImExMWQyZWJmZWE5N2MwMjYwNGIyNjI2NGFjNWI5NWNlMWY3YjdiNzRlODAyMWMwNmUwMTdkZTU1ZTkwOWVlMmMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ4OTNmNDBlMzc4MWViODk2YzgyZDA0NmEwODA2N2ExMWUzNWNkZjJmMWRmYWYyNmZlYTkwYjhkYjY2NzY0MTMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImJmYjQyNDM1NjMzODgxYThlYjljMmNiZDUxZTE1MmY3NzIyMjdjOTQ5OWEyY2I4ZGI0MmFmMTVhODE5NDEzYmQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImJiMDliMGYxYjkwZjUyODJlODIzNmFhODA4ZGQ4YmJlZDAyMTc0YWQwNjA3MTY1OTNlMWNhNWU5YjFjMDU0MGUifQ"
+        },
+        {
+          "resource": "repo://haap/identity.py#L61-L72",
+          "version": "repo-lines-v1:sha256:f04a3c64fb978d6b5f350a23b519789c1c82c2b30d7b54382791da4509fdebeb:eyJzZWxlY3RlZExpbmVDb3VudCI6MTIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjgxOTY2YTU0Yjc2ZTZlYWM5MjVlODViMTZkMjJiZGJjMDUwMWE5M2FkYzY1ZjZlNTdkMDRlMTM0YjMzOGQxYzEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjBkY2U0NGZhZDcyMjFiMThjNGIyMjVjNWY5OGY0OWYyYzZlMzZhNmM5MjcwZWYwY2M4YTA3NGMwMmUwM2ViNDgiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjFlOTc3YmU1ZmFhNDg4ZDY0NjVlMmFhNWQ5M2I1YmIxNjgzMTNkNDZlNzQ4OGM3ZTY3MzQxNjVkMGMyNGRlMmQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzMzdjZGVkZGFhN2RkNTczZGJkNjJjYjQ5MTExZThkYzVmOTFmYzNjYjAxMWVjMGJhNGYyMjg5ODBjYmM4MGEifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_94ca76897090473280118f2a7f74915f",
+      "statement": "The well-known HTTP contract: HAAPServer exposes GET /.well-known/haap.json (alongside POST /haap/messages and GET /health), and each request is answered 200 application/json with a public manifest regenerated live by HAAPServer.well_known_manifest() calling public_manifest with the server's identity, speciality, skills_dirs and extra_tools; any other GET path returns 404. The design mirrors the A2A Agent Card at /.well-known/agent-card.json.",
+      "evidence": [
+        {
+          "resource": "repo://docs/ARQUITECTURA.md#L277-L282",
+          "version": "repo-lines-v1:sha256:f586f3fbb445a443c3e8e041d51be86994425324b2dad20fb192e7e2a8d6a9ae:eyJzZWxlY3RlZExpbmVDb3VudCI6NiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMzI1YTQ0NDExYzNiM2MwMTdkNzRhY2UwODliMjcxNDg3YTA4YjhkZTI3M2JkYTkxMTQ3NjAxNTg1NGRlMmNhZCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiOTIxOTZmMGQ3ZmJjNmZmZWRhMzg0OGUyNTY5N2E4ZmY0NWYzY2YzYWEyYzM5ZDRiODgyOWE1ZjMyNDM3Njc2NiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNjhiZTUwNjFlYmQyYzJmN2E3MmUyMWM4ZjUyMWFhYWVhNDQzZThjZDU0MGU0YjBkZjMzYWQ1OTVkZDdhZmE3OSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNzU4ZDc3YWZkYTRlOWYxYTI3MTJjMWEyYzBiZTI5YjQ5NTliODM5ZmMyMTFkZjhkN2FiMGM5OTM1ZDU0YmNlZSJ9"
+        },
+        {
+          "resource": "repo://haap/server.py#L438-L443",
+          "version": "repo-lines-v1:sha256:d1162730505df7ee70844a96f6c8cdb88f13f723c1732c2d7a5f0e18464be8d3:eyJzZWxlY3RlZExpbmVDb3VudCI6NiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiN2M1MjZlMzg2OTljNzg5YWQ2YjFmMzNkMzFiYTUzMjRkN2U0MTlmOGQ2ODQxODA4MjVhYzI0OTdhYmZlY2M4YyIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiOTcyMjgzZDVhNzM2MmJlN2U5OTQ5NTQxMGE4ZWFiYWQ5YzMxMDExNzk4MDAxNmZmZTE3YWQ3M2YzNTdjMDM4MiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMWMyY2U0NjVjYzU0MGI3YWUzZmM3MGVjYWNhZWY3NDJjZmNhY2JmYmVjODE5MDNmOGRmZWYyNzYyNDdiZGY3MSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiOTI2MjY3OTY2Y2Q4ZjRhNTZhYWU5NzBkOWE0OTg3MTdlZWRlNDgyYzEyZTZhNTZkNGViMTM1YTkwMGM0OWYzMCJ9"
+        },
+        {
+          "resource": "repo://haap/server.py#L96-L100",
+          "version": "repo-lines-v1:sha256:222605b37ca5a556ea561e02debad48c971218c4553403a918f12485ad9028e9:eyJzZWxlY3RlZExpbmVDb3VudCI6NSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNTk4NTVlMTkxYjdiYWQ2NmM0MjA4MDJmZDkzYTg1MWIwYzQ2ZDVkMzQ0Njg4OWIyNWM3YzA5Y2Y5ZjI5MzVjYiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMzRlMzQxNTc1NGU4ZGRkNWEwZGZlODE4ZTdhMDg2NWFhNGUwYjA1M2NjNDNiMTJhZTc2MDgwODM0NDU4ODcyNSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZDliZjQzYTIwYjBiYjAwOTVjODMwYmRhZTk1M2EwMGZjOGRhMWU1MGM0MDYxZmUyOTQ1MDc1ZjQ3YTBkMjczNiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiYmMxN2M1NGY3MDVmZTQ2NTM1Y2NhZDQxMDIxYTE3YzZiYjQzYjU5ZTI1NmVhMDY3NzBiMzdlM2E2OTE2MGM1YiJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_af6af1b2bcd442af994301b3992efb3e",
+      "statement": "Hermes skill introspection: the skills arrays of both manifest formats come from scan_installed_skills, which scans the SKILLS_CANDIDATES directories (~/.hermes/skills and ~/.hermes/profiles/default/skills, overridable via the skills_dirs argument) and, for each immediate subdirectory containing SKILL.md, contributes {name, description} read conservatively from the file's YAML frontmatter by regex (only name and description keys, no YAML parser dependency), deduplicated by first-seen skill directory name; an unreadable or missing frontmatter degrades to the directory name and empty description rather than failing.",
+      "evidence": [
+        {
+          "resource": "repo://haap/capabilities.py#L29-L33",
+          "version": "repo-lines-v1:sha256:8ba8215b25e7ba649c34b6b6e6d817e8864f4a91825dc5d5074731ccae135848:eyJzZWxlY3RlZExpbmVDb3VudCI6NSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNWNhM2YwY2Y4NTA5NTdiZTRkOWM4ZjQyMjk2NzFjNzc2ZDFjMDYzMTBkNDRlYmY0Yzk1YmIxNDM2OTFjMmVlMyIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiZjk0MTZlMDlmNzhiYTMxNmMwMzI1NjgyMTNiODU1ZWU3NTZlNDE1NjVkOTE4ZjA5NTE5YzgxZmQ2MjBmNDA2MCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNGNhYmRiMTJmMTU0ZTVjOTQ1ZDNkN2IxZThlNjNjNTI1NTQ4YTNiZGMwYmJkMjhkNjI4MGJkZTc2ZjdiYmQzMSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMjZlMzQ4YjliMjk3NTM1MWNjZmI4ZGRiMDcwMjg5N2I1ZGI2ZWVlMTVkNWMyYjMwM2Y5NDMwM2MwZGZkZjE2NCJ9"
+        },
+        {
+          "resource": "repo://haap/capabilities.py#L46-L89",
+          "version": "repo-lines-v1:sha256:3410ae70d91b8914a0500088dbb3c13571aa1e64403e34f1e09e8ee8f32f1422:eyJzZWxlY3RlZExpbmVDb3VudCI6NDQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjRjMjNmNGUxYTdiNDdiYTJhMzg4Nzc3MTMwNTI4NGVlZTZmOTdjZDFhODRmZTNlZDhmZjE5OWQzYTU1MzJkMTEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImI4OGE1NTJmOGNjZDgzMzkzZWMxNjNkZmVjYmE5MjdlZGQ3MDk2NGFmMGM5N2E4YjUwZTk2YjJmNjIwYzYwMWEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUwMGEzOWM1OWRmZWQ0MDMzY2RhM2NhM2I5YjU5MjU1M2YwNWYzZGVkZDIxM2RhYjY2OTZlYjlhOTc2OWZmYWQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImM0NDY5NzIzZmI0NmFlOGQ4NTg1Y2RkMTE0NGI3YjZkMjRlNzdjYzY4ZGY3MjViNDY5MjAyODY4MmM2NTA3NTQifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_8ab8d43a09cc420db00c7b70ae4c7f9c",
+      "statement": "The full manifest's persistence API is explicit and inert by default: export_manifest writes a manifest as indented JSON to <directory>/capabilities.json (defaulting to haap_dir()) and returns the path, and load_manifest reads it back raising HAAPError ('no manifest at ...') when absent; per the module contract, capabilities.json is the owner's local artifact for deciding what to publish, and the document actually served to other agents is always the live public_manifest result, never a reload of that file.",
+      "evidence": [
+        {
+          "resource": "repo://haap/capabilities.py#L139-L156",
+          "version": "repo-lines-v1:sha256:cbf305de810126de8ef237acf3291c18da0c8c817c7a3920b55fd9bb0688b408:eyJzZWxlY3RlZExpbmVDb3VudCI6MTgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxZGNjYjNiMDY1NjEzZGJmMDIxYWUzNzk1OTc5YWQ3NzM5MWI0NzY1NDdjYTc0ODNiMDJjZjI0ZTlhODdmN2YiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjgyOGMyNDI4ZDlkNWJiOTI4YzZjYWMwYjQ5Yzc3NWIyMjU2MzA3N2FkYWY0Yzk5NTFkMDRlMTQ2MGFmM2M2ZmQiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjRmYmQwMDkzMTRiYzI3MDg0MTY3MzRhMDJhZTVmZjM5YTFlNDhhMDUwYmU5MWY0M2IyZmFhOTIwMDJjNjJiZmMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjE5ZWYwNGNlOWU1NzdkN2NiMGFhZjM3MDQ4NzM0ZWY1OGZkZjU4NDM0MmUxYmYzNDRlOWNlZGI5OTBhMzBmMTAifQ"
+        },
+        {
+          "resource": "repo://haap/capabilities.py#L9-L12",
+          "version": "repo-lines-v1:sha256:8a06a8da97aab0d15492956c06145689653bb7f4c8755e9a56c21d3a24081dd5:eyJzZWxlY3RlZExpbmVDb3VudCI6NCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMDFiYTQ3MTljODBiNmZlOTExYjA5MWE3YzA1MTI0YjY0ZWVlY2U5NjRlMDljMDU4ZWY4Zjk4MDVkYWNhNTQ2YiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNzU2MDlkODI5ZjAzODgzOTg2YTVhOTFjYzM1NzYyZWE2N2VjNDFjYWUzNzQ0MGU0MTFkOGFmYTc1Yjk2MDY0ZSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNTI4MTRmYzdiYzZlYWI5YzYzOWNkNTk1YjUwZTA0ZjgzMjE2MjFjNDc5MTE3NjJlNmJkYWE2MThmNTVmYjc4MyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMWFhZjc2MzdjYjZlN2U1ZGI4NWQ2MzQyNzQ2MDE0ZGYwNDFjY2Q1NThhOTIwYjI5ZWI2YWM3MTlkN2JhZjVjMiJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_8f7d197907ce4374b4e1a2768f04a705",
+      "statement": "parse_manifest is the canonical validator for manifests received from another agent: it accepts JSON str, bytes or dict, rejects non-JSON input, non-object JSON, and any manifest whose agent.fingerprint is not a string, and — as explicit defense in depth — rejects any manifest containing private_key, public_key or signature at top level or inside agent with the error 'manifest contains forbidden field ...: not processed'.",
+      "evidence": [
+        {
+          "resource": "repo://haap/capabilities.py#L159-L179",
+          "version": "repo-lines-v1:sha256:714593eb7064b2c5fa77085dc7bb09538042598c073896cb96872b0189ebbe6d:eyJzZWxlY3RlZExpbmVDb3VudCI6MjEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImM1NmQyZGJlNTI5NWYzMGMxMzY1Yjk1MzAzOWE0MzU4NzFlY2EyZjc1ZmM0MTEzZTk1YzZiMTJiY2Y5MTM2MDEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjdkN2ZhNWI1MDVlYTNlNWFiMTc0YjU4MDg2M2FkODlmYWNkYzIyMTM4NGY2NTBjZmZlNmJmMTFiOWM5MDI5ZjciLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjMzNDE5NTk4MGJiOTY5ZjY0ZmI2NGQxZTk4ZDdiNzhjNjJlOWZiOGNmNzM0ODcxNDFjNDMyMzEzZGI2ODBhOTMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_d7051d462ec948dfacecd0f3ed0ec779",
+      "statement": "For registry registration the public manifest is signed beside the keys, never inside them: registry_client.build_registration returns (public_manifest with messaging_url set, the identity's base64 public key, and an Ed25519 signature over the manifest serialized deterministically with json.dumps sort_keys=True, compact separators, ensure_ascii=False), and register() performs the two-step flow — POST /register, then signing the returned challenge nonce as the endpoint proof for POST /register/complete — raising DiscoveryError on any rejection.",
+      "evidence": [
+        {
+          "resource": "repo://haap/registry_client.py#L52-L89",
+          "version": "repo-lines-v1:sha256:a76da6f5a63f0a6a91cf404c177542ee74b6b1530b35dcc1d275c93dcb756b7d:eyJzZWxlY3RlZExpbmVDb3VudCI6MzgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjU4YjY3NDZkYTExNzhkZGI1Mjc4MDVmYzEwNmMwNWE3NzA5ZjQwMTZhNzZlNzdlZWIxMGUwM2RkMGNkODA2NjgiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjkzMWQxNzZlOTFjYmYwZWFjODlmMjZhNWMyZWM4NGJhMzY4NTgzNTk1YTU2NDUzZGE5M2UwZmM3ZWEwZjI5ZTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImQ0YTU3MzA3ZWQyMTZmYTE0NGU5NWI5MWQ2ZTA4OTUzZjBkM2JkZTY0ZGFiZWM3OTYxYjg2YTEyNTk3Nzg0MmEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6Ijg5ODdkZGMyMTljOWRmNzJlM2Y4YmQ3YThlMDgzOTMzNmVkMjNhYzViZDRlNzNkMmEzZGJkYjhlOWE1NmZiNWIifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_7016ad14ba7345e49b2f2e9a827ede64",
+      "statement": "The registry's no-keys design: RegistryStore.submit_registration validates the fingerprint format (^HF-[0-9a-f]{16}$), that the submitted public key's fingerprint equals the manifest's agent.fingerprint, that the manifest signature verifies with that key, and that the declared endpoint is http(s); it keeps the validated public key in the pending challenge state precisely because the manifest never carries keys, and complete_registration lists the entry only after the endpoint proof verifies against that key within the 60 s CHALLENGE_TTL_S window. Re-registering the same fingerprint updates the stored entry, and entries expire after ENTRY_TTL_S (24 h) without a heartbeat, pruned lazily on read.",
+      "evidence": [
+        {
+          "resource": "repo://haap/registry.py#L35-L37",
+          "version": "repo-lines-v1:sha256:2d2f822f91acc270861d13fe60c7ab97fd67aba2906f02ed25a1176f7fbb6c98:eyJzZWxlY3RlZExpbmVDb3VudCI6MywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiY2ZiYmE4YzdhMGNiODkyYjRjNjc3YjI0NjA3N2Q0MDFhNzRkNTllYWFkYjI5ZDhiOTYyMmE3NzI5ODM2ODg0NiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiOTIwYzkxMTI4NzFhODQ2NjlkNmJlYTM0NDA4YWYxMWZjMDRlYTIxZTVlMjQwMDk1NjJjZGIzNGM5ZTNiOTg3ZSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiOTk0YTNmZTE3MTU2N2YyYzdkM2U0MTE1NGVkODllZDcxNGU0MTI0OTE2OTM0NWEyZWEyOGE1M2QxMTUxMDU5YyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiOGM5M2M0MGJlNjEyNDczNTU4N2E1ZjlkODI5ODNmNGNjYjNlNWNlODQxMjk1NGJiM2VmZmExMTA5OGQ5MTU5MyJ9"
+        },
+        {
+          "resource": "repo://haap/registry.py#L60-L127",
+          "version": "repo-lines-v1:sha256:5fa0b58567c41260d54c58853820e7250ad3e5ed94fe60ef1786026b941c6fb5:eyJzZWxlY3RlZExpbmVDb3VudCI6NjgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjE4ZTZlOTE4MTlmZDZhOGU5NDFjMGVjNDI3ZGNhMWYzMzVjMDQ0M2Y0ZGQyYjZmNzZkOWU5OTcwOWY3YzgyNTciLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjlmMTFlYTExZWYwMWUyZTk2OWU1ZjRjNjI3MmYzZGI2NmRlNWY4ZTU0ZDFjYWFhNGFmZWYyZDIwYmJhMmVmMjYiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjMzZGZjNGQ2ZGYxZTJlZWU3YmMzNzZiNzdmZjNjYzczYjkxNDRiZGY1YjgyZTJiZTlhODkzNDQxZjZlNDExNDUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjE4ZjQ0YmJkNmEwMmQ5NzU2Yjg5MDFkNGEzYmZmN2FmNzlhMDllNjk4MWFkZjM5ZjgyNzExZWY4YWQ1MDYwMTcifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_3434232cd9a04fb69fb2b1bf17ad95d6",
+      "statement": "Directory search indexes the stored manifests: /search matches the capability filter case-insensitively against the union of tools, skill names and agent.speciality, filters the q parameter against the full manifest JSON, and returns only entries still alive within the entry TTL; registry_client.search consumes the results list.",
+      "evidence": [
+        {
+          "resource": "repo://haap/registry.py#L138-L143",
+          "version": "repo-lines-v1:sha256:e2c403428484bb0219ed66304e640c27884cd68fcb7dd19efe40c0f920b28744:eyJzZWxlY3RlZExpbmVDb3VudCI6NiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiN2Q5ZjQ2NWZlNTY3MDZkYmYyYzhiNjBhNWE0OWVmZGUyODk1NDY3NGExOTZiZWE2YTI4YTc5ODE2ZWE5NzVhNiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNDIwNzgzOTJmZmU5MzUxM2E0Y2VjMDYyNDY4NmE5NzIzZjgzODFiMzhhM2M2MGZhZDQ2ZjNiMTBhNzY2NWU3ZSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZmJmM2IwOGQ3OGY4MmEzMmEzODliNzQwNzE5YTIxMzVlMjIzNGU1MzE0YzFkOTFlMjJhNmZlMjUwOWRkMmIyMSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiYmUzODMxZDQ3Y2E2YjkzYzg5ZTVjNzdiMTg5NDI5NWY5MGNkZjJhZWRiNDdiNjdhZTQ0MDgzN2QxZDgwZDA3YyJ9"
+        },
+        {
+          "resource": "repo://haap/registry.py#L145-L163",
+          "version": "repo-lines-v1:sha256:389eb64057473bdd29cf587ce1b83c4d8db31a85e4ccaca2035fa1a046375194:eyJzZWxlY3RlZExpbmVDb3VudCI6MTksImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjFhMmNmYjc5NjYxZjE5MDgxNzhiMDRiNWJmMDBiODYzMjMxODFlOWEyN2RjMWJkZjU4NDFlMzU3ZDA5NTE5MTUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjM2MGM0M2NhOTYzZTJlNzk2ZjUyMjU1OTc4ODI2YmNhNDczNmNhZTc4MDM4YTkzNGQzZDEwM2VjZDAzY2QxZWEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjJjYjcyY2Q1NzViNjQyOGE1ODIxNGEwNjI0NzY5NWZmMGEyZWNhYzMwMGU0ZDQ2YWFkODE2NjE2MzdkNDVjNzUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjViYWMxYjY5MjQzNzNlN2JlMjU1MmI0MTJmYTY0MTkzNTE4ZWRkMGI0Zjg1ZDBlMjJlMzZiOTZmNjBkODYxNmMifQ"
+        },
+        {
+          "resource": "repo://haap/registry_client.py#L92-L96",
+          "version": "repo-lines-v1:sha256:2a39c41a57420257d509971aa0c491798ab4e98218df3e5eb1566cc1e4c4777f:eyJzZWxlY3RlZExpbmVDb3VudCI6NSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMTVjZDhkNTViMTU1YTNlNmFmNWM3ZmNkNjExNDBiM2FkNDU1OTQwN2IxM2UyZWQ4MTA3ZTEyODc0ZTZlYjFiMiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiYWVlMWJjOGRhYzRiZjAwMmRhZTUzM2FmMzhlZGY4OTVjNzUzNzgzNDM2MWIzMjY0MThlZTMyYWMyOThiYjY0ZSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZjAzZmU4NzMxOWUwYWMzNGVmMDA0ZGUyODQ4NjI2NWY3OWJlMmY0Mzc3Njk5ZmYyMGE3OTEyOGExMjMzODA2YSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZDYzMTAyYjcwMGQ4Y2QxY2U0NTA5YWFhZTkzZmNmOTdjNDg3NmE4ZjY3ZmFhYjI1ZDc5YjUzNTlhOGQ3ZTM2ZCJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_755bc26beb3a4ade96993240afd01f8c",
+      "statement": "Discovery clients re-verify agents directly: HAAPClient.refresh_endpoint fetches the friend's /.well-known/haap.json (base URL derived by stripping /haap/messages from the recorded endpoint), raises DiscoveryError ('possible endpoint substitution') when the manifest's agent.fingerprint differs from the recorded one, and on match prepends the manifest's agent.endpoint plus /haap/messages to FriendRecord.endpoints when it is new; tests pin both the rejection and the acceptance path.",
+      "evidence": [
+        {
+          "resource": "repo://haap/client.py#L276-L296",
+          "version": "repo-lines-v1:sha256:1b1a3c9bbd4ee2c12ff5d963b6f68292e7e5ea0c587fca8fe9b72fe28f9ca770:eyJzZWxlY3RlZExpbmVDb3VudCI6MjEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjE1MmY0NTcwYmUzMzZmZTY5ZTU2MGQ3YjllYzc2N2E4NDQyZmNjYmZkYjc5ZmQwOWQwNzVmNTlkZjI2MDNiZmMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImQxZWU0MDhlZDNkZDVmM2QxZGNiODI3ZThhYjQyMzlkOWU0ZDE5M2VmMzdiYzc3NmEyMmVmYTE3YmQ1Njc1NzQiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImIyYjhkODA4M2Y3NjExZDkzNmIwNjJkYzE1ZTRmMmFiNzczYzUzMDIyNjQ0ZTY2Yzg1ZWZhOTYxY2Y5NmE4NTkiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        },
+        {
+          "resource": "repo://tests/test_client.py#L110-L134",
+          "version": "repo-lines-v1:sha256:3332117067167dd5378888b14b19b9ea2e38bff75cc9a5b1431331dd1acf7a2f:eyJzZWxlY3RlZExpbmVDb3VudCI6MjUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImUwNWJmYmVhZjQxMWE5YzMzYTdkZGJhZWFlMzg1MjVlY2JlZTFhMWJkMzQwZWQyYWUzYWJkZmJhOTY3YzI2NzgiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxODBlZmNkZTUwYzlkNWM3OWI0ODIwNjEwYTRkNTc3ZDc4OGVlYTk0ODZkNDEwMTc4ZDExYjBkM2JmOTZkZGEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjFlMzAxNTIyZDMyMGU4ODcyMzBjODM4NTVhNmM0OGU0OTM2Y2I4NDM2MTQ5Mzk2MWFhYTQ5NTBkOWUyODY3NWYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_745312540df44f0c967b73206966a30d",
+      "statement": "During the friendship handshake only a capability summary travels: HAAPClient.start_friendship builds the full local manifest with build_manifest but sends just {speciality, format} inside the friend_request payload's capabilities field; the receiving HAAPServer stores it as FriendRecord.declared_capabilities, which feeds the owner notification card and RequestPolicy auto-approve/deny rule matching on speciality, and surfaces in the CLI's pending-request listing.",
+      "evidence": [
+        {
+          "resource": "repo://haap/client.py#L126-L162",
+          "version": "repo-lines-v1:sha256:ab7b35113f17af2d7a23bbc6d22dbdbd4232bdf5fcae15712cea5818aa4e9120:eyJzZWxlY3RlZExpbmVDb3VudCI6MzcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjU2MjU2ZTFmMGQ2MTJkNWU5Nzk3MjJkYmU0ZmY2ZmVlMzRmY2UwNTY5NmJlNWUxMGY1ZjZlM2VlZThhYzc3NzYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImU1MTc4YTE3MTZjYzExMGVkY2QxMDZiMDFkY2JjNjk5NWQ2N2IwYWUyZGU1YjIyYzVmNzA4ZjIxMzQ3ODA0OTUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjhlYTJlN2JkZDY0NjE5M2Y2NzYwNTNmMTc0MDk5NmMxYWIxNTViZTRmZDg5ZWI1NTJjZThhNmFjZDcxNWI1N2MiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6Ijk4ODQyZTZlNTYwZDJiZTQ3NjkyMDhmODA2OTVjODZjYjJmYjg0ZTUyZjgwOWY4NjczMjAxODFiMmViN2U0NzUifQ"
+        },
+        {
+          "resource": "repo://haap/directory.py#L58-L70",
+          "version": "repo-lines-v1:sha256:d4c796ed70df806530ae49a7e6b3548c88a36e83e7f4a1fdb8a97146b0c0ed71:eyJzZWxlY3RlZExpbmVDb3VudCI6MTMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImI2ZmJhZTBiOTFkNDRmYzBkNDlmNWRlNjkxZGE2ZmM0MzFmMjYwMTM0YmY3MzFlMGUyMWY3NjQ4MDk0MzM0Y2IiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImNmNGI1NzEwOWU2NGI4OGUyZGUyNGRhZTRlNzhmYTM5NWEyYWZhNTMwMzU2NmE5ZjYxNmY5NGIwMTcyZjg4YTIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjA3NDdlNzE4MTE3YmUwMmZlN2MyNDhlM2JmNWU5YTA4ZDc0ZmE2MDUzNjBiMGQ4ZmY2NmViODFkYmY0ZjMxNGIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjllNTdiMDYyMmM2NTVhM2ViMzU0OGExYmVlNTgxYjAyMjJiODhiNzY5MjIwYzY1ZWQ5OTRlZjFlZDFiMzFlZmUifQ"
+        },
+        {
+          "resource": "repo://haap/policy.py#L81-L116",
+          "version": "repo-lines-v1:sha256:5019a3a9381628687fdc2be7c71e1cd22fb6dceda686f81887cedcb0876373a1:eyJzZWxlY3RlZExpbmVDb3VudCI6MzYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjJlOTU4NTdhODliMGE0NjkzNzBlNWRiNWI4NjhlOGIwNjlhNDY0MGZiYjljZDM1NmE5ZDZhMzgwNTRlOWUyYjciLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImVlN2M5NTdiY2I0NGZiNjczYzk4YjAwNTBhNzVkMzgwODJkYjgxZDkxOGRlMzEzYTNmMDdjMTIzNTMwNmQ3ZWMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImViYzI5NzcwMzM2ZWEzYWI1NWEwMzE3ZDY3OTM2OTk2ZmY4M2RjODYyNGQwYmQ0MmFlMTE0M2ZkOWNkOWZjNzciLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImFhOWQ3MmM4MmFlNzI1YTVkZWM0ODJiYTQ4ZmM5OWFkODU2MWYxMzQ0YTM3ODk2NmVhOGU4MTgzMzNjYzNlY2UifQ"
+        },
+        {
+          "resource": "repo://haap/server.py#L213-L272",
+          "version": "repo-lines-v1:sha256:12c4c3a5d1817b629280144ba261141df70433c242b6ad94526240a8219d65f7:eyJzZWxlY3RlZExpbmVDb3VudCI6NjAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjE0MDNlNmE1MGEyMzk3YjA0YWVkYTM4OTIxNmY3YmNjYmZjOTc0YzQ0ZGQwYzE0NGY0OWUyNmE2NGZhZmY4MmMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjFjZDI4MTQ5YzljOTk3OGEyYTU5ZTQyMjNkZDZiMTFhYzlkNDcwMzE5YjA2YTQwNjA0MjhmNDBiYTI3NDdjNTQiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImZmMDk2N2Y4NjBkYjk5NTA4ZmY5N2U1ZDcyMDllMTg2YTJmNTE0ZTg0ZGIxYWE1ZmVjZjVmYWJkYmJhODYyNzEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjU1NWQzYzBkMGIwMDY0ZmQ5YzIzZjVjMzhkMDU0MTAyNDdjYjYwNTQ2Y2MzNTJkMDhjMDQ3MzhjMWQyZWY0ZWQifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_1f91f2bf2ad447c7b759c4ae877e40a9",
+      "statement": "Manifest bytes never travel inside signed envelopes in v1: the capabilities message type is allow-listed in envelope.MESSAGE_TYPES and advertised in every manifest's MESSAGE_TYPES_PUBLIC, but the HAAPServer router implements no _on_capabilities handler — handle_message dispatches to _on_<type> only for handlers that exist and answers unhandled types with an error envelope ('unhandled type') — so capability exchange happens over HTTP well-known GET, registry registration, and the friend_request capability summary.",
+      "evidence": [
+        {
+          "resource": "repo://haap/capabilities.py#L35-L39",
+          "version": "repo-lines-v1:sha256:0360db82fcfd8bc4c6524db495f4c1a24a9f71203400b25d58585d8d006acec9:eyJzZWxlY3RlZExpbmVDb3VudCI6NSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMDYwZDRlYWFkNDgwM2EwOTc3ZDViZWQyNzQxNDk1Y2YxMDkzZTQxNGNlZjg3YmU5NjAyZjc0NjFmYzY2ODU3NCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiZjk0MTZlMDlmNzhiYTMxNmMwMzI1NjgyMTNiODU1ZWU3NTZlNDE1NjVkOTE4ZjA5NTE5YzgxZmQ2MjBmNDA2MCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiYWEzZTllMDA1ODgwM2MxNTY3MGRiMDFjNjg4NDc4YjUxNWQ3ZTNjNmMyNTgwN2UyM2QwZjhjZjFhOGQwM2U5ZSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiY2IxYTk4MWNmMmYwNzdmYTgyZmJiOWE5ODRiZjIxZDA3YjI2NTIyMDE1ZmY1YWMwNzU2NzRkMzU3MzQ3Yjk3MCJ9"
+        },
+        {
+          "resource": "repo://haap/envelope.py#L45-L53",
+          "version": "repo-lines-v1:sha256:65d5a2cdba20cbde11a7cb7f78c33dce472974180d8cebc99668b434a3a6692b:eyJzZWxlY3RlZExpbmVDb3VudCI6OSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMzIxNmEwYjQ2NDczMWQ2MTE0MTc4NWY5MjhhOWU3YWM5MjExMTVkY2RjNGQ1NGRhMTliYWY1NjgzYzA0ZjljYSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiODU4MGI3NjUxOGRhZTk3OWZhZWJkMDIzNjdhMjkyOTJhNTBkOTc2MDkyMjUxYTM4YTZjZTMwODgwYmE0MjgyNSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiOGZmNzg1OGJlZjVjYjk3NWYxMWViZWQxYjEwYTA4NDE5NWI0MmFiYTljZTFkMGVlM2Q3Mjc4MTA2OTkxNDg4ZCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiYmI4MTNjZmU0MGQ1MzJjY2FmOTNhYTFlNzMyZDU4NzU1ZTFhYmU2MzY5NzJkNmVmNDJjYzAxZTI1Mzc1MzJlOSJ9"
+        },
+        {
+          "resource": "repo://haap/server.py#L148-L160",
+          "version": "repo-lines-v1:sha256:05fa3f84af39654e3d34154e1335119dc8a803808a308c6b1cea0c70e4f86c95:eyJzZWxlY3RlZExpbmVDb3VudCI6MTMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjZmMjQ1ZTAzMDY4NDQ1MDQyNDZhYzUwMjI4OTcyOWEzZmYyYTEzYjBiZGQ3MDkzOTg0NTRkMGE5MWM0MmYyYTkiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjdhYzQwOTk2YmI3MzE2ZDI3ZmZkOTVjMzJmMzFiYjY1ZGM1Zjk4MDVkNDE4MGNmZWI0MzVkMDhjNDZjN2NkM2MiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjRhODlhZGU5MjJhYWI5NzdhYWEzMWJkYzE4MTQwM2ViNjUzYTQ3MTRhNmExZDhjOTcyZTkzYWViM2I1ZDU1YTgiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImNmZWM0NzFjOWQ1NWRjNTBiMDlkMjk4MTViN2ZkNmI2OWIzZjU4NmEwYWQyNDY1M2EzY2E5NDc5MDg2MTE1NWQifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_e07cc9ac336248478195691255a6c667",
+      "statement": "The CLI surface for manifests: 'haap capabilities' prints a summary or the full build_manifest JSON with --show-all (never persisting capabilities.json), 'haap serve --speciality' feeds the speciality that the live well-known document advertises, and the registry register/search subcommands drive registry_client.register and registry_client.search with the declared speciality.",
+      "evidence": [
+        {
+          "resource": "repo://haap/cli.py#L136-L147",
+          "version": "repo-lines-v1:sha256:a65ae294b4cec8651eeb0e5f8ef8bb8a4c0fc4f313ac62188e8b3b5e30478622:eyJzZWxlY3RlZExpbmVDb3VudCI6MTIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjU2MTJkYTNkZjQwZTlmNzM0OWIzODA3ZGFhYTdkZTRhMjkwODI0YzNmNzZkOTQxZjNhYTNiNTkxOGZhNzg4NjEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjE2MjMzYjNmZmVhMzJhMjNkZjUzMDY1MzQzNDhmMmRlZTc3NmE1YTZmNzRmYjUzMzE3NWRkYzUzOWE4ZmU0NjQiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjM1YzdlYjk5ODc2NjE3MjI3NDliNWQ3ZDczODZkZmI2ZDk1MWQzYmYzNjgyZDhkNzk0MDFmMjBiODk3NDEzYmMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjdjY2I1NGNkNWNhYmU3ZTc3ZDhmYmZlNGMyNTBjNWRjZTZmZTc1M2UzNThiMDViMzc0YTFlMWJlYWY1YjRjNzQifQ"
+        },
+        {
+          "resource": "repo://haap/cli.py#L170-L178",
+          "version": "repo-lines-v1:sha256:debecce93e8b55047921787ff0424f5cd79964b99e1e640a195a5b5237ba1e34:eyJzZWxlY3RlZExpbmVDb3VudCI6OSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNjlhYjMyYTYzNGU4ZGQ2NDJiZjkzMGM3ZTdiODZjNTYwYzA1NWFlMGFiOWFiNDNkNDRkN2NjMTJiZDA5ZGY3ZCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiYmQxYzA0OWRmMDk2MmM5MmNiMzViZTQ3NDAyMWJlODU0YjFhN2RiNWY5Y2ZmMzA2MzI0MjUwMjMyMDk3NjA3NyIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMDdhZjVlMmY2MWI2N2IwZGI4ODQ3MjQ2N2U2YzAwNzFjNDlmZDQwMmI0Njc1Yjk3OGIxNzExZTBhYWU1NjI0YyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiODNkZDZmMGQzOWZhYmM1ZWZkMmU5ZDdkNWQ5N2YxNjM4YTdmZjJkZDAzOGY1ZjYzZGJjNjRlNjRjMmJmNWIxNSJ9"
+        },
+        {
+          "resource": "repo://haap/cli.py#L206-L228",
+          "version": "repo-lines-v1:sha256:33e7d42e73e0c9e5a3fe5e31ed8bfd02c77bea7d75a4d3befd609b67fe6767ff:eyJzZWxlY3RlZExpbmVDb3VudCI6MjMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjkzZDVkMzdmZWE2OTNlMmU0ZmI1ZWJkNmI5ZWFkZmMyMTM0MmQ1MzBiYjM3NTU3MjA0MjU4YzUxMzU3MzQ0OWYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjVhMTY4MDljMDc1ZGIzMDllMDliYmM5YWI3ZWZlZTY5ZWZiNWY0MTliZDRkODkzMGQwMzgwNjYwMmRkMDJmZDQiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6Ijk3ZWU3NzFkODQ4NWVlYzRjZDQ2OGMxYWM0NmI2MzNhNzU0NmJjODA1NmQxNmNhMmM1NGZmZmNlNTVlN2FlOTYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImE5ZTI1M2E3ODE0YTY1NDdhNTBlNTRkNmQ5MjM3NmY5ZmVlZDNhMDFkZTA4NDM5MDg0MjAzMmIwNjRiNThjOTEifQ"
+        }
+      ]
+    }
+  ],
+  "verification": {
+    "by": "openwiki/0.5.0",
+    "at": "2026-09-05T09:02:08.883Z"
+  }
+}
