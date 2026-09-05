@@ -295,5 +295,5 @@ arrastrar la complejidad de JSON-RPC.
 - [ ] `ARQUITECTURA.md` en inglés
 - [ ] Verificación de negocio (dominio web) en el directorio
 - [ ] Sistema de reputación federado
-- [ ] Puente a Hermes: webhook entrante → router HAAP; notificaciones al dueño
+- [x] Puente a Hermes: plugin nativo `haap.hermes_plugin` (servidor HAAP en el gateway, tools `haap_*`, registro/heartbeat automáticos, tarjetas de solicitud inyectadas en el chat del dueño)
 - [ ] Demo: agente personal ↔ agente de negocio (reserva CalDAV)
