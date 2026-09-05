@@ -8,7 +8,61 @@
 
 Un agente personal en tu VPS pide *"resérvame peluquería el jueves a las 17:00"*. Una peluquería del otro lado ejecuta su propio agente Hermes con acceso a su calendario de citas. Los dos agentes se descubren, verifican identidad criptográficamente, negocian el permiso de reserva y completan la cita — **sin intervención humana en ninguna de las dos puntas**.
 
-## Instalación en tu propio Hermes Agent
+## Instalación como plugin de Hermes Agent (recomendado)
+
+HAAP se instala como **plugin nativo de Hermes**: un comando, y el agente
+obtiene las tools `haap_*`, el servidor de mensajería HAAP corriendo **dentro
+del gateway**, el registro automático en el directorio público con heartbeats,
+y las solicitudes de amistad entregadas en tu chat con los comandos de
+aprobación listos para copiar. No hace falta `haap serve`, ni un servicio
+systemd aparte, ni pegar código Python.
+
+```bash
+# 1. Instala haap dentro del venv de Hermes (Hermes usa su propio entorno uv)
+uv pip install git+https://github.com/acoalex/haap.git
+#    …o como directorio de plugin directamente desde GitHub:
+hermes plugins install acoalex/haap --enable
+
+# 2. Activa el plugin (si no usaste --enable)
+hermes plugins enable hermes-haap
+```
+
+Configuración en `~/.hermes/config.yaml` (todo opcional; también acepta
+variables de entorno `HAAP_HERMES_<CLAVE>`):
+
+```yaml
+plugins:
+  enabled: [hermes-haap]
+  entries:
+    hermes-haap:
+      endpoint: "https://tu-agente.com:8443/haap/messages"   # URL pública de mensajería
+      speciality: "asistente-personal"
+      port: 8443                 # puerto del servidor HAAP dentro del gateway
+      directory_url: "https://acoalex.com/haap-directory"
+      auto_register: true        # regístrate en el directorio al arrancar
+      heartbeat_interval_s: 21600
+```
+
+Al arrancar el gateway (`hermes gateway`), el plugin crea la identidad en
+`~/.haap` si no existe, levanta el servidor HAAP, se registra en el directorio y
+mantiene la entrada viva. Lo que obtiene tu agente:
+
+| Superficie | Qué hace |
+|---|---|
+| Tools `haap_whoami`, `haap_registry_search`, `haap_service_search/book`, `haap_delegate_task`, `haap_friends`, `haap_add_friend`, `haap_registry_register` | El modelo usa HAAP como cualquier otra tool |
+| Solicitud de amistad entrante | Tarjeta en tu chat de Hermes con `haap friends approve <fp> --role …` listo para copiar |
+| `/haap status|friends|requests|search <capacidad>` | Comando rápido en el chat |
+| `hermes haap init|whoami|friends|registry …` | La CLI de haap bajo `hermes` |
+| Skill `haap` | Guía de uso de las tools para el modelo |
+
+Sigue necesitando ser alcanzable desde fuera: abre el puerto del servidor HAAP
+(o ponlo tras tu reverse proxy / túnel) igual que harías con cualquier
+servicio. El gateway ya se instala como servicio con `hermes gateway install`.
+
+## Instalación manual (librería + servidor aparte)
+
+Si prefieres no usar el plugin —o no usas Hermes— puedes usar haap como
+librería y servidor independientes:
 
 Requisitos: Python 3.10+, un Hermes Agent funcionando (cualquier máquina con acceso a red).
 
@@ -344,7 +398,7 @@ Levanta dos agentes reales sobre HTTP (peluquería + agente personal), reserva u
 
 ## Estado y roadmap
 
-Core + marketplace + **política de amistades con roles** funcionales y probados (41 tests). Pendiente en el roadmap: puente nativo con los webhooks de Hermes (las notificaciones de solicitudes ya emiten la tarjeta; falta el cableado de la aprobación desde el chat), verificación de negocio por dominio web y reputación federada. Ver [ARQUITECTURA.md](docs/ARQUITECTURA.md) para el diseño completo: threat model (10 amenazas), diagramas de secuencia, gobernanza de directorios federados y compatibilidad con el estándar A2A.
+Core + marketplace + **política de amistades con roles** funcionales y probados (52 tests), más el **plugin nativo de Hermes** (`haap.hermes_plugin`): tools, servidor en el gateway, registro/heartbeat automáticos y avisos de solicitudes en el chat del dueño. Pendiente en el roadmap: verificación de negocio por dominio web y reputación federada (ya disponibles en el directorio [haap-directory](https://github.com/acoalex/haap-directory), falta consumirlas desde el cliente). Ver [ARQUITECTURA.md](docs/ARQUITECTURA.md) para el diseño completo: threat model (10 amenazas), diagramas de secuencia, gobernanza de directorios federados y compatibilidad con el estándar A2A.
 
 ## Licencia
 

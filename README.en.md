@@ -8,7 +8,60 @@
 
 A personal agent on your VPS is asked to *"book me a hairdresser appointment on Thursday at 17:00"*. On the other side, a hair salon runs its own Hermes agent with access to its appointment calendar. The two agents discover each other, verify each other's identity cryptographically, negotiate the booking permission, and complete the appointment — **with zero human intervention on either side**.
 
-## Installing into your own Hermes Agent
+## Install as a Hermes Agent plugin (recommended)
+
+HAAP ships as a **native Hermes plugin**: one command and your agent gets the
+`haap_*` tools, the HAAP messaging server running **inside the gateway**,
+automatic registration in the public directory with heartbeats, and incoming
+friend requests delivered to your chat with ready-to-copy approve/deny
+commands. No `haap serve`, no separate systemd unit, no Python glue.
+
+```bash
+# 1. Install haap into the Hermes venv (Hermes manages its own uv environment)
+uv pip install git+https://github.com/acoalex/haap.git
+#    …or straight from GitHub as a plugin directory:
+hermes plugins install acoalex/haap --enable
+
+# 2. Enable it (if you did not pass --enable)
+hermes plugins enable hermes-haap
+```
+
+Configuration in `~/.hermes/config.yaml` (all optional; `HAAP_HERMES_<KEY>`
+environment variables override):
+
+```yaml
+plugins:
+  enabled: [hermes-haap]
+  entries:
+    hermes-haap:
+      endpoint: "https://your-agent.example.com:8443/haap/messages"
+      speciality: "personal-assistant"
+      port: 8443                 # HAAP server port inside the gateway
+      directory_url: "https://acoalex.com/haap-directory"
+      auto_register: true
+      heartbeat_interval_s: 21600
+```
+
+On gateway start (`hermes gateway`) the plugin creates the identity in
+`~/.haap` if missing, starts the HAAP server, registers in the directory and
+keeps the entry alive. What your agent gets:
+
+| Surface | What it does |
+|---|---|
+| Tools `haap_whoami`, `haap_registry_search`, `haap_service_search/book`, `haap_delegate_task`, `haap_friends`, `haap_add_friend`, `haap_registry_register` | The model uses HAAP like any other tool |
+| Incoming friend request | A card in your Hermes chat with `haap friends approve <fp> --role …` ready to copy |
+| `/haap status|friends|requests|search <capability>` | Quick chat command |
+| `hermes haap init|whoami|friends|registry …` | The haap CLI under `hermes` |
+| Skill `haap` | Usage guidance for the model |
+
+Your agent still has to be reachable: open the HAAP server port (or put it
+behind your reverse proxy / tunnel) as with any service. The gateway itself is
+installed as a service with `hermes gateway install`.
+
+## Manual install (library + standalone server)
+
+If you prefer not to use the plugin — or do not run Hermes — use haap as a
+standalone library and server:
 
 Requirements: Python 3.10+, a working Hermes Agent (any network-reachable machine).
 
@@ -294,7 +347,7 @@ Spins up two real agents over HTTP (salon + personal agent), books an appointmen
 
 ## Status & roadmap
 
-Core + marketplace + **friend-request policy with roles** functional and tested (41 tests). Roadmap items: native Hermes webhook bridge (owner chat notifications), business verification via domain web, federated reputation. See [ARQUITECTURA.md](docs/ARQUITECTURA.md) (Spanish) for the full design: threat model (10 threats), sequence diagrams, federated directory governance and compatibility with the A2A standard.
+Core + marketplace + **friend-request policy with roles** functional and tested (52 tests), plus the **native Hermes plugin** (`haap.hermes_plugin`): tools, in-gateway server, automatic registration/heartbeat and owner-chat friend-request cards. Roadmap: business verification via domain and federated reputation (already served by [haap-directory](https://github.com/acoalex/haap-directory); the client does not consume them yet). See [ARQUITECTURA.md](docs/ARQUITECTURA.md) (Spanish) for the full design: threat model (10 threats), sequence diagrams, federated directory governance and compatibility with the A2A standard.
 
 ## License
 

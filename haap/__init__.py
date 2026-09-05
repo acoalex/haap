@@ -4,8 +4,10 @@
 Protocolo de comunicación entre agentes Hermes en distintas máquinas:
 identidad criptográfica (Ed25519), amistad con challenge-response y
 aprobación humana, capacidades, permisos granulares, rate limiting,
-auditoría y mensajería de tareas, todo sobre los mecanismos existentes
-de Hermes Agent (webhooks, API server, MCP).
+auditoría y mensajería de tareas. Se integra en Hermes Agent como plugin
+nativo (``haap.hermes_plugin``: tools, servidor en el gateway, registro en
+el directorio y avisos al dueño) y también funciona como librería/CLI
+independiente.
 """
 
 __version__ = "1.0.0"

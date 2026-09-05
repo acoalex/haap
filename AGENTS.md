@@ -9,13 +9,18 @@ descubran, verifiquen identidad criptográfica (Ed25519), negocien permisos y
 colaboren. Python puro, sin framework web (usa `http.server`). No confundir con
 `acoalex/haap-directory`, que es el servicio de directorio público independiente.
 
+El paquete incluye `haap/hermes_plugin/` (plugin nativo de Hermes Agent:
+entry point `hermes_agent.plugins`, manifiesto `plugin.yaml` y shim
+`__init__.py` en la raíz para `hermes plugins install acoalex/haap`). Sus
+tests usan un `FakeCtx` que imita el `ctx` de Hermes: no requieren Hermes.
+
 ## Comandos
 
 ```bash
 # Instalar en modo editable con dependencias de desarrollo
 pip install -e ".[dev]"
 
-# Ejecutar la suite de tests (41 tests)
+# Ejecutar la suite de tests (52 tests, incl. el plugin de Hermes)
 pytest
 
 # Probar la CLI
@@ -53,7 +58,9 @@ haap/                    # paquete principal
   roles.py               # roles: guest/client/partner/family/admin
   policy.py              # motor de friend-request (deny/auto-approve/queue) + notificadores
   cli.py                 # comando `haap`
-tests/                   # test_client, test_marketplace, test_policy, test_registry, test_server
+  hermes_plugin/         # plugin nativo de Hermes Agent (register(ctx), tools haap_*, skill/)
+plugin.yaml, __init__.py # manifiesto + shim raíz: el repo es instalable con `hermes plugins install`
+tests/                   # test_client, test_marketplace, test_policy, test_registry, test_server, test_hermes_plugin
 docs/                    # ARQUITECTURA.md, DIRECTORY_SERVICE_BRIEF.md
 ```
 

@@ -21,5 +21,13 @@ dev = ["pytest>=7.0"]
 [project.scripts]
 haap = "haap.cli:main"
 
+# Hermes Agent discovers this plugin automatically once `haap` is installed in
+# its venv (`uv pip install haap`); enable it with `hermes plugins enable hermes-haap`.
+[project.entry-points."hermes_agent.plugins"]
+hermes-haap = "haap.hermes_plugin:register"
+
 [tool.setuptools.packages.find]
 include = ["haap*"]
+
+[tool.setuptools.package-data]
+haap = ["hermes_plugin/skill/*.md"]

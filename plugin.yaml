@@ -1,0 +1,11 @@
+# Hermes Agent plugin manifest — lets `hermes plugins install acoalex/haap`
+# drop this repository into ~/.hermes/plugins/ as the "hermes-haap" plugin.
+# The pip route (`uv pip install haap`) registers the same plugin through the
+# `hermes_agent.plugins` entry point and needs no manifest.
+name: hermes-haap
+version: "1.0.0"
+description: >
+  HAAP (Hermes Agent Alliance Protocol) as a native Hermes capability: tools to
+  discover, befriend and delegate tasks to other Hermes agents, an in-gateway
+  HAAP messaging server, automatic directory registration + heartbeats, and
+  friend-request approval cards delivered to the owner's chat.
