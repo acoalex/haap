@@ -432,8 +432,11 @@ Levanta dos agentes reales sobre HTTP (peluquería + agente personal), reserva u
 | `haap/registry_client.py` | ✅ | Cliente de directorio (register/search/heartbeat) |
 | `haap/roles.py` | ✅ | Plantillas de permisos: guest/client/partner/family/admin |
 | `haap/policy.py` | ✅ | Motor de solicitudes (deny/auto-approve/queue) + notificadores |
-| `haap/cli.py` | ✅ | Comando `haap` (init/whoami/friends/task/serve/registry) |
-| Tests (41) | ✅ | Handshake completo, autorización, abuso, marketplace, directorio |
+| `haap/cli.py` | ✅ | Comando `haap` (init/whoami/friends/task/serve/registry/mcp) |
+| `haap/tools.py` | ✅ | Superficie de tools `haap_*` compartida (runtime, schemas, handlers) para plugin y MCP |
+| `haap/hermes_plugin/` | ✅ | Plugin nativo de Hermes Agent: tools, servidor en el gateway, registro/heartbeat, avisos en el chat, `/haap`, skill |
+| `haap/mcp_server.py` | ✅ | Servidor MCP (stdio JSON-RPC) con las mismas tools; CLI `haap mcp` |
+| Tests (63) | ✅ | Handshake completo, autorización, abuso, marketplace, directorio, plugin de Hermes, webhook V2, MCP |
 
 ## Principios de seguridad
 

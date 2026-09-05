@@ -381,8 +381,11 @@ Spins up two real agents over HTTP (salon + personal agent), books an appointmen
 | `haap/registry_client.py` | ✅ | Directory client (register/search/heartbeat) |
 | `haap/roles.py` | ✅ | Permission templates: guest/client/partner/family/admin |
 | `haap/policy.py` | ✅ | Request engine (deny/auto-approve/queue) + notifiers |
-| `haap/cli.py` | ✅ | `haap` command (init/whoami/friends/task/serve/registry) |
-| Tests (41) | ✅ | Full handshake, authorization, abuse, marketplace, directory, policy |
+| `haap/cli.py` | ✅ | `haap` command (init/whoami/friends/task/serve/registry/mcp) |
+| `haap/tools.py` | ✅ | Shared `haap_*` tool surface (runtime, schemas, handlers) for the plugin and MCP |
+| `haap/hermes_plugin/` | ✅ | Native Hermes Agent plugin: tools, in-gateway server, registration/heartbeat, chat cards, `/haap`, skill |
+| `haap/mcp_server.py` | ✅ | MCP server (stdio JSON-RPC) exposing the same tools; CLI `haap mcp` |
+| Tests (63) | ✅ | Full handshake, authorization, abuse, marketplace, directory, Hermes plugin, webhook V2, MCP |
 
 ## Security principles
 
