@@ -237,6 +237,23 @@ def cmd_audit(args) -> int:
     return 0
 
 
+# ---------------------------------------------------------------------- mcp
+def cmd_mcp(args) -> int:
+    """Serve the HAAP tools over MCP (stdio). Logs go to stderr so stdout
+    stays a clean JSON-RPC stream."""
+    from .mcp_server import run_stdio
+    from .tools import HaapRuntime, merge_config
+
+    raw = {"haap_dir": getattr(args, "dir", None) or "",
+           "serve": bool(args.serve), "auto_register": bool(args.serve and args.endpoint),
+           "endpoint": args.endpoint, "speciality": args.speciality,
+           "host": args.host, "port": args.port}
+    if args.directory_url:
+        raw["directory_url"] = args.directory_url
+    runtime = HaapRuntime(merge_config(raw), log=lambda m: print(f"[haap mcp] {m}", file=sys.stderr))
+    return run_stdio(runtime)
+
+
 # ------------------------------------------------------------------ parser
 def build_parser() -> argparse.ArgumentParser:
     p = argparse.ArgumentParser(prog="haap",
@@ -291,6 +308,16 @@ def build_parser() -> argparse.ArgumentParser:
     sp.add_argument("--capability", default="", help="capability filter (search)")
     sp.add_argument("--query", "--q", dest="query", default="", help="free-text filter (search)")
     sp.set_defaults(func=cmd_registry)
+
+    sp = sub.add_parser("mcp", help="serve the haap_* tools over MCP (stdio)")
+    sp.add_argument("--serve", action="store_true",
+                    help="also run the HAAP messaging server in-process")
+    sp.add_argument("--host", default="0.0.0.0")
+    sp.add_argument("--port", type=int, default=8443)
+    sp.add_argument("--endpoint", default="", help="public messaging URL (enables directory registration with --serve)")
+    sp.add_argument("--speciality", default="")
+    sp.add_argument("--directory-url", dest="directory_url", default="")
+    sp.set_defaults(func=cmd_mcp)
 
     sp = sub.add_parser("audit", help="recent audit entries")
     sp.add_argument("--last", type=int, default=30)

@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "haap"
-version = "1.0.0"
+version = "1.2.0"
 description = "HAAP - Hermes Agent Alliance Protocol: autonomous Hermes agents that discover each other, verify cryptographic identity and collaborate across machines"
 readme = "README.md"
 requires-python = ">=3.10"

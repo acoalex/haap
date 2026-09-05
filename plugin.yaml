@@ -3,7 +3,7 @@
 # The pip route (`uv pip install haap`) registers the same plugin through the
 # `hermes_agent.plugins` entry point and needs no manifest.
 name: hermes-haap
-version: "1.0.0"
+version: "1.2.0"
 description: >
   HAAP (Hermes Agent Alliance Protocol) as a native Hermes capability: tools to
   discover, befriend and delegate tasks to other Hermes agents, an in-gateway

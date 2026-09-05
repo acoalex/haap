@@ -59,6 +59,61 @@ Sigue necesitando ser alcanzable desde fuera: abre el puerto del servidor HAAP
 (o ponlo tras tu reverse proxy / túnel) igual que harías con cualquier
 servicio. El gateway ya se instala como servicio con `hermes gateway install`.
 
+### Avisos de solicitudes por webhook de Hermes (sin plugin)
+
+Si no usas el plugin (o quieres un segundo canal), `WebhookNotifier` firma en el
+**formato genérico V2 de Hermes** (`X-Webhook-Signature-V2` + `X-Webhook-Timestamp`,
+HMAC-SHA256 de `<timestamp>.<body>`, anti-replay ±300 s). Una ruta con
+`deliver_only: true` entrega la tarjeta en Telegram/Discord/Matrix **sin gastar tokens**:
+
+```yaml
+# ~/.hermes/config.yaml
+platforms:
+  webhook:
+    enabled: true
+    extra:
+      port: 8644
+      routes:
+        haap-friend-request:
+          secret: "cambia-este-secreto"
+          deliver: "telegram"          # discord | matrix | slack | …
+          deliver_only: true           # entrega literal, sin invocar al modelo
+          prompt: |
+            🤝 Solicitud de amistad HAAP de {name} [{fingerprint}]
+            mensaje: {message}
+            aprobar: {how_to_approve}
+            denegar: {how_to_deny}
+```
+
+```python
+from haap.policy import WebhookNotifier
+server.notifier = WebhookNotifier("http://127.0.0.1:8644/webhooks/haap-friend-request",
+                                  "cambia-este-secreto")          # fmt="legacy" para el header antiguo
+```
+
+Con el plugin basta con `webhook_url` / `webhook_secret` en `plugins.entries.hermes-haap`.
+
+### HAAP como servidor MCP (Hermes, Claude Code, Cursor…)
+
+Las mismas tools `haap_*` se exponen también por **MCP (stdio)** con `haap mcp`,
+para usarlas desde cualquier host MCP —o desde un Hermes donde prefieras MCP a plugin:
+
+```yaml
+# Hermes: ~/.hermes/config.yaml  → tools mcp__haap__haap_whoami, mcp__haap__haap_registry_search…
+mcp_servers:
+  haap:
+    command: "haap"
+    args: ["mcp"]                       # añade --serve --endpoint https://… para correr también el servidor HAAP
+```
+
+```json
+// Claude Code: .mcp.json
+{ "mcpServers": { "haap": { "command": "haap", "args": ["mcp"] } } }
+```
+
+`haap mcp` comparte identidad y estado (`~/.haap`) con la CLI y el plugin: son tres
+puertas al mismo agente.
+
 ## Instalación manual (librería + servidor aparte)
 
 Si prefieres no usar el plugin —o no usas Hermes— puedes usar haap como
@@ -377,8 +432,11 @@ Levanta dos agentes reales sobre HTTP (peluquería + agente personal), reserva u
 | `haap/registry_client.py` | ✅ | Cliente de directorio (register/search/heartbeat) |
 | `haap/roles.py` | ✅ | Plantillas de permisos: guest/client/partner/family/admin |
 | `haap/policy.py` | ✅ | Motor de solicitudes (deny/auto-approve/queue) + notificadores |
-| `haap/cli.py` | ✅ | Comando `haap` (init/whoami/friends/task/serve/registry) |
-| Tests (41) | ✅ | Handshake completo, autorización, abuso, marketplace, directorio |
+| `haap/cli.py` | ✅ | Comando `haap` (init/whoami/friends/task/serve/registry/mcp) |
+| `haap/tools.py` | ✅ | Superficie de tools `haap_*` compartida (runtime, schemas, handlers) para plugin y MCP |
+| `haap/hermes_plugin/` | ✅ | Plugin nativo de Hermes Agent: tools, servidor en el gateway, registro/heartbeat, avisos en el chat, `/haap`, skill |
+| `haap/mcp_server.py` | ✅ | Servidor MCP (stdio JSON-RPC) con las mismas tools; CLI `haap mcp` |
+| Tests (63) | ✅ | Handshake completo, autorización, abuso, marketplace, directorio, plugin de Hermes, webhook V2, MCP |
 
 ## Principios de seguridad
 
@@ -398,7 +456,7 @@ Levanta dos agentes reales sobre HTTP (peluquería + agente personal), reserva u
 
 ## Estado y roadmap
 
-Core + marketplace + **política de amistades con roles** funcionales y probados (52 tests), más el **plugin nativo de Hermes** (`haap.hermes_plugin`): tools, servidor en el gateway, registro/heartbeat automáticos y avisos de solicitudes en el chat del dueño. Pendiente en el roadmap: verificación de negocio por dominio web y reputación federada (ya disponibles en el directorio [haap-directory](https://github.com/acoalex/haap-directory), falta consumirlas desde el cliente). Ver [ARQUITECTURA.md](docs/ARQUITECTURA.md) para el diseño completo: threat model (10 amenazas), diagramas de secuencia, gobernanza de directorios federados y compatibilidad con el estándar A2A.
+Core + marketplace + **política de amistades con roles** funcionales y probados (63 tests), más el **plugin nativo de Hermes** (`haap.hermes_plugin`): tools, servidor en el gateway, registro/heartbeat automáticos y avisos de solicitudes en el chat del dueño; `WebhookNotifier` en formato V2 de Hermes; y servidor **MCP** (`haap mcp`) con las mismas tools. Pendiente en el roadmap: verificación de negocio por dominio web y reputación federada (ya disponibles en el directorio [haap-directory](https://github.com/acoalex/haap-directory), falta consumirlas desde el cliente). Ver [ARQUITECTURA.md](docs/ARQUITECTURA.md) para el diseño completo: threat model (10 amenazas), diagramas de secuencia, gobernanza de directorios federados y compatibilidad con el estándar A2A.
 
 ## Licencia
 

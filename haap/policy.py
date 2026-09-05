@@ -163,31 +163,55 @@ class ConsoleNotifier(BaseNotifier):
 
 
 class WebhookNotifier(BaseNotifier):
-    """POSTs a signed JSON payload to a URL (HMAC-SHA256 over the body).
+    """POSTs the request card as JSON to a URL, HMAC-SHA256 signed.
 
-    Target: a Hermes webhook subscription that lands in the owner's chat,
-    so the approval command can be copied straight from the phone.
+    Target: a Hermes inbound webhook route so the card lands in the owner's
+    chat and the approval command can be copied straight from the phone.
+
+    ``fmt`` selects the signature scheme:
+
+    * ``"hermes-v2"`` (default) — Hermes' generic V2 webhook format:
+      ``X-Webhook-Timestamp: <unix seconds>`` and
+      ``X-Webhook-Signature-V2: hex(HMAC-SHA256(secret, "<timestamp>.<body>"))``.
+      Hermes rejects timestamps outside ±300 s (replay protection). Pair it
+      with a ``platforms.webhook.routes.<name>`` entry using
+      ``deliver_only: true`` for zero-token delivery to Telegram/Discord/…
+    * ``"legacy"`` — the original ``X-HAAP-Signature: sha256=<hex>`` over the
+      body only, for custom receivers built against earlier versions.
     """
 
-    def __init__(self, url: str, secret: str):
+    FORMATS = ("hermes-v2", "legacy")
+
+    def __init__(self, url: str, secret: str, fmt: str = "hermes-v2"):
+        if fmt not in self.FORMATS:
+            raise ValueError(f"unknown webhook format '{fmt}'")
         self.url = url
         self.secret = secret.encode()
+        self.fmt = fmt
+
+    def headers_for(self, body: bytes, timestamp: int | None = None) -> dict:
+        """Signature headers for ``body`` (exposed for tests/receivers)."""
+        if self.fmt == "legacy":
+            sig = hmac.new(self.secret, body, hashlib.sha256).hexdigest()
+            return {"X-HAAP-Signature": f"sha256={sig}"}
+        ts = str(int(time.time()) if timestamp is None else timestamp)
+        sig = hmac.new(self.secret, ts.encode("ascii") + b"." + body,
+                       hashlib.sha256).hexdigest()
+        return {"X-Webhook-Timestamp": ts, "X-Webhook-Signature-V2": sig}
 
     def notify(self, request: dict) -> None:
         try:
             body = json.dumps(request, ensure_ascii=False).encode("utf-8")
-            sig = hmac.new(self.secret, body, hashlib.sha256).hexdigest()
-            req = urllib_request_post(self.url, body, sig)
+            urllib_request_post(self.url, body, self.headers_for(body))
         except Exception:
             pass  # notification failures never break the protocol
 
 
-def urllib_request_post(url: str, body: bytes, signature: str) -> None:
+def urllib_request_post(url: str, body: bytes, headers: dict) -> None:
     import urllib.request
     req = urllib.request.Request(
         url, data=body, method="POST",
-        headers={"Content-Type": "application/json",
-                 "X-HAAP-Signature": f"sha256={signature}"})
+        headers={"Content-Type": "application/json", **headers})
     urllib.request.urlopen(req, timeout=5)
 
 
