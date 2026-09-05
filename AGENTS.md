@@ -20,7 +20,7 @@ tests usan un `FakeCtx` que imita el `ctx` de Hermes: no requieren Hermes.
 # Instalar en modo editable con dependencias de desarrollo
 pip install -e ".[dev]"
 
-# Ejecutar la suite de tests (52 tests, incl. el plugin de Hermes)
+# Ejecutar la suite de tests (63 tests, incl. plugin de Hermes, webhook V2 y MCP)
 pytest
 
 # Probar la CLI
@@ -58,9 +58,11 @@ haap/                    # paquete principal
   roles.py               # roles: guest/client/partner/family/admin
   policy.py              # motor de friend-request (deny/auto-approve/queue) + notificadores
   cli.py                 # comando `haap`
-  hermes_plugin/         # plugin nativo de Hermes Agent (register(ctx), tools haap_*, skill/)
+  tools.py               # superficie de tools haap_* compartida (HaapRuntime, schemas, handlers)
+  hermes_plugin/         # plugin nativo de Hermes Agent (register(ctx), skill/) sobre tools.py
+  mcp_server.py          # servidor MCP stdio (JSON-RPC) sobre tools.py; CLI `haap mcp`
 plugin.yaml, __init__.py # manifiesto + shim raíz: el repo es instalable con `hermes plugins install`
-tests/                   # test_client, test_marketplace, test_policy, test_registry, test_server, test_hermes_plugin
+tests/                   # test_client, test_marketplace, test_policy, test_registry, test_server, test_hermes_plugin, test_webhook_notifier, test_mcp_server
 docs/                    # ARQUITECTURA.md, DIRECTORY_SERVICE_BRIEF.md
 ```
 

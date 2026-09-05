@@ -3,6 +3,24 @@
 Todos los cambios notables de HAAP se documentan aquí.
 Formato basado en [Keep a Changelog](https://keepachangelog.com/es-ES/1.1.0/).
 
+## [1.2.0] - 2026-09-05
+
+### Añadido
+- **Servidor MCP** (`haap/mcp_server.py`, CLI `haap mcp [--serve]`): las tools
+  `haap_*` por stdio JSON-RPC para Hermes (`mcp_servers`), Claude Code, Cursor…
+  `initialize`/`ping`/`tools/list`/`tools/call`; fallos de tool como `isError`.
+- `haap/tools.py`: superficie de tools compartida (runtime, schemas, handlers)
+  de la que beben el plugin de Hermes y el servidor MCP — una implementación,
+  dos fachadas.
+- `WebhookNotifier` firma por defecto en el formato genérico **V2 de Hermes**
+  (`X-Webhook-Signature-V2` + `X-Webhook-Timestamp`, anti-replay); `fmt="legacy"`
+  conserva `X-HAAP-Signature`. El plugin acepta `webhook_url`/`webhook_secret`.
+- Tests: webhook (5) y MCP (6). Suite: 63.
+
+### Cambiado
+- `haap.hermes_plugin` refactorizado sobre `haap.tools` (misma API pública).
+- Versión del paquete alineada con este changelog (1.2.0).
+
 ## [1.1.0] - 2026-09-05
 
 ### Añadido

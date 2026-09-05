@@ -10,6 +10,6 @@ el directorio y avisos al dueño) y también funciona como librería/CLI
 independiente.
 """
 
-__version__ = "1.0.0"
+__version__ = "1.2.0"
 PROTOCOL_VERSION = "1.0"
 __all__ = ["__version__", "PROTOCOL_VERSION"]
