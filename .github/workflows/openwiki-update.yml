@@ -1,10 +1,7 @@
 name: OpenWiki Update
 
-on:
-  workflow_dispatch:
-  schedule:
-    - cron: "0 8 * * *"
-
+on: []
+  
 permissions:
   contents: write
   pull-requests: write
